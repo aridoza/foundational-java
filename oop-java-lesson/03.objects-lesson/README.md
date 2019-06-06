@@ -91,7 +91,7 @@ Mankind johnSmith = new Mankind();
 
 means declare a new variable named "johnSmith" of type "Mankind", and assign it a new instance of the class Mankind. 
 
-<!-- move this to the lesson on visibility, and be careful to move the instantiation outside the main method and into the class, or else it is a compile error to declare a visibility.
+<!-- todo: move this to the lesson on visibility, and be careful to move the instantiation outside the main method and into the class, or else it is a compile error to declare a visibility.
 In this example we omitted the visibility, implying default visibility, which as we said means that it is only visible to classes in the same package. More commonly we will make instance variables private, by prefacing the declaration with the word _private_, as follows:
 ```java
 private Mankind johnSmith = new Mankind(); // this is only visible in this class file

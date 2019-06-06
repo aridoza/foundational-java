@@ -68,9 +68,9 @@ When Java was first introduced, it had limited support for date and time operati
 
 With the advent of Java 8, a new set of Date and Time classes were introduced that provided a robust set of date and time arithmetic, formatting, and conversions. However there is still a vast amount of code using the legacy Date class, in the java.util package.
 
-We will mention those briefly, just so that you are aware of them. But genererally you should be using the java.time
+We will mention those briefly, just so that you are aware of them. But genererally you should be using the java.time package for date and time related work, such as time zone conversions, date arithmetic, and output formatting.
 
-As you can see, most of the constructors in the Date class have a strikethrough font, which means they are deprecated (which means they could theoretically be removed in future releaes of Java, although this is highly unlikely to happen, given Java's undying respect for backward compatibility.)
+As you can see, most of the constructors in the Date class have a strikethrough font, indicating they are deprecated (which means they could theoretically be removed in a future releae of Java, although this is highly unlikely to happen, given Java's undying respect for backward compatibility.)
 
 ![](resources/date-class.png)
 
