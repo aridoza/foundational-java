@@ -139,10 +139,12 @@ Do you see anything unusual there?
 
 Notice that in our _main_ method, the first thing we did was to start our thread, and then secondly, we printed out "Thread was started". However in the output, we can see that "Thread was started" was logged first, even though it was declared last!
 
-Why did that happen? Well, once we called our Thread _start_ method, we launched a new Thread, that runs in its own time. Then we resumed our main thread, which printed out the "Thread was started" message, and finally, our new Thread got into action and began its business of printing the current time.
+Why did that happen? Keep in mind that everything in Java runs in a thread. Even if you are creating an innocent little Hello, World application, Java implictly spins up a thread called the _main thread_ and executes the program in that thread.
+
+Once the main thread called our Thread _start_ method, it launched a new Thread, that runs in its own time. Then our main thread resumed, which printed out the "Thread was started" message. Meanwhile back at the ranch, our new Thread was preparing itself, then it got into action and began its business of printing the current time.
 
 ## The Runnable interface
-That's how you create a Thread by overriding the Thread class. Perhaps the more common approach is to recognize that the Thread class has a constructor that accepts a _Runnable_ instance. Runnable is an interface with one method - `public void run()`. Using this approach, you construct a new Thread instance by passing a Runnable instance to the constructor, then you call your Thread's _start_ method, which will call your Runnable in a new Thread.
+We have seen one way to create a Thread by overriding the Thread class. The second approach is to recognize that the Thread class has a constructor that accepts a _Runnable_ instance. Runnable is an interface with one method - `public void run()`. Using this approach, you construct a new Thread instance by passing a Runnable instance to the constructor, then you call your Thread's _start_ method, which will call your Runnable in a new Thread.
 
 Here is the program:
 ```java
@@ -211,10 +213,87 @@ To highlight the difference, compare the two versions. You can copy and paste th
 
 Just study the two lines that are different, and be aware of that syntax.
 
+(Footnote: Another popular variation of the Runnable syntax is to use Lambda expressions, and we will learn more about those when we get to the lesson on Lambdas and Streams.)
+
 ## Race condition
-Now it is entirely possible that the thread could have started before our main thread got around to printing the "Thread was started" message, in which case "Thread was started" would have printed as the second message instead of the first. This is known as a race condition, and sometimes that makes testing threaded code very difficult! A race condition essentially means that different threads execute independently, and so they can appear to randomly execute their steps in different orders.
+Now it is entirely possible that our time printing thread could have started before our main thread got around to printing the "Thread was started" message, in which case "Thread was started" would have printed as the second message instead of the first. This is known as a race condition, and sometimes that makes testing threaded code very difficult! A race condition essentially means that different threads execute independently, and so they can appear to randomly execute their steps in different orders.
+
+This can have some interesting side effects, when trying to assign and access a shared variable from different threads.
+
+## Activity - Instructor lead - Race condition
+(Note to instructor, see the class RaceCondition)
+Description: Let's set up two threads, which each change the value of a shared variable, and then inspects the variable to see if it is the value as set.
+
+The output is something like:
+```text
+huh? Expected 0!
+huh? Expected 0!
+huh? Expected -1!
+huh? Expected 0!
+huh? Expected 0!
+huh? Expected -1!
+huh? Expected -1!
+huh? Expected 0!
+huh? Expected 0!
+huh? Expected 0!
+huh? Expected 0!
+huh? Expected 0!
+huh? Expected -1!
+huh? Expected -1!
+```
+
 ## synchronized keyword
-## Native locks are reentrant 
+When you want to make absolutely sure that two threads cannot execute at the same time, you can _lock_ those calls. The low level way to do that is using the _synchronized_ keyword. That was in fact the only way, until Java 5, and it is very common. The other way was using the java.util.concurrent package, introduced in Java 5. More on that later.
+
+For now, let's look at the _synchronized_ keyword.
+When you declare methods as _synchronized_, then that ensures that only one thread at a time can be executing any of the synchronized methods on any given object. The reason this works, is that every object instance has built in to it what is called an "intrinsic lock". When a thread enters a synchronized method, it automatically grabs that lock. If any other threads try to access a synchronized method while one thread already has the lock, then the other threads must _block_ until the current thread relinquishes the lock by exiting the synchronized block. When a thread is blocked, there is absolutely no way for it to move at all, until the lock is relinquished or the program ends. If many threads are waiting for the lock on an object, there is no guaranty that they will acquire the locks fairly, and it is possible that any given thread will have to wait indefinitely, depending on the volume of threads. The bottom line is be careful how you synchronize, and try to visualize all of the execution paths. Later on in this lesson, we will learn about the _ReentrantLock_, that allows you to lock in a fair way.
+
+One more important note about the intrinsic lock.
+
+Let's say you have two methods, both synchronized;
+```text
+public synchronized void myFirstMethod() {...}
+public synchronized void myOtherMethod() {...}
+``` 
+Now if some thread #1 comes along and calls myFirstMethod, and thread #2 comes along and calls myOtherMethod while thread #1 is holding the lock, then thread #2 will block, as we said. However, let's say myFirstMethod calls myOtherMethod, and they are both synchronized. Then even though thread #2 will block when it calls myOtherMethod, nonetheless, thread #1 can still call myOtherMethod without blocking, since it already has the lock, so the synchronized keyword in that case has no effect.
+
+```java
+public synchronized void myFirstMethod() {
+    ...
+    myOtherMethod();
+    ...
+}
+public synchronized void myOtherMethod() {
+    // thread #1 can enter myOtherMethod even though it is in the synchronized method myFirstMethod
+}
+```
+One final note on the _synchronized_ syntax. When you add _synchronized_ to a method, you are in effect saying, "lock on this object". However you can choose to lock on different objects, using the related syntax:
+`synchronized(someObject)`
+
+Be sure that when you are using an object as "mutex", that instance is not going to change. Generally you want to declare those mutexes to be _final_. 
+
+Let's modify our class above to use synchronized and see how that works:
+```java
+private final Object MUTEX = new Object();
+
+Thread thread1 = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        synchronized (MUTEX) {
+            while (true) {
+                someSharedVariable = 0;
+                if (someSharedVariable != 0) {
+                    System.out.println("huh? Expected " + 0 + " but got " + 0 + "!");
+                }
+            }
+        }
+    }
+});
+```
+Thankfully, when we synchronize, our updates and accesses are guaranteed to occur atomically, in the same thread, and so we see there is no surprising output, like we had in the initial version.
+
+Note that using the synchronized method approach, then if you have different instances of that class, all bets are off, and it is entirely permissible for different threads to access those methods on different object instances. If you want to lock a method across all object instances, then you can make that method synchronized. There are a few variations, but in this course we will not look further into that approach.
+ 
 ## Signalling threads using wait/notify - synchronization
 ## How many threads are correct?
 ### Concurrency traps - contention, non-atomic, volatile

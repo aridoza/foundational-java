@@ -1,0 +1,37 @@
+package com.generalassembly.concurrency;
+
+public class RaceCondition {
+    private long someSharedVariable;
+    private void launch() {
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    someSharedVariable = 0;
+                        if (someSharedVariable != 0) {
+                            System.out.println("huh? Expected " + 0 + " but got " + 0 + "!");
+                        }
+                    }
+                }
+        });
+
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    someSharedVariable = -1;
+                        if (someSharedVariable != -1) {
+                            System.out.println("huh? Expected " + -1 + " but got " + -1 + "!");
+                        }
+                    }
+                }
+        });
+        thread1.start();
+        thread2.start();
+    }
+
+    public static void main(String[] args) {
+        new RaceCondition().launch();
+    }
+}
