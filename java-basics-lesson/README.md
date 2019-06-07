@@ -88,7 +88,7 @@ Remember above we said that a canonical class name consists of the package name 
  
  If you would like to import all of the classes in a package, you can follow the package by a wildcard .*, for example
  ```import com.generalassembly.oop.intro.*;```
- This will import every class in the com.generalassembly.oop.intro package, but not recursively. So for example classes in com.generalassembly.oop.intro.util would not be imported.
+ This will import every class in the com.generalassembly.oop.intro package, but not recursively. So for example all classes in the com.generalassembly.oop.intro package will be imported, but classes in com.generalassembly.oop.intro.util would not be imported.
  
  In case of a clashing class name, there are several things you can do. An example would be the List class. In the Java core libraries there are two classes called List:
  java.util.List (which is a collection class), and java.awt.List which is a graphical list display class.
@@ -160,7 +160,18 @@ If you exceed MAX_VALUE it wraps around
         System.out.println(Integer.MAX_VALUE + 1); // prints -2147483648
 ``` 
 
-In addition, Java allows you to create (or download) custom types called 'classes', and also provides a robust collection of built-in classes that perform all of the functionality that makes Java great. For example, String is a built in class whose values are arbitrary text strings. All of the storage details are hidden away in the class, so for the application developer, it just functions as you would expect a text to function.
+A recent addition to Java is that numbers can include underscore characters at any position (except as the first or last position, or before or after a decimal point), and those underscores are ignored. So it helps with readability of the number. This works for any numeric type.
+
+All of the following are legal numbers, and they represent the same number with the underscores removed:
+```java
+int ssNumber = 123_45_6789;
+float f = 2_0f + 2.3_3f;
+double pi = 3.141_593;
+
+```
+
+### Class types
+Besides the primitive types, Java allows you to create (or download) custom types called 'classes', and also provides a robust collection of built-in classes that perform all of the functionality that makes Java great. For example, String is a built in class whose values are arbitrary text strings. All of the storage details are hidden away in the class, so for the application developer, it just functions as you would expect a text to function.
 
 ### Variables
 Variables are used in just about every programming language to reference a location where values of arbitrary types are stored.
