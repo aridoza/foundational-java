@@ -1,3 +1,7 @@
+<!-- @Victor: this lesson is ~3200 words and needs to be reduced to ~1200 words to fit in the given time.
+Please start by dentifying certain sub-sections from each lesson that can be removed - anything that’s slightly “advanced”, or that represents an edge case or special circumstance or nuance to the norm. If there are any parts of the lessons in which we explain several ways to do something, we can reduce that and just discuss the most common / easiest approach.
+-->
+
 # Objects
 
 Students will be able to create an object from a class and use the object.
@@ -21,11 +25,6 @@ Then you must assign that JDK to your IntelliJ Project The first time you try to
 
 
 ### Instantiating an object
-<!--
-Melissa -I added steps below. If this is fine please delete this thread.
-
-Victor - It's not clear what the structure is here. Can you create a step-by-step process here? (ie Step 1 - create a class. Step 2 - here is what goes into creating a class. Step 3 - create an instance. Step 4 - this is what you do to create an instance.) Then, have the instructor pause and have students create another instance on their own (or, have them create a new class and instance).
---> 
 
 <!-- 
 This is a good reference. Please don't delete
@@ -92,6 +91,7 @@ Mankind johnSmith = new Mankind();
 means declare a new variable named "johnSmith" of type "Mankind", and assign it a new instance of the class Mankind. 
 
 <!-- todo: move this to the lesson on visibility, and be careful to move the instantiation outside the main method and into the class, or else it is a compile error to declare a visibility.
+
 In this example we omitted the visibility, implying default visibility, which as we said means that it is only visible to classes in the same package. More commonly we will make instance variables private, by prefacing the declaration with the word _private_, as follows:
 ```java
 private Mankind johnSmith = new Mankind(); // this is only visible in this class file
@@ -110,6 +110,7 @@ private MyValidClass someVariable;
 ```
 
 --> 
+
 Finally, to run our program in IntelliJ, notice the little green arrow in the margin, to the left of our _main_ method. 
 ![](resources/execute-main.png)
 
@@ -123,7 +124,8 @@ Now let's apply what we learned, and create a new class called Automobile in pac
 
 ### Members
 So far we have seen how to define the shell of the class. But the value starts to be realized when we add _members_ to the class; fields, methods, and inner classes. We will look at fields and methods now, inner classes are a little more advanced, and you can Google to learn move about them.
-<!-- Melissa is it ok to say it like this, about googling for more info? -->
+<!-- Melissa is it ok to say it like this, about googling for more info? 
+  @Victor - yes, absolutely fine to encourage this behavior.-->
 
 #### Fields
 Fields are the variables associated with every instance of this class. Methods, as we saw, provide the functionality to the class. (Or rather, to the objects instantiated from this class.)
@@ -180,6 +182,7 @@ double result = sum(2, 4);
 
 <!-- 
 Melissa - The following paragraph beginning with 'Some languages such as JavaScript ' explains a curiousity if the student has exposure to any other programming languages at all, since Java works a little differently than most. If you think we shoud omit this please delete it.
+@Victor students start the course with JS so I think it's valid to recognize the difference between the 2 languages - so we can include this.
 -->
 Some languages such as JavaScript allow you to omit arguments from a method call, and will either substitute a null or a default value for the omitted value. Java currently does not support that; the arguments of every method call in Java must exactly match the method it is calling. We will see why this is so when we cover method overloading later in the lesson.
 
@@ -267,7 +270,11 @@ Let's create a class called Calculator, and add the sum method. Then add a main 
 ```
 Hint: remember to instantiate a new Calculator before you start calling its methods. Then try making the methods static, and change the invocation accordingly.
 
-Solution 1:
+<!-- @Victor, I collapsed the solutions here
+-->
+
+<details>
+  <summary>Solution 1:</summary>
 ```java
 package com.generalassembly.oop.intro;
 public class Calculator {
@@ -283,7 +290,10 @@ public class Calculator {
     }
 }
 ```
-Solution 2: (using static):
+</details>  
+
+<details>
+  <summary>Solution 2 (using static):</summary>
 ```java
 package com.generalassembly.oop.intro;
 public class Calculator {
@@ -299,6 +309,7 @@ public class Calculator {
     }
 }
 ```
+</details>  
 
 A common idiom you are sure to encounter is when a method parameter has the same name as an instance variable.
 
@@ -436,11 +447,6 @@ Once you define your own constructor, Java _will no longer_ supply a default con
 
 ### Multiple Constructors
 
-<!--
-Melissa - These are very fundamental, and developers will see it and use it frequently in code. I recommend we leave it here. Please delete this comment if you agree.
-
-Victor - Is this + the next lesson on constructors calling constructors necessary for an intro lesson?
--->
 A class may have multiple constructors, as long as each has a signature that is distinct from the other constructors in the class.
 
 For example, these two constructors would be legal, (albeit not very useful, since they both have the same arguments, just in a different order.):
@@ -507,6 +513,8 @@ For example:
     }
 
 ```
+<!-- @Victor - this is something we could remove and cover in the Design Patterns lesson (a separate lesson) or on interview prep day -->
+
 ### Exercise - Instructor led - Singleton class
 There is a common design pattern called _the Singleton_ class. This is a class that we want to ensure will ever only have one instance.
 
