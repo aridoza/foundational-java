@@ -1,3 +1,7 @@
+<!-- @Victor: this lesson is ~2400 words and needs to be reduced to ~1200 words.
+Please start by identifying certain sub-sections from each lesson that can be removed - anything that’s slightly “advanced”, or that represents an edge case or special circumstance or nuance to the norm. if there are any parts of the lessons in which we explain several ways to do something, we can reduce that and just discuss the most common / easiest approach.
+-->
+
 # Subclasses
 
 Students will be able to create a subclass and use it to augment the functionality of the base class.
@@ -302,7 +306,10 @@ The area is the square footage covered by the shape.
  
  To take a square root, use the Math.sqrt() method:
  
- Solution:
+ <details>
+ 
+ <summary>Solution:</summary>
+ 
  ```java
 package com.generalassembly.oop;
 
@@ -332,6 +339,8 @@ public class Triangle extends Shape{
     }
 }
 ```
+
+</details>
 
 Now do the same for Circle and Rectangle. Remember these should all _extend Shape_.
 
@@ -383,7 +392,9 @@ Now, let's say we want to create a Square shape. We remember from Geometry class
 ### Exercise - Instruct Lead - Create Square Class
 (Instructor - Ask for suggestions before implementing)
 
-solution:
+<details>
+ <summary>Solution:</summary>
+
 ```java
 
 public class Square extends Rectangle {
@@ -392,6 +403,8 @@ public class Square extends Rectangle {
     }
 }
 ```
+
+</details>
 
 Now this Square will automatically calculate its circumference and area.
 
@@ -405,7 +418,9 @@ Assign each one of these shapes to a variable of the appropriate type, and then 
 ```    private static String getCircumferenceAndArea(Shape shape) ```
 That will return a String consisting of "circumference, area = 12, 6", with the correct values for each shape.
 
-Solution:
+<details>
+ <summary>Solution:</summary>
+
 ```java
 package com.generalassembly.oop;
 
@@ -429,6 +444,8 @@ public class ShapeCalc {
 }
 
 ```
+
+</details>
 
 Output:
 ```java
