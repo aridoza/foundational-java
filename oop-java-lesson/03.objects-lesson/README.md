@@ -275,6 +275,7 @@ Hint: remember to instantiate a new Calculator before you start calling its meth
 
 <details>
   <summary>Solution 1:</summary>
+  
 ```java
 package com.generalassembly.oop.intro;
 public class Calculator {
@@ -290,10 +291,12 @@ public class Calculator {
     }
 }
 ```
+
 </details>  
 
 <details>
   <summary>Solution 2 (using static):</summary>
+  
 ```java
 package com.generalassembly.oop.intro;
 public class Calculator {
@@ -309,6 +312,7 @@ public class Calculator {
     }
 }
 ```
+
 </details>  
 
 A common idiom you are sure to encounter is when a method parameter has the same name as an instance variable.
