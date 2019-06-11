@@ -147,6 +147,9 @@ Once the main thread called our Thread _start_ method, it launched a new Thread,
 We have seen one way to create a Thread by overriding the Thread class. The second approach is to recognize that the Thread class has a constructor that accepts a _Runnable_ instance. Runnable is an interface with one method - `public void run()`. Using this approach, you construct a new Thread instance by passing a Runnable instance to the constructor, then you call your Thread's _start_ method, which will call your Runnable in a new Thread.
 
 Here is the program:
+<details>
+  <summary>Time: Runnable version</summary>
+
 ```java
     public static void main(String[] args) {
         class TimeRunnable implements Runnable {
@@ -172,6 +175,9 @@ Here is the program:
     }
 
 ```
+</details>
+
+
 This approach is roughly similar to the previous approach. 
 We create a class that implements Runnable. We construct a new instance, supplying a run method, and pass that to the Thread constructor. Then we start the thread. Hitting Ctrl-Shift-F10 to execute that, produces the same result as the first approach.
 
@@ -308,7 +314,7 @@ Thread thread1 = new Thread(new Runnable() {
     }
 });
 ```
-Thankfully, when we synchronize, our updates and accesses are guaranteed to occur atomically, in the same thread, and so we see there is no surprising output, like we had in the initial version.
+Thankfully, when we synchronize, our updates and accesses are guaranteed to occur atomically, in the same thread, and so we see there is none of the surprised output like we saw in the initial version.
 
 Note that using the synchronized method approach, if you have different instances of that class, all bets are off, and it is entirely permissible for different threads to access those methods on different object instances. If you want to lock a method across _all_ object instances of that class, then you can make that method synchronized. There are a few variations, but in this course we will not look further into that approach.
  
@@ -319,18 +325,107 @@ and then continue. In such cases we can use Java's built-in _wait-notify_ mechan
 `wait` and `notify` are both methods on the Object class, so every Java class inherits those,and they should never be overridden. 
 
 ### wait
-If a thread owns the intrinsic lock on a mutex, and it wants to wait for some condition to be true before resuming, then it can call the `wait` method on the mutex. There are actually two flavors of `wait`. The first takes no arguments, and will wait forever (until notified, as we will see shortly.) The second takes a long argument, which represents the number of milliseconds to wait. If the time lapses, our thread exits the wait state, and is now runnable.
+If a thread owns the intrinsic lock on a mutex, and it wants to wait for some condition to be true before resuming, then it can call the `wait` method on the mutex, which will send the calling thread into a _waiting_ state. There are actually two flavors of `wait`. The first takes no arguments, and will wait forever (until notified, as we will see shortly.) The second takes a long argument, which represents the number of milliseconds to wait. If the time lapses, our thread exits the wait state, and is now runnable.(Passing in a value of 0 is equivalent to the no-parameter version, and will wait forever.)
 
-We said earlier that when a thread grabs a synchronized lock (by entering a synchronized block) then no other thread can enter that synchronized block (or any block that is synchronized on that object.)
+We said earlier that when a thread grabs an intrinsic lock (by entering a synchronized block) then no other thread can enter that synchronized block (or any block that is synchronized on that object.)
 
-We need to refine that slightly. When a thread is in the wait state, it temporarily forfeits the lock it is waiting on, and the lock becomes available for another thread to take. 
+We need to refine that statement slightly. When a thread is in the wait state, it _temporarily forfeits the lock_ it is waiting on, and the lock becomes available for another thread to take. 
 
-So if a thread is in the timed-wait state and the time lapses, we said our thread exits the wait state, and is now runnable. Again we need to refine that slightly, because if another thread is holding the lock then when our thread leaves the wait state, it enters the blocked state, until the lock becomes available.
+So if a thread is in the timed-wait state and the time lapses, we said our thread exits the wait state, and is now runnable. Again we need to refine that slightly, because if another thread is already holding the lock then when our thread exits the wait state, then the thread enters the _blocked state_, until the lock becomes available again.
+
+![](resources/synchronized.gif)
 
 ### notify/notifyAll
-Now let's say our thread is moving merrily along, until it comes to a point where it needs to wait for some data to be avaiable from another thread. This is a very common concurrency idiom, and Java provides the `notify` and `notifyAll` keywords to solve it.
+Now let's say our thread is moving merrily along, until it comes to a point where it needs to wait for some data to be available from another thread. This is a very common concurrency idiom, and Java provides the `notify` and `notifyAll` keywords to solve it.
 
-It's easier to see it in an example.  Let's say we have two thread, one that is reading file data, and another that is formatting and displaying that data. 
+It's easier to see it in an example.  Let's say we have two thread, one that is reading file data (the _reader_ thread, and another that is formatting and displaying that data (the _writer_ thread).
+
+Now there is no reason for the writer to write anything, until the reader has read something. So the reader must have a way to signal to the writer that data is available. This is where wait/notify comes in handy.
+
+Here is the program.  Let's  study what it is doing:
+<details>
+<summary>Wait-Notify</summary>
+
+```java
+package com.generalassembly.concurrency;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class ReaderWriterExample {
+    private Object mutex = new Object();
+    private volatile int index = 0;
+    String[] files = {
+            "Concurrency/resources/flatland.txt",
+            "Concurrency/resources/war-and-peace.txt",
+            "Concurrency/resources/sherlock-holmes.txt",
+    };
+
+    String[] values = new String[3]; // allocate 3 slots, but for now, leave them null
+    public void launch() {
+        System.out.println(new File(".").getAbsolutePath());
+        Thread reader = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(index = 0; index < files.length; index++) {
+                    try {
+                        byte[] strings = Files.readAllBytes(Paths.get(files[index]));
+                        String string = new String(strings);
+                        values[index] = string;
+                        synchronized (mutex) {
+                            mutex.notify();
+                        }
+                        Thread.sleep(2000);
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+                System.exit(0);
+            }
+        });
+        Thread writer = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true) {
+                    try {
+                        synchronized (mutex) {
+                            mutex.wait();
+                            System.out.println(values[index]);
+                        }
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        });
+        writer.start();
+        reader.start();
+    }
+
+    public static void main(String[] args) {
+        new ReaderWriterExample().launch();
+    }
+}
+``` 
+</details>
+
+In this example, a reader thread reads a file, then stores it in an array, and sleeps for two seconds. The index to the array is kept in a shared variable called `index`.
+
+Note that after the reader thread has read the file, it stores the result in our array, and then it _notifies_ the writer thread to do its job.
+
+The writer thread immediately wakes up, grabs the value, writes it, and goes back to wait until it is notified to wake up again.
+
+Incidentally, notice the keyword _volatile_, which is used before the declaration of the index variable.
+
+This is a deep concept. The JVM will generally make a local copy of variables that are used by each thread, and the thread has the right to assume that the value will not be changed by any other thread.
+
+If one thread modifies that variable, there is a possibility that the change will not be seen by another thread, unless we mark the variable volatile, which tells the JVM to always read a new value of the variable on every access, instead of using the thread's local copy. The reason this is done is an optimization because accessing memory by a thread is a relatively slow operation.
 
 ## How many threads are correct?
 ### Concurrency traps - contention, non-atomic, volatile
