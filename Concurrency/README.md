@@ -216,13 +216,31 @@ Just study the two lines that are different, and be aware of that syntax.
 (Footnote: Another popular variation of the Runnable syntax is to use Lambda expressions, and we will learn more about those when we get to the lesson on Lambdas and Streams.)
 
 ## Race condition
-Now it is entirely possible that our time printing thread could have started before our main thread got around to printing the "Thread was started" message, in which case "Thread was started" would have printed as the second message instead of the first. This is known as a race condition, and sometimes that makes testing threaded code very difficult! A race condition essentially means that different threads execute independently, and so they can appear to randomly execute their steps in different orders.
+Now it is entirely possible that our time printing thread could have started before our main thread got around to printing the "Thread was started" message, in which case "Thread was started" would have printed as the second message instead of the first. Each thread operates independently, and so the intercolation is unpredictable. This is known as a race condition, and sometimes that makes testing threaded code very difficult! A race condition essentially means that different threads execute independently, and so they can appear to randomly execute their steps in different orders.
 
 This can have some interesting side effects, when trying to assign and access a shared variable from different threads.
 
 ## Activity - Instructor lead - Race condition
 (Note to instructor, see the class RaceCondition)
 Description: Let's set up two threads, which each change the value of a shared variable, and then inspects the variable to see if it is the value as set.
+
+Let's  set up two threads to set and then check the value. Here is the first. The second is similar
+```java
+private long someSharedVariable;
+
+Thread thread1 = new Thread(new Runnable() {
+    @Override
+    public void run() {
+        while (true) {
+            someSharedVariable = 0;
+                if (someSharedVariable != 0) {
+                    System.out.println("huh? Expected " + 0 + " but got " + 0 + "!");
+                }
+            }
+        }
+});
+
+```
 
 The output is something like:
 ```text
@@ -270,7 +288,7 @@ public synchronized void myOtherMethod() {
 One final note on the _synchronized_ syntax. When you add _synchronized_ to a method, you are in effect saying, "lock on this object". However you can choose to lock on different objects, using the related syntax:
 `synchronized(someObject)`
 
-Be sure that when you are using an object as "mutex", that instance is not going to change. Generally you want to declare those mutexes to be _final_. 
+When we create an object for the sake of using its lock, we call that object a "_mutex_". Be sure that when you are using an object as mutex, that variable is not going to change its value, because the lock belongs to the value not the variable. Generally you want to declare those mutex  variables to be _final_ to prevent any reassignment. 
 
 Let's modify our class above to use synchronized and see how that works:
 ```java
@@ -292,9 +310,28 @@ Thread thread1 = new Thread(new Runnable() {
 ```
 Thankfully, when we synchronize, our updates and accesses are guaranteed to occur atomically, in the same thread, and so we see there is no surprising output, like we had in the initial version.
 
-Note that using the synchronized method approach, then if you have different instances of that class, all bets are off, and it is entirely permissible for different threads to access those methods on different object instances. If you want to lock a method across all object instances, then you can make that method synchronized. There are a few variations, but in this course we will not look further into that approach.
+Note that using the synchronized method approach, if you have different instances of that class, all bets are off, and it is entirely permissible for different threads to access those methods on different object instances. If you want to lock a method across _all_ object instances of that class, then you can make that method synchronized. There are a few variations, but in this course we will not look further into that approach.
  
-## Signalling threads using wait/notify - synchronization
+## Signalling threads using wait/notify/notifyAll
+We learned about grabbing an intrinsic lock on an object.
+There is a useful idiom we need to learn, that will help us in situations where some Thread 1 must _wait_ for another Thread 2 to complete,
+and then continue. In such cases we can use Java's built-in _wait-notify_ mechanism.
+`wait` and `notify` are both methods on the Object class, so every Java class inherits those,and they should never be overridden. 
+
+### wait
+If a thread owns the intrinsic lock on a mutex, and it wants to wait for some condition to be true before resuming, then it can call the `wait` method on the mutex. There are actually two flavors of `wait`. The first takes no arguments, and will wait forever (until notified, as we will see shortly.) The second takes a long argument, which represents the number of milliseconds to wait. If the time lapses, our thread exits the wait state, and is now runnable.
+
+We said earlier that when a thread grabs a synchronized lock (by entering a synchronized block) then no other thread can enter that synchronized block (or any block that is synchronized on that object.)
+
+We need to refine that slightly. When a thread is in the wait state, it temporarily forfeits the lock it is waiting on, and the lock becomes available for another thread to take. 
+
+So if a thread is in the timed-wait state and the time lapses, we said our thread exits the wait state, and is now runnable. Again we need to refine that slightly, because if another thread is holding the lock then when our thread leaves the wait state, it enters the blocked state, until the lock becomes available.
+
+### notify/notifyAll
+Now let's say our thread is moving merrily along, until it comes to a point where it needs to wait for some data to be avaiable from another thread. This is a very common concurrency idiom, and Java provides the `notify` and `notifyAll` keywords to solve it.
+
+It's easier to see it in an example.  Let's say we have two thread, one that is reading file data, and another that is formatting and displaying that data. 
+
 ## How many threads are correct?
 ### Concurrency traps - contention, non-atomic, volatile
 ## Concurrency components:
