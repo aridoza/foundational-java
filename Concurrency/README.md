@@ -378,8 +378,6 @@ public class ReaderWriterExample {
                             mutex.notify();
                         }
                         Thread.sleep(2000);
-
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -415,23 +413,27 @@ public class ReaderWriterExample {
 ``` 
 </details>
 
-In this example, a reader thread reads a file, then stores it in an array, and sleeps for two seconds. The index to the array is kept in a shared variable called `index`.
+In this example, a reader thread reads a file, then stores it in an array, storing the index to the array in a shared variable called `index`. Then it sleeps for two seconds. 
 
 Note that after the reader thread has read the file, it stores the result in our array, and then it _notifies_ the writer thread to do its job.
 
-The writer thread immediately wakes up, grabs the value, writes it, and goes back to wait until it is notified to wake up again.
+The call to `notify` immediately wakes up the writer thread, which then grabs the newly stored value, writes it to standard out, and then goes back to the wait state until it is notified to wake up again.
+
+In our example, the call to `notify` wakes up the waiting thread. This works great because we only created one waiting thread. But what happens if you have many waiting threads? A call to notify will wake up one of the waiting threads at random, which is often what you want.  However there are times you want all waiting threads to wake. In that case you would call `notifyAll`, which will notify every waiting thread to wake up. (The observant student will notice that all threads are in the same synchronized block, so how can they all wake at the same time? The answer is they can't. Notify will change all waiting threads from the waiting state to the blocked state, waking up one thread at random. As each thread relinuishes the lock, another thread will be selected at random to become runnable, etc, until ever thread has had a chance.)
 
 Incidentally, notice the keyword _volatile_, which is used before the declaration of the index variable.
 
 This is a deep concept. The JVM will generally make a local copy of variables that are used by each thread, and the thread has the right to assume that the value will not be changed by any other thread.
 
-If one thread modifies that variable, there is a possibility that the change will not be seen by another thread, unless we mark the variable volatile, which tells the JVM to always read a new value of the variable on every access, instead of using the thread's local copy. The reason this is done is an optimization because accessing memory by a thread is a relatively slow operation.
+If one thread modifies that variable, due to a JVM optimization, Java makes no guarantees that that the change will be seen by another thread, unless we mark the variable _volatile_, which tells the JVM to read the value of the variable on every access, instead of using the thread's local copy. The reason this is done is an optimization because accessing memory by threads across CPUs and cores can be a relatively slow operation.
 
-## How many threads are correct?
-### Concurrency traps - contention, non-atomic, volatile
-## Concurrency components:
+
+## Concurrency components
+Until Java 5 arrived on the scene 
 ## Executors class
 ### ExecutorService interface
+## How many threads are correct?
+When you are 
 ### Fixed Thread Pool
 ### Cached Thread Pool
 ### Scheduled Executor
