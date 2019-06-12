@@ -427,18 +427,120 @@ This is a deep concept. The JVM will generally make a local copy of variables th
 
 If one thread modifies that variable, due to a JVM optimization, Java makes no guarantees that that the change will be seen by another thread, unless we mark the variable _volatile_, which tells the JVM to read the value of the variable on every access, instead of using the thread's local copy. The reason this is done is an optimization because accessing memory by threads across CPUs and cores can be a relatively slow operation.
 
-
 ## Concurrency components
-Until Java 5 arrived on the scene 
+Until Java 5 arrived on the scene, that was pretty much the extent of the concurrency support. You basically were given the low level functionality, but building things like thread pools (to dispatch pools of threads), or semaphores (like locks except with more than one permit), were left to the programmer.
+
+Java 5 changed all that with the introduction of the java.util.concurrent package, which provided a rich set of components for handling many important concurrency design patterns. We will go through the important ones now.
+
 ## Executors class
-### ExecutorService interface
-## How many threads are correct?
-When you are 
+So far we have seen how to create threads; but threads use resources, and it would be dangerous to have programs spin arbitrary numbers of threads. To control this, there is a concept of a _thread pool_. This is a component that allocates threads from a fixed pool, and once the pool is depleted, requests for more threads block, until threads are returned to the pool. 
+
+In Java thread pools belong to the category of ExecutorServices, and are created using a factory class called _Executors_, which contains many static methods for creating different flavors of ExecutorService. Looking at the API for ExecutorService, there are methods for invoking, shutting down, and checking status.  
+ ![](resources/executorservice.png)
+We will concentrate on construction, execute, and submit.
 ### Fixed Thread Pool
-### Cached Thread Pool
+
+To construct a fixed thread pool, call `Executors.newFixedThreadPool(pool-size)`, passing in the number of threads to pool. For example:
+```java
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(5);
+```
+
+(We made it private because we want all control to be in this class, and final so that we don't lose reference to it.)
+
+That returns a new ExecutorService, which in this example we assigned to a variable called _threadPool_.
+
+To use that thread pool, we call the `ExecutorService.execute(Runnable)` method, providing a Runnable instance. This is usually done by supplying an anonymous inner class or Lambda expression. Here is how it looks:
+<details>
+<summary>Executor Service</summary>
+
+```java
+        ExecutorService threadPool = Executors.newFixedThreadPool(3);
+        threadPool.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 5; i++) {
+                    System.out.println(" This is thread 0" + " iteration " + i);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        });
+
+```
+</details>
+
+We are creating a new Runnable, providing a Run method that iterates five times, printing out the thread number and the iteration.
+
+Let's see what happens if we start 10 threads like that. Since we hate copy and paste code, let's do a bit of refactoring
+<details>
+<summary>ExecutorService in action</summary>
+
+```java
+    public static void main(String[] args) {
+        ExecutorService threadPool = Executors.newFixedThreadPool(3);
+        threadPool.execute(getRunnable(" This is thread 0"));
+        threadPool.execute(getRunnable(" This is thread 1"));
+        threadPool.execute(getRunnable(" This is thread 2"));
+        threadPool.execute(getRunnable(" This is thread 3"));
+        threadPool.execute(getRunnable(" This is thread 4"));
+        threadPool.execute(getRunnable(" This is thread 5"));
+        threadPool.execute(getRunnable(" This is thread 6"));
+        threadPool.execute(getRunnable(" This is thread 7"));
+        threadPool.execute(getRunnable(" This is thread 8"));
+        threadPool.execute(getRunnable(" This is thread 9"));
+
+    }
+
+    private static Runnable getRunnable(String message) {
+        return new Runnable() {
+            @Override
+            public void run() {
+                for(int i = 0; i < 5; i++) {
+                    System.out.println(message + " iteration " + i);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        };
+    }
+```
+</details>
+
+Now, the pool only has three threads, but we are calling it 10 times. Looking at the output, we see that the first three threads run until complete, whence the next three run, etc, until the end. 
+
+
+## How many threads are correct?
+How large should you make your thread pool? If each thread pinned the CPU, then you would generally want no more than one thread per CPU. So the idea is to look at CPU utilization for one thread, and divide that number into the number of CPUs. For example, if we have 4 cores, and the utilization from one thread is 20% per core, then the number of threads for 100% utilization would be 4/.2 = 20. If you need to exceed that, then it's probably time to start thinking about upgrading hardware. But don't make rash decisions until you test things, because Java is clever about context switching and swapping, so it will still work albeit marginally slower.
+
+## Futures
+A _Future_ in Java is a kind of promise, that data _will_ be available, and so until it does, you my friendly thread, will block if you try to access it.
+
+To get the result of a Future, call its `get()` method, which blocks until there is something _to get_!
+
+When you call `ExecutorService.submit method, it returns a Future.
+ 
 ### Scheduled Executor
-## Callable interface
-## execute vs. submit
+An important flavor of ExecutorService is the _scheduled executor_. This calls its job repeatedly at fixed intervals. For example, let's say we created a job that checks for files on an ftp server, and when files are there, it processes them. Let's say our requirement is to check every 1 minute.
+<details>
+<summary>Scheduled Executor</summary>
+
+```java
+private void checkFtpServer(long period) {
+    ScheduledExecutorService scheduledExecutor = Executors.newScheduledThreadPool(1);
+    scheduledExecutor.scheduleAtFixedRate(checkAndProcessFile(), 0, period, TimeUnit.SECONDS);
+}
+
+```
+</details>
+
+In this example, we are creating a new scheduled thread pool, which is a kind of `ScheduledExecutorService`, and then we schedule our job at a fixed rate of `period` seconds, with an initial delay of 0. That will check for files and process them every `period` seconds, which is a good alternative to the sleep approach we have been using until now.
+
 ## Atomics components - AtomicInteger
 ## ReentrantLock component
 ## ReadWriteLock
