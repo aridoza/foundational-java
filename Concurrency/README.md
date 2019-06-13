@@ -76,6 +76,9 @@ In this approach, we will create a new class that extends Thread.
  `run`. 
  
  Be sure to get this clear... you _implement run()_ but you _call start()_! Let's see an example:
+ <details>
+ <summary>TimeLogger - extending Thread</summary>
+ 
  ```java
 import java.time.LocalTime;
 
@@ -100,6 +103,8 @@ public class TimeLogger extends Thread {
     }
 }
 ```
+</details>
+
 There's  lot going on here, so let's talk through it.
 First we imported the LocalTime class, a convenient class for capturing time information. 
 
@@ -189,6 +194,9 @@ There is another common idiom you should be aware of for creating threads using 
 In our second thread example, we created a new class called TimeRunnable, and then instantiated that and passed in the instance to the Thread class. There is some boiled plate code there - we should not need to assign a name to a class that we are only ever going to use once, in a very limited context? 
 
 For such cases, Java allows you to create _Anonymous inner classes_, which are declared and used in-line, without having to name them. Contrast the following to the previous TimeRunnable version:
+<details>
+<summary>TimeLogger - implementing Runnable</summary>
+
 ```java
     public static void main(String[] args) {
         Runnable timeRunnable = new Runnable() {
@@ -210,6 +218,8 @@ For such cases, Java allows you to create _Anonymous inner classes_, which are d
         System.out.println("Thread was started");
     }
 ```
+</detail>
+
 The syntax looks a bit tricky at first glance. Basically the first line of the main method is declaring a new Runnable instance. But we are calling an anonymous constructor `new Runnable()` that is formed by implementing the `Runnable.run()` method.
 
 To highlight the difference, compare the two versions. You can copy and paste the first version into IntelliJ, then copy the second version into you clipboard, right click and choose "Compare to Clipboard":
@@ -231,6 +241,9 @@ This can have some interesting side effects, when trying to assign and access a 
 Description: Let's set up two threads, which each change the value of a shared variable, and then inspects the variable to see if it is the value as set.
 
 Let's  set up two threads to set and then check the value. Here is the first. The second is similar
+<details>
+<summary>Race Condition</summary>
+
 ```java
 private long someSharedVariable;
 
@@ -245,8 +258,9 @@ Thread thread1 = new Thread(new Runnable() {
             }
         }
 });
-
 ```
+
+</detail>
 
 The output is something like:
 ```text
@@ -280,6 +294,8 @@ public synchronized void myFirstMethod() {...}
 public synchronized void myOtherMethod() {...}
 ``` 
 Now if some thread #1 comes along and calls myFirstMethod, and thread #2 comes along and calls myOtherMethod while thread #1 is holding the lock, then thread #2 will block, as we said. However, let's say myFirstMethod calls myOtherMethod, and they are both synchronized. Then even though thread #2 will block when it calls myOtherMethod, nonetheless, thread #1 can still call myOtherMethod without blocking, since it already has the lock, so the synchronized keyword in that case has no effect.
+<details>
+<summary>Intrinsic Lock is Reentrant</summary>
 
 ```java
 public synchronized void myFirstMethod() {
@@ -291,12 +307,17 @@ public synchronized void myOtherMethod() {
     // thread #1 can enter myOtherMethod even though it is in the synchronized method myFirstMethod
 }
 ```
+</details>
+
 One final note on the _synchronized_ syntax. When you add _synchronized_ to a method, you are in effect saying, "lock on this object". However you can choose to lock on different objects, using the related syntax:
 `synchronized(someObject)`
 
 When we create an object for the sake of using its lock, we call that object a "_mutex_". Be sure that when you are using an object as mutex, that variable is not going to change its value, because the lock belongs to the value not the variable. Generally you want to declare those mutex  variables to be _final_ to prevent any reassignment. 
 
 Let's modify our class above to use synchronized and see how that works:
+<details>
+<summary>Synchronized</summary>
+
 ```java
 private final Object MUTEX = new Object();
 
@@ -314,6 +335,8 @@ Thread thread1 = new Thread(new Runnable() {
     }
 });
 ```
+</details>
+
 Thankfully, when we synchronize, our updates and accesses are guaranteed to occur atomically, in the same thread, and so we see there is none of the surprised output like we saw in the initial version.
 
 Note that using the synchronized method approach, if you have different instances of that class, all bets are off, and it is entirely permissible for different threads to access those methods on different object instances. If you want to lock a method across _all_ object instances of that class, then you can make that method synchronized. There are a few variations, but in this course we will not look further into that approach.
@@ -539,9 +562,97 @@ private void checkFtpServer(long period) {
 ```
 </details>
 
-In this example, we are creating a new scheduled thread pool, which is a kind of `ScheduledExecutorService`, and then we schedule our job at a fixed rate of `period` seconds, with an initial delay of 0. That will check for files and process them every `period` seconds, which is a good alternative to the sleep approach we have been using until now.
+In this example, we are creating a new scheduled thread pool, which is a kind of `ScheduledExecutorService`, and then scheduling our job at a fixed rate of `period` seconds, with an initial delay of 0. That will check for files and process them every `period` seconds, which is a good alternative to the sleep approach we have been using until now.
 
 ## Atomics components - AtomicInteger
+Imagine you are creating a hit counter for a website. The naive implementation would say something like (in pseudocode):
+```java
+Line 1 value = getHitCounter()
+Line 2 value = value+1
+Line 3 setHitCounter(value)
+```
+Now that looks all well and good, except, what happens if two threads call this code using is an inauspicious inter-collation of events.
+
+Let's say the hit counter is currently at 1000, when the two threads attack. Now follow me closely:
+Thread 1 calls Line 1, gets value of 1000
+Thread 2 calls Line 1, gets value of 1000 (since Thread 1 has not set the value yet!)
+Thread 1 calls Line 2, increments its counter value to 1001 
+Thread 2 calls Line 2, increments its counter value to 1001 
+Thread 1 sets the hit counter to 1001
+Thread 2 sets the hit counter to 1001
+
+What just happened?? We had two threads, and we only incremented the hit counter by one!!
+
+Now one solution to this would be to combine Lines 1, 2, and 3 into s single call, and synchronize it. 
+
+But Java provides those semantics inherently, in its AtomicInteger class.
+
+Let's see an example:
+<details>
+<summary>AtomicInteger</summary>
+
+```java
+package com.generalassembly.concurrency;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class AtomicIntegerLesson {
+    private final ExecutorService executor = Executors.newCachedThreadPool();
+    private final AtomicInteger hitCounter = new AtomicInteger(0);
+
+    private void hit() {
+        int value = hitCounter.incrementAndGet();
+        System.out.println(value);
+    }
+
+    private void spinThread() {
+        executor.execute(() -> {
+            for (int i = 0; i < 100; i++) {
+                hit();
+            }
+        });
+    }
+
+    public static void main(String[] args) {
+        AtomicIntegerLesson lesson = new AtomicIntegerLesson();
+        lesson.launch(lesson);
+    }
+
+    private void launch(AtomicIntegerLesson atomicIntegerLesson) {
+        for(int i = 0; i < 100; i++) {
+            atomicIntegerLesson.spinThread();
+        }
+    }
+}
+```
+</details>
+
+In this example, the hit counter starts at 0. We are launching 100 threads, having each one hit the thread counter 100 times. If all goes well, the hit counter should reach 10,000. If there is even a single race condition, we will never see 10,000.
+
+Running that application yields the log output:
+```text
+1
+6
+8
+9
+5
+11
+...
+9996
+9997
+9998
+9999
+10000
+
+Process finished with exit code 0
+```
+The good news is we reached 10000!
+
+Don't be thrown by the fact that some of the numbers appear out of sequence; that's just the way the output was ordered by the thrashing threads. If you study the output carefully, you will see there is exactly one of each number from 1 to 10,000. 
+ 
+
 ## ReentrantLock component
 ## ReadWriteLock
 
