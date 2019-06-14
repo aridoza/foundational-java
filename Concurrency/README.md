@@ -726,7 +726,7 @@ Let's look at an example, first without the read write lock, then again with.
 Study the difference between the two versions.
 
 <details>
-<summary></summary>
+<summary>ReadWriteLock</summary>
 
 ```java
 package com.generalassembly.concurrency;
