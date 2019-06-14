@@ -24,7 +24,6 @@ Students will:
     - Callable interface
     - execute vs. submit
     - Atomics components - AtomicInteger
-    - ReentrantLock component
     - ReadWriteLock
 
 - Activities:
