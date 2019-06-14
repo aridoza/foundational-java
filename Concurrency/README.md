@@ -541,6 +541,16 @@ Now, the pool only has three threads, but we are calling it 10 times. Looking at
 ## How many threads are correct?
 How large should you make your thread pool? If each thread pinned the CPU, then you would generally want no more than one thread per CPU. So the idea is to look at CPU utilization for one thread, and divide that number into the number of CPUs. For example, if we have 4 cores, and the utilization from one thread is 20% per core, then the number of threads for 100% utilization would be 4/.2 = 20. If you need to exceed that, then it's probably time to start thinking about upgrading hardware. But don't make rash decisions until you test things, because Java is clever about context switching and swapping, so it will still work albeit marginally slower.
 
+## Cached Executor
+We will briefly mention the cached executor. This is kind of an unlimited thread pool. You would only use this if you know you have a limited number of short lived threads, so there is no reason to limit it using a fixed thread pool. We will use this in some of our examples for simplicity, but in general there is probably more reason to use fixed thread pools.
+
+The cached execute is created by calling
+```java
+ExecutorService executor = Executors.newCachedThreadPool()
+```
+
+
+
 ## Futures
 A _Future_ in Java is a kind of promise, that data _will_ be available, and so until it does, you my friendly thread, will block if you try to access it.
 
@@ -651,10 +661,212 @@ Process finished with exit code 0
 The good news is we reached 10000!
 
 Don't be thrown by the fact that some of the numbers appear out of sequence; that's just the way the output was ordered by the thrashing threads. If you study the output carefully, you will see there is exactly one of each number from 1 to 10,000. 
- 
 
-## ReentrantLock component
 ## ReadWriteLock
+There are many more components in the java.util.concurrent package, each implementing some valuable concurrency design pattern. We will look at one more, but it pays to study the documentation to see the full treasury.
 
+ The last concurrency component we will look at is the ReadWriteLock, which solves an common problem.
+ 
+ Let's say you have many readers of a certain set of data. There are also writers that change the data, and the changes must be atomic, in the sense that we want to ensure that readers can't read the data until all of it is changed. What would be an example of that?
+ 
+ Well, a very common example would be a stock portfolio owned by a hedge fund.
+ 
+ As an example, let's say we have the following:
+ 
+ |Ticker|# of Shares|Price|Total|
+ |---|---|---|---|
+ |FB	|10,000	|$176.00 	|$1,760,000.00  |
+ |ABC	|5,000	|$98 	|$490,000.00    |
+ |MSFT	|700	|$131.00 	|$91,700.00     |
+ |	|	|Total 	|$2,341,700.00      |
+
+ Now the fund constantly trades shares, and prices constantly change. Let's say the fund updates the portfolio shares and prices every minute. 
   
+Let's say they just sold 500 shares of FB at $176, and used the money to buy 1000 shares of ABC, an equivalent value. (Assume the price of each share did not change at all, only the number of shares.)
   
+ So in reality, the value of the portfolio hs not changed at all; $98,000 of FB was sold, and the same amount of ABC was bought. Zero net change in portfolio value.
+ 
+ But imagine that a reader came in to calculate the portfolio value just while the writer was updating.
+ 
+ The writer sold the 176,000 of FB, and the reader comes in. The reader is a fast thread, so it reads FB (down 176,000), ABC (unchanged, because the writer did not get to it yet), and MSFT (which was not changed at all) So in that scenario, the reader will see a portfolio that is $176,000 lower than the actual value.
+ 
+ Now, we might try to synchronize, which should cure the problem of data consistency, but by doing so, the writers may never get a chance to write, since there might always be readers holding the lock.
+ 
+ The solution is to use a ReadWriteLock.
+ 
+ The way this works is each reader thread grabs a read lock. These do not block each other at all.
+ 
+ When a writer gets a write lock, the writer blocks until there are no more readers! And no new readers can get in, as long as a writer is waiting for a write lock.
+ 
+ Here is an animation to illustrate that
+ 
+ (The reader threads are shown with arrow heads, and the writers have trapezoid heads. Also, the state is color coded - green is running, and white is waiting.)
+ 
+ ![](resources/read-write-lock.gif)
+
+Notice in the animations, that as long as there are no writers, readers come and go freely.
+
+As soon as a writer comes along, new reader and writers must wait.
+
+Once the last writer does its job, all of the waiting readers are free once again to perform their computations.
+
+To create a new ReadWriteLock, call exactly that:
+```java
+ReadWriteLock rwl = new ReadWriteLock();
+```
+
+To grab a read lock, call `rwl.readLock().lock()`, and to 
+To relinquish the read lock, call `rwl.readLock().unlock()`
+
+To grab a write lock, call `rwl.writeLock().lock()`, and to 
+To relinquish the write lock, call `rwl.writeLock().unlock()`
+
+Let's look at an example, first without the read write lock, then again with.
+
+Study the difference between the two versions.
+
+<details>
+<summary></summary>
+
+```java
+package com.generalassembly.concurrency;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+/**
+ * Holding class is contains the ticker, shares, and prices of a stock in a portfolio
+ */
+class Holding {
+    private String ticker;
+
+    public int getShares() {
+        return shares;
+    }
+
+    private int shares;
+
+    public void setShares(int shares) {
+        this.shares = shares;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    private double price;
+
+    public Holding(String ticker, int shares, double price) {
+        this.ticker = ticker;
+        this.shares = shares;
+        this.price = price;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+public class ReadWriteLockLesson {
+    private final List portfolio = new ArrayList();
+    ExecutorService executor = Executors.newCachedThreadPool();
+
+    public static void main(String[] args) {
+        new ReadWriteLockLesson().launch();
+    }
+
+    // create our read write lock
+    ReadWriteLock rwl = new ReentrantReadWriteLock();
+
+    private void launch() {
+        createPortfolio();
+        for (int i = 0; i < 10; i++) {
+            // create 10 reader threads, that continue without pause
+            createReaderThread();
+        }
+        createWriterThread();
+    }
+
+    private void createReaderThread() {
+        executor.execute(() -> read());
+    }
+
+    private Map<Double, Integer> values = new ConcurrentHashMap<>();
+
+    private void read() {
+        while (true) {
+//            rwl.readLock().lock();
+            double value = 0;
+            for (int i = 0; i < portfolio.size(); i++) {
+                Holding holding = (Holding) portfolio.get(i);
+                double holdingValue = holding.getShares() * holding.getPrice();
+                value += holdingValue;
+            }
+            synchronized (ReadWriteLockLesson.class) {
+                int size = values.size();
+                values.put(value, 0);
+                if (values.size() != size) {
+                    // only save the value if it is changed. If the program works, there should only ever be one value
+                    System.out.println(values);
+                }
+            }
+//            rwl.readLock().unlock();
+        }
+    }
+
+    private void createWriterThread() {
+        executor.execute(() -> write());
+    }
+
+    // for the fun, we will first sell FB and buy ABC, then we will buy FB and sell ABC
+    volatile int plusMinus = 1;
+
+    private void write() {
+        while (true) {
+//            rwl.writeLock().lock();
+            Holding fb = (Holding) portfolio.get(0);
+            fb.setShares(fb.getShares() - plusMinus * 500);
+            Holding abc = (Holding) portfolio.get(1);
+            abc.setShares(abc.getShares() + plusMinus * 1000);
+            plusMinus *= -1;
+//            rwl.writeLock().unlock();
+            try {
+                // sleep briefly to give readers a chance to read
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    /**
+     * Create a one time portfolio
+     */
+    private void createPortfolio() {
+        portfolio.add(new Holding("FB", 10_000, 176.00));
+        portfolio.add(new Holding("ABC", 5_000, 88.00));
+        portfolio.add(new Holding("MSFT", 700, 131.00));
+    }
+}
+
+```
+</details>
+
+That produces output:
+```text
+{2291700.0=0}
+{2379700.0=0, 2291700.0=0}
+{2379700.0=0, 2203700.0=0, 2291700.0=0}
+```
+So we see the portfolio has produced three different values, depending on the inter-collation of the calls.
+
+Now, uncomment the Read Write lock logic, and try again:
+```text
+{2291700.0=0}
+
+```
+Doing that, we see there is a single value, as we had hoped. 
