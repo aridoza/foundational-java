@@ -218,7 +218,7 @@ For such cases, Java allows you to create _Anonymous inner classes_, which are d
         System.out.println("Thread was started");
     }
 ```
-</detail>
+</details>
 
 The syntax looks a bit tricky at first glance. Basically the first line of the main method is declaring a new Runnable instance. But we are calling an anonymous constructor `new Runnable()` that is formed by implementing the `Runnable.run()` method.
 
@@ -260,7 +260,7 @@ Thread thread1 = new Thread(new Runnable() {
 });
 ```
 
-</detail>
+</details>
 
 The output is something like:
 ```text
