@@ -1,7 +1,3 @@
-<!-- @Victor: this lesson is ~3200 words and needs to be reduced to ~1200 words to fit in the given time.
-Please start by dentifying certain sub-sections from each lesson that can be removed - anything that’s slightly “advanced”, or that represents an edge case or special circumstance or nuance to the norm. If there are any parts of the lessons in which we explain several ways to do something, we can reduce that and just discuss the most common / easiest approach.
--->
-
 # Objects
 
 Students will be able to create an object from a class and use the object.
@@ -180,23 +176,12 @@ For example, in our _sum_ example above, you could say
 double result = sum(2, 4);
 ```
 
-<!-- 
-Melissa - The following paragraph beginning with 'Some languages such as JavaScript ' explains a curiousity if the student has exposure to any other programming languages at all, since Java works a little differently than most. If you think we shoud omit this please delete it.
-@Victor students start the course with JS so I think it's valid to recognize the difference between the 2 languages - so we can include this.
--->
-Some languages such as JavaScript allow you to omit arguments from a method call, and will either substitute a null or a default value for the omitted value. Java currently does not support that; the arguments of every method call in Java must exactly match the method it is calling. We will see why this is so when we cover method overloading later in the lesson.
-
 In IntelliJ, if you don't remember the names of the parameters for a particular method, type the method where you want to use it, put your cursor between the parentheses and hit Ctrl-p. This will show a neat display of the parameters and types.
 
-<table><tr><td>
-
 ![](resources/ctrl-p.png)
-</td></tr></table>
 That's essentially the structure of every method declaration. But it's not very useful until we supply an implementation.
 
 Like fields, methods can be static or not. Non-static methods are known as _instance methods_. Static methods are also known as _class methods_. We will cover statics in more detail later. 
-
-A method implementation goes inside the opening and closing squiggly brackets following the method declaration. 
 
 The implementation of an instance method has access to every field and method declared in the class, no matter what the visibility. It can also create its own variables, but these are lost once the method returns.
 
@@ -210,52 +195,19 @@ public double sum(double first, double second) {
 }
 ```
 
-Let's analyze that implementation.
-``` double result = first + second;``` says declare a _method_ variable called result (we can name it anything we like, following the usual naming rules; letters, numbers, underscores, must not begin with a number) - try to use meaningful names and avoid abbrevations unless they are obvious. 
-
-`double result = first + second` is far more expressive than
-`double r=f+s` 
-And nowadays memory is cheap but programmers are not (that's why we make the big bucks!), so you want to make your code easy to read and understand for the next guy (or yourself, in a week, when you have forgotten why you did what you did!) 
-
-`return result;` says return the value of the variable called resultas the return value of this method.
-
 Methods that return void can have (but do not require) a return statement, whereas non-void methods _must_ have at least one return statement.
 
-We did not need to explictly declare the result variable above. The following is perfectly valid, and is called "inlining" the calculation (using the value _in-line_ without assigning it to a variable.)
-
-```java
-public double sum(double first, double second) {
-    return first + second;
-}
-```
-
-Inlining might save a step, but when you are analyzing your code in a debugger, having the intermediate variable helps with the debugging, because you can easily see the intermediate values. 
-<table><tr><td>
-
 ![](resources/debugger.png)
-</td></tr></table>
-
-(You might think that although it's helpful to introduce an extra variable there, but doesn't that take a tiny amount of execution time, which might be significant in a low latency application? The truth is that extra step takes no execution time at all, because the Java "JIT" (Just-In-Time) compiler will inline that call for you. JIT is an optimizer built into the Java runtime, that analyzes your code during execution, and actually optimizes the code for performance while it is running. We won't be covering the JIT in this course, but I recommend Googling Java JIT compiler for more information.
-
 
 ### Static methods
 Most of the methods and fields we have defined so far have been _instance_ methods; methods that require an instance to invoke.
 
-However Java also provides _static_ (aka _class_) methods, that don't require an instance, they just execute on a class.
+However Java also provides _static_ (aka _class_) methods, that don't require an instance, they just execute on a class. These methods get the word _static_ before the return type.
 
-This is useful for defining behavior that does not necessarily belong to an instance, but just supplies some kind of common functionality or behavior.
-
-Some common examples of static methods are the methods in the Math class, as we saw in the lesson on Java basics. Since the methods in Math are static, we don't need an instance of the Math class to call things like its _pow()_ or _max()_ methods, to get a power or the maximum of two values.
-
-Static methods are defined exactly like instance methods, except they have the word 'static' before the return type. Static methods only have access to the static fields and methods in this class, as well as to any other values it creates or otherwise obtains externally. 
+Some common examples of static methods are the methods in the Math class, as we saw in the lesson on Java basics. 
 
 ```java
-int a = 4;
-int b = 2;
-System.out.println(a + "**" + b + "=" + (Math.pow(a, b))); // displays 4**2=16.0 (Java has no exp operator, so we invent ** just for display purposes)
-System.out.println("max(a" + "," + b + ")=" + (Math.max(a, b))); // displays max(a,2)=4
-System.out.println("min(a" + "," + b + ")=" + (Math.min(a, b))); // displays min(a,2)=2
-
+System.out.println(a + "**" + b + "=" + (Math.pow(4, 2))); // displays 4**2=16.0 (Java has no exp operator, so we invent ** just for display purposes)
 ``` 
 If a method does not access any of the instance fields or methods from the class that it is defined in, consider making it static.
 
@@ -268,35 +220,9 @@ Let's create a class called Calculator, and add the sum method. Then add a main 
 3.14 + 2.718
 1.414+3.14
 ```
-Hint: remember to instantiate a new Calculator before you start calling its methods. Then try making the methods static, and change the invocation accordingly.
-
-<!-- @Victor, I collapsed the solutions here
--->
-
 <details>
-  <summary>Solution 1:</summary>
-  
-```java
-package com.generalassembly.oop.intro;
-public class Calculator {
-    public double sum(double first, double second) {
-        double sum = first + second;
-        return sum;
-    }
-    public static void main(String[] args) {
-        Calculator calculator = new Calculator();
-        System.out.println(calculator.sum(10 , 20));
-        System.out.println(calculator.sum(3.14 , 2.718));
-        System.out.println(calculator.sum(1.414,3.14));
-    }
-}
-```
-
-</details>  
-
-<details>
-  <summary>Solution 2 (using static):</summary>
-  
+  <summary>Solution</summary>
+    
 ```java
 package com.generalassembly.oop.intro;
 public class Calculator {
@@ -329,8 +255,7 @@ class Person {
 
 Now there are two different variables with the same name _age_; the instance variable `private float age` and the method argument float age.
 
-That is all well and good, and the class will compile with no objections.
-But let's say you want to assign the value of the method variable to the class variable.
+Let's say you want to assign the value of the method variable to the class variable.
 If you say:
 ```java
     private float age;
@@ -397,8 +322,7 @@ maryJones.setName("Jones, Mary");
 maryJones.setAddress("456 Elm St, New York, NY");
 ```
 
-Now, that's a lot of lines to repeat for each operation. Java provides a shorthand, called the class "constructor".
-A constructor looks like any other method, containing a visibility and parameters inside parentheses. However there are two differences between a constructor and any other method:
+That's a lot of lines to repeat for each operation. Java provides a shorthand, called the class "constructor", a special kind of method called when you _construct_ new instances.
 1. A constructor must exactly match the class name it is contained in.
 2. A constructor has no return type.
 3. (One more actually - a constructor may not be static)
@@ -406,143 +330,20 @@ A constructor looks like any other method, containing a visibility and parameter
 Let's add a constructor to our Mankind class:
 
 You actually don't have to type anything to add a constructor, if you use IntelliJ's keyboard shortcut: Alt-Ins, and select the fields you would like to assign, the constructor is added for you:
-<table><tr><td>
 
 ![](resources/ConstructorIDEA.png)
-</td></tr></table>
-
-The constructor can also call methods within the class itself. In the following example, we are _encapsulating_ the fields by setting them using setters, rather than setting them directly.
-
-<table><tr><td>
-
-![](resources/method-calls-in-constructor.png)
-</td></tr></table>
-
-
-Compare the constructors in the two previous examples closely, to understand the difference.
 
 So given the constructor, we can now save a few lines of code (and make it clearer along the way) by entering:
 ```java
 Mankind johnSmith = new Mankind(123, "Smith, John", "123 Main St, Burbank, CA");
 Mankind maryJones = new Mankind(456, "Jones, Mary", "456 Elm St, New York, NY");
 ```
-
-Like any method, a constructor call must contain all of the arguments, and no more than those arguments, and the order must be exactly as defined in the constructor.
-
 ### Default Constructor
 Truthfully, even if you do not define a constructor for a class, Java supplies one implicitly.
 
-To verify that, let's comment out the constructor, compile, and then display the decompiled class using the _javap_ decompiler utility we saw earlier:
-<pre>
-C:\dev\foundational-java>javap target\production\foundational-java\com\generalassembly\oop\intro\Mankind.class
-Compiled from "Mankind.java"
-public class com.generalassembly.oop.intro.Mankind {
-  <b>public com.generalassembly.oop.intro.Mankind();</b> // DEFAULT CONSTRUCTOR WAS SUPPLIED!
-  public int getID();
-  public void setID(int);
-  public java.lang.String getName();
-  public void setName(java.lang.String);
-  public java.lang.String getAddress();
-  public void setAddress(java.lang.String);
-</pre>
-So we see that every class has at least one constructor.
-
-Once you define your own constructor, Java _will no longer_ supply a default constructor, so if you want one, you would have to define it explicitly.
+Once you define your own constructor, Java _will no longer_ supply a default constructor, so if needed define it explicitly.
 
 ### Multiple Constructors
 
 A class may have multiple constructors, as long as each has a signature that is distinct from the other constructors in the class.
 
-For example, these two constructors would be legal, (albeit not very useful, since they both have the same arguments, just in a different order.):
-```java
-    public Mankind(int ID, String name, String address) {
-        this.setID(ID);
-        this.setName(name);
-        this.setAddress(address);
-    }
-
-    public Mankind(String name, int ID, String address) {
-        this.setID(ID);
-        this.setName(name);
-        this.setAddress(address);
-    }
-
-```
-
-Since it is clear which constructor you are referring to, depending on whether you supply _new Mankind(int, String, String)_ or _new Mankind(String, int, String)_
-
-However the following would not be legal
-```java
-    public Mankind(int ID, String name, String address) {
-        this.setID(ID);
-        this.setName(name);
-        this.setAddress(address);
-    }
-
-    public Mankind(int ID, String address, String name) {
-        this.setID(ID);
-        this.setName(name);
-        this.setAddress(address);
-    }
-
-```
-since in that case, both methods have a common signature, _new Mankind(int, String, String)_, and so the Java compiler would not know which one you'd be referring to, and cannot resolve the ambiguity.
-
-### Constructors Calling Constructors
-It is a good practice to chain constuctor calls, so that every constructor calls another constructor. Using this pattern you can simulate constructors with default parameters. 
-Use the `this()` constructor to call one constructor from inside another constructor.
-For example:
-
-```java
-    public Mankind(int ID) {
-        this.ID = ID;
-    }
-
-    public Mankind(int ID, String name) {
-        this(ID);
-        this.name = name;
-    }
-
-    public Mankind(int ID, String name, String address) {
-        this(ID, name);
-        this.address = address;
-    }
-
-```
- If a constructor This calls _this()_, that must be the first call inside a constructor.
- ```java
-    public Mankind(int ID, String name, String address) {
-        this.address = address;
-        this(ID, name); // WON'T COMPILE. this() cannot follow any other code inside a constructor!!
-    }
-
-```
-<!-- @Victor - this is something we could remove and cover in the Design Patterns lesson (a separate lesson) or on interview prep day -->
-
-### Exercise - Instructor led - Singleton class
-There is a common design pattern called _the Singleton_ class. This is a class that we want to ensure will ever only have one instance.
-
-To create a singleton, we must make the constructor private, which means that only the class itself can call its constructor.
-
-We make sure that the class creates one instance of itself, and provide a static accessor to that instance. If you want an instance, the only way to get it is to call the static accessor on the class name. And every call to that accessor always returns the same instance.
-
-Let's create a singleton class called Logger, that has one method, called `public void info(String message)` whose only function is to print the message to System.out.
-
-```java
-package com.generalassembly.oop;
-
-public class Logger {
-    private static Logger logger = new Logger();
-
-    private Logger() {
-    }
-
-    public static Logger getInstance() {
-        return logger;
-    }
-
-    public void info(String message) {
-        System.out.println(message);
-    }
-}
-```
