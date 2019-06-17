@@ -17,15 +17,15 @@ Generate an OutOfMemoryError
 
 ## Java Memory
 We have already seen quite a bit about how Java allocates data, objects, arrays, collections, etc.
-One subtle point we have glossed over is, where does Java put all of this data - we can assume that memory is allocated as needed, but where does that memory come from, how does Java manage that memory, and how does it get reclaimed when the data is no longer required?
+One subtle point we glossed over is, where does Java put all of this data - we can assume that memory is allocated as needed, but where does that memory come from, how does Java manage that memory, and how does memory get reclaimed when the data is no longer required?
 
 Before Java entered the picture, earlier languages like C and C++ required the programmer to _allocate_ memory as it was needed, and then _deallocate_ it once it was no longer needed.
 
 Java introduced the concept of a _Garbage Collector_ which obviated the need for the programmer to manage basic memory allocation/deallocation at all. 
 
-The technology behind Garbage Collection has greatly evolved in the last 20 something years. The common theme is that the JVM allocates an area of memory called _the heap_, where it will store all objects.
+The technology behind Garbage Collection has greatly evolved in the last 20 something years, and there are large companies that make a career out of optimizing garbage collection. We won't get into the precise details of all of these, but the common theme is that the JVM allocates an area of memory called _the heap_, where it stores all objects.
  
-When the heap starts to fill up, Java runs a background process called the _Garbage Collector_ that looks at every object on the heap, traces its references, and references to those references, etc. transitively, to determine if these objects are referenced by any live thread at all. If they are not, they are eligible for collection. The Garbage Collector will mark those for collection, and then in a sweep process will remove that memory and perform a compaction so that the memory once again becomes available.
+When the heap starts to fill up, Java runs a background process (the _Garbage Collector_) that looks at every object on the heap, traces its references, and references to those references, etc. transitively, to determine whether they are still referenced directly or indirectly by any live thread at all. If they are not, they are eligible for collection. The Garbage Collector will mark those for collection, and then in a sweep process will remove that memory and perform a compaction so that the memory once again becomes available.
 
 For example, consider the following program:
 ```java
@@ -34,7 +34,7 @@ for (int i = 0; i < 100; i++) {
     System.out.println(message);
 }
 ```
-At the end of each loop iteration, the message String object that was created during that loop is no longer reachable. It was not assigned, it has no references, and there is no way to ever get it back. Therefore it is eligible for garbage collection. 
+At the end of each loop iteration, the `message` String object that was created during that loop is no longer reachable. It was not assigned, it has no references, and there is no way to ever get it back. Therefore it is eligible for garbage collection. 
 
 You can specify the heap size when you launch your program using launch flags:
 ```sbtshell
