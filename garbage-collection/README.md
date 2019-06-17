@@ -41,6 +41,11 @@ You can specify the heap size when you launch your program using launch flags:
 -Xms allocates the initial (and minimum) heap size.
 -Xmx allocates the maximum heap size. 
 ```
+For example the following will allocate an initial memory of 10GB and will increase that to 100GB:
+
+```java
+java -Xms10g -Xmx100g MyCode
+```
 
 If your -Xmx is greater than your -Xms setting, then Java will start with an initial heap size equal to your -Xms setting, then will allocate more heap as needed until the -Xmx value is reached. If you try to exceed you would get an OutOfMemoryError
 
