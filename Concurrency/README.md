@@ -60,7 +60,7 @@ Or consider an application that needs additional input for its processing. A nai
   All of these reasons and more explain why the designers of Java made the decision to include concurrency in the core JDK, making it perhaps the first language to do so.
   
 ## How to create a Thread
-Threads a really easy to create. But with great simplicity comes great responsibility, and we will discuss some of the traps in a little while. For now let's create and start a thread.
+Threads are really easy to create. But with great simplicity comes great responsibility, and we will discuss some of the traps in a little while. For now let's create and start a thread.
 
 There are two popular ways to create a thread, and you will see both heavily used:
 * Override the Thread class, implementing the `run` method
@@ -116,11 +116,11 @@ The first thing the run method does is to declare a _try catch_ block. Let's com
 
 Next we create a new LocalTime object, which refers to the current time (`now()`) at the time of instantiation.
 
-Since all of that is happening in a while loop, it will continue to loop forever without pause. But the requirement was to display the time every 5 seconds, so we must sleep for 5 seconds between loop iterations. To do that we call the _Thread.sleep()_ method, supplying the number of milliseconds to sleep, in this case 2 seconds is 2000 ms, so we call `Thread.sleep(2000)`. 
+Since all of that is happening in a _while_ loop, it will continue to loop forever without pause. But the requirement was to display the time every 5 seconds, so we must sleep for 5 seconds between loop iterations. To do that we call the _Thread.sleep()_ method, supplying the number of milliseconds to sleep, in this case 2 seconds is 2000 ms, so we call `Thread.sleep(2000)`. 
 
 Finally we define the _main_ method, which launches our program. It _starts_ our new Thread by calling the `start()` method, (which implicitly calls the _run_ method, in a new Thread.)
 
-Coming back to the try-catch block, notice that `Thread.sleep()` is declared to throw an _InterruptedException_. An InterruptedException is thrown when the thread's `interrupt()` method is called. This is usually done by frameworks or application servers, to initiate a smooth shutdown of the threads. Since InterruptedException is a checked exception, it must be caught. One side-effect of catching an InterruptedException, is that the thread's _interrupt_ flag is reset, meaning that it is no longer interrupted. To propagate the interrupt, we must set the interrupt flag once again, which is why we call `Thread.currentThread().interrupt()`.
+Coming back to the try-catch block, notice that `Thread.sleep()` throws an _InterruptedException_. That exception is thrown when the thread's `interrupt()` method is called, usually by frameworks or application servers, to initiate a smooth shutdown of the threads. Since InterruptedException is a checked exception, it must be caught. One side-effect of catching an InterruptedException, is that the thread's _interrupt_ flag is reset, meaning that it is no longer interrupted. To propagate the interrupt, we must set the interrupt flag once again, which is why we call `Thread.currentThread().interrupt()`.
 
 Notice that we enclosed the while loop _inside_ the try catch. A common mistake even advanced programmers make is to do the opposite, and they enclose the try catch _inside the while loop_. Why is that wrong?
 
@@ -229,6 +229,49 @@ To highlight the difference, compare the two versions. You can copy and paste th
 Just study the two lines that are different, and be aware of that syntax.
 
 (Footnote: Another popular variation of the Runnable syntax is to use Lambda expressions, and we will learn more about those when we get to the lesson on Lambdas and Streams.)
+
+## Student Activity - Report the free memory and total memory and time.
+We want to capture some metrics in our logs, to ensure that our application is properly executing and that there is enough memory.
+
+Create an application that spins two extra threads.  
+The first thread logs the system time every minute. 
+The second thread logs the total memory and free memory every 15 seconds.
+
+Try not to use any duplicated code.
+
+Hint: In order to display the current time, call `LocalTime.now()`. In order to display the free memory, call `Runtime.freeMemory()`. In order to display the total memory, call `Runtime.totalMemory()`. 
+
+<details>
+<summary>Free Memory and Time threads</summary>
+
+```java
+public class FreeMemoryAndTime {
+    public static void main(String[] args) {
+        spinThread("Free memory: " + Runtime.getRuntime().freeMemory() + " Total memory: " + Runtime.getRuntime().totalMemory(), 60_000);
+        spinThread("Current time: " + LocalTime.now(), 15_000);
+    }
+
+    private static void spinThread(String message, long delay) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    System.out.println(message);
+                    try {
+                        Thread.sleep(delay);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
+}
+
+```
+</details>
+
 
 ## Race condition
 Now it is entirely possible that our time printing thread could have started before our main thread got around to printing the "Thread was started" message, in which case "Thread was started" would have printed as the second message instead of the first. Each thread operates independently, and so the intercolation is unpredictable. This is known as a race condition, and sometimes that makes testing threaded code very difficult! A race condition essentially means that different threads execute independently, and so they can appear to randomly execute their steps in different orders.
