@@ -10,8 +10,6 @@ Students will be able to instantiate and use an object from a class.
 - Activities:
    - HumanKind activity (code along)
    - Calculator activity (independent)
-   Students will be able to define and implement the Singleton pattern.
-      - Activity: create a Singleton.
 - Sizing: 5 (biggest)
 
 <!-- 
@@ -130,9 +128,9 @@ That will compile and execute our code, and produce output something like:
 
 ![](resources/execute-main-output.png)
 
-### Exercise - Automobile
+## Class Features
 
-Now let's apply what we learned, and create a new class called Automobile in package `com.generalassembly.oop.intro`. Then add a _main_ method, create a new Automobile instance, and print it out. Then run your program.
+Now that we've looked at an example class, let's breakdown the different pieces and take a look at what exactly they're doing.
 
 ### Members
 
