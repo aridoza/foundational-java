@@ -394,9 +394,16 @@ The completed example can be found in the repo in the file named "IndependentPra
 
 
 ## Conclusion
-We've covered a lot in this brief introduction to lambda expressions, streams, filtering, and collecting.
-Hopefully this introduction shows how this functional style can improve code readability. Also, it can reduce
-the amount of code needed to achieve a task when compared to the imperative style.
+We've covered a lot in this brief introduction to lambda expressions, streams, filtering, and collecting. Hopefully this introduction shows how this functional style can improve code readability. Also, it can reduce the amount of code needed to achieve a task when compared to the imperative style.
+
+#### Let's Review
+
+With a partner, draft a one sentence answer to each of these questions:
+- What is a lambda expression?
+- What makes lambdas great?
+- What is a stream?
+- What is filtering?
+- What is collecting?
 
 ## References
 - [Lambda Expressions Oracle](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)
