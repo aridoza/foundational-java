@@ -1,7 +1,3 @@
-<!-- @Victor: this lesson is ~2400 words and needs to be reduced to ~1200 words.
-Please start by identifying certain sub-sections from each lesson that can be removed - anything that’s slightly “advanced”, or that represents an edge case or special circumstance or nuance to the norm. if there are any parts of the lessons in which we explain several ways to do something, we can reduce that and just discuss the most common / easiest approach.
--->
-
 # Subclasses
 
 Students will be able to create a subclass and use it to augment the functionality of the base class.
@@ -94,45 +90,13 @@ Error: java: cannot inherit from final class
 
 A subclass can override any member that is visible to it, except if the method is final or static, simply by defining the method using the exact same name and method signature as the base method it is overriding.
 
-Note that Java does not support "multiple inheritance". That is a fancy way of saying that a class can only extend one class. You can have many subclasses of a class, but a class can have at most one superclass. 
-
-In the next lesson we will learn about Interfaces, that lets you have a limited form of multiple inheritance.
-
 ### The Object class
 There is one detail that the Java class definition hides from you, and that is that every class ultimately inherits from the primordial Java _Object_ class. Object is the superclass of all other classes in Java.
 
 Let's look at the structure of the Object class:
-<table><tr><td>
 
 ![](resources/Object.png)
-</td></tr></table>
 
-Object has a default constructor (i.e. no parameters), it has several methods related to concurrency - wait(), notify(), notifyAll() (more on those in our lesson on concurrency), it has an equals() method, which is used to compare different instances for equality, and a hashCode() method which helps define that equality (more on those when we get to Collections). It has a toString() method, which is what is called whenever a String representation of an object is required, for example if we say System.out.println("My object" + myObject) - converts myObject to s String by calling its oString() method. There is also a _finalize()_ method, which is something you probably don't ever want to use, as it can slow runtimes down considerably, but it is called whenever an instance is marked for Garbage Collection. (More on GC coming soon.) We will cover 
-
-Whenever you declare a class without explicitly _extending_ another class, you are implictly extending the Object class. Every Java class contains all of the methods defined in Object.
-
-Let's see what happens when we call toString() on our Cat class.
-```java
-Cat cat = new Cat();
-cat.setName("Garfield");
-System.out.println(cat.toString()); //displays com.generalassembly.oop.Cat@14ae5a5
-```
-
-Now let's override the toString() method to provide something more useful:
-
-```java
-    @Override
-    public String toString() {
-        return "Cat{name='" + name + '\'' + '}';
-    }
-```
-
-And we try again
-```java
-Cat cat = new Cat();
-cat.setName("Garfield");
-System.out.println(cat.toString()); // displays Cat{name='Garfield'}. Nice!
-```
 ### Upcasting
 Now, there is a subtle feature going on here, that is leveraged in just about every Java library you will use.
 You can declare a variable to be of a certain type, and assign it any subtype. For example
@@ -173,88 +137,16 @@ And if you break that pact, as follows,
 
 ```
 you will get a ClassCastException from the compiler:
-```sbtshell
-Exception in thread "main" java.lang.ClassCastException: com.generalassembly.oo.incom.generalassembly.oop.Catneralassembly.oo.incom.generalassembly.oop.Lionoo.incom.generalassembly.oop.CatTo test that a downcast will work before attempting it, Java provides the `instanceOf` operator.
-```java
-if(cat instanceof Lion) {
-    Lion lion = (Lion) cat;
-}
 
-```
 ### Visibility of overridden methods
 An overridden method can be of the same visibility as the method it is overriding, or it can be more public. However it cannot be more private.
-The reason for this oddity is that Java is preventing you from exposing private information by making it more public.
 
-For example, let's say you have the following class
-```java
-public class TopSecretClass {
-    public String getPassword() {
-        return "pa55w0rd";
-    }
-}
-```
-Now, getTopSecretPassword() is a protected method in that class, which we wish to expose only to subclasses.
-Now suppose a library vendor, wished to expose that method. They would simply subclass it, and make the method more private (by assigning the default visibility).
-
-```java
-public class PasswordHider extends TopSecretClass {
-    @Override
-    protected String getPassword() {
-        return super.getPassword();
-    }
-```
-But now, if someone enters the following code, they expect it to respect the contract of the TopSecretClass, which has a `getPassword()` method:
-
-```java
-TopSecretClass tsc = new PasswordHider();
-String password = tsc.getPassword(); 
-```
-If we allowed the method to become more private, what would you expect it to return?
-As we said earlier, a method call delegates to the value contained in the variable, not the type of the variable.
-So getPassword() should delegate to the PasswordHider, and since getPassword there is more private, it should not return. But the variable is declared as type TopSecretClass, and so it should respect the contract defined by that class, and return a value! See the quandary? So the Java specification prevents you from getting into that pickle by not allowing methods to be more private that the methods they are overriding.
-
-(As an exercise, show why making methods more public does not result in a similar quandary.)
 ### Fields go by the variable not the instance
 One surprising fact (that you don't want to get wrong in an interview), is that fields do not work the same way!
 Field accesses go by the variable type, not the instance type.
 
-So for example, let's look at an abridged version of our Cat and Lion.
-```java
-public class Cat {
-    protected int lives = 9;
-
-    public int getLives() {
-        return lives;
-    }
-}
-
-class Lion extends Cat {
-    protected int lives = 1;
-    @Override
-    public int getLives() {
-        return lives;
-    }
-
-    public static void main(String[] args) {
-        Cat catCat = new Cat();
-        Cat lionCat = new Lion();
-        System.out.println("a. " + catCat.getLives());
-        System.out.println("b. " + lionCat.getLives());
-        System.out.println("c. " + catCat.lives);
-        System.out.println("d. " + lionCat.lives);
-    }
-}
-```
-When we call the getLives() method, a - catCat - returns 9 since that is a Cat instance, but b - lionCat - returns 1 since it is actually a Lion instance (it is being held in a Cat variable, but it is still a Lion instance.)
- 
-Surprisingly however, c and d both return 9, since our Cat has nine lives, and both of these are declared as Cat variables, and fields go by the variable type, not the object type!
-
-Kind of a paradox, I am not sure why they did it that way, but it reinforces our advice - always make fields private, and you will never be bitten by this lion of a paradox (or scratched by a cat!)
-
 ### Encapsulation
 Combining subcassing and visibility, we can hide the gory details of functionality inside a class, and just expose an API (Application Program Interface).
-
-For example, a popular class built into the JDK is FileInputStream, that provides access to files on the file system. Now, whatever operating system you are using, Windows, Linux, iOS, etc., you access files using the FileInputStream exactly the same way. Inside the class, it handles the different file systems so they perform as expected. However from the programmer's perspective, you just implement the FileInputStream, and the gory details are _encapsulated_ inside the class.
 
 ### Polymorphism
 Polymorphism is a frightening sounding word, and you will hear it a lot, but it is really a very simple concept (although very profound, Grasshopper!)
