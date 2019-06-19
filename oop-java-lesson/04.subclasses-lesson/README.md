@@ -73,7 +73,7 @@ class Lion extends Cat {
     }
 }
 ````
-In this case, we say `Lion` _extends_ `Cat`, or `Lion` is a _subcass_ of `Cat`. And we say `Cat` is a _superclass_ of `Lion`. 
+In this case, we say `Lion` _extends_ `Cat`, or `Lion` is a _subclass_ of `Cat`. And we say `Cat` is a _superclass_ of `Lion`. 
 
 The `Lion` class inherits member from it's superclass, so the following calls are legal, even though they are not in the Lion class, they are inherited from the `Cat` class:
 
