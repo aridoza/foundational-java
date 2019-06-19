@@ -1,6 +1,6 @@
 # Interfaces
 
-Students will be able to define an interface in Java and understand when to use one.
+Students will be able to define an interface in Java and understand when to use one. Additionally students will be able to differentiate between abstract classes and interfaces and understand when to use one over the other. 
 
 - Topics:
     - Defining and Implementing an Interface

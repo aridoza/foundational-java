@@ -1,9 +1,9 @@
 # Abstract classes
 
-Students will be able to differentiate between abstract classes and interfaces and understand when to use an abstract class. 
+Students will be able write an abstract classes and understand when to use one. 
 
 - Topics:
-   - Difference between abstract classes and interfaces
+   - Abstract classes
 - Activity: Monitors
 - Sizing: 1 (smallest)
 
@@ -74,9 +74,9 @@ Suppose we want to create a framework that does some (undefined) processing, and
 
 We wish to process that information by writing individual "Monitor" subclasses, that calls the process method and writes the result to the file system.
 
-Let's write a base abstract class called `AbstractMonitor`, with one abstract method called `process()` that returns a String, and one non-abstract method called `writeFile(String fileName, String dataToWrite)`. 
+Let's write a base abstract class called `AbstractMonitor`, with one abstract method called `process()` that returns a String, and one non-abstract method called `startMonitoring(String fileName)`. 
 
-Subclasses benefit from the `AbstractMonitor` class in that they don't have to rewrite the `writeFile` method, they just have to worry about their own particular functionality for the `process` method.
+Subclasses benefit from the `AbstractMonitor` class in that they don't have to rewrite the `startMonitoring(String filename)` method, they just have to worry about their own particular functionality for the `process` method.
 
 For example, let's write a subclass called `MemoryMonitor` that writes the current time and CPU utilization. 
 
@@ -111,3 +111,7 @@ public class MemoryMonitor extends AbstractMonitor {
 ```
 
 <!-- NOTE TO INSTRUCTOR: Execute this method, then open the test.txt file in IntelliJ and watch it refresh every second. If it does not refresh on its own, keep hitting Ctrl-Alt-Y every second or so and it will tail the file. -->
+
+## Summary
+
+Both intefaces and abstract classes are used for abstraction. They're used in similar ways, but as you will see in the next lesson, _interfaces_ are most useful when you don't have any shared code between the subclasses, unlike our Monitors example in which all Monitors were able to share the `startMonitoring(String filename)` method.
