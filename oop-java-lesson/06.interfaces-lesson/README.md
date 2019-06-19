@@ -199,7 +199,7 @@ While a class cannot extend multiple classes, it is perfectly legal to _implemen
 
 #### Another Example
  
-Let's run through another example. Let's use a `Person` class that implements 3 different interfaces for various qualities like `Sentient`, `Sapient`, `Biped`, etc.
+Let's think through another example together as a class. Let's use a `Person` class that implements 3 different interfaces for various qualities like `Sentient`, `Sapient`, `Biped`, etc.
  
 <!-- 
 COMMENT (Brandi): What does this note mean?
@@ -239,9 +239,9 @@ However the following is illegal
 sentient.walk();
 ```
 
-Since even though the instance is a person, the interface is a Sentient,and so you can only call methods from the Sentient interface.
+Since even though the instance is a person, the interface is a `Sentient`, and so you can only call methods from the `Sentient` interface.
 
-This feature provides a way to have a sort of multiple inheritance in Java. For example, if you
+This feature provides a way to have a sort of multiple inheritance in Java that is otherwise not supported.
 
 ### Interfaces vs Abstract Classes 
 
@@ -317,4 +317,10 @@ You should use an abstract class when:
 
 The difference is somewhat subtle and both interfaces and abstract classes are used for abstraction, but the key takeaway for knowing which one to use is whether the classes that would implement or extend the interface or abstract class will *share lines of code*. 
 
-This may require some thinking about your particular task or situation. There's no one right answer for each and every situation. 
+This may require some thinking about your particular task or situation. There's no one right answer for each and every situation. It's okay though. We trust you!
+
+![](https://media.giphy.com/media/vpUbmR24hx6mc/giphy.gif)
+
+## Extra Resources
+
+Need some more examples about abstract classes and interfaces? Check out this [GeeksforGeeks article](https://www.geeksforgeeks.org/difference-between-abstract-class-and-interface-in-java/).
