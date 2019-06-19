@@ -47,7 +47,7 @@
 
 # ![](./LambdaSyntax.png)
 
-A Lambda expression is an anonymous function which provides a very concise and functional syntax which is further used for writing anonymous methods. There are similar to anonymous classes.  However, one issue with anonymous classes is that if the implementation of your anonymous class is very simple, such as an interface that contains only one method, then the syntax of anonymous classes may seem unwieldy and unclear. In these cases, you're usually trying to pass functionality as an argument to another method, such as what action should be taken when someone clicks a button. Lambda expressions enable you to do this, to treat functionality as method argument, or code as data. 
+A Lambda expression is an anonymous function which provides a very concise and functional syntax which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes.  However, one issue with anonymous classes is that if the implementation of your anonymous class is very simple, such as an interface that contains only one method, then the syntax of anonymous classes may seem unwieldy and unclear. In these cases, you're usually trying to pass functionality as an argument to another method, such as what action should be taken when someone clicks a button. Lambda expressions enable you to do this, to treat functionality as method argument, or code as data. 
 
 A lambda expression consists of the following:
 - A comma-separated collection of formal parameters enclosed in parentheses.
@@ -238,7 +238,7 @@ be filtered, aggregated, or converted to other objects.
 The map() function will always return a stream since it's an intermediate operation.  
 
 **What are collectors?**  
-Collectors are terminal operations used to implement various useful reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, etc.  In layman's terms, this a way to convert a stream into your end result.
+In the previous examples, we've seen how to iterate streams and map streams to different objects.  But how do you come up with an end result? That's where collectors come in. Collectors are terminal operations used to implement various useful reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, etc.  In layman's terms, this a way to convert a stream into your end result.
 
 There are various functions of the Collectors class.  The one we will be focused on is "toList()".  
 Let's expand our earlier example by converting the stream to a list of Integers.
@@ -301,7 +301,7 @@ My mother calls me
 - Also point out the stream pipeline of stringList.stream(), map, and collect.
 
 ## Introduction: Filters
-So far we discussed about streams and how they can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation "map" and the terminal operations "forEach" and "collect".  Now, we are going to discuss a very useful intermediate operation called "filter".
+So far we discussed about streams and how they can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation "map" and the terminal operations "forEach" and "collect".  But what if we had a requirement where we only needed a subset of the data based on certain criteria?  This is where a very useful intermediate operation called "filter" comes in.
 
 **What is a filter?**  
 The filter method essentially selects elements based on a condition you provide. That's why the filter 
