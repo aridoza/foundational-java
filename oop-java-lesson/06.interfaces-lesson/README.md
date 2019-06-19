@@ -5,7 +5,7 @@ Students will be able to define an interface in Java and understand when to use 
 - Topics:
     - Defining and Implementing an Interface
     - Write a Class that uses an Interface
-- Activity: to be added.
+    - Discuss when to use interfaces vs abstract classes
 - Sizing: 2 (small)
 
 ## Introduction
