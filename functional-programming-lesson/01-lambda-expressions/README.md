@@ -1,5 +1,5 @@
 
-|                    Title                    |  Type  | Duration |  Creator |
+|                     Title                    |  Type  | Duration |  Creator |
 |:-------------------------------------------:|:------:|:--------:|:--------:|
 | Functional Programming - Lambda Expressions | lesson |   1:30   | Kyle Dye |
 
@@ -46,6 +46,8 @@
 ## Introduction: Lambda Expression Syntax
 
 # ![](./LambdaSyntax.png)
+
+A Lambda expression is an anonymous function which provides a very concise and functional syntax which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes.  However, one issue with anonymous classes is that if the implementation of your anonymous class is very simple, such as an interface that contains only one method, then the syntax of anonymous classes may seem unwieldy and unclear. In these cases, you're usually trying to pass functionality as an argument to another method, such as what action should be taken when someone clicks a button. Lambda expressions enable you to do this, to treat functionality as method argument, or code as data. 
 
 A lambda expression consists of the following:
 - A comma-separated collection of formal parameters enclosed in parentheses.
@@ -133,15 +135,20 @@ The output will be the following:
 **Example 1:** 680 Characters and 32 lines  
 **Example 2:** 456 Characters and 19 lines  
 
-This is a 33% reduction in characters and 41% reduction in lines of code!
+This is a 33% reduction in characters and 41% reduction in lines of code! Also, in most cases, the code becomes more reader friendly.
 
 ## Introduction: Streams and Collections
 
 **What is a Stream?**  
-A stream is a sequence of elements. Unlike a collection, it is not a data structure that stores elements. Instead, a stream carries values from a source, such as collection, through a pipeline.   
+A stream is a sequence of elements. Unlike a collection, it is not a data structure that stores elements. Instead, a stream carries values from a source, such as collection, through a pipeline.  Stream operations leverage the use of lambda expressions to achieve a task, as you'll see shortly.
 
 **What is a Pipeline?**  
-A pipeline is a sequence of stream operations, such as filtering and aggregation operations. Aggregate operations typically accept lambda expressions as parameters, enabling you to customize how they behave.
+A pipeline is a sequence of stream operations, such as filtering and aggregation operations. Aggregate operations typically accept lambda expressions as parameters, enabling you to customize how they behave.  Some of the common aggregation operations are forEach, filter, sum, average, and sort.
+
+**Types of Stream Operations**  
+Stream operations are used to modify streams to create an end result. There are 2 main types of stream operations.  
+- Intermediate operations - Intermediate operations take a stream as input and modify it to produce a different stream. Some of the commonly used intermediate operations are map, filter, sorted, and flatMap. 
+- Terminal operations - Terminal operations mark the stream as consumed, after which point it can no longer be used further.  In other words, you will use terminal operations to create your end result objects. Some common terminal operations are forEach and collect.
 
 **Getting a Stream from a Collection**
 
@@ -202,15 +209,16 @@ My mother calls me
 
 
 **Key Takeaway**  
-Stress to the class the fact that the original list is unaltered when using streams.
+- Stress to the class the fact that the original list is unaltered when using streams.
+- Have them identify the number of lambda expressions seen in the demo. Answer: 3
 
 ## Introduction: .map and .collect
 
 **What does the map function do?**  
-The map() function is a method in the Stream class that represents a functional programming concept. In simple words, the map() is used to transform one object into other by applying a function.
+The map() intermediate operation is a method in the Stream class that represents a functional programming concept. In simple words, the map() is used to transform one object into a different object by using a lambda expression.
 
 **Syntax:**  
-.map(argument -> { function to apply})
+.map(**argument -> { function to apply}) <-- Notice the lambda expression**
 
 **Example:**  
     
@@ -227,10 +235,10 @@ applied is "Integer.valueOf(number)".  The result is a stream of Integer values 
 be filtered, aggregated, or converted to other objects.
 
 **Note:**  
-The map() function will always return a stream.  
+The map() function will always return a stream since it's an intermediate operation.  
 
 **What are collectors?**  
-Collectors are used to implement various useful reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, etc.  
+In the previous examples, we've seen how to iterate streams and map streams to different objects.  But how do you come up with an end result? That's where collectors come in. Collectors are terminal operations used to implement various useful reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, etc.  In layman's terms, this a way to convert a stream into your end result.
 
 There are various functions of the Collectors class.  The one we will be focused on is "toList()".  
 Let's expand our earlier example by converting the stream to a list of Integers.
@@ -288,8 +296,12 @@ My name is
 My friends call me   
 My mother calls me   
 
+**Instructor Note:**  
+- Point out to the class that the code is more concise and readable by using collectors.
+- Also point out the stream pipeline of stringList.stream(), map, and collect.
+
 ## Introduction: Filters
-Now that we know about "map", "stream", and "collect".  We can now discuss the "filter" method.  
+So far we discussed about streams and how they can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation "map" and the terminal operations "forEach" and "collect".  But what if we had a requirement where we only needed a subset of the data based on certain criteria?  This is where a very useful intermediate operation called "filter" comes in.
 
 **What is a filter?**  
 The filter method essentially selects elements based on a condition you provide. That's why the filter 
@@ -317,8 +329,13 @@ The output would be:
 
 ## Independent Practice
 For the Independent Practice, we will take the following template program below and complete 
-the "TODO" portions that are in the comments.  To confirm that your results are corrrect,
-iterate each list that you create and output the results.
+the "TODO" portions that are in the comments.  To confirm that your results are correct,
+iterate each list that you create and output the results.  
+
+**Hint:**  
+- You'll need to leverage the intermediate operations "map" and "filter"
+- You'll also need to use the terminal operation "Collectors.toList"
+
 
     package com.ga.examples;
     
