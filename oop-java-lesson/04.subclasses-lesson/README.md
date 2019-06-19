@@ -262,7 +262,7 @@ The area is the square footage covered by the shape.
 <details>
 <summary>Solution:</summary>
 
-``` 
+```java 
 package com.generalassembly.oop;
 
 public class Triangle extends Shape{
