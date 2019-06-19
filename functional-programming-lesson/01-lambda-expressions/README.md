@@ -1,5 +1,5 @@
 
-|                    Title                    |  Type  | Duration |  Creator |
+|                     Title                    |  Type  | Duration |  Creator |
 |:-------------------------------------------:|:------:|:--------:|:--------:|
 | Functional Programming - Lambda Expressions | lesson |   1:30   | Kyle Dye |
 
@@ -329,7 +329,7 @@ The output would be:
 
 ## Independent Practice
 For the Independent Practice, we will take the following template program below and complete 
-the "TODO" portions that are in the comments.  To confirm that your results are corrrect,
+the "TODO" portions that are in the comments.  To confirm that your results are correct,
 iterate each list that you create and output the results.  
 
 **Hint:**  
