@@ -142,8 +142,10 @@ Cat cat = new Lion();
 
 **Knowledge Check!**
 
+Now if you call ```cat.getLives()``` after declaring it like above, what do you expect will be returned - the 9 lives of the `Cat`, or the 1 life of the `Lion`?
+
 <details>
-    <summary>Now if you call ```cat.getLives()```, what do you expect will be returned - the 9 lives of the `Cat`, or the 1 life of the `Lion`?</summary>
+<summary>The answer may be surprising!</summary>
 
 The rule to remember is that when you call a method on a variable, you are really calling the method on the instance contained in that variable.
 
@@ -295,6 +297,9 @@ public class Triangle extends Shape{
 
 Now do the same for `Circle` and `Rectangle`. Remember these should all _extend_ the `Shape` class.
 
+<details>
+<summary>Solution:</summary>
+
 ```java
 package com.generalassembly.oop;
 
@@ -338,6 +343,8 @@ public class Rectangle extends Shape{
     }
 }
 ```
+
+</details>
 
 Now, let's say we want to create a `Square` shape. We remember from Geometry class, that a square is a special kind of rectangle, where all sides are equal. For our next assignment, we will create a `Square` class that extends `Rectangle`, and instead of overriding the `getCircumference()` and `getArea()` methods, just provide a constructor that will pass in the same value for all sides into the rectangle constructor. 
 
@@ -389,8 +396,8 @@ When you're ready, check your answer with the solution below.
 
 <details>
     <summary>Need a hint?</summary>
-    
-    The important thing to note here is that the method _getCircumferanceAndArea_ accepts a Shape argument, and even though our Shapes are Triangles, Rectangle, Circle, and Square, the method still accepts them since they extend Shape. Anything that extends a class, _is_ that class... A Rectangle _is a_ Shape!
+
+The important thing to note here is that the method _getCircumferanceAndArea_ accepts a Shape argument, and even though our Shapes are Triangles, Rectangle, Circle, and Square, the method still accepts them since they extend Shape. Anything that extends a class, _is_ that class... A Rectangle _is a_ Shape!
 </details>
 
 <details>
