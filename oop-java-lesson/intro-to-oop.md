@@ -1,30 +1,34 @@
-## OOP Lesson Overview
-
-
-| Order | Topic | Objective | Sub topics | Sizing |
-| --- | ---- | ------ | ----- | --- |
-| 1 | What is OOP | Define object-oriented programming. | The four principles of OOP | 1 |
-| 2 | Classes | Define what a class is and the basic structure of defining it in Java. | | 1 |
-| 3 | Objects | Create an object from a class and use the object. | Variables, methods, constructors | 5 |
-| 4 | Subclasses | Create a subclass and use it to augment the functionality of the base class. | Object class, upcasting, downcasting, overriding methods, visibility, inheritance, polymorphism, encapsulation | 3 |
-| 5 | Interfaces | Define an interface in Java and understand when to use one. | Defining / implementing an interface, programming to an interface | 2 |
-| 6 | Abstract classes | Differentiate between abstract classes and interfaces and understand when to use an abstract class. | Abstract classes vs interfaces | 1 |
    
-   
-<!-- Not including because too advanced
-- Inner classes: (2)
-   - advanced topic
-- Annotations (1)
-   - advanced topic -->
+
+| Title | Type | Duration | Creator |
+| --- | -- | -- | --- |
+| Intro to Object-Oriented Programming | Lesson | 0:30 | Victor Grazi, NYC |
 
 
-## Introduction to Object-Oriented Programming
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Intro to Object-Oriented Programmng
+
+### LEARNING OBJECTIVES
+
+*After this lesson, you will be able to:*
+- Define the four principles of OOP
+- Explain how classes and objects factor into OOP
+
+### LESSON GUIDE
+
+| TIMING  | TYPE  | TOPIC  |
+|:-:|---|---|
+| 5 min  | Opening  | Discuss lesson objectives |
+| 10 min  | Introduction  | 4 Principles of OOP |
+| 10 min  | Demo  | Classes |
+| 5 min  | Conclusion  | Review / Recap |
+
+## Opening (5 mins)
 
 *Object-Oriented Programming* (OOP) is a concept that was introduced around 1962 with the advent of the Simula programming language, and became popular some 25 years later in C++.
 
 Where earlier languages were _procedural_ in nature, object-oriented programming introduced the concept of _objects_, which were compartments of data and functionality that could easily retain and modify their own instance data. 
 
-## The Four Principles of OOP
+## The Four Principles of OOP (10 mins)
 
 There are four pillars of object-oriented programming, and these are:
 
@@ -57,7 +61,7 @@ Inheritance allows classes to "inherit" code from one another. The base class is
 
 Polymorphism simply means "many forms". It refers to the fact that a method could have multiple implementations, either differing between an parent and a child class (method overriding) or depending on the type and number of arguments (method overloading).
 
-## Background on Classes
+## Classes and Modifiers (10 mins)
 
 Before object-oriented programming came along, languages like the C programming language sported a feature called `structs` - a way of defining a common format to allocate blocks of consistent data types.
  
@@ -89,9 +93,7 @@ public class MyClass {
 
 In this example, _public_ is the visibility. Top-level classes can only be public or default (unspecified). Top-level means that they are not inner classes, and we will define inner classes later in this lesson.
 
-_public_ classes (lower case p) can be referenced by any other class, and this is the most common class visibility. As we saw earlier, a file may contain _no more than one_ public class. The rule is that every top level public Java class must reside in a file that exactly matches the file name (minus the `.java` file type, of course). 
-
-> Note: Inner classes don't have this restriction, and can be given any valid Java name, as we will demonstrate later.
+_public_ classes (lower case p) can be referenced by any other class, and this is the most common class visibility. A file may contain _no more than one_ public class. The rule is that every top level public Java class must reside in a file that exactly matches the file name (minus the `.java` file type, of course). 
 
 #### Default Classes
 
@@ -119,15 +121,23 @@ This nifty table from [Oracle's docs on access control](https://docs.oracle.com/
 
 ![](https://res.cloudinary.com/briezh/image/upload/v1560810976/Screen_Shot_2019-06-17_at_3.35.38_PM_fq9ffm.png)
 
-## Summary
+## Conclusion (5 mins)
 
 Object-oriented programming is the practice of using classes and objects to make code that is modular (encapsulated) and often reusable. A class can be thought of as a blueprint or a pattern for a dress. There is one blueprint, but with it you can build many buildings. There is one dress pattern, but with it you can manufacture many dresses.
+
+Check for understanding - can you define each of the four OOP pillars?
+- Abstraction
+- Polymorphism
+- Inheritance
+- Encapsulation
 
 ## Additional Resources
 
 * [Oracle Docs: Access Control](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html)
 * [OOP for Beginners (article)](https://dev.to/charanrajgolla/beginners-guide---object-oriented-programming)
 * [4 Principles of OOP (article)](https://medium.com/@cancerian0684/what-are-four-basic-principles-of-object-oriented-programming-645af8b43727)
+
+
 <!--
 ### Todo potential topics:
 #### calling the super constructor. 
@@ -197,3 +207,10 @@ transient (advanced)
 --- @Deprecated
 --- @FunctionalInterface (bonus)
 -->
+
+
+<!-- Not including because too advanced
+- Inner classes: (2)
+   - advanced topic
+- Annotations (1)
+   - advanced topic -->
