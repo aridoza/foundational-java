@@ -54,7 +54,7 @@ We can say that `Lion` is a subclass of `Cat`, and will inherit basic properties
 
 ## Guided Practice: Superclasses and subclasses (15 mins)
 
-Given the following definition of our `Cat` class:  
+Let's create a class `Cat`: 
 
 <!-- NOTE TO INSTRUCTOR: Instructor should code this for the class -->
 
@@ -83,7 +83,7 @@ public class Cat {
 }
 ```
 
-We create a subclass by using the _extends_ keyword, as follows:
+We create a subclass of `Lion` by using the _extends_ keyword, as follows:
 
 ````java
 class Lion extends Cat {
@@ -106,6 +106,7 @@ lion.getLives();
 ```
 
 **Think: What will each of these calls return?**
+
 
 <details>
  <summary>Answers</summary>
@@ -146,14 +147,23 @@ There's a lot to be said about annotations, but here are a few quick hit facts:
 
 > For more about annotations, read through [this article](https://www.geeksforgeeks.org/annotations-in-java/).
 
-<!--### Restricting Inheritance
+### Restricting Inheritance
+
+<!--Note from Melissa - this section needs an example:
+- when would we want to ensure a class cannot be subclassed?
+- what does the code look like using `final`?-->
+
 There are times that you want to ensure that your class cannot be subclassed. In such cases, you can declare your class to be _final_. If you try to subclass a final class, the compiler will warn you with a message like:
+
 ```java
 Error: java: cannot inherit from final class
 ``` 
+
 Sometimes you might want a class to be able to be inherited from, but perhaps you don't want the subclass to change a particular method or field in your class. If needed, particular members can be marked final individually.
+
 A subclass can override any member that is visible to it, except if the method is final or static, simply by defining the method using the exact same name and method signature as the base method it is overriding.
-### The Object Class
+
+<!--### The Object Class
 There is one detail that the Java class definition hides from you, and that is that every class ultimately inherits from the primordial Java _Object_ class. Object is the superclass of all other classes in Java.
 Let's look at the structure of the `Object` class:
 ![](resources/Object.png)-->
@@ -174,6 +184,7 @@ Cat cat = new Lion();
 
 Now if you call ```cat.getLives()``` after declaring it like above, what do you expect will be returned - the 9 lives of the `Cat`, or the 1 life of the `Lion`?
 
+
 <details>
 <summary>The answer may be surprising!</summary>
 
@@ -188,6 +199,7 @@ In plain English, maybe you want a collection (like an Array or ArrayList) of Ca
 That's upcasting! Did the answer surprise you?
 
 </details>
+
 
 ### Downcasting
 
@@ -228,7 +240,7 @@ COMMENT (Brandi): This part isn't clear or really connected to the surrounding l
 One surprising fact (that you don't want to get wrong in an interview), is that fields do not work the same way!
 Field accesses go by the variable type, not the instance type. -->
 
-## Independent Practice - Shapes (30 mins)
+## Independent Practice - Shapes (40 mins)
 
 Let's get into a little more depth with an example about `Shapes`.
 
@@ -289,6 +301,7 @@ In this case, `p = (a+b+c)/2`. To take a square root, use the `Math.sqrt()` meth
 
 When you're done, check your answer below. 
  
+ 
 <details>
 <summary>Solution</summary>
 
@@ -328,6 +341,7 @@ public class Triangle extends Shape{
 **Part 2: Bonus!**
 
 Do the same for `Circle` and for `Rectangle`. Remember these should all _extend_ the `Shape` class.
+
 
 <details>
 <summary>Solution</summary>
@@ -387,6 +401,7 @@ Together, we will create a `Square` class that extends `Rectangle`, and instead 
 
 <!-- NOTE TO INSTRUCTOR: Ask students for suggestions before implementing. Get students talking if you can! -->
 
+
 <details>
  <summary>Solution:</summary>
 
@@ -431,6 +446,7 @@ Square circumference, area = 16.0, 16.0
 
 When you're ready, check your answer with the solution below.
 
+
 <details>
     <summary>Need a hint?</summary>
 
@@ -469,7 +485,7 @@ public class ShapeCalc {
 
 ## Conclusion (10 mins)
 
-Intense Lesson! Let's Recap!
+Intense lesson! Let's recap!
 
 ### Tying Back to the Four Pillars
 
