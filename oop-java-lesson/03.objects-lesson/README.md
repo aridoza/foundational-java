@@ -9,8 +9,9 @@
 
 *After this lesson, you will be able to:*
 - Instantiate and use an object from a class.
+- Create an instance with the "new" keyword.
 - Add fields and methods to a class.
-- Use constructors.
+- Write constructors (including ones that accept arguments).
 
 ### LESSON GUIDE
 
@@ -22,13 +23,6 @@
 | 15 min | Independent Practice | Calculator class |
 | 20 min | Guided / Independent Practice | Constructors |
 | 10 min  | Conclusion  | Review / Recap |
-
-
-* Demonstrate Ability to:
-    * Write a Class
-    * Write a Constructor (including ones that accept arguments)
-    * Create an Instance with the "new" Keyword
-    * Access a Field or Method from an Instance 
 
 <!-- 
 NOTE TO INSTRUCTOR: Before you can execute Java code you must install a JDK (latest build of JDK 1.8).
