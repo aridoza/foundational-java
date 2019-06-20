@@ -1,8 +1,27 @@
-# Subclasses
+| Title | Type | Duration | Creator |
+| --- | -- | -- | --- |
+| Subclasses | Lesson | 1:25 | Victor Grazi, NYC |
 
-Students will be able to create a subclass and use it to augment the functionality of the base class.
- 
-- Topics:
+
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Subclasses
+
+### LEARNING OBJECTIVES
+
+*After this lesson, you will be able to:*
+- Create a subclass.
+- Use a subclass to augment the functionality of the base class.
+
+### LESSON GUIDE
+
+| TIMING  | TYPE  | TOPIC  |
+|:-:|---|---|
+| 5 min  | Opening  | Discuss lesson objectives | 
+| 15 mins | Guided Practice | Superclasses and subclasses |
+| 15 mins | Guided Practice | Upcasting and downcasting |
+| 40 mins | Independent Practice | Shapes |
+| 10 min  | Conclusion  | Review / Recap |
+
+<!--- Topics:
    - The Object Class
    - Upcasting
    - Downcasting
@@ -13,7 +32,7 @@ Students will be able to create a subclass and use it to augment the functionali
 - Activities:
    - Cat example
    - Shape calculator
-- Sizing: 3 (medium)
+- Sizing: 3 (medium)-->
 
 <!--
 Additional materials to structure this section: 
@@ -21,18 +40,19 @@ Additional materials to structure this section:
 - [lab](https://git.generalassemb.ly/ed-product-library/programming-fundamentals-in-java/tree/master/baseline-materials/subclassing-lab
 -->
 
+## Opening (5 mins)
+
+In our use of language and observations from the world, we naturally categorize objects of similar types. We understand what a cat is. We understand that a lion is a member of the cat family, and although we have no confusion between a cat and a lion, we know that lions share qualities with cats.
 
 ![](resources/cat-lion.png)
 
 <!-- taken from https://odditymall.com/includes/content/thumb1366252920.png -->
 
-In our use of language and observations from the world, we naturally categorize objects of similar types. We understand what a cat is. We understand that a lion is a member of the cat family, and although we have no confusion between a cat and a lion, we know that lions share qualities with cats.
-
 We can say that `Lion` is a subclass of `Cat`, and will inherit basic properties and functionality from its _superclass_ (its parent class). 
 
 > Note: You may also hear subclasses and superclasses referred to as parent and child classes, which may help visualize what is meant by "inheritance".
 
-## Code-Along: Cat superclass
+## Guided Practice: Superclasses and subclasses (15 mins)
 
 Given the following definition of our `Cat` class:  
 
@@ -73,65 +93,75 @@ class Lion extends Cat {
     }
 }
 ````
+
 In this case, we say `Lion` _extends_ `Cat`, or `Lion` is a _subclass_ of `Cat`. And we say `Cat` is a _superclass_ of `Lion`. 
 
-The `Lion` class inherits member from it's superclass, so the following calls are legal, even though they are not in the Lion class, they are inherited from the `Cat` class:
+The `Lion` class inherits members from its superclass, so the following calls are legal, even though they are not in the Lion class, they are inherited from the `Cat` class.
 
 ```java
 Lion lion = new Lion();
-lion.hasWhiskers();     // returns true
-lion.favoriteSnack();   // returns mice
-lion.getLives();        // returns 1
+lion.hasWhiskers();     
+lion.favoriteSnack();  
+lion.getLives();       
 ```
+
+**Think: What will each of these calls return?**
+
+<details>
+ <summary>Answers</summary>
 
 * `hasWhiskers()` returns true - inherited from the `Cat` class
 * `favoriteSnack()` returns "mice" - inherited from the `Cat` class
-* `getLives()` returns 1, since a cat may have nine lives, but a `Lion` was not so endowed, because its `getLives()` method was _overridden_.
+* `getLives()` returns 1. Why? A cat may have nine lives, but a `Lion` was not so endowed, because its `getLives()` method was _overridden_.
 
-A subclass will inherit every field and method that it can see, i.e., every public member, protected member, and default member (provided they are in the same package). Private members cannot be inherited, except by classes defined in the *same file*.
+</details>
+
+
+A subclass will inherit every field and method that it can see, i.e., every public member, protected member, and default member (provided they are in the same package). 
+
+Private members cannot be inherited, except by classes defined in the *same file*.
  
-#### Best Practices: Annotations
+### Best Practices: @Override
 
-It is a good idea to annotate an overridden method by placing the _@Override_ annotation above the method. Doing so instructs the compiler to ensure that you are overriding a method from the base class. Although this is not required, it is a good defensive practice, because in the future, if the base method happens to get renamed along the way, the code will fail to compile, (since it is no longer overridding anything), which will help with early detection of some subtle bugs that would result from your believing you were calling an overridden method but actually was a new method!
+For the `Lion` subclass, notice how we put _@Override_ above the `getLives` method?
 
-**Annotations:**
+````java
+class Lion extends Cat {
+    @Override
+    public int getLives() {
+        return 1;
+    }
+}
+````
 
+It is a good idea to annotate an overridden method by placing the _@Override_ annotation above the method. It tells the compiler to ensure that you are overriding a method from the base class. Although this is not required, it is a good defensive practice, because in the future, if the base method happens to get renamed along the way, the code will fail to compile, (since it is no longer overridding anything), which will help with early detection of some subtle bugs that would result from your believing you were calling an overridden method but actually was a new method!
+
+ An overridden method can be of the same visibility as the method it is overriding, or it can be more public. However it cannot be more private.
+
+There's a lot to be said about annotations, but here are a few quick hit facts:
 * Start with the "@" symbol
 * Don't affect code functionality itself
 * Do affect the compiler's actions
-* Help associate metadata
 * Are not required, but it is best practice to use them
-* There are seven built-in annotations: @Retention, @Documented, @Target, @Inherited, @Deprecated, @Override,and @SuppressWarnings
 
-For more about annotations, read through [this article](https://www.geeksforgeeks.org/annotations-in-java/).
+> For more about annotations, read through [this article](https://www.geeksforgeeks.org/annotations-in-java/).
 
-#### Visibility of overridden methods
-
-One last note about method overriding: An overridden method can be of the same visibility as the method it is overriding, or it can be more public. However it cannot be more private.
-
-### Restricting Inheritance
-
+<!--### Restricting Inheritance
 There are times that you want to ensure that your class cannot be subclassed. In such cases, you can declare your class to be _final_. If you try to subclass a final class, the compiler will warn you with a message like:
-
 ```java
 Error: java: cannot inherit from final class
 ``` 
-
 Sometimes you might want a class to be able to be inherited from, but perhaps you don't want the subclass to change a particular method or field in your class. If needed, particular members can be marked final individually.
-
 A subclass can override any member that is visible to it, except if the method is final or static, simply by defining the method using the exact same name and method signature as the base method it is overriding.
-
 ### The Object Class
-
 There is one detail that the Java class definition hides from you, and that is that every class ultimately inherits from the primordial Java _Object_ class. Object is the superclass of all other classes in Java.
-
 Let's look at the structure of the `Object` class:
+![](resources/Object.png)-->
 
-![](resources/Object.png)
-
-### Upcasting
+## Guided Practice - Upcasting and Downcasting (15 mins)
 
 Now, there is a subtle feature going on here, that is leveraged in just about every Java library you will use.
+
 You can declare a variable to be of a certain type, and assign it any subtype. For example:
 
 ````java
@@ -151,12 +181,13 @@ The rule to remember is that when you call a method on a variable, you are reall
 
 So in our case, since the cat variable contains a `Lion` instance, the ```getLives()``` method will return the 1 life of the Lion and not the 9 of the parent Cat.
 
-This is generally a good thing, because library vendors can now define subclasses of things, and they will function as the vendor intends them to. For example, JDBC libraries, which provide access to every brand of relational database, can override the particulars to make their libraries work, as long as they follow the pattern (the API) of the provided interfaces.  
+This is generally a good thing, because library vendors can now define subclasses of things, and they will function as the vendor intends them to.   
 
-In plain English, maybe you want a collection (like an Array or ArrayList) of Cats, but you want to be able to to put Lions, Cats, and anything else in the cat family, say `Tigers` or `Leopards` all in that same collection. Convenient! 
-</details>
+In plain English, maybe you want a collection (like an Array or ArrayList) of Cats, but you want to be able to put Lions, Cats, and anything else in the cat family, say `Tigers` or `Leopards` all in that same collection. Convenient! 
 
 That's upcasting! Did the answer surprise you?
+
+</details>
 
 ### Downcasting
 
@@ -191,18 +222,17 @@ public static void main(String[] args) {
 ```
 you will get a "ClassCastException" from the compiler!
 
-
 <!--
 COMMENT (Brandi): This part isn't clear or really connected to the surrounding lesson... can we clarify and maybe flesh out with an example?  
-
 ### Fields go by the variable not the instance
-
 One surprising fact (that you don't want to get wrong in an interview), is that fields do not work the same way!
 Field accesses go by the variable type, not the instance type. -->
 
+## Independent Practice - Shapes (30 mins)
+
 Let's get into a little more depth with an example about `Shapes`.
 
-### Exercise - Shapes
+**Part 1 (5 mins)**
 
 Let's start by coding out this first part together. Let's say we have a superclass called `Shape`, as follows:
 
@@ -220,9 +250,9 @@ public class Shape {
 }
 ```
 
-Our Shape class has methods `getCircumference()` and `getArea()`, that depending on the shape, will calculate the circumference and area of the shape.
+Our Shape class has methods `getCircumference()` and `getArea()`, that, depending on the shape, will calculate the circumference and area of the shape.
 
-As we define some subclasses to inherit from `Shape` such as `Triangle`, `Circle`, or `Rectangle`, remember that each of these shapes has a slightly different function to determine it's area or circumference.
+As we define some subclasses to inherit from `Shape`, remember that each of these shapes has a slightly different function to determine i's area or circumference.
 
 Let's start by defining a subclass of Shape called `Triangle`, that takes three sides in its constructor:
 
@@ -242,7 +272,7 @@ public class Triangle extends Shape{
 }
 ```
 
-#### Your turn!
+**Part 2 (15 mins)**
 
 Your assignment is to implement the `getCircumference()` and `getArea()` methods.
 
@@ -255,12 +285,12 @@ The area is the square footage covered by the shape.
  √(p(p−a)*(p−b)*(p−c))    
  ```
 
- In this case, `p = (a+b+c)/2`.
+In this case, `p = (a+b+c)/2`. To take a square root, use the `Math.sqrt()` method. 
 
- To take a square root, use the `Math.sqrt()` method. When you're done, check your answer below. If you have extra time, start in on the bonus section!
+When you're done, check your answer below. 
  
 <details>
-<summary>Solution:</summary>
+<summary>Solution</summary>
 
 ```java 
 package com.generalassembly.oop;
@@ -291,14 +321,16 @@ public class Triangle extends Shape{
     }
 }
 ```
+
 </details>
 
-#### Bonus Time!
 
-Now do the same for `Circle` and `Rectangle`. Remember these should all _extend_ the `Shape` class.
+**Part 2: Bonus!**
+
+Do the same for `Circle` and for `Rectangle`. Remember these should all _extend_ the `Shape` class.
 
 <details>
-<summary>Solution:</summary>
+<summary>Solution</summary>
 
 ```java
 package com.generalassembly.oop;
@@ -346,11 +378,14 @@ public class Rectangle extends Shape{
 
 </details>
 
-Now, let's say we want to create a `Square` shape. We remember from Geometry class, that a square is a special kind of rectangle, where all sides are equal. For our next assignment, we will create a `Square` class that extends `Rectangle`, and instead of overriding the `getCircumference()` and `getArea()` methods, just provide a constructor that will pass in the same value for all sides into the rectangle constructor. 
 
-### Code-Along: Create Square Class
+**Part 3 (5 mins)**
 
-<!-- NOTE TO INSTRUCTOR: Ask for suggestions before implementing. Get students talking if you can! -->
+Now, let's say we want to create a `Square` shape. We remember from Geometry class, that a square is a special kind of rectangle, where all sides are equal. 
+
+Together, we will create a `Square` class that extends `Rectangle`, and instead of overriding the `getCircumference()` and `getArea()` methods, just provide a constructor that will pass in the same value for all sides into the rectangle constructor. 
+
+<!-- NOTE TO INSTRUCTOR: Ask students for suggestions before implementing. Get students talking if you can! -->
 
 <details>
  <summary>Solution:</summary>
@@ -365,23 +400,25 @@ public class Square extends Rectangle {
 
 </details>
 
+
 Now this `Square` will automatically calculate its circumference and area.
+
+**Part 4 (15 mins)**
 
 Finally, let's test our code by calculating the circumference and area for each of the following 4 shapes:
 
 * A triangle with sides 3, 4, 5
 * A rectangle with length = 4 and height = 5
 * A circle with radius = 4
-* A Square with side = 4
+* A square with side = 4
 
-Assign each one of these shapes to a variable of the appropriate type, and then pass that shape to a method with signature 
+Assign each one of these shapes to a variable of the appropriate type, and then pass that shape to a method with signature: 
 
 ```java
 private static String getCircumferenceAndArea(Shape shape)
 ```
 
 That will return a String consisting of "ShapeType circumference, area = 12, 6", with the correct values for each shape. 
-
 
 **Sample Expected Output:**
 
@@ -400,8 +437,9 @@ When you're ready, check your answer with the solution below.
 The important thing to note here is that the method _getCircumferanceAndArea_ accepts a Shape argument, and even though our Shapes are Triangles, Rectangle, Circle, and Square, the method still accepts them since they extend Shape. Anything that extends a class, _is_ that class... A Rectangle _is a_ Shape!
 </details>
 
+
 <details>
-<summary>Solution:</summary>
+<summary>Solution</summary>
 
 ```java
 package com.generalassembly.oop;
@@ -428,7 +466,10 @@ public class ShapeCalc {
 
 </details>
 
-## Intense Lesson! Let's Recap!
+
+## Conclusion (10 mins)
+
+Intense Lesson! Let's Recap!
 
 ### Tying Back to the Four Pillars
 
