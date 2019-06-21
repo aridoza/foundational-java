@@ -8,4 +8,4 @@
 | 3 | Creating Classes | Lab | 1:30 |
 | 4 | Subclasses | Lesson | 1:30 |
 | 5 | Subclassing | Lab or HW | 1:30 |
-| 6 | Abstract Classes and Interfaces | Lesson |  |
+| 6 | Abstract Classes and Interfaces | Lesson | 1:30 |
