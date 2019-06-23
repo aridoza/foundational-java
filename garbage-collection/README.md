@@ -49,7 +49,7 @@ java -Xms10g -Xmx100g MyCode
 
 If your -Xmx is greater than your -Xms setting, then Java will start with an initial heap size equal to your -Xms setting, then will allocate more heap as needed until the -Xmx value is reached. If you try to exceed you would get an OutOfMemoryError
 
-Note that when your program executes, even if there is not a single object allocated, there is still some memory used by the program itself, to keep track of the call stack of every thread running. For example if method a calls method b calls method c, Java must remember that when method c exits, return to the spot in method b that called it, and when that returns, return to method a, etc. This memory is called _the stack_ and is distinct from the heap. 
+Note that when your program executes, even if there is not a single object allocated, there is still some memory used by the program itself, to keep track of the call stack of every thread running. For example if method a calls method b calls method c, Java must remember that when method c exits, return to the spot in method b that called it, and when that returns, return to method a, etc. This memory is called _the stack_ and is distinct from the heap. The stack also holds any method-local data that will be swept off once the method returns. The stack work like a fifo queue; it is allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, the stack is swept in a first in first out manner, and the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
 
 ## Memory leaks
 Does this mean that Java can never run out of memory? That would be a happy dream, but the truth is, it can!
