@@ -23,15 +23,16 @@ After this lesson, students will:
         - Fixed Thread Pool
         - Cached Thread Pool
         - Scheduled Executor
-    - Callable interface
-    - Execute vs. submit
+    - Execute vs. Submit
     - Atomics components - AtomicInteger
     - ReadWriteLock
 
+<!-- COMMENT (Brandi): Removed "Callable interface" because it wasn't implemented in the lesson. Was this critical? -->
+
 **Activities:**
 
-- Instructor lead code-along: Start ten threads in a loop
-- Instructor lead code-along: Portfolio pricing method
+- Instructor-led code-along: Start ten threads in a loop
+- Instructor-led code-along: Portfolio pricing method
 - Student exercise: TBD
 - Sizing: 5 (biggest)
 
@@ -144,11 +145,13 @@ Thread was started
 11:57:22.964
 ```
 
-Do you see anything unusual there?
+**Do you see anything unusual there?**
 
 Notice that in our _main_ method, the first thing we did was to start our thread, and then secondly, we printed out "Thread was started". However in the output, we can see that "Thread was started" was logged first, even though it was declared last!
 
-Why did that happen? Keep in mind that everything in Java runs in a thread. Even if you are creating an innocent little "Hello, World" application, Java implictly spins up a thread called the _main thread_ and executes the program in that thread.
+**Why did that happen?**
+
+Keep in mind that everything in Java runs in a thread. Even if you are creating an innocent little "Hello, World" application, Java implictly spins up a thread called the _main thread_ and executes the program in that thread.
 
 Once the main thread called our Thread `start()` method, it launched a new thread, that runs in its own time. Then our main thread resumed, which printed out the "Thread was started" message. Meanwhile back at the ranch, our new Thread was preparing itself, then it got into action and began its business of printing the current time.
 
@@ -302,7 +305,7 @@ Now it is entirely possible that our time printing thread could have started bef
 
 This can have some interesting side effects, when trying to assign and access a shared variable from different threads.
 
-## Instructor lead code-along: Race Conditions
+## Instructor-led code-along: Race Conditions
 
 <!-- Note to instructor, see the class RaceCondition -->
 
@@ -852,7 +855,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Holding class is contains the ticker, shares, and prices of a stock in a portfolio
+ * Holding class contains the ticker, shares, and prices of a stock in a portfolio
  */
 class Holding {
     private String ticker;
@@ -986,3 +989,21 @@ Now, uncomment the `ReadWriteLock` logic, and try again:
 ```
 
 Doing that, we see there is a single value, as we had hoped. 
+
+## Summary
+
+Wow, we learned a lot in this lesson! To recap, here's what we hope you can discuss:
+
+  - Why use concurrency?
+  - How to create a Thread: 2 Different Ways!
+    - Extending Thread
+    - Implement the Runnable interface
+  - Estimate how many threads to use
+  - Usage of the synchronized keyword
+  - Locking and associated thread states
+  - Signalling threads using wait/notify - synchronization
+  - Concurrency components:
+    - Executors and ThreadPools
+    - Execute vs. Submit
+    - Atomics components - AtomicInteger
+    - ReadWriteLock
