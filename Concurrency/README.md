@@ -1,19 +1,21 @@
-# Multi-threading/Java Concurrency
+# Multi-threading and Java Concurrency
 
-Students will: 
+After this lesson, students will:
+
 * Understand the fundamentals of concurrency in Java
 * Be able to create and launch a thread using Thread or by subclassing Runnable interface
 * Understand how to deal with thread contention
 * Estimate how many threads to use for an application
 * Understand basic concurrency components introduced in Java 5
 
-- Topics:
-  - Why concurrency
+**Topics:**
+
+  - Why use concurrency?
   - How to create a Thread
   - The Runnable interface
   - How many threads are correct?
-  - synchronized keyword
-    - Native locks are reentrant 
+  - The synchronized keyword
+    - Re-entrant Native locks  
   - Signalling threads using wait/notify - synchronization
   - Concurrency components:
     - Executors class
@@ -22,63 +24,62 @@ Students will:
         - Cached Thread Pool
         - Scheduled Executor
     - Callable interface
-    - execute vs. submit
+    - Execute vs. submit
     - Atomics components - AtomicInteger
     - ReadWriteLock
 
-- Activities:
-   - Instructor lead - Start ten threads in a loop. 
-   Make each write an integer to the console. See how the integers are not printed in order
-   - Instructor lead - Portfolio pricing method
-   - Student exercise
-   Students will be able to 
-      - Activity: 
+**Activities:**
+
+- Instructor lead code-along: Start ten threads in a loop
+- Instructor lead code-along: Portfolio pricing method
+- Student exercise: TBD
 - Sizing: 5 (biggest)
 
-### Fundamentals of Concurrency
-Until now, we have covered basic programs and program flow. We have seen how you can control the flow
-of a program using things like `if` statements and `for` loops. However all of the programs we have 
-seen so far have been synchronous. One thread running the program serially from beginning to end.
+## Fundamentals of Concurrency
 
-However nowadays computers have powers far beyond what we have seen thus far. Today's commodity computers have multiple CPU's
-dozens or hundreds of cores, and even within a single core, Java spins threads to perform 
-parallel processes.
+Until now, we have covered basic programs and program flow. We have seen how you can control the flow of a program using things like `if` statements and `for` loops. However all of the programs we have seen so far have been _synchronous_. One thread running the program serially (consecutively) from beginning to end.
 
-# Why concurrency?
+However today's computers have powers far beyond what we have seen or used thus far. Commodity computers have multiple CPUs, dozens or hundreds of cores, and even within a single core, Java spins threads to perform parallel processes.
+
+## Why Use Concurrency?
+
 Why would we ever need to have multiple threads performing concurrent work?
 
-Consider a web application with dozens (or millions!) of concurrent users. 
-We would not expect each user to wait in line until the previous user is done; rather we 
+Consider a web application with dozens (or millions!) of concurrent users. We would not expect each user to wait in line until the previous user is done; rather we 
 want to handle these requests _concurrently_.
 
 Or let's say our application requires a lot of processing such as database queries, file reads and writes, and URL connection handling, where there's lots of IO. Do we 
-want each outgoing request to wait for the other to return before the next one starts? Wouldn\'t it be better
-to have all of our requests process _concurrently_?
+want each outgoing request to wait for the other to return before the next one starts? Wouldn't it be better to have all of our requests process _concurrently_?
 
-Or consider an application that needs additional input for its processing. A naive approach would be to save all of the state of the process, terminate the process, get the additional data, and then restart the original process. That approach requires a lot of housekeeping overhead, keeping track of things, especially if there are many such things going on. Wouldn\'t it be better if the process could spin a concurrent process to get the required data, without stopping itself, and then continuing when the data is available?
+Or consider an application that needs additional input for its processing. A naive approach would be to save all of the state of the process, terminate the process, get the additional data, and then restart the original process. That approach requires a lot of housekeeping overhead, keeping track of things, especially if there are many such things going on. Wouldn't it be better if the process could spin a concurrent process to get the required data, without stopping itself, and then continuing when the data is available?
 
-  All of these reasons and more explain why the designers of Java made the decision to include concurrency in the core JDK, making it perhaps the first language to do so.
+All of these reasons and more explain why the designers of Java made the decision to include concurrency in the core JDK, making it perhaps the first language to do so.
   
-## How to create a Thread
-Threads are really easy to create. But with great simplicity comes great responsibility, and we will discuss some of the traps in a little while. For now let's create and start a thread.
+## How to Create a Thread
+
+Threads are really easy to create, but with great simplicity comes great responsibility! We will discuss some of the common pitfalls in a little while. For now let's jump straight into creating and starting our very first thread.
 
 There are two popular ways to create a thread, and you will see both heavily used:
+
 * Override the Thread class, implementing the `run` method
 * Implement the Runnable interface, and pass it to a Thread
 
-Let's use both of these approaches to start a thread that writes the current time to System output every 5 seconds
+Let's use both of these approaches to start a thread that writes the current time to System output every 2 seconds
 
-## Override the Thread class
-The _Thread_ class has a method called `public void run()` that is called implicitly when you _start_ your thread. 
-In this approach, we will create a new class that extends Thread.
- and override the `run` method. Then we will call our class's `start` method, which will start the Thread and implicitly call 
- `run`. 
+## Override the Thread Class
+
+The `Thread` class has a method called `public void run()` that is called implicitly when you _start_ your thread. 
+
+In this approach, we will create a new class that _extends_ `Thread` and _overrides_ the `run()` method. Then we will call our class's `start()` method, which will start the thread and implicitly call `run()`. 
  
- Be sure to get this clear... you _implement run()_ but you _call start()_! Let's see an example:
- <details>
- <summary>TimeLogger - extending Thread</summary>
+ > Reminder: Be sure to get this clear... you _implement_ `run()` but you _call_ `start()`! Tricky! 
+
+ **Let's walk-through an example:**
+
+<details>
+    <summary>TimeLogger: Extending the Thread Class</summary>
  
- ```java
+```java
 import java.time.LocalTime;
 
 public class TimeLogger extends Thread {
@@ -102,33 +103,36 @@ public class TimeLogger extends Thread {
     }
 }
 ```
+
 </details>
 
-There's  lot going on here, so let's talk through it.
-First we imported the LocalTime class, a convenient class for capturing time information. 
+There's a lot going on here, so let's talk through it.
 
-Next we implemented our TimeLogger class, which _extends Thread_.
+First we imported the `LocalTime` class, which is a convenient class for capturing time information. 
 
-Now comes the meat. We override the `Thread` class's `run` method. 
-The first thing the run method does is to declare a _try catch_ block. Let's come back to that until after we review the rest of the code.
+Next we implemented our `TimeLogger` class, which _extends_ `Thread`.
+
+Now comes the meat. We overrode the `Thread` class's `run()` method. The first thing the run method does is to declare a _try-catch_ block. We surround code that we think may throw an exception (or even expect to throw an exception) with the try portion, and make some code to gracefully handle the exception we anticipated in the catch portion. More on try-catch in a moment!
 
 `Thread.run` normally does its job and then exits, terminating the Thread. However in our case, we don't want it to exit, we want it to keep printing, so we use a _while_ loop to continually execute our output statement. 
 
-Next we create a new LocalTime object, which refers to the current time (`now()`) at the time of instantiation.
+Next we create a new `LocalTime` object, which refers to the current time (`now()`) at the time of instantiation.
 
-Since all of that is happening in a _while_ loop, it will continue to loop forever without pause. But the requirement was to display the time every 5 seconds, so we must sleep for 5 seconds between loop iterations. To do that we call the _Thread.sleep()_ method, supplying the number of milliseconds to sleep, in this case 2 seconds is 2000 ms, so we call `Thread.sleep(2000)`. 
+Since all of that is happening in a _while_ loop, it will continue to loop forever without pause. But the requirement was to display the time every 2 seconds, so we must sleep for 2 seconds between loop iterations. To do that we call the _Thread.sleep()_ method, supplying the number of milliseconds to sleep, in this case 2 seconds is 2000 ms, so we call `Thread.sleep(2000)`. 
 
-Finally we define the _main_ method, which launches our program. It _starts_ our new Thread by calling the `start()` method, (which implicitly calls the _run_ method, in a new Thread.)
+Finally we define the `main()` method, which launches our program. It _starts_ our new thread by calling the `start()` method, (which implicitly calls the `run()` method, in a new thread.)
 
-Coming back to the try-catch block, notice that `Thread.sleep()` throws an _InterruptedException_. That exception is thrown when the thread's `interrupt()` method is called, usually by frameworks or application servers, to initiate a smooth shutdown of the threads. Since InterruptedException is a checked exception, it must be caught. One side-effect of catching an InterruptedException, is that the thread's _interrupt_ flag is reset, meaning that it is no longer interrupted. To propagate the interrupt, we must set the interrupt flag once again, which is why we call `Thread.currentThread().interrupt()`.
+> Note: We get the implementation of the `start()` method from the `Thread` class which we're extending. That's why we don't have to write it ourselves!
 
-Notice that we enclosed the while loop _inside_ the try catch. A common mistake even advanced programmers make is to do the opposite, and they enclose the try catch _inside the while loop_. Why is that wrong?
+Coming back to the try-catch block, notice that `Thread.sleep()` throws an `InterruptedException`. That exception is thrown when the thread's `interrupt()` method is called (usually by frameworks or application servers), to initiate a smooth shutdown of the threads. Since `InterruptedException` is a checked exception (meaning we called it out in the catch), it _must_ be caught. One side-effect of catching an `InterruptedException`, is that the thread's _interrupt_ flag is reset, meaning that it is no longer interrupted. To propagate the interrupt, we must set the interrupt flag once again, which is why we call `Thread.currentThread().interrupt()`.
+
+Notice that we enclosed the while loop _inside_ the try-catch. A common mistake even advanced programmers make is to do the opposite, and they enclose the try-catch _inside the while loop_. Why is that wrong?
 
 Well think about it. If the try catch would be inside the while, then imagine what would happen if someone calls the interrupt method. In that case, the exception would trap the interrupt, set the interrupt flag, and then loop again! The program would never end, even after an interrupt! So we fix that by including the while _inside_ the try catch. Now if an interrupt occurs, the while loop exits, and the catch block takes over, sets the interrupt flag, and exits, returning control to the caller.
 
-This is a _very_ common idiom in Java concurrency - execute some activity in a loop, sleep, and catch the InterruptedException outside the loop.
+This is a _very_ common idiom in Java concurrency: execute some activity in a loop, sleep, and catch the `InterruptedException` outside the loop. Now you know!
 
-Let's execute that program (Ctrl-Shift-F10 in IntelliJ.) Notice that our `while(true)` statement will never exit, so the only way to exit this program is to _kill_ it (Ctrl F2 or Command F2 in IntelliJ), or pull the plug!
+Let's execute that program (`Ctrl-Shift-F10` in IntelliJ.) Notice that our `while(true)` statement will never exit, so the only way to exit this program is to _kill_ it (`Ctrl-F2` or `Command-F2` in IntelliJ), or pull the plug!
 
 The output looks like this:
 
@@ -139,15 +143,17 @@ Thread was started
 11:57:20.964
 11:57:22.964
 ```
+
 Do you see anything unusual there?
 
 Notice that in our _main_ method, the first thing we did was to start our thread, and then secondly, we printed out "Thread was started". However in the output, we can see that "Thread was started" was logged first, even though it was declared last!
 
-Why did that happen? Keep in mind that everything in Java runs in a thread. Even if you are creating an innocent little Hello, World application, Java implictly spins up a thread called the _main thread_ and executes the program in that thread.
+Why did that happen? Keep in mind that everything in Java runs in a thread. Even if you are creating an innocent little "Hello, World" application, Java implictly spins up a thread called the _main thread_ and executes the program in that thread.
 
-Once the main thread called our Thread _start_ method, it launched a new Thread, that runs in its own time. Then our main thread resumed, which printed out the "Thread was started" message. Meanwhile back at the ranch, our new Thread was preparing itself, then it got into action and began its business of printing the current time.
+Once the main thread called our Thread `start()` method, it launched a new thread, that runs in its own time. Then our main thread resumed, which printed out the "Thread was started" message. Meanwhile back at the ranch, our new Thread was preparing itself, then it got into action and began its business of printing the current time.
 
 ## The Runnable interface
+
 We have seen one way to create a Thread by overriding the Thread class. The second approach is to recognize that the Thread class has a constructor that accepts a _Runnable_ instance. Runnable is an interface with one method - `public void run()`. Using this approach, you construct a new Thread instance by passing a Runnable instance to the constructor, then you call your Thread's _start_ method, which will call your Runnable in a new Thread.
 
 Here is the program:
