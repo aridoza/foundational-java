@@ -27,7 +27,7 @@ After this lesson, students will:
     - Atomics components - AtomicInteger
     - ReadWriteLock
 
-<!-- COMMENT (Brandi): Removed "Callable interface" because it wasn't implemented in the lesson. Was this critical? -->
+<!-- COMMENT (Brandi): I removed "Callable interface" because it wasn't implemented in the lesson. Was this critical? -->
 
 **Activities:**
 
@@ -165,6 +165,7 @@ We have seen one way to create a thread by extending the `Thread` class and over
 <details>
 <summary>Time: Runnable version</summary>
 
+
 ```java
 public static void main(String[] args) {
     class TimeRunnable implements Runnable {
@@ -263,10 +264,6 @@ CHALLENGE: Try not to use any duplicated code!
 <details>
 <summary>Solution: Memory and Time Threads</summary>
 
-**What are those underscores?**
-
-Underscores in numeric literals are ignored in Java and used for readability. In the code below, the `delay` is a time in miliseconds, which is difficult to read. Putting the underscore in lets us easily identify that the sleep timer of the threads waits for 60 and 15 seconds respectively on each iteration.
-
 <!-- COMMENT (Brandi): Error. This code prints the same string every time since the string message is calculated just once for each call to spinThread. You need to use a lambda expression here. -->
 
 ```java
@@ -295,6 +292,12 @@ public class FreeMemoryAndTime {
 }
 
 ```
+
+
+**What are those underscores?**
+
+Underscores in numeric literals are ignored in Java and used for readability. In the code below, the `delay` is a time in miliseconds, which is difficult to read. Putting the underscore in lets us easily identify that the sleep timer of the threads waits for 60 and 15 seconds respectively on each iteration.
+
 </details>
 
 
@@ -353,7 +356,7 @@ huh? Expected 0 but got 0!
 
 **What's going on?**
 
-Up is down? Left is right? 0 is 1?!
+*Up is down? Left is right? 0 is 1?!*
 
 Whoa! Don't worry, there is actually a logical explanation for this behavior! You have to realize that thread1 is continually setting `someSharedVariable` to 0 and thread2, presumably operating at the same time is trying to set it to 1. At any given time we don't know who touched the shared variable last! So it's less of a logical contradiction so much as two siblings who are both fighting over who gets to play with a toy, but it's pretty clear even from this samll example that threading and concurrency can lead to some trippy behavior!
 
