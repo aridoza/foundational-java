@@ -33,7 +33,7 @@ After this lesson, students will:
 
 - Instructor-led code-along: Start ten threads in a loop
 - Instructor-led code-along: Portfolio pricing method
-- Student exercise: TBD
+- Student exercise: Create 2 Threads to Track Free Memory, Total Memory, and Time.
 - Sizing: 5 (biggest)
 
 ## Fundamentals of Concurrency
@@ -75,10 +75,9 @@ In this approach, we will create a new class that _extends_ `Thread` and _overri
  
  > Reminder: Be sure to get this clear... you _implement_ `run()` but you _call_ `start()`! Tricky! 
 
- **Let's walk-through an example:**
+ Let's walk-through an example:
 
-<details>
-<summary>TimeLogger: Extending the Thread Class</summary>
+**TimeLogger: Extending the Thread Class**
  
 ```java
 import java.time.LocalTime;
@@ -105,8 +104,6 @@ public class TimeLogger extends Thread {
 }
 ```
 
-</details>
-
 There's a lot going on here, so let's talk through it.
 
 First we imported the `LocalTime` class, which is a convenient class for capturing time information. 
@@ -124,6 +121,8 @@ Since all of that is happening in a _while_ loop, it will continue to loop forev
 Finally we define the `main()` method, which launches our program. It _starts_ our new thread by calling the `start()` method, (which implicitly calls the `run()` method, in a new thread.)
 
 > Note: We get the implementation of the `start()` method from the `Thread` class which we're extending. That's why we don't have to write it ourselves!
+
+### What About That Try-Catch Block?
 
 Coming back to the try-catch block, notice that `Thread.sleep()` throws an `InterruptedException`. That exception is thrown when the thread's `interrupt()` method is called (usually by frameworks or application servers), to initiate a smooth shutdown of the threads. Since `InterruptedException` is a checked exception (meaning we called it out in the catch), it _must_ be caught. One side-effect of catching an `InterruptedException`, is that the thread's _interrupt_ flag is reset, meaning that it is no longer interrupted. To propagate the interrupt, we must set the interrupt flag once again, which is why we call `Thread.currentThread().interrupt()`.
 
@@ -155,7 +154,7 @@ Keep in mind that everything in Java runs in a thread. Even if you are creating 
 
 Once the main thread called our Thread `start()` method, it launched a new thread, that runs in its own time. Then our main thread resumed, which printed out the "Thread was started" message. Meanwhile back at the ranch, our new Thread was preparing itself, then it got into action and began its business of printing the current time.
 
-## The Runnable interface
+## The Runnable Interface
 
 We have seen one way to create a thread by extending the `Thread` class and overriding its `run()` method. The second approach is to recognize that the `Thread` class has a constructor that accepts a _Runnable_ instance. Runnable is an interface with one method - `public void run()`. Using this approach, you construct a new Thread instance by passing a Runnable instance to the constructor, then you call your Thread's _start_ method, which will call your Runnable in a new Thread.
 
@@ -368,6 +367,10 @@ When you declare methods as `synchronized`, then that ensures that _only one thr
 
 **Seems a little unfair doesn't it?**
 
+![](https://res.cloudinary.com/briezh/image/upload/v1561421042/DMV-cartoon_x2twcy.jpg)
+
+<!-- COMMENT (Brandi): I don't know who to credit the comic to, and honestly just replace it with something else light-hearted, but this content is DENSE. Having visual aids, examples, or humor will go a long way toward breaking up the monotony. -->
+
 Have you ever been in a grocery line trying to buy one item behind someone buying 100 items? Or have you been waiting in a customer service line while whoever is in front of you had a complex problem? You were left waiting indefinitely, and if the person in front of you felt like taking more time you'd have no choice but to just wait and wait! It turns out, we don't like our Java threads to wait on hold either! Later on in this lesson, we will learn about the _ReentrantLock_, that allows you to lock in a fair way.
 
 One more important note about the intrinsic lock.
@@ -405,6 +408,8 @@ Let's modify our class above to use synchronized and see how that works:
 
 <details>
 <summary>Synchronized</summary>
+
+<!-- COMMENT (Brandi): I feel like MUTEX needs more explanation here and may be a stumbling point for students. Why is it capitalized? What does it do? Why do we use it with synchronized as opposed to the variable we're trying to protect? These are all questions we can anticipate. -->
 
 ```java
 private final Object MUTEX = new Object();
@@ -991,6 +996,8 @@ Now, uncomment the `ReadWriteLock` logic, and try again:
 Doing that, we see there is a single value, as we had hoped. 
 
 ## Summary
+
+<!-- COMMENT (Brandi): Summary should be a little better. For now I just reiterated the lesson objectives, but maybe we include a brief how-to on how to know which tool to use when. A quiz maybe? -->
 
 Wow, we learned a lot in this lesson! To recap, here's what we hope you can discuss:
 
