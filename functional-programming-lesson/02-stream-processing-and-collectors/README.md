@@ -98,7 +98,7 @@ In this demo will first take a look at some of the commonly used intermediate st
 
 ### Commonly Used Intermediate Stream Operations
 
-**Filter: selects elements based on a condition you provide **  
+**Filter: selects elements based on a condition you provide**  
     
     //Filter - Get numbers greater than 50
     List<Integer> numberList = Arrays.asList(1,2,50,100);
