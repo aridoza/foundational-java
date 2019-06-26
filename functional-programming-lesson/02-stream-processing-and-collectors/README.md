@@ -215,7 +215,7 @@ Person{name='Jane', age=45}
 Person{name='Jeff', age=70}  
 Person{name='Tom', age=30}  
 
-###Stream Processing Doesn't Start Until We Have A Terminal Stream Operation  
+### Stream Processing Doesn't Start Until We Have A Terminal Stream Operation  
 We mentioned earlier that stream processing doesn't start until a terminal stream operation is encountered, due to lazy evaluation.  See the example below:
 
     personList.stream()
@@ -289,7 +289,7 @@ Person{name='Jeff', age=70}
 
 The first name filter takes 11 iterations to filter the stream down to 4.  The age filter takes 4 iterations to filter the stream down to 2 Person objects.  Lastly, you have the sort of those 2 Person objects in the stream.  That's a total of 17 iterations.  We've cut out 11 unnecessary iterations just by reordering the pipeline!
 
-##Introduction - Terminal Stream Operations
+## Introduction - Terminal Stream Operations
 In the last section we learned about intermediate stream operations and how they can be used to manipulate streams. We also learned that stream processing doesn't start until there is a terminal stream operation. We will use this section to discuss terminal stream operations. As mentioned in the last functional programming module, terminal operations, such as forEach(), mark the stream as consumed, after which point it can no longer be used further.  
 
 Some of the commonly used terminal stream operations are:  
@@ -300,7 +300,7 @@ Some of the commonly used terminal stream operations are:
 
 There are other useful terminal operations that will be discussed further in the "Comparison Based Stream Operations" section.
 
-##Demo - Terminal Stream Operations  
+## Demo - Terminal Stream Operations  
 For this short demo, we are going to show examples of using forEach, findFirst, collect, and toArray.  We will also leverage the same Person class that was used in the previous demo.
 
     public class Person {
@@ -339,7 +339,7 @@ For this short demo, we are going to show examples of using forEach, findFirst, 
         }
     }
 
-###forEach
+### forEach
 Print out each person's name.
 
     List<TerminalOperations.Person> largePersonList =
@@ -374,7 +374,7 @@ Hello my name is Jane
 Hello my name is Jeff  
 
 
-###findFirst
+### findFirst
 Find the first person over the age of 35.
 
     Person personOverThirtyFive =
@@ -388,7 +388,7 @@ Find the first person over the age of 35.
 Output:  
 Person{name='Chris', age=37}
 
-###collect
+### collect
 Find persons whose name starts with the letter "J". Notice that since the collect is a terminal operation, we can immediately call another terminal operation "forEach" to print the results.
 
     largePersonList.stream()
@@ -402,7 +402,7 @@ Person{name='Jenny', age=20}
 Person{name='Jane', age=45}  
 Person{name='Jeff', age=70}
 
-###toArray
+### toArray
 Create an array from the largePersonList.
 
    Person[] personArray =
@@ -434,7 +434,7 @@ Person{name='Zach', age=10}
 Person{name='Jane', age=45}  
 Person{name='Jeff', age=70}
 
-##Introduction - Comparison Based Stream Operations
+## Introduction - Comparison Based Stream Operations
 In the past sections of this module, we discussed commonly used intermediate and terminal operations.  In this section, we will discuss useful stream operations that can be used for comparing items in a stream.  They are:
 
 - sorted - intermediate operation that will sort a stream
@@ -447,7 +447,7 @@ In the past sections of this module, we discussed commonly used intermediate and
 
 The following demo will go into a little more detail of each one.
 
-##Demo - Comparison Based Stream Operations
+## Demo - Comparison Based Stream Operations
 In this demo, we will take a look at each of the comparison based stream operations mentioned in the introduction. We will also be using the same Person class from the previous demos.
 
     public class Person {
@@ -486,7 +486,7 @@ In this demo, we will take a look at each of the comparison based stream operati
         }
     }
 
-###sorted 
+### sorted 
 We saw an example of this in the intermediate stream operation section.  The following example sorts the list of persons by name.
 
     List<ComparisonBaseStreamOperations.Person> largePersonList =
@@ -523,7 +523,7 @@ Person{name='Paige', age=31}
 Person{name='Tom', age=30}  
 Person{name='Zach', age=10}  
 
-###min
+### min
 This example will return the youngest person.  
 
     Person youngestPerson =
@@ -538,7 +538,7 @@ Person{name='Zach', age=10}
 
 **Note:** Some stream operations, such as min, max, findFirst, return an Optional object. This will be covered in detail in another module, but for now Optionals are used in the case where none of the stream elements satisfy the predicate.  This is where the "orElse" clause comes in the previous example.  If no, result is found, it will return null.  However, we did find a result in our example.
 
-###max
+### max
 This example will return the oldest person.
 
     Person oldestPerson =
@@ -551,7 +551,7 @@ This example will return the oldest person.
 Output:  
 Person{name='Jeff', age=70}  
 
-###distinct
+### distinct
 The following example will take a stream of integers that contain duplicates and then return it without any duplicates.
 
     Stream<Integer> integerStream = Stream.of(1,1,2,2,3,4,5);
@@ -567,7 +567,7 @@ Output:
 4  
 5  
 
-###allMatch
+### allMatch
 This example will return true if all the persons are over the age of 9.
 
     List<ComparisonBaseStreamOperations.Person> largePersonList =
@@ -593,7 +593,7 @@ This example will return true if all the persons are over the age of 9.
 Output:  
 true
 
-###anyMatch
+### anyMatch
 This example will return true if any person is over the age of 50.
 
     List<ComparisonBaseStreamOperations.Person> largePersonList =
@@ -619,7 +619,7 @@ This example will return true if any person is over the age of 50.
 Output:  
 true
 
-###noneMatch
+### noneMatch
 This example will return true if there is not a person over the age of 70.
 
     List<ComparisonBaseStreamOperations.Person> largePersonList =
@@ -645,5 +645,5 @@ This example will return true if there is not a person over the age of 70.
 Output:  
 true
 
-##Introduction - More Collectors
+## Introduction - More Collectors
 In the previous module, we talked briefly about collectors.  In the section, we will look at other data structures that we can collect to.
