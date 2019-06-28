@@ -15,27 +15,40 @@
 - Specify the heap size when you launch a program.
 - Resolve an OutofMemory Error.
 
+## LESSON GUIDE
 
-### Understand  
-* Students need to understand what is garbage collection and how Java implements it. Essentially they should understand OutofMemory error and how to resolve it  
+| TIMING  | TYPE  | TOPIC  |
+|:-:|---|---|
+| 5 min  | Opening  | Discuss lesson objectives |
+| 10 min  | Lecture  | Introducing the Garbage Collector |
+| x min  | Demo, Guided Practice, Independent Practice, or Lecture  | What's covered |
+| x min  | Demo, Guided Practice, Independent Practice, or Lecture  | What's covered |
+| 5 min  | Conclusion  | Review / Recap |
 
-### Activity - Instructor lead
-Generate an OutOfMemoryError
+## Opening (5 mins)
 
-
-## Java Memory
 We have already seen quite a bit about how Java allocates data, objects, arrays, collections, etc.
-One subtle point we glossed over is, where does Java put all of this data - we can assume that memory is allocated as needed, but where does that memory come from, how does Java manage that memory, and how does memory get reclaimed when the data is no longer required?
+But we've glossed over a few subtle points – where does Java put all of this data? We can assume that memory is allocated as needed, but where does that memory come from? how does Java manage that memory? How does memory get reclaimed when the data is no longer required?
+
+Enter: The Garbage Collector... promise it's not as ominous as it sounds.
+
+## The Garbage Collector (10 mins) 
 
 Before Java entered the picture, earlier languages like C and C++ required the programmer to _allocate_ memory as it was needed, and then _deallocate_ it once it was no longer needed.
 
-Java introduced the concept of a _Garbage Collector_ which obviated the need for the programmer to manage basic memory allocation/deallocation at all. 
+Java introduced the concept of a _Garbage Collector_ which relinquished programmers from the duties of basic memory allocation/deallocation at all. 
 
-The technology behind Garbage Collection has greatly evolved in the last 20 something years, and there are large companies that make a career out of optimizing garbage collection. We won't get into the precise details of all of these, but the common theme is that the JVM allocates an area of memory called _the heap_, where it stores all objects.
+The technology behind Garbage Collection has greatly evolved in the last 20 something years, and there are large companies that make a career out of optimizing garbage collection. 
+
+We won't get into the precise details of all of these, but the common theme is that the JVM allocates an area of memory called _the heap_, where it stores all objects.
  
-When the heap starts to fill up, Java runs a background process (the _Garbage Collector_) that looks at every object on the heap, traces its references, and references to those references, etc. transitively, to determine whether they are still referenced directly or indirectly by any live thread at all. If they are not, they are eligible for collection. The Garbage Collector will mark those for collection, and then in a sweep process will remove that memory and perform a compaction so that the memory once again becomes available.
+When the heap starts to fill up, Java runs a background process (the _Garbage Collector_) that looks at every object on the heap, traces its references, and references to those references, etc. transitively, to determine whether they are still referenced directly or indirectly by any live thread at all. If they are not, they are eligible for collection. 
 
-For example, consider the following program:
+The Garbage Collector will mark those for collection, and then in a sweep process will remove that memory and perform a compaction so that the memory once again becomes available.
+
+> Share the program below with students. Give them a few minutes to answer the questions below then debrief. 
+
+Consider the following program:
 ```java
 for (int i = 0; i < 100; i++) {
     String message = "This is message " + i;
