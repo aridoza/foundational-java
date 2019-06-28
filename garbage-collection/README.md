@@ -22,7 +22,7 @@
 | 10 min  | Lecture  | Introducing the Garbage Collector |
 | 10 min  |Lecture   | Heap Size |
 | 5 min  | Demo | Force an OutofMemory Error|
-| 15 min | Indepenedent | Resolve an OutofMemory Error|
+| 15 min | Indepenedent Practice| Resolve an OutofMemory Error|
 | 5 min  | Conclusion  | Review / Recap |
 
 ## Opening (5 mins)
