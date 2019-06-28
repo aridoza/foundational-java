@@ -2,11 +2,19 @@
 | ----------- | ------ | -------- |   ----------  |
 | The Heap and The Garbage Collector | Lesson | 1:00     |  Victor Grazi |
 
-* What is the Heap vs Stack?  
-* Where are objects stored? (allocate memory, free memory)  
-* What is the garbage collector and when does it free objects from memory?  
-* What is a memory leak?  
-* OutOfMemoryError  
+
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) The Heap and The Garbage Collector
+
+## LEARNING OBJECTIVES
+
+*After this lesson, you will be able to:*
+
+- Identify where objects are stored in Java.
+- Differentiate between the heap and the stack.
+- Describe what the garbage collector is and how it works.
+- Specify the heap size when you launch a program.
+- Resolve an OutofMemory Error.
+
 
 ### Understand  
 * Students need to understand what is garbage collection and how Java implements it. Essentially they should understand OutofMemory error and how to resolve it  
