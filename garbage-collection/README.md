@@ -67,7 +67,7 @@ Yes, it is eligible for garbage collection.
 </details>
 
 
-## Heap Size (10 mins) 
+## Heap & Stack (10 mins) 
 
 You can specify the heap size when you launch your program using launch flags:
 
@@ -83,8 +83,11 @@ java -Xms10g -Xmx100g MyCode
 
 If your -Xmx is greater than your -Xms setting, then Java will start with an initial heap size equal to your -Xms setting, then will allocate more heap as needed until the -Xmx value is reached. 
 
+#### Default Heap
+
 If you don't specify a heap size, Java will allocate a default heap for you, based on your machines physical memory. However, it is a good practice to determine your maximum expectedd heap size by observing the program during execution using tools like Linux's _ps_ or _top_.
 
+#### The Stack
 
 Note that when your program executes, even if there is not a single object allocated, there is still some memory used by the program itself, to keep track of the call stack of every thread running.
 
