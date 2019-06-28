@@ -9,7 +9,6 @@
 
 *After this lesson, you will be able to:*
 
-- Identify where objects are stored in Java.
 - Differentiate between the heap and the stack.
 - Describe what the garbage collector is and how it works.
 - Specify the heap size when you launch a program.
@@ -46,7 +45,7 @@ When the heap starts to fill up, Java runs a background process (the _Garbage Co
 
 The Garbage Collector will mark those for collection, and then in a sweep process will remove that memory and perform a compaction so that the memory once again becomes available.
 
-> Share the program below with students. Give them a few minutes to answer the questions below then debrief. 
+> Share the program below with students. Give them a few minutes to answer the two questions below then reveal the answers. 
 
 Consider the following program:
 ```java
@@ -55,7 +54,18 @@ for (int i = 0; i < 100; i++) {
     System.out.println(message);
 }
 ```
-At the end of each loop iteration, the `message` String object that was created during that loop is no longer reachable. It was not assigned, it has no references, and there is no way to ever get it back. Therefore it is eligible for garbage collection. 
+
+<details>
+	<summary>What happens to the `message` string object taht was created during the loop?</summary>
+	At the end of each loop iteration, the `message` String object that was created during that loop is no longer reachable. It was not assigned, it has no references, and there is no way to ever get it back.
+</details>
+
+<details>
+	<summary>Based on this information, is it eligible for collection?</summary>
+Yes, it is eligible for garbage collection. 
+</details>
+
+
 
 You can specify the heap size when you launch your program using launch flags:
 ```sbtshell
