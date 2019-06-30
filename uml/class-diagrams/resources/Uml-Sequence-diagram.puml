@@ -1,20 +1,29 @@
-    /*
 @startuml
 actor User
-User -> Alice
-activate Alice
-Alice -> Bob: Authentication Request
-activate Bob
-Bob --> Alice: Authentication Response
-deactivate Bob
+User->Login: login()
+activate Login
+Login--> User
+deactivate Login
+|||
+User->>TradingMain: bookTrade(Asset)
+Activate TradingMain
+TradingMain->>Market: bookTrade(Asset)
+deactivate TradingMain
+activate Market
+Market->>TradingMain
+activate TradingMain
+deactivate Market
+|||
+TradingMain->TradingMain: saveTradeDetails
+activate TradingMain
+TradingMain->TradeDAL: saveTradeDetails
+database DB
+TradeDAL->DB: saveTradeDetails
+DB-->TradeDAL
+TradeDAL-->TradingMain
+|||
+deactivate TradingMain
+deactivate TradingMain
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: Another authentication Response
 
-activate Alice
-Alice -> Alice
-deactivate Alice
-Alice ->> Bob: async
 @enduml
-
-     */

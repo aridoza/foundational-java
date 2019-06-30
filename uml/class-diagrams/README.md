@@ -108,6 +108,13 @@ The amount of detail included in a UML diagram depends on the level of granulari
 
 Even if you are not generating code from your UML, you can see the benefit of using UML over code for communicating code structure.
 
+## Student Activity
+Let's get started coding our Trading system from existing models.  Here is the class diagram for a trading system.
+![](resources/trading-system-classes.png)  
+
+We will add the implementation details in the lesson on sequence diagrams, but for now, your activity is to generate the Java classes represented in this diagram.
+
+Note that Market is an interface, as indicated by the italics..
 
 
 
