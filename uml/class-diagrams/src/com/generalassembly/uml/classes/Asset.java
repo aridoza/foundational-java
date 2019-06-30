@@ -1,4 +1,4 @@
-package com.generalassembly.uml;
+package com.generalassembly.uml.classes;
 
 public class Asset {
 
