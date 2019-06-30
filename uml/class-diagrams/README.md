@@ -112,9 +112,9 @@ Even if you are not generating code from your UML, you can see the benefit of us
 Let's get started coding our Trading system from existing models.  Here is the class diagram for a trading system.
 ![](resources/trading-system-classes.png)  
 
-We will add the implementation details in the lesson on sequence diagrams, but for now, your activity is to generate the Java classes represented in this diagram.
+We will add the implementation details later, in the lesson on sequence diagrams, but for now, your activity is to generate the Java classes represented in this diagram.
 
-Note that Market is an interface, as indicated by the italics..
+Note that Market is an interface, as indicated by the italics. All of the others are concrete (non-abstract) classes.
 
 
 
