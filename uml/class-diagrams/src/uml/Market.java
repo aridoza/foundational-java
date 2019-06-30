@@ -1,4 +1,4 @@
-package com.generalassembly.uml;
+package uml;
 
 import com.generalassembly.uml.classes.Asset;
 

@@ -1,4 +1,4 @@
-package com.generalassembly.uml;
+package uml;
 
 public class Login {
     public void login() {
