@@ -1,0 +1,20 @@
+    /*
+@startuml
+actor User
+User -> Alice
+activate Alice
+Alice -> Bob: Authentication Request
+activate Bob
+Bob --> Alice: Authentication Response
+deactivate Bob
+
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: Another authentication Response
+
+activate Alice
+Alice -> Alice
+deactivate Alice
+Alice ->> Bob: async
+@enduml
+
+     */

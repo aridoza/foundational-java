@@ -1,6 +1,6 @@
-By now, you have seen many examples of some pretty terse code, that make even simple programs hard to follow.
+By now, you have seen many examples of some pretty arcane code, that make even simple programs hard to follow.
 
-Wouldn't it be great if we could express programs clearly, without having to plow through all of the arcane language syntax?
+Wouldn't it be great if we could express programs clearly, without having to plow through all of the terse language syntax?
 
 That is where UML comes in.
 
