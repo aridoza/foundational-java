@@ -1,6 +1,4 @@
-package uml;
-
-import com.generalassembly.uml.classes.Asset;
+package com.generalassembly.uml.classes;
 
 public class TradeDAL {
     private final JdbcTemplate jdbcTemplate;
