@@ -57,7 +57,7 @@ for (int i = 0; i < 100; i++) {
 ```
 
 <details>
-	<summary>What happens to the `message` string object taht was created during the loop?</summary>
+	<summary>What happens to the `message` string object that was created during the loop?</summary>
 	At the end of each loop iteration, the `message` String object that was created during that loop is no longer reachable. It was not assigned, it has no references, and there is no way to ever get it back.
 </details>
 
@@ -85,7 +85,7 @@ If your -Xmx is greater than your -Xms setting, then Java will start with an ini
 
 #### Default Heap
 
-If you don't specify a heap size, Java will allocate a default heap for you, based on your machines physical memory. However, it is a good practice to determine your maximum expectedd heap size by observing the program during execution using tools like Linux's _ps_ or _top_.
+If you don't specify a heap size, Java will allocate a default heap for you, based on your machines physical memory. However, it is a good practice to determine your maximum expected heap size by observing the program during execution using tools like Linux's _ps_ or _top_.
 
 #### The Stack
 
@@ -120,7 +120,7 @@ public class OOMError {
 
 ```
 
-> Check: Can some one explain what happened? 
+> Check: Can someone explain what happened? 
 
 In this program we continuously create a large array and store it in a List. we display the total and available memory on each iteration. 
 
@@ -128,17 +128,20 @@ Eventually since every object is referenced by our List, nothing is eligible for
 
 So it is possible to run out of memory... What do we do when that happens?
 
-SME NEED: the answer to that question ^^
+<!-- SME NEED: the answer to that question ^^ -->
+There are two reasons our program might ever run out of memory. First, the memory requirements of the program might just exceed the allocated memory. If you have a lot of live data and/or objects, then you need to allocate enough memory for the program to run. This can be determined by watching the program run in development, under production-like load.
+
+The second reason is harder to locate and harder to fix, and that is a memory leak. A memory leak occurs when objects are allocated but not released when done, for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or filesystem connections. To locate these, review your code, look at all of your collections, to ensure they are not growing without bound, and check all of your connections to be sure you are releasing them when done. Be sure to use Java 7's try with resources syntax as a defense against memory leaks. 
 
 ## Independent Practice: Resolve the OutofMemory Error (15 mins) 
-
+<!-- resolving a memory leak is a career, I don't think we can do much in a few minutes. I suggest we leave it at that -->
 SME NEED: code that will get students set up with an outofmemory error (could also use the code from the demo) and an explanation a to how to resolve it.
 
-Activity depenedent on how complicated the resolution is... might have to convert to lecture if needed. 
+Activity dependent on how complicated the resolution is... might have to convert to lecture if needed. 
 
 ## Conclusion (5 mins) 
 
-- How does the garabage collecter determine what is elligible for collection? 
+- How does the garbage collector determine what is elligible for collection? 
 - How do you set the heap size for a program? 
 - What happens if you don't set one? 
 - How does the stack compare to the heap?
