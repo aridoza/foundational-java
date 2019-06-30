@@ -8,6 +8,7 @@ UML (Unified Modeling Language) is a graphic-based language that uses intuitive 
 
 There are several categories of UML diagrams, including:
 * Class diagrams - Represent the static structure of classes and their dependencies.
+* Package diagrams - Represent the relationships between packages.
 * Sequence diagrams - Represent the dynamic interactions between objects.
 * Use case diagrams - Represent the high level dynamic capabilities of a system. 
 
@@ -38,10 +39,10 @@ Briefly, a UML class or interface is represented as a rectangular box, with thre
 
 Abstract classes and interfaces are represented by italicizing the class name. 
 
-For example, let's model our Asset class, which is the base class for all assets:
+For example, let's model our Asset class, which is the base class for all assets:  
 ![](resources/asset-class.png)
 
-From the diagram we can see that the class name is Asset, there are three fields id, shares, and purchasePrice, and there are three methods called getId, getShares, and calculateValue.
+From the diagram we can see that the class name is "Asset", there are three fields: "id", "shares", and "purchasePrice", and there are four methods: "getId", "getShares", "setShares", and calculateValue.
 
 Notice that we prefixed the fields and methods with -, +, and #. These are examples of _visibility_ indicators. The full list of visibilities is as follows:
 
@@ -52,19 +53,58 @@ Notice that we prefixed the fields and methods with -, +, and #. These are examp
 |#|protected|
 |~|package (_default_, in Java)|
 
-Following the field and method names is a colon and then the return type.
+To specify the type of field or the return type of a method, the field or method name is followed by a colon and then the return type. 
 
-You can see how these diagrams contain sufficient information to generate the class structure. The programmers job would then be to fill in the implementation details and documentation. (Actually we are not seeing where the package name might be specified. We will get to that in a minute.)
+You can see how these diagrams contain sufficient information to generate the class structure. The programmers job would then be to fill in the implementation details and documentation. 
 
 A UML class diagram arranges these classes on a blank canvas, and then uses connector lines and arrows to represent the class inter-relationships.
 
-The shapes of the lines and arrows indicate the kind of relationships
+The shapes of the lines and arrows indicate the kind of relationships, as follows:
 
 ![](resources/connectors.png)
+Basically the connectors indicate the kind of relationship. Some of the differences are subtle, so let's discuss each of them:
 
-### Implements
-### Extends
+### Association
+![](resources/association.png)  
+Association connector depicts that class A _has a field_ of type B
+
+### Dependency
+![](resources/dependency.png)  
+Dependency connector depicts that class A might not have a field of type B, but that it uses type B as an import, for example as a local type in a method.
+
+### Aggregation
+![](resources/aggregation.png)  
+Aggregation and Composition are subsets of Association, i.e. kinds of Association, and in fact the generated code would be identical. Where Association just indicates that class A has a field of type B, Aggregation indicates that class A has a field of type B, but that B can exist independently of A. 
+
+### Composition
+![](resources/composition.png)
+Where Aggregation indicates that A refers to B but B can exist without A, Composition indicates that B is a vital part of A
+
+A building has rooms and it has a superintendent. If you take away the superindendent, you still have a building (for a while!) That is aggregation. But if you take away the rooms, the building ceases to exist. That is composition. And both are associations.
+
+### Order of arrows
+Note the direction of the arrows. In assocation, the arrow head is on the dependent class, whereas with aggregation and composition, the rombus is on the containing class.
+
+### Inheritance
+![](resources/inheritance.png)  
+Inheritance connectors indicate the subclasses of a class, i.e. the classes that extend a class. In this example class B extends class A. Generally the subclass is drawn below the base class, and the inheritance arrow is drawn pointing upward. That is consistent with the naming convention we saw earlier, where "upcasting" is the operation of casting a subclass to its base class, and "downcasting" is the operation of casting a class to a subclass. Up and down refer to the direction of the inheritance arrow.
+
+To indicate several subclasses, we generally merge the arrows as follows:  
+![](resources/multiple-subclasses.png)  
+In this diagram, classes B1, B2, and B3 all extend class A
+
+### Implementation
+![](resources/implementation.png)  
+Implementation is similar to inheritance, except the class A is an interface, and the arrow indicates that class B implements interface A.
+
 ### Multiplicity
+You can also include multiplicity indicators on the connecting arrows, some number greater than or equal to 0, or a *.
+
+In the following, we see that a cat has up to 4 legs, and a leg belongs to at most 1 cat.  
+![](resources/multiplicity.png)  
+
+## In conclusion
+The amount of detail included in a UML diagram depends on the level of granularity you are trying to convey. If you just want to convey the high-level class relationships, you can omit some or all of the fields and methods.
 
 Even if you are not generating code from your UML, you can see the benefit of using UML over code for communicating code structure.
 
