@@ -39,10 +39,9 @@
 |  5 min |         Introduction         |                      Terminal Stream Operations                     |
 | 5 min |     Demo     |                         Common Terminal Stream Operations                        |
 |  5 min |         Introduction         |      Comparison Based Stream Operations      |
-| 5 min |     Demo     |                                      Comparison Based Streams Operations               
+| 10 min |     Demo     |                                      Comparison Based Stream Operations               
 |  5 min |         Introduction         |      More Collectors     |
 | 10 min |     Demo     |                                      Demo the different ways to use collectors                                       
-| 5 min |     Introduction     |                                      Parallel Streams                                       |
 | 20 min | Independent Practice | Take what we've learned and complete a program using streams, pipelines, and collecting |
 |  5 min |      Conclusion      |                                       Review/Recap                                       |
 
@@ -524,11 +523,11 @@ Person{name='Tom', age=30}
 Person{name='Zach', age=10}  
 
 ### min
-This example will return the youngest person.  
+This example will return the youngest person. We can use Comparator.comparing for the lambda expression below to specify which class property to use.
 
     Person youngestPerson =
         largePersonList.stream()
-            .min((p1, p2) -> p1.getAge() - p2.getAge())
+            .min(Comparator.comparing(Person::getAge))
             .orElse(null);
 
     System.out.println(youngestPerson);
@@ -539,11 +538,11 @@ Person{name='Zach', age=10}
 **Note:** Some stream operations, such as min, max, findFirst, return an Optional object. This will be covered in detail in another module, but for now Optionals are used in the case where none of the stream elements satisfy the predicate.  This is where the "orElse" clause comes in the previous example.  If no, result is found, it will return null.  However, we did find a result in our example.
 
 ### max
-This example will return the oldest person.
+This example will return the oldest person. We can use 
 
     Person oldestPerson =
             largePersonList.stream()
-                    .min((p1, p2) -> p2.getAge() - p1.getAge())
+                    .max(Comparator.comparing(Person::getAge))
                     .orElse(null);
 
     System.out.println(oldestPerson);
@@ -646,4 +645,424 @@ Output:
 true
 
 ## Introduction - More Collectors
-In the previous module, we talked briefly about collectors.  In the section, we will look at other data structures that we can collect to.
+In the previous module, we talked briefly about collectors.  In the section, we will look at other data structures that we can collect to. They are:  
+
+- toSet - similar to toList but will create a Set
+- toCollection - used to create implementations of the Collection interface 
+- toMap - creates a Map
+- joining - allows you to concatenate elements in a stream using a delimiter, prefix, and suffix
+- partitioningBy - breaks a stream into 2 groups based on whether the elements satisfy certain criteria or not. 
+- groupingBy - allows you to partition a stream into more than 2 groups
+- mapping - similar to map, this will allow you to convert the result of a groupingBy into another data structure
+
+## Demo - More Collectors
+For this demo, we will take a look at an example of each of the collector types mentioned in the introduction.  We will use the following class in some of the examples.
+
+    public static class Person {
+
+        private String name;
+        private int age;
+
+        public Person(String name,
+                      int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Person)) return false;
+            Person person = (Person) o;
+            return age == person.age &&
+                    Objects.equals(name, person.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(name, age);
+        }
+    }
+
+### toSet
+This example will take a list that contains one duplicate and create a Set, which will discard the duplicates.
+
+    Set<Person> personSet =
+        duplicatePersonList.stream()
+            .collect(Collectors.toSet());
+
+    personSet.stream().forEach(person  -> System.out.println(person));
+
+Output:  
+Person{name='Tom', age=30}  
+Person{name='Jenny', age=20}  
+
+### toCollection
+This example will take a list of persons and create a Vector of persons that are over the age of 50.
+
+    List<CollectorsDemo.Person> largePersonList =
+        Arrays.asList(
+                new CollectorsDemo.Person("Tom", 30),
+                new CollectorsDemo.Person("John", 29),
+                new CollectorsDemo.Person("Jenny", 20),
+                new CollectorsDemo.Person("Mark", 35),
+                new CollectorsDemo.Person("Chris", 37),
+                new CollectorsDemo.Person("Paige", 31),
+                new CollectorsDemo.Person("Helen", 60),
+                new CollectorsDemo.Person("Erin", 50),
+                new CollectorsDemo.Person("Zach", 10),
+                new CollectorsDemo.Person("Jane", 45),
+                new CollectorsDemo.Person("Jeff", 70));
+
+    Vector<Person> personVector =
+        largePersonList.stream()
+            .filter(person -> person.getAge() > 50)
+            .collect(Collectors.toCollection(Vector::new));
+
+    personVector.stream().forEach(person  -> System.out.println(person));
+
+Output:  
+Person{name='Helen', age=60}  
+Person{name='Jeff', age=70}  
+
+### toMap
+This example will create a map where the key is the person's name and the value is the age.  
+    
+    Map<String, Integer> nameToAgeMap =
+        largePersonList.stream()
+            .collect(Collectors.toMap(person -> person.getName(), person -> person.getAge()));
+
+    nameToAgeMap.forEach((key, value) -> System.out.println("Name is " + key + " and age is " + value));
+
+Output:  
+Name is Erin and age is 50  
+Name is Paige and age is 31  
+Name is Tom and age is 30  
+Name is Zach and age is 10  
+Name is Chris and age is 37  
+Name is Jeff and age is 70  
+Name is John and age is 29  
+Name is Mark and age is 35  
+Name is Jenny and age is 20  
+Name is Jane and age is 45  
+Name is Helen and age is 60  
+Name is Tom and age is 30  
+Name is Jenny and age is 20  
+
+### Special Note about toMap and duplicate keys
+If toMap encounters a duplicate key, then an exception will be thrown. ie.  
+
+    List<CollectorsDemo.Person> duplicatePersonList =
+        Arrays.asList(
+                new CollectorsDemo.Person("Tom", 30),
+                new CollectorsDemo.Person("Tom", 30),
+                new CollectorsDemo.Person("Jenny", 20));
+
+    Map<String, Integer> nameToAgeDuplicateMap =
+        duplicatePersonList.stream()
+                .collect(Collectors
+                        .toMap(person -> person.getName(),
+                                person -> person.getAge()));
+
+Output:  
+Exception in thread "main" java.lang.IllegalStateException: Duplicate key 30  
+
+You can avoid this by passing a lambda expression as the 3rd argument to toMap which will tell it how to handle the duplicate. ie.
+
+    Map<String, Integer> nameToAgeDuplicateMap =
+            duplicatePersonList.stream()
+                    .collect(Collectors
+                            .toMap(person -> person.getName(),
+                                    person -> person.getAge(),
+                                    (first, second) -> second));
+
+    nameToAgeDuplicateMap.forEach((key, value) -> System.out.println("Name is " + key + " and age is " + value));
+
+Output:  
+Name is Tom and age is 30  
+Name is Jenny and age is 20  
+
+If you look at the lambda expression that's provided to toMap:
+
+    (first, second) -> second
+
+This is essentially saying to take the last duplicate encountered.  If we specified "first", then it would take the first value and ignore all duplicates from that point on.
+
+### joining
+This example will take all of the person's names and concatenate them together using ", " as the delimiter.
+
+    String names =
+        largePersonList.stream()
+            .map(person -> person.getName())
+            .collect(Collectors.joining(", ", "", ""));
+
+    System.out.println(names);
+
+Output:  
+Tom, John, Jenny, Mark, Chris, Paige, Helen, Erin, Zach, Jane, Jeff  
+
+The first parameter to Collectors.joining is the delimiter. The 2nd is the prefix, and the 3rd is the suffix.
+
+### partitioningBy
+As mentioned before, partitioningBy will create 2 groups based on a criteria.  The result will be a Map with 2 keys, a Boolean true and a Boolean false.  The values for the Boolean true will be a List of stream elements that pass the criteria.  The values for Boolean false will be a List of stream elements that DO NOT pass the criteria.  The following example will take the large list of persons and partition them based on those persons that are over the age of 40 and those that are not.
+
+    Map<Boolean, List<Person>> youngerAndOlderThanFortyMap =
+        largePersonList.stream()
+            .collect(Collectors.partitioningBy(person -> person.getAge() >= 40));
+
+    //Let's iterate the person's older than 40.
+    System.out.println("Persons older than 40");
+    youngerAndOlderThanFortyMap.get(true).forEach(person -> System.out.println(person));
+
+    System.out.println("Persons younger than 40");
+    youngerAndOlderThanFortyMap.get(false).forEach(person -> System.out.println(person));
+
+Output:  
+Persons older than 40  
+Person{name='Helen', age=60}  
+Person{name='Erin', age=50}  
+Person{name='Jane', age=45}  
+Person{name='Jeff', age=70}  
+Persons younger than 40  
+Person{name='Tom', age=30}  
+Person{name='John', age=29}  
+Person{name='Jenny', age=20}  
+Person{name='Mark', age=35}  
+Person{name='Chris', age=37}  
+Person{name='Paige', age=31}  
+Person{name='Zach', age=10}  
+
+### groupingBy
+GroupingBy is advanced partitioning that will allow you to create custom groupings.  The following example will group all the persons based of their first initial. The lambda expression passed to the groupingBy method tells the collector what to use for the map key.
+
+    Map<Character, List<Person>> firstInitialMap =
+            largePersonList.stream()
+                .collect(Collectors.groupingBy(person -> new Character(person.getName().charAt(0))));
+
+    //Check the number of elements in the map. It should be 8.
+    System.out.println("Number of distinct first initials in the map is " + firstInitialMap.size());
+
+    System.out.println("Persons with initial T");
+    firstInitialMap.get('T').forEach(person -> System.out.println(person));
+
+    System.out.println("Persons with initial J");
+    firstInitialMap.get('J').forEach(person -> System.out.println(person));
+
+    System.out.println("Persons with initial M");
+    firstInitialMap.get('M').forEach(person -> System.out.println(person));
+
+    System.out.println("Persons with initial C");
+    firstInitialMap.get('C').forEach(person -> System.out.println(person));
+
+    System.out.println("Persons with initial P");
+    firstInitialMap.get('P').forEach(person -> System.out.println(person));
+
+    System.out.println("Persons with initial H");
+    firstInitialMap.get('H').forEach(person -> System.out.println(person));
+
+    System.out.println("Persons with initial E");
+    firstInitialMap.get('E').forEach(person -> System.out.println(person));
+
+    System.out.println("Persons with initial C");
+    firstInitialMap.get('C').forEach(person -> System.out.println(person));
+
+Output:  
+Number of distinct first initials in the map is 8  
+Persons with initial T  
+Person{name='Tom', age=30}  
+Persons with initial J  
+Person{name='John', age=29}  
+Person{name='Jenny', age=20}  
+Person{name='Jane', age=45}  
+Person{name='Jeff', age=70}  
+Persons with initial M  
+Person{name='Mark', age=35}  
+Persons with initial C  
+Person{name='Chris', age=37}  
+Persons with initial P  
+Person{name='Paige', age=31}  
+Persons with initial H  
+Person{name='Helen', age=60}  
+Persons with initial E  
+Person{name='Erin', age=50}  
+Persons with initial C  
+Person{name='Chris', age=37}  
+
+### mapping
+Mapping is typically used with groupingBy to convert the resulting map values to some of the data structure.  The following example will create a map where the key is the person name and the value is a single element list that contains their age.  If we didn't use mapping here, the map value would have been a list of the whole Person object.
+
+    Map<String, List<Integer>> anotherNameToAgeMap =
+        largePersonList.stream()
+            .collect(
+                    Collectors.groupingBy(person -> new String(person.getName()),
+                        Collectors.mapping(Person::getAge, Collectors.toList())
+            ));
+
+    anotherNameToAgeMap.forEach((key, value) -> System.out.println("Name is " + key + " and age is " + value.get(0)));
+
+Output:  
+Name is Erin and age is 50  
+Name is Paige and age is 31  
+Name is Tom and age is 30  
+Name is Zach and age is 10  
+Name is Chris and age is 37  
+Name is Jeff and age is 70  
+Name is John and age is 29  
+Name is Mark and age is 35  
+Name is Jenny and age is 20  
+Name is Jane and age is 45  
+Name is Helen and age is 60  
+
+
+## Independent Practice
+For the independent practice, we will take what we have learned in this module and put them to use. 
+
+**Hint:**
+You will need to use:
+- filters
+- min 
+- max 
+- toMap 
+- groupingBy
+
+### Independent Practice Template
+
+    package com.ga.examples;
+
+    import java.util.Arrays;
+    import java.util.List;
+    import java.util.Objects;
+
+    public class IndependentPractice {
+
+        public static class Person {
+
+            private String name;
+            private String gender;
+            private int age;
+            private int salary;
+
+            public Person(String name, String gender, int age, int salary) {
+                this.name = name;
+                this.gender = gender;
+                this.age = age;
+                this.salary = salary;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getGender() {
+                return gender;
+            }
+
+            public void setGender(String gender) {
+                this.gender = gender;
+            }
+
+            public int getAge() {
+                return age;
+            }
+
+            public void setAge(int age) {
+                this.age = age;
+            }
+
+            public int getSalary() {
+                return salary;
+            }
+
+            public void setSalary(int salary) {
+                this.salary = salary;
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (!(o instanceof Person)) return false;
+                Person person = (Person) o;
+                return age == person.age &&
+                        salary == person.salary &&
+                        Objects.equals(name, person.name) &&
+                        Objects.equals(gender, person.gender);
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(name, gender, age, salary);
+            }
+
+            @Override
+            public String toString() {
+                return "Person{" +
+                        "name='" + name + '\'' +
+                        ", gender='" + gender + '\'' +
+                        ", age=" + age +
+                        ", salary=" + salary +
+                        '}';
+            }
+        }
+
+        public static void main(String[] args) {
+
+            List<Person> largePersonList = Arrays.asList(
+                new IndependentPractice.Person("Tom", "Male", 30, 50000),
+                new IndependentPractice.Person("John", "Male", 30, 60000),
+                new IndependentPractice.Person("Jenny", "Female",  20, 70000),
+                new IndependentPractice.Person("Mark", "Male", 35, 30000),
+                new IndependentPractice.Person("Chris", "Male", 37, 20000),
+                new IndependentPractice.Person("Paige", "Female",  31, 25000),
+                new IndependentPractice.Person("Helen", "Female",  60, 100000),
+                new IndependentPractice.Person("Erin", "Female",  50, 500000),
+                new IndependentPractice.Person("Zach", "Male", 10, 1000),
+                new IndependentPractice.Person("Jane", "Female",  45, 200000),
+                new IndependentPractice.Person("Jeff", "Male", 70, 80000)
+            );
+
+            //TODO: Find the person with the highest salary.
+
+            //TODO: Find the person with the lowest salary.
+
+            //TODO: Create a map where the key is age and the value if the name of the person. For any duplicate keys, use
+            // the first entry and ignore any duplicates.
+
+            //TODO: Create a map where the key is the gender and the value is a list of Persons.  Filter the results to only
+            //include persons over the age of 30 and that have a salary greater than 20,000.
+        }
+    }
+
+
+## Conclusion - Review Recap
+To recap, we have learned a great deal about streams and how to manipulate them using pipelines of intermediate and terminal operations. After going through this module, the hope is that you now see how powerful streams and pipelines are.  They make the code more readable. The biggest benefit is that it saves you from having to write a lot of boiler plate code to convert data structures.
+
+## References
+[Stackify Streams Guide](https://stackify.com/streams-guide-java-8/)
