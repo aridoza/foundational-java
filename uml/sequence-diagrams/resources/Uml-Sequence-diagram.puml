@@ -41,3 +41,17 @@ TradeDAL-->TradingMain
 |||
 |||
 @enduml
+
+@startuml
+actor User
+User->TradingMain: bookTrade
+activate TradingMain
+TradingMain -> TradeDAL ** : create
+TradingMain->TradeDAL: saveTradeDetails
+database DB
+activate TradeDAL
+TradeDAL->DB: saveTradeDetails
+deactivate TradeDAL
+deactivate TradingMain
+
+@enduml
