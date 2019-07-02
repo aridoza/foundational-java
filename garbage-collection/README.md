@@ -20,9 +20,9 @@
 |:-:|---|---|
 | 5 min  | Opening  | Discuss lesson objectives |
 | 10 min  | Lecture  | Introducing the Garbage Collector |
-| 10 min  |Lecture   | Heap Size |
+| 10 min  | Lecture   | Heap Size |
 | 5 min  | Demo | Force an OutofMemory Error|
-| 15 min | Indepenedent Practice| Resolve an OutofMemory Error|
+| 15 min | Indepenedent Practice | Resolve an OutofMemory Error|
 | 5 min  | Conclusion  | Review / Recap |
 
 ## Opening (5 mins)
@@ -46,9 +46,8 @@ When the heap starts to fill up, Java runs a background process (the _Garbage Co
 
 The Garbage Collector will mark those for collection, and then in a sweep process will remove that memory and perform a compaction so that the memory once again becomes available.
 
-> Share the program below with students. Give them a few minutes to answer the two questions below then reveal the answers. 
-
 Consider the following program:
+
 ```java
 for (int i = 0; i < 100; i++) {
     String message = "This is message " + i;
@@ -57,13 +56,19 @@ for (int i = 0; i < 100; i++) {
 ```
 
 <details>
-	<summary>What happens to the `message` string object that was created during the loop?</summary>
-	At the end of each loop iteration, the `message` String object that was created during that loop is no longer reachable. It was not assigned, it has no references, and there is no way to ever get it back.
+	
+<summary>What happens to the `message` string object that was created during the loop?</summary>
+	
+At the end of each loop iteration, the `message` String object that was created during that loop is no longer reachable. It was not assigned, it has no references, and there is no way to ever get it back.
+	
 </details>
 
 <details>
-	<summary>Based on this information, is it eligible for collection?</summary>
+	
+<summary>Based on this information, is it eligible for collection?</summary>
+	
 Yes, it is eligible for garbage collection. 
+
 </details>
 
 
@@ -75,7 +80,8 @@ You can specify the heap size when you launch your program using launch flags:
 -Xms allocates the initial (and minimum) heap size.
 -Xmx allocates the maximum heap size. 
 ```
-For example the following will allocate an initial memory of 10GB and will increase that to 100GB:
+
+For example, the following will allocate an initial memory of 10GB and will increase that to 100GB:
 
 ```java
 java -Xms10g -Xmx100g MyCode
@@ -83,28 +89,28 @@ java -Xms10g -Xmx100g MyCode
 
 If your -Xmx is greater than your -Xms setting, then Java will start with an initial heap size equal to your -Xms setting, then will allocate more heap as needed until the -Xmx value is reached. 
 
+<!-- Victor, do we need to define what -Xmx and -Xms are?-->
+
 #### Default Heap
 
-If you don't specify a heap size, Java will allocate a default heap for you, based on your machines physical memory. However, it is a good practice to determine your maximum expected heap size by observing the program during execution using tools like Linux's _ps_ or _top_.
+If you don't specify a heap size, Java will allocate a default heap for you, based on your machine's physical memory. However, it is a good practice to determine your maximum expected heap size by observing the program during execution using tools like Linux's _ps_ or _top_.
 
 #### The Stack
 
 Note that when your program executes, even if there is not a single object allocated, there is still some memory used by the program itself, to keep track of the call stack of every thread running.
 
-For example if method a calls method b calls method c, Java must remember that when method c exits, return to the spot in method b that called it, and when that returns, return to method a, etc. 
+For example, if `method a` calls `method b` calls `method c`, Java must remember that when `method c` exits, it must return to the spot in `method b` that called it, and when that returns, return to `method a`, etc. 
 
 This memory is called _the stack_ and is distinct from the heap. 
 
-The stack also holds any method-local data that will be swept off once the method returns. The stack works like a fifo queue; it is allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, the stack is swept in a first-in-first-out manner, so the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
-
-
+The stack also holds any method-local data that will be swept off once the method returns. The stack works on a 
+"first in, first out" (aka FIFO) basis; it is allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, the stack is swept in a first-in-first-out manner, so the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
 
 ## Instructor Led Demo (5 mins) 
 
-Does this mean that Java can never run out of memory? Let's see what happens when we run this program. 
+Does this mean that Java can never run out of memory? 
 
-> Instructor: you can poll the class what they think will happen as you're setting up to run the program below. 
-
+What do we think will happen when we run this program?
 
 ```java
 public class OOMError {
@@ -122,25 +128,27 @@ public class OOMError {
 
 > Check: Can someone explain what happened? 
 
-In this program we continuously create a large array and store it in a List. we display the total and available memory on each iteration. 
+In this program we continuously create a large array and store it in a List. We display the total and available memory on each iteration. 
 
-Eventually since every object is referenced by our List, nothing is eligible for garbage collection, and we exhaust the heap. Java runtime throws up its hands with an OutOfMemoryError.
+Eventually, since every object is referenced by our List, nothing is eligible for garbage collection, and we exhaust the heap. Java runtime throws up its hands with an `OutOfMemory` Error.
 
-So it is possible to run out of memory... What do we do when that happens?
+There are two reasons our program might ever run out of memory. 
 
-<!-- SME NEED: the answer to that question ^^ -->
-There are two reasons our program might ever run out of memory. First, the memory requirements of the program might just exceed the allocated memory. If you have a lot of live data and/or objects, then you need to allocate enough memory for the program to run. This can be determined by watching the program run in development, under production-like load.
+1. The memory requirements of the program might just exceed the allocated memory. If you have a lot of live data and/or objects, then you need to allocate enough memory for the program to run. This can be determined by watching the program run in development, under production-like load.
+1. You might have a **memory leak**. A memory leak occurs when objects are allocated but not released when done; for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or filesystem connections. To locate these, review your code, look at all of your collections, to ensure they are not growing without bound, and check all of your connections to be sure you are releasing them when done. Be sure to use Java 7's `try... with` resources syntax as a defense against memory leaks. 
 
-The second reason is harder to locate and harder to fix, and that is a memory leak. A memory leak occurs when objects are allocated but not released when done, for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or filesystem connections. To locate these, review your code, look at all of your collections, to ensure they are not growing without bound, and check all of your connections to be sure you are releasing them when done. Be sure to use Java 7's try with resources syntax as a defense against memory leaks. 
+*So*, it is possible to run out of memory. That means that we should be asking ourselves: What do we do when that happens?
 
-## Independent Practice: Resolve the OutofMemory Error (15 mins) 
+## Independent Practice: Resolve the OutofMemory Error (15 mins)
+
 <!-- resolving a memory leak is a career, I don't think we can do much in a few minutes. I suggest we leave it at that -->
-SME NEED: code that will get students set up with an outofmemory error (could also use the code from the demo) and an explanation a to how to resolve it.
+<!-- Melissa comment: I think we still need to at least show one way, the simplest way, to do this. The lesson ends on a big cliffhanger and I think it would feel incomplete if we don't explain / show how to address the problem we've been discussing. Can we do a code-along where the instructor shows one simple way to resolve it?-->
 
 Activity dependent on how complicated the resolution is... might have to convert to lecture if needed. 
 
 ## Conclusion (5 mins) 
 
+Let's check what we covered!
 - How does the garbage collector determine what is elligible for collection? 
 - How do you set the heap size for a program? 
 - What happens if you don't set one? 
