@@ -90,6 +90,7 @@ java -Xms10g -Xmx100g MyCode
 If your -Xmx is greater than your -Xms setting, then Java will start with an initial heap size equal to your -Xms setting, then will allocate more heap as needed until the -Xmx value is reached. 
 
 <!-- Victor, do we need to define what -Xmx and -Xms are?-->
+<!-- Melissa - we did that above in lines 80-81 -->
 
 #### Default Heap
 
@@ -135,16 +136,15 @@ Eventually, since every object is referenced by our List, nothing is eligible fo
 There are two reasons our program might ever run out of memory. 
 
 1. The memory requirements of the program might just exceed the allocated memory. If you have a lot of live data and/or objects, then you need to allocate enough memory for the program to run. This can be determined by watching the program run in development, under production-like load.
-1. You might have a **memory leak**. A memory leak occurs when objects are allocated but not released when done; for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or filesystem connections. To locate these, review your code, look at all of your collections, to ensure they are not growing without bound, and check all of your connections to be sure you are releasing them when done. Be sure to use Java 7's `try... with` resources syntax as a defense against memory leaks. 
+2. You might have a **memory leak**. A memory leak occurs when objects are allocated but not released when done; for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or filesystem connections. To locate these, review your code, look at all of your collections, to ensure they are not growing without bound, and check all of your connections to be sure you are releasing them when done. Be sure to use Java 7's `try... with` resources syntax as a defense against memory leaks. 
 
 *So*, it is possible to run out of memory. That means that we should be asking ourselves: What do we do when that happens?
 
-## Independent Practice: Resolve the OutofMemory Error (15 mins)
+Our memory leak generator is an extreme example of what can happen if your program creates objects with reckless abandon. In order to prevent this, be sure that you are not allowing collections to grow indefinitely. If your collection belongs to a singleton object or is a static reference, then many objects might be adding to it. If an unlimited number of objects are being added, you need to rethink your program design. Some possibilities are:
+ * reuse duplicates
+ * use "Least-Recently-Used" structures, which automatically remove items that have not been referenced in some specified time
+ * consider using weak references (Google WeakHashMap: https://docs.oracle.com/javase/8/docs/api/java/util/WeakHashMap.html), which clean up when memory is running out, etc.
 
-<!-- resolving a memory leak is a career, I don't think we can do much in a few minutes. I suggest we leave it at that -->
-<!-- Melissa comment: I think we still need to at least show one way, the simplest way, to do this. The lesson ends on a big cliffhanger and I think it would feel incomplete if we don't explain / show how to address the problem we've been discussing. Can we do a code-along where the instructor shows one simple way to resolve it?-->
-
-Activity dependent on how complicated the resolution is... might have to convert to lecture if needed. 
 
 ## Conclusion (5 mins) 
 
