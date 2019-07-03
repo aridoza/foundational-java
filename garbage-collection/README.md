@@ -1,6 +1,6 @@
 | Title       | Type   | Duration | Author        |
 | ----------- | ------ | -------- |   ----------  |
-| The Heap and The Garbage Collector | Lesson | 1:00     |  Victor Grazi |
+| The Heap and The Garbage Collector | Lesson | 0:50     |  Victor Grazi |
 
 
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) The Heap and The Garbage Collector
@@ -12,22 +12,23 @@
 - Describe what the garbage collector is and how it works.
 - Specify the heap size when you launch a program.
 - Differentiate between the heap and stack.
-- Resolve an OutofMemory Error.
+- Prevent an OutofMemory Error.
 
 ## LESSON GUIDE
 
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
 | 5 min  | Opening  | Discuss lesson objectives |
-| 10 min  | Lecture  | Introducing the Garbage Collector |
-| 10 min  | Lecture   | Heap Size |
-| 5 min  | Demo | Force an OutofMemory Error|
-| 15 min | Indepenedent Practice | Resolve an OutofMemory Error|
+| 10 min | Lecture  | Introducing the Garbage Collector |
+| 10 min | Lecture   | Heap Size |
+| 10 min | Demo | Force an OutofMemory Error |
+| 10 min | Demo | Resolve an OutofMemory Error|
 | 5 min  | Conclusion  | Review / Recap |
 
 ## Opening (5 mins)
 
 We have already seen quite a bit about how Java allocates data, objects, arrays, collections, etc.
+
 But we've glossed over a few subtle points – where does Java put all of this data? We can assume that memory is allocated as needed, but where does that memory come from? how does Java manage that memory? How does memory get reclaimed when the data is no longer required?
 
 Enter: The Garbage Collector... promise it's not as ominous as it sounds.
@@ -89,9 +90,6 @@ java -Xms10g -Xmx100g MyCode
 
 If your -Xmx is greater than your -Xms setting, then Java will start with an initial heap size equal to your -Xms setting, then will allocate more heap as needed until the -Xmx value is reached. 
 
-<!-- Victor, do we need to define what -Xmx and -Xms are?-->
-<!-- Melissa - we did that above in lines 80-81 -->
-
 #### Default Heap
 
 If you don't specify a heap size, Java will allocate a default heap for you, based on your machine's physical memory. However, it is a good practice to determine your maximum expected heap size by observing the program during execution using tools like Linux's _ps_ or _top_.
@@ -107,7 +105,7 @@ This memory is called _the stack_ and is distinct from the heap.
 The stack also holds any method-local data that will be swept off once the method returns. The stack works on a 
 "first in, first out" (aka FIFO) basis; it is allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, the stack is swept in a first-in-first-out manner, so the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
 
-## Instructor Led Demo (5 mins) 
+## Instructor Led Demo (10 mins) 
 
 Does this mean that Java can never run out of memory? 
 
@@ -136,21 +134,28 @@ Eventually, since every object is referenced by our List, nothing is eligible fo
 There are two reasons our program might ever run out of memory. 
 
 1. The memory requirements of the program might just exceed the allocated memory. If you have a lot of live data and/or objects, then you need to allocate enough memory for the program to run. This can be determined by watching the program run in development, under production-like load.
-2. You might have a **memory leak**. A memory leak occurs when objects are allocated but not released when done; for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or filesystem connections. To locate these, review your code, look at all of your collections, to ensure they are not growing without bound, and check all of your connections to be sure you are releasing them when done. Be sure to use Java 7's `try... with` resources syntax as a defense against memory leaks. 
+1. You might have a **memory leak**. A memory leak occurs when objects are allocated but not released when done; for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or filesystem connections. To locate these, review your code, looking at all of your collections to ensure they are not growing without bound, and check all of your connections to be sure you are releasing them when done. Be sure to use Java 7's `try... with` resources syntax as a defense against memory leaks. 
+
+## Resolving an `OutOfMemory` Error (10 min)
 
 *So*, it is possible to run out of memory. That means that we should be asking ourselves: What do we do when that happens?
 
-Our memory leak generator is an extreme example of what can happen if your program creates objects with reckless abandon. In order to prevent this, be sure that you are not allowing collections to grow indefinitely. If your collection belongs to a singleton object or is a static reference, then many objects might be adding to it. If an unlimited number of objects are being added, you need to rethink your program design. Some possibilities are:
- * reuse duplicates
- * use "Least-Recently-Used" structures, which automatically remove items that have not been referenced in some specified time
- * consider using weak references (Google WeakHashMap: https://docs.oracle.com/javase/8/docs/api/java/util/WeakHashMap.html), which clean up when memory is running out, etc.
+Our memory leak generator is an extreme example of what can happen if your program creates objects with reckless abandon. In order to prevent this, be sure that you are not allowing collections to grow indefinitely. 
 
+If your collection belongs to a singleton object or is a static reference, then many objects might be adding to it. If an unlimited number of objects are being added, you need to rethink your program design. 
+
+Some possibilities are:
+- Reuse duplicates.
+- Use "Least-Recently-Used" structures, which automatically remove items that have not been referenced in some specified time.
+- Consider using weak references (Google WeakHashMap: https://docs.oracle.com/javase/8/docs/api/java/util/WeakHashMap.html), which clean up when memory is running out, etc.
+
+The bottom line is that *fixing* an `OutOfMemory` error is tricky and generally means changing something about the way your program is designed. (Do a quick search on StackOverflow and you'll see just how many people are trying to figure this out.) It's important to take *preventative measures* when you setup a program to ensure this doesn't happen (and yes, we know - easier said than done).
 
 ## Conclusion (5 mins) 
 
 Let's check what we covered!
-- How does the garbage collector determine what is elligible for collection? 
+- How does the garbage collector determine what is eligible for collection? 
 - How do you set the heap size for a program? 
 - What happens if you don't set one? 
 - How does the stack compare to the heap?
-- Describe how to resolve an OutofMemory Error.
+- Describe how to prevent an OutofMemory Error.
