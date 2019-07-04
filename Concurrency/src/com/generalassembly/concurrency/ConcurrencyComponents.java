@@ -5,33 +5,32 @@ import java.util.concurrent.*;
 public class ConcurrencyComponents {
 
     public static void main(String[] args) {
-        ExecutorService threadPool = Executors.newFixedThreadPool(3);
-        threadPool.execute(getRunnable(" This is thread 0"));
-        threadPool.execute(getRunnable(" This is thread 1"));
-        threadPool.execute(getRunnable(" This is thread 2"));
-        threadPool.execute(getRunnable(" This is thread 3"));
-        threadPool.execute(getRunnable(" This is thread 4"));
-        threadPool.execute(getRunnable(" This is thread 5"));
-        threadPool.execute(getRunnable(" This is thread 6"));
-        threadPool.execute(getRunnable(" This is thread 7"));
-        threadPool.execute(getRunnable(" This is thread 8"));
-        threadPool.execute(getRunnable(" This is thread 9"));
-        Future future = threadPool.submit(getRunnable("From submit"), "Done");
-        try {
-            String message = (String) future.get();
-            System.out.println(message);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        ExecutorService threadPool = Executors.newFixedThreadPool(2);
+        threadPool.execute(getRunnable(" This is job 0"));
+        threadPool.execute(getRunnable(" This is job 1"));
+        threadPool.execute(getRunnable(" This is job 2"));
+        threadPool.execute(getRunnable(" This is job 3"));
+//        Future future = threadPool.submit(getRunnable("From submit"), "Done");
+//        try {
+//            String message = (String) future.get();
+//            System.out.println(message);
+//        } catch (InterruptedException e) {
+//            Thread.currentThread().interrupt();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        }
     }
 
+    /**
+     * Returns a runnable that executes 5 times then exits
+     * @param message
+     * @return
+     */
     private static Runnable getRunnable(String message) {
         return new Runnable() {
             @Override
             public void run() {
-                for(int i = 0; i < 5; i++) {
+                for(int i = 0; i < 3; i++) {
                     System.out.println(message + " iteration " + i);
                     try {
                         Thread.sleep(1000);

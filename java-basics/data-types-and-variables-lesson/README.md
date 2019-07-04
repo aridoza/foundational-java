@@ -208,15 +208,17 @@ int range = Math.abs(max - min) + 1;
 
 ## Introduction: Primitives vs. Objects (10 mins)
 
-Before we get into Strings, let's take a step back. Have you noticed that all the data types we've used so far are lowercase? What do you notice about the `String` data type?
+Before we get into Strings, let's take a step back. Have you noticed that all the data types we've used so far begin with a lowercase letter? What do you notice about the `String` data type?
 
-What is the difference?  Do you notice that it is capitalized?  This is a naming convention that is used to distinguish between primitive and Object data types.
+What is the difference?  Do you notice that it begins with a capital S?  This is a naming convention that is used to distinguish between primitive and Object data types. Primitive types always start with a lower case letter (e.g. int, double, boolean), where classes start with an upper (e.g. String, Integer)
 
 **Primitive data types**: are a piece of data and are **pass-by-value**. This means: Using a primitive as a parameter is like writing a number on a post-it note and handing it off. `int a = 1; ` is a *copy* of the number data, not a reference to where the data is stored;
 
 **Object data types**: contain attributes and methods, and start with a capital letter. These are **pass-by-reference**.
 
 In other words: Using an object is like using a dewey decimal system in the library. A variable assigned to an Object is given a number that references where a book can be found in the computer's library but is not a copy of the book itself. `Person a = new Person(Nancy, Drew); ` is a reference to the data Object that contains all info and methods in the class of that object.
+
+> Tip: Java naming convention - classes should start with a capital letter (e.g. _String_, _Integer_), primitives always start with a lower case letter (e.g. _int_, _boolean_), variables and method names start with a lower case letter (e.g. _main()_), multi-word names are camel-case (e.g. _vannaWhite_). Class constants (i.e. final instance and static variables) are generally all capitalized, and words separated by underscores (e.g. _private final Object MY_MUTEX_) .
 
 > Check: Discuss with the person next to you: What does a primitive contain? What does an object contain?  What's one easy way to tell the difference between an Object and a primitive data type? Be ready to share out!
 
@@ -226,7 +228,7 @@ With that basic introduction to the two larger sorts of data types, primitives a
 
 A `char` is a primitive data type.  What is an example of a `char`?
 
-A String is capitalized because a String is an Object.
+A String begins with a capital because a String is an Object.
 
 > Check: Discuss with the person next to you: What is an object? Be ready to share out!
 

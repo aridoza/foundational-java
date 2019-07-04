@@ -14,9 +14,12 @@ public class AtomicIntegerLesson {
     }
 
     private void spinThread() {
-        executor.execute(() -> {
-            for (int i = 0; i < 100; i++) {
-                hit();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    AtomicIntegerLesson.this.hit();
+                }
             }
         });
     }

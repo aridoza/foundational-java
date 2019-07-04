@@ -21,7 +21,7 @@ You're going to create some classes that represent parts of a simple music playe
 - Create 4 classes: **Song, Playlist, User, Main**
   - Right click on the "src" folder in Project menu > New > Java Class
   - Each class must go in its own separate Java file
-  - Remember that by convention, class names are capitalized
+  - Remember that by convention, class names begin with a capital letter
   - For all the member variables you need to create, select an access modifier that will prevent code from other classes from changing them
 
 - **Song** class requirements

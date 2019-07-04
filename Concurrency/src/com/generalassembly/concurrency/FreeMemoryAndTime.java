@@ -4,16 +4,33 @@ import java.time.LocalTime;
 
 public class FreeMemoryAndTime {
     public static void main(String[] args) {
-        spinThread("Free memory: " + Runtime.getRuntime().freeMemory() + " Total memory: " + Runtime.getRuntime().totalMemory(), 60_000);
-        spinThread("Current time: " + LocalTime.now(), 15_000);
+        spinThread(new MemoryPrinter(), 6_000);
+        spinThread(new TimePrinter(), 1_500);
     }
 
-    private static void spinThread(String message, long delay) {
+    interface Printer {
+        void printMessage();
+    }
+    static class TimePrinter implements Printer {
+
+        @Override
+        public void printMessage() {
+            System.out.println("Current time: " + LocalTime.now());
+        }
+    }
+    static class MemoryPrinter implements Printer {
+
+        @Override
+        public void printMessage() {
+            System.out.println("Free memory: " + Runtime.getRuntime().freeMemory() + " Total memory: " + Runtime.getRuntime().totalMemory());
+        }
+    }
+    private static void spinThread(Printer printer, long delay) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
-                    System.out.println(message);
+                    printer.printMessage();
                     try {
                         Thread.sleep(delay);
                     } catch (InterruptedException e) {

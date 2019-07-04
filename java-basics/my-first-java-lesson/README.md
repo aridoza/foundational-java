@@ -138,7 +138,7 @@ double priceOfSteak = 6.99;
 
 We'll learn more about all of Java's different data types soon, but here are the ones we see here:
 - `int`: short for integer; a whole number
-- `String`: any combination of letters and words. it's always capitalized
+- `String`: any combination of letters and words. The word String is a class, so always begins with a capital S
 - `double`: a number with a decimal
 
 Notice anything about how we write variables? That's right - it's camel case!
