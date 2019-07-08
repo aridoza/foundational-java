@@ -34,7 +34,7 @@
 |:------:|:--------------------:|:----------------------------------------------------------------------------------------:|
 |  5 min |        Opening       |                                 Recap of Streams and Pipelines                                |
 | 5 min |     Demo     |                         Show the different ways to create a stream                        |
-| 5 min |         Introduction         |   Intermediate Stream Operations   |
+| 5 min |         Introduction         |   Stream Operations   |
 | 10 min |     Demo     |                          Ordering of Intermediate Stream operations                         |
 |  5 min |         Introduction         |                      Terminal Stream Operations                     |
 | 5 min |     Demo     |                         Common Terminal Stream Operations                        |
@@ -56,11 +56,13 @@ In this lesson we will go in more detail about how to create streams, the differ
 The first demo will show you the different ways that you can create a Stream.
 
 ## Demo - Different Ways to Create Streams
-In our lessons thus far, you've seen one way to create a stream via a collection.
+In our lessons thus far, we've only seen how to create a stream from a collection.  ie.
 
     List<String> stringList = Arrays.asList("hello", "world");
     Stream stringStream = stringList.stream();
     stringStream.forEach(value -> System.out.println(value));
+
+However, there are other ways to create streams in the cases where you don't have a collection. The following stream methods are provided to give the developer more control over creating their own streams.
 
 You can create a stream from an array:
 
@@ -73,7 +75,7 @@ You can create a stream from individual objects:
     Stream objectStream = Stream.of(100,200,300);
     objectStream.forEach(value -> System.out.println(value));
 
-You can create streams by leveraging the Stream Builder:
+You can create streams by leveraging the Stream Builder, which is usually more efficient because it doesn't use an array/ArrayList as a buffer when adding elements to the stream:
 
     Stream.Builder<String> stringStreamBuilder = Stream.builder();
 
@@ -85,14 +87,23 @@ You can create streams by leveraging the Stream Builder:
     stringBuilderStream.forEach(value -> System.out.println(value));
 
 
-## Introduction - Intermediate Stream Operations  
-In the previous lesson we learned that stream operations are used to modify streams to create an end result. We also learned that intermediate stream operations take a stream as input, modifies the stream, and outputs a result stream. In this section, we will discuss some of the commonly used intermediate stream operations.  
+## Introduction - Stream Operations  
+In the previous lesson we learned that stream operations are used to modify streams to create an end result. In the following sections, we are going to discuss several types of stream operations: intermediate, terminal, and comparison. 
+
+- Intermediate operations are used for manipulating stream data. 
+- Terminal operations are used to create. 
+- Comparison operations are a type of intermediate or terminal operation that compares items in a stream. 
+
+
+In the following sections and demos, we will see why and when you'd use each type.
+
+## Demo - Intermediate Stream Operations  
+We've learned previously that intermediate stream operations take a stream as input, modifies the stream, and outputs a result stream. In this section, we will discuss some of the commonly used intermediate stream operations.  
 
 The key takeaways that you should have about intermediate stream operations after this section should be:  
 - **Intermediate stream operations do not produce an end result. They use lazy evaluation, meaning stream processing does not activate until a terminal stream operation is specified.**
 - **The order of your stream operations matter.  Not ordering them correctly could have performance impacts.**
 
-## Demo - Intermediate Stream Operations  
 In this demo will first take a look at some of the commonly used intermediate stream operations.  After that we will see that no processing happens until a terminal operation occurs. Lastly, we will look at what happens when you don't order your intermediate operations correctly.
 
 ### Commonly Used Intermediate Stream Operations
@@ -440,9 +451,6 @@ In the past sections of this module, we discussed commonly used intermediate and
 - min - terminal operation that will return the minimum element based on a comparator
 - max - terminal operation that will return the maximum element based on a comparator
 - distinct - intermediate operation that will eliminate duplicates in a stream based on the equals() method of the stream elements
-- allMatch - terminal operation that given a predicate, returns a boolean true if all elements in the stream satisfy the predicate
-- anyMatch - terminal operation that given a predicate, returns a boolean true if one of elements in the stream satisfy the predicate
-- noneMatch - terminal operation that given a predicate, returns a boolean true if none of the elements in the stream satisfy the predicate
 
 The following demo will go into a little more detail of each one.
 
@@ -566,94 +574,13 @@ Output:
 4  
 5  
 
-### allMatch
-This example will return true if all the persons are over the age of 9.
-
-    List<ComparisonBaseStreamOperations.Person> largePersonList =
-        Arrays.asList(
-                new ComparisonBaseStreamOperations.Person("Tom", 30),
-                new ComparisonBaseStreamOperations.Person("John", 29),
-                new ComparisonBaseStreamOperations.Person("Jenny", 20),
-                new ComparisonBaseStreamOperations.Person("Mark", 35),
-                new ComparisonBaseStreamOperations.Person("Chris", 37),
-                new ComparisonBaseStreamOperations.Person("Paige", 31),
-                new ComparisonBaseStreamOperations.Person("Helen", 60),
-                new ComparisonBaseStreamOperations.Person("Erin", 50),
-                new ComparisonBaseStreamOperations.Person("Zach", 10),
-                new ComparisonBaseStreamOperations.Person("Jane", 45),
-                new ComparisonBaseStreamOperations.Person("Jeff", 70));
-
-    Boolean isAllOverTheAgeOfNine =
-            largePersonList.stream()
-                .allMatch(person -> person.getAge() > 9);
-
-    System.out.println(isAllOverTheAgeOfNine);
-
-Output:  
-true
-
-### anyMatch
-This example will return true if any person is over the age of 50.
-
-    List<ComparisonBaseStreamOperations.Person> largePersonList =
-        Arrays.asList(
-                new ComparisonBaseStreamOperations.Person("Tom", 30),
-                new ComparisonBaseStreamOperations.Person("John", 29),
-                new ComparisonBaseStreamOperations.Person("Jenny", 20),
-                new ComparisonBaseStreamOperations.Person("Mark", 35),
-                new ComparisonBaseStreamOperations.Person("Chris", 37),
-                new ComparisonBaseStreamOperations.Person("Paige", 31),
-                new ComparisonBaseStreamOperations.Person("Helen", 60),
-                new ComparisonBaseStreamOperations.Person("Erin", 50),
-                new ComparisonBaseStreamOperations.Person("Zach", 10),
-                new ComparisonBaseStreamOperations.Person("Jane", 45),
-                new ComparisonBaseStreamOperations.Person("Jeff", 70));
-
-    Boolean isAnyOverTheAgeOfFifty =
-            largePersonList.stream()
-                .anyMatch(person -> person.getAge() > 50);
-
-    System.out.println(isAnyOverTheAgeOfFifty);
-
-Output:  
-true
-
-### noneMatch
-This example will return true if there is not a person over the age of 70.
-
-    List<ComparisonBaseStreamOperations.Person> largePersonList =
-        Arrays.asList(
-                new ComparisonBaseStreamOperations.Person("Tom", 30),
-                new ComparisonBaseStreamOperations.Person("John", 29),
-                new ComparisonBaseStreamOperations.Person("Jenny", 20),
-                new ComparisonBaseStreamOperations.Person("Mark", 35),
-                new ComparisonBaseStreamOperations.Person("Chris", 37),
-                new ComparisonBaseStreamOperations.Person("Paige", 31),
-                new ComparisonBaseStreamOperations.Person("Helen", 60),
-                new ComparisonBaseStreamOperations.Person("Erin", 50),
-                new ComparisonBaseStreamOperations.Person("Zach", 10),
-                new ComparisonBaseStreamOperations.Person("Jane", 45),
-                new ComparisonBaseStreamOperations.Person("Jeff", 70));
-
-    Boolean isNoneOverTheAgeOfSeventy =
-            largePersonList.stream()
-                .noneMatch(person -> person.getAge() > 70);
-
-    System.out.println(isNoneOverTheAgeOfSeventy);
-
-Output:  
-true
-
 ## Introduction - More Collectors
-In the previous module, we talked briefly about collectors.  In the section, we will look at other data structures that we can collect to. They are:  
+In the previous module, we talked briefly about collectors.  Again, collectors are used to collect data out of a stream and put it into a data structure. In the section, we will look at other data structures that we can collect to. They are:  
 
 - toSet - similar to toList but will create a Set
-- toCollection - used to create implementations of the Collection interface 
-- toMap - creates a Map
-- joining - allows you to concatenate elements in a stream using a delimiter, prefix, and suffix
-- partitioningBy - breaks a stream into 2 groups based on whether the elements satisfy certain criteria or not. 
-- groupingBy - allows you to partition a stream into more than 2 groups
-- mapping - similar to map, this will allow you to convert the result of a groupingBy into another data structure
+- toMap - creates a Map based on a key provided and has **one** value
+- groupingBy - allows you to partition a stream into groups.  It can have **one or more** keys and **one or more** values (Collection)
+
 
 ## Demo - More Collectors
 For this demo, we will take a look at an example of each of the collector types mentioned in the introduction.  We will use the following class in some of the examples.
@@ -721,36 +648,8 @@ Output:
 Person{name='Tom', age=30}  
 Person{name='Jenny', age=20}  
 
-### toCollection
-This example will take a list of persons and create a Vector of persons that are over the age of 50.
-
-    List<CollectorsDemo.Person> largePersonList =
-        Arrays.asList(
-                new CollectorsDemo.Person("Tom", 30),
-                new CollectorsDemo.Person("John", 29),
-                new CollectorsDemo.Person("Jenny", 20),
-                new CollectorsDemo.Person("Mark", 35),
-                new CollectorsDemo.Person("Chris", 37),
-                new CollectorsDemo.Person("Paige", 31),
-                new CollectorsDemo.Person("Helen", 60),
-                new CollectorsDemo.Person("Erin", 50),
-                new CollectorsDemo.Person("Zach", 10),
-                new CollectorsDemo.Person("Jane", 45),
-                new CollectorsDemo.Person("Jeff", 70));
-
-    Vector<Person> personVector =
-        largePersonList.stream()
-            .filter(person -> person.getAge() > 50)
-            .collect(Collectors.toCollection(Vector::new));
-
-    personVector.stream().forEach(person  -> System.out.println(person));
-
-Output:  
-Person{name='Helen', age=60}  
-Person{name='Jeff', age=70}  
-
 ### toMap
-This example will create a map where the key is the person's name and the value is the age.  
+This example will create a map where the key is the person's name and the value is the age.  Notice that the value of the map is **one** Integer.
     
     Map<String, Integer> nameToAgeMap =
         largePersonList.stream()
@@ -810,54 +709,10 @@ If you look at the lambda expression that's provided to toMap:
 
     (first, second) -> second
 
-This is essentially saying to take the last duplicate encountered.  If we specified "first", then it would take the first value and ignore all duplicates from that point on.
-
-### joining
-This example will take all of the person's names and concatenate them together using ", " as the delimiter.
-
-    String names =
-        largePersonList.stream()
-            .map(person -> person.getName())
-            .collect(Collectors.joining(", ", "", ""));
-
-    System.out.println(names);
-
-Output:  
-Tom, John, Jenny, Mark, Chris, Paige, Helen, Erin, Zach, Jane, Jeff  
-
-The first parameter to Collectors.joining is the delimiter. The 2nd is the prefix, and the 3rd is the suffix.
-
-### partitioningBy
-As mentioned before, partitioningBy will create 2 groups based on a criteria.  The result will be a Map with 2 keys, a Boolean true and a Boolean false.  The values for the Boolean true will be a List of stream elements that pass the criteria.  The values for Boolean false will be a List of stream elements that DO NOT pass the criteria.  The following example will take the large list of persons and partition them based on those persons that are over the age of 40 and those that are not.
-
-    Map<Boolean, List<Person>> youngerAndOlderThanFortyMap =
-        largePersonList.stream()
-            .collect(Collectors.partitioningBy(person -> person.getAge() >= 40));
-
-    //Let's iterate the person's older than 40.
-    System.out.println("Persons older than 40");
-    youngerAndOlderThanFortyMap.get(true).forEach(person -> System.out.println(person));
-
-    System.out.println("Persons younger than 40");
-    youngerAndOlderThanFortyMap.get(false).forEach(person -> System.out.println(person));
-
-Output:  
-Persons older than 40  
-Person{name='Helen', age=60}  
-Person{name='Erin', age=50}  
-Person{name='Jane', age=45}  
-Person{name='Jeff', age=70}  
-Persons younger than 40  
-Person{name='Tom', age=30}  
-Person{name='John', age=29}  
-Person{name='Jenny', age=20}  
-Person{name='Mark', age=35}  
-Person{name='Chris', age=37}  
-Person{name='Paige', age=31}  
-Person{name='Zach', age=10}  
+This is essentially saying to take the last duplicate encountered.  If we specified "first", then it would take the first value and ignore all duplicates from that point on. 
 
 ### groupingBy
-GroupingBy is advanced partitioning that will allow you to create custom groupings.  The following example will group all the persons based of their first initial. The lambda expression passed to the groupingBy method tells the collector what to use for the map key.
+GroupingBy is advanced partitioning that will allow you to create custom groupings.  The following example will group all the persons based of their first initial. The lambda expression passed to the groupingBy method tells the collector what to use for the map key. Notice that the value of the map is **one or more Person objects in a List**
 
     Map<Character, List<Person>> firstInitialMap =
             largePersonList.stream()
@@ -911,32 +766,6 @@ Persons with initial E
 Person{name='Erin', age=50}  
 Persons with initial C  
 Person{name='Chris', age=37}  
-
-### mapping
-Mapping is typically used with groupingBy to convert the resulting map values to some of the data structure.  The following example will create a map where the key is the person name and the value is a single element list that contains their age.  If we didn't use mapping here, the map value would have been a list of the whole Person object.
-
-    Map<String, List<Integer>> anotherNameToAgeMap =
-        largePersonList.stream()
-            .collect(
-                    Collectors.groupingBy(person -> new String(person.getName()),
-                        Collectors.mapping(Person::getAge, Collectors.toList())
-            ));
-
-    anotherNameToAgeMap.forEach((key, value) -> System.out.println("Name is " + key + " and age is " + value.get(0)));
-
-Output:  
-Name is Erin and age is 50  
-Name is Paige and age is 31  
-Name is Tom and age is 30  
-Name is Zach and age is 10  
-Name is Chris and age is 37  
-Name is Jeff and age is 70  
-Name is John and age is 29  
-Name is Mark and age is 35  
-Name is Jenny and age is 20  
-Name is Jane and age is 45  
-Name is Helen and age is 60  
-
 
 ## Independent Practice
 For the independent practice, we will take what we have learned in this module and put them to use. 
@@ -1062,7 +891,12 @@ You will need to use:
 
 
 ## Conclusion - Review Recap
-To recap, we have learned a great deal about streams and how to manipulate them using pipelines of intermediate and terminal operations. After going through this module, the hope is that you now see how powerful streams and pipelines are.  They make the code more readable. The biggest benefit is that it saves you from having to write a lot of boiler plate code to convert data structures.
+To recap, we have learned a great deal about streams and how to manipulate them using pipelines of intermediate and terminal operations. After going through this module, the hope is that you now see how powerful streams and pipelines are.  They make the code more readable. The biggest benefit is that it saves you from having to write a lot of boiler plate code to convert data structures. With that said, here are a few questions that I have for you:
+
+ - Let's say that you only wanted your stream to contain objects of a certain criteria, what stream operation might you use?
+ - If you have a scenario where you have to both sort and filter your stream, how would you order the pipeline to ensure that you don't do more processing than what's needed?
+ - If you wanted to partition stream data into Map where the value of the map was a list, would you use a Collectors.toMap or Collectors.groupingBy?
+
 
 ## References
 [Stackify Streams Guide](https://stackify.com/streams-guide-java-8/)
