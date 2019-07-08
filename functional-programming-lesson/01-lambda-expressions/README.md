@@ -336,6 +336,7 @@ iterate each list that you create and output the results.
 - You'll need to leverage the intermediate operations "map" and "filter"
 - You'll also need to use the terminal operation "Collectors.toList"
 
+### Independent Practice Template
 
     package com.ga.examples;
     
