@@ -70,12 +70,12 @@ You can create a stream from an array:
     Stream intArrayStream = Stream.of(intArray);
     intArrayStream.forEach(value -> System.out.println(value));
 
-You can create a stream from individual objects:
+Stream.of is a quick way to create a stream from your custom objects:
 
     Stream objectStream = Stream.of(100,200,300);
     objectStream.forEach(value -> System.out.println(value));
 
-You can create streams by leveraging the Stream Builder, which is usually more efficient because it doesn't use an array/ArrayList as a buffer when adding elements to the stream:
+You can create streams by leveraging the Stream Builder, which is usually more efficient than the previous 2 examples because it doesn't use an array/ArrayList as a buffer when adding elements to the stream:
 
     Stream.Builder<String> stringStreamBuilder = Stream.builder();
 
