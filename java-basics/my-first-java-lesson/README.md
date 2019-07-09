@@ -1,15 +1,11 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) My First Java
 
----
-title: My First Java
-type: lesson
-duration: "0:55"
-creator:
-    name: Ryan Fleharty
-    city: Denver
----
+| Title | Type | Time | Creator |
+| ----- | ---- | -- | ----- |
+| My First Java | Lesson | 0:55 | Ryan Fleharty |
 
 ### LEARNING OBJECTIVES
+
 *After this lesson, you will be able to:*
 - Create and run Java files.
 - Write the `main` Java method.
