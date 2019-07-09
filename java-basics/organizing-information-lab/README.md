@@ -1,5 +1,5 @@
 ---
-title: Organizing Information - Challenge Questions
+title: Organizing Information with Collections
 type: lab
 duration: "1:30"
 creator:
@@ -9,7 +9,7 @@ creator:
 
 ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
-# Organizing Information - Challenge Questions
+# Organizing Information with Collections
 
 ## Introduction
 
@@ -38,7 +38,8 @@ An **intelliJ project** called ChallengeQuestions has been provided for you that
 
 The completed Java file with solutions to the questions.
 
-
 #### Test your code
 
 Use the included JUnit test cases. Right click the file MainTest.java, and choose 'Run MainTest'.
+
+
