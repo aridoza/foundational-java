@@ -14,7 +14,7 @@ creator:
 
 > ***Note:*** _This is a pair programming activity_
 
-In this lab you will be using your knowledge of classes to build an app that utilizes an Animal class, complete with properties, getters and setters. After completing the class, you will instantiate your Animal and use the getters and setters to display its properties.
+In this lab you will be using your knowledge of classes to build a Java program that utilizes an Animal class, complete with properties, getters and setters. After completing the class, you will instantiate your Animal and use the getters and setters to display its properties.
 
 ## Exercise
 

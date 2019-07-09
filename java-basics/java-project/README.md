@@ -1,4 +1,4 @@
-# Unit 1 Project
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Rock, Paper, Scissors in Java
 
 ## Overview
 
@@ -42,18 +42,7 @@ Your game must:
 - Do multitasking with multithreading to handle concurrent requests (like in multiplayer games)
 - Incorporating Video, Text, Data, Networking, and Sound into your game via Processing
 
----
-
-
-#### Code of Conduct
-
-As always, your app must adhere to General Assembly's [student code of conduct guidelines](../../../resources/guidelines/code-of-conduct.md).
-
-If you have questions about whether or not your work adheres to these guidelines, please speak with a member of your instructional team.
-
----
-
-#### Necessary Deliverables
+### Necessary Deliverables
 
 Submit a pull request with a Java program that meets the above requirements.
 
