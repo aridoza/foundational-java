@@ -126,7 +126,7 @@ That second point can make debugging your code much faster. Instead of adding a 
 
 ## Demo: Breakpoints (10 mins)
 
-Let's continue with the array example from the previous demo. Enabling breakpoints in Eclipse is very simple. Go ahead and click the margin next to line 13 where we access index 0 in the array.
+Let's continue with the array example from the previous demo. Enabling breakpoints in IntelliJ is very simple. Go ahead and click the margin next to line 13 where we access index 0 in the array.
 
 Next, you need to run the program in debugging mode. Instead of pressing the Run icon like normal, you need to press the Debug button.
 
