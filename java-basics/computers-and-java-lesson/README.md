@@ -2,7 +2,9 @@
 | ----------- | ------ | -------- |   ----------  |
 | Computers and Java | Lesson | 0:30   |  Victor Grazi |
 
-### Learning Objectives 
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Computers and How Java Works
+
+## Learning Objectives 
 - Explain what a computer is and what some of the common accessories are.
 - Differentiate between compiled, interpreted, and JVM languages.
 - Tell all your friends what makes Java great.
@@ -37,7 +39,7 @@ Now, what *we* call instructions and what a *computer* calls instructions are tw
 
 But unfortunately, as we have heard, computer data is nothing more than a sequence of zeros and ones, and by extension that is what computer instructions are as well; sequences of zeros and ones. These instructions comprise the "Machine Code" that is understood by your particular operating system. Depending on the operating system and hardware you are using, be it Windows, Macintosh, Android, etc, a compiler must convert the computer program to the machine code understood by that particular operating system. The good news is, that is why we have computer programming languages!
 
-![](/computers-and-java-lesson/0s-and-1s.jpeg)
+![](https://git.generalassemb.ly/GA-Cognizant/foundational-java/blob/master/java-basics/computers-and-java-lesson/0s-and-1s.jpeg)
 *Yeah, it's basically just the Matrix in there.*
 
 ### What is a compiler?
