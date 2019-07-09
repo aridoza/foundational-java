@@ -30,7 +30,7 @@ creator:
 | 10 min  | [Demo](#demo-comparison-operators-10-mins)  | Comparison Operators |
 | 10 min  | [Introduction](#introduction-switch-statement-10-mins)  | Switch Statement |
 | 15 min  | [Demo](#demo-loops-15-mins)  | Loops |
-| 15 min  | [Fizz Buzz - Independent Practice](#fizz-buzz-independent-practice-15-minutes)  |   |
+| 15 min  | [Independent Practice](#fizz-buzz-independent-practice-15-minutes)  |  Fizz Buzz |
 | 5 min  | [Conclusion](#conclusion-5-mins)  | Review / Recap |
 
 ## Opening (5 mins)
