@@ -60,9 +60,9 @@ Interpreted languages are generally going to execute slower than compiled langua
 
 There is a happy medium between compiled and interpreted languages, and that is the class of bytecode compiled languages, such as C#, Scala, and your soon-to-be favorite language, Java. 
 
-These languages are compiled into an intermediate form called "byecode", which is very similar to the machine code of most platforms. The bytecode executes in an interpreter called a JVM (Java Virtual Machine) in the world of Java. Such languages are "write once, run anywhere" because they do not generally need to be compiled for each platform.
+These languages are compiled into an intermediate form called "bytecode", which is very similar to the machine code of most platforms. The bytecode executes in an interpreter called a JVM (Java Virtual Machine) in the world of Java. Such languages are "write once, run anywhere" because they do not generally need to be compiled for each platform.
 
-In this case of Java, there is also a JIT (just in time) compiler, than inspects the code as it executes, and based on those inspections, makes assumptions that allow it to compile segments of the code directly to machine code, making it blazing fast.
+In this case of Java, there is also a JIT (just in time) compiler, that inspects the code as it executes, and based on those inspections, makes assumptions that allow it to compile segments of the code directly to machine code, making it blazing fast.
 
 ### What's the big deal about Java?
 
