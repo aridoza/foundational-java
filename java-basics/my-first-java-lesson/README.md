@@ -70,7 +70,7 @@ Inside the parentheses, you will notice the function takes in one parameter: `St
 ```java
 	public class HowdyPardner {
 		public static void main(String[] args) {
-			System.out.Println("Howdy, Pardner!");
+			System.out.println("Howdy, Pardner!");
   		}
  	}
 ```
