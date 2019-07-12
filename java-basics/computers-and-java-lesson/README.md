@@ -5,8 +5,10 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Computers and How Java Works
 
 ## Learning Objectives 
-- Explain what a computer is and what some of the common accessories are.
-- Differentiate between compiled, interpreted, and JVM languages.
+
+*After this lesson, you will be able to:*
+- Explain what a computer is and how its component parts work together.
+- Differentiate between compiled and interpreted programming languages.
 - Tell all your friends what makes Java great.
 
 ### What is a computer?
@@ -87,6 +89,6 @@ The language was originally branded "Oak", but someone realized that name was al
 ## Check for Understanding
 
 - Explain how the different parts of a computer fit together.
-- What's the difference between compiled, interpreted, and JVM languages?
+- What's the difference between compiled and interpreted languages?
 - Why do we love Java? 
 
