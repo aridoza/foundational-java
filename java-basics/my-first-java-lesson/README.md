@@ -7,7 +7,7 @@
 ### LEARNING OBJECTIVES
 
 *After this lesson, you will be able to:*
-- Create and run Java files.
+- Create and run Java files from the command line.
 - Write the `main` Java method.
 
 ---
@@ -18,8 +18,20 @@ Before we dive into the nitty-gritty of Java functions and data types, let's wri
 
 The first two things you'll need to do in any Java program is create a `class` and create the `main` method. So let's see how to do that!
 
+## Installing the JDK (5 min)
 
-## Code Along: My First Java: Howdy Pardner (20 mins)
+Before we can write any Java code on our local machines, we need to have the Java Development Kit (JDK) installed.
+
+The JDK is a package of tools for developing Java programs. It'll run in the background of your computer as you're writing Java code in a text editor or IDE. It's available from Oracle, the company that manages the Java language.
+
+Installing JDK is one of the easiest things you'll do in this course. 
+1. [Click here](https://www.oracle.com/technetwork/java/javase/downloads/index.html) to visit Oracle's website. Find the latest version of JDK at the top of the page.
+1. On the next page, accept the license agreement and select the file for your operating system.
+1. Follow the installation instructions when the file downloads.
+
+That's it! You're ready to rock and roll.
+
+## Code Along: My First Java: Howdy Pardner (15 mins)
 
 We'll complete this activity using a text editor and the command line.
 
