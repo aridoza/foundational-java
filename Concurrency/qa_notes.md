@@ -13,6 +13,11 @@
 ## Notes on [Concurrency Lesson 2](concurrency2.md)
 
 - Maybe mention oswego and Doug Lea https://en.wikipedia.org/wiki/Doug_Lea is where the java.util.concurrent package came from (and Java continues to evolve thanks to contributions from people in the community)
+- Students may not know what this means "pinned the CPU"
+- "or a browser DOM" --> how does a Web browser DOM fit in this context of Java?
+- Maybe another (simpler?) word to consider using instead of "inter-collation" is "ordering"
+- "each implementing some valuable concurrency design pattern" --> reference a book or other resource?
+- In the ReadWriteLock example, it may be better to break into two executable programs. Also, if using ConcurrentHashMap, you'd need to explain it.
 - 
 
 
