@@ -17,7 +17,7 @@
 - "or a browser DOM" --> how does a Web browser DOM fit in this context of Java?
 - Maybe another (simpler?) word to consider using instead of "inter-collation" is "ordering"
 - "each implementing some valuable concurrency design pattern" --> reference a book or other resource?
-- In the ReadWriteLock example, it may be better to break into two executable programs. Also, if using ConcurrentHashMap, you'd need to explain it.
+- In the ReadWriteLock example, it may be better to break into two executable programs. Also, if using ConcurrentHashMap, you'd need to explain it and how it's used in this context to hold different possible portfolio values.
 - 
 
 
