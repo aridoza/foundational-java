@@ -15,8 +15,8 @@ After this lesson, students will:
   - The Runnable interface
   - How many threads are correct?
   - The synchronized keyword
-<!--  Note: in computing the correct form is "reentrant"locks, without a hyphen -->
-    - Reentrant Native locks  
+  - Reentrant Native locks
+    - _Note: in computing the correct form is "reentrant"locks, without a hyphen_  
   - Signalling threads using wait/notify - synchronization
   - Concurrency components:
     - Executors class
