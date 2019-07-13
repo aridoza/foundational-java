@@ -1,0 +1,22 @@
+# QA Notes
+
+## Notes on [Concurrency Lesson 1](concurrency1.md)
+
+- Timings breakdown like this: https://git.generalassemb.ly/GA-Cognizant/course-documentation/blob/master/lesson-best-practices.md#example-lesson-timing
+- What does “Sizing: 5 (biggest)“ mean in Activities List?
+- Probably worth explaining why you need to “To propagate the interrupt” in the catch block. Also, since this is a pattern/idiom as stated, if the student does not completely understand it now that is OK for now.
+- To explain locking, I would re-order the MUTEX object to be first (easier to visualize) and the synchronized methods (with intrinsic locks) to be second.
+- Something missing here “The two events - ordering the book and debiting the credit card, must occur atomically - you don't ever want a situation “
+- In Wait-Notify ReaderWriterExample, private Object mutex = new Object(); —> should be final and all caps?
+- 
+
+## Notes on [Concurrency Lesson 2](concurrency2.md)
+
+- Maybe mention oswego and Doug Lea https://en.wikipedia.org/wiki/Doug_Lea is where the java.util.concurrent package came from (and Java continues to evolve thanks to contributions from people in the community)
+- 
+
+
+
+## Other
+- My Edits are in [this branch - concurrency_qa_alex](https://git.generalassemb.ly/GA-Cognizant/foundational-java/blob/concurrency_qa_alex)
+
