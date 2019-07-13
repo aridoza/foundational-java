@@ -37,7 +37,7 @@ After this lesson, students will:
 
 ## Fundamentals of Concurrency
 
-Until now, we have covered basic programs and program flow. We have seen how you can control the flow of a program using things like `if` statements and `for` loops. However all of the programs we have seen so far have been _synchronous_. One thread running the program serially (consecutively) from beginning to end.
+Until now, we have covered basic programs and program flow. We have seen how you can control the flow of a program using things like `if` statements and `for` loops. However all of the programs we have seen so far have been _synchronous_. One thread running the program step-by-step serially (consecutively) from beginning to end.
 
 However today's computers have powers far beyond what we have seen or used thus far. Commodity computers have multiple CPUs, dozens or hundreds of cores, and even within a single core, Java spins threads to perform parallel processes.
 
@@ -48,7 +48,7 @@ Why would we ever need to have multiple threads performing concurrent work?
 Consider a web application with dozens (or millions!) of concurrent users. We would not expect each user to wait in line until the previous user is done; rather we 
 want to handle these requests _concurrently_.
 
-Or let's say our application requires a lot of processing such as database queries, file reads and writes, and URL connection handling, where there's lots of I/O. Do we 
+Or let's say our application requires a lot of processing such as database queries, file reads and writes, and calling other services over a network, where there's lots of I/O. Do we 
 want each outgoing request to wait for the other to return before the next one starts? Wouldn't it be better to have all of our requests process _concurrently_?
 
 For these reasons, the designers of Java made the decision to include concurrency in the core JDK, making it perhaps the first language to do so.
@@ -392,7 +392,7 @@ huh? Expected 0 but got 0!
 
 *Up is down? Left is right? 0 is 1?!*
 
-Whoa! Don't worry, there is actually a logical explanation for this behavior! You have to realize that thread1 is continually setting `someSharedVariable` to 0 and thread2, operating at the same time, is trying to set it to 1. At any given time we don't know who touched the shared variable last! So it's less of a logical contradiction so much as two siblings who are both fighting over who gets to play with a toy, but it's pretty clear even from this small example that threading and concurrency can lead to some trippy behavior!
+Whoa! Don't worry, there is actually a logical explanation for this behavior! You have to realize that thread1 is continually setting `someSharedVariable` to 0 and thread2, operating at the same time, is trying to set it to -1. At any given time we don't know who touched the shared variable last! So it's less of a logical contradiction so much as two siblings who are both fighting over who gets to play with a toy, but it's pretty clear even from this small example that threading and concurrency can lead to some trippy behavior!
 <!-- leave synchronized as lower case. That is the name of the keyword, upper case won't compile -->
 ## The `synchronized` Keyword
 
