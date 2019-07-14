@@ -1,8 +1,8 @@
 # Concurrency Components
 
-Until Java 5 arrived on the scene, that was pretty much the extent of the concurrency support. You basically were given the low level functionality, but building things like thread pools (to dispatch pools of threads), or semaphores (like locks except with more than one permit), were left to the programmer.
+Until Java 5 arrived on the scene, that was pretty much the extent of the concurrency support. You basically were given the low level functionality, but building things like thread pools (to dispatch pools of threads), or semaphores (like locks except with more than one permit), were left to the programmer. Soon after the advent of Java, Oswego Professor Doug Lea published his seminal book Concurrent Programming in Java, which introduced many design patterns to assist with the complexities of concurrency. Then in 2006, Brian Goetz (currently the Java Language Architect at Oracle) et.al. released Java Concurrecy in Practice, tightening up many of the original patterns, and introducing many more patterns and concurrency strategies. These were further streamlined by the Java Community Process.
 
-Java 5 changed all that with the introduction of the `java.util.concurrent` package, which provided a rich set of components for handling many important concurrency design patterns. We will go through the important ones now.
+Java 5 distilled all of that knowledge into the `java.util.concurrent` package, which provided a rich set of components for handling many important concurrency design patterns. We will go through the important ones now.
 
 ## Executors Class
 
@@ -95,7 +95,7 @@ Now, the pool only has two threads, but we are calling it four times. Looking at
 
 ## How Many Threads Should I Use?
 
-How large should you make your thread pool? If each thread pinned the CPU, then you would generally want no more than one thread per CPU. So the idea is to look at CPU utilization for one thread, and divide that number into the number of CPUs. For example, if we have 4 cores, and the utilization from one thread is 20% per core, then the number of threads for 100% utilization would be 4/.2 = 20. If you need to exceed that, then it's probably time to start thinking about upgrading hardware. But don't make rash decisions until you test things, because Java is clever about context switching and swapping, so it will still work albeit marginally slower.
+How large should you make your thread pool? If each thread pinned the CPU (i.e. brought CPU utilization near 100%), then you would generally want no more than one thread per CPU. So the idea is to look at CPU utilization for one thread, and divide that number into the number of CPUs. For example, if we have 4 cores, and the utilization from one thread is 20% per core, then the number of threads for 100% utilization would be 4/.2 = 20. If you need to exceed that, then it's probably time to start thinking about upgrading hardware. But don't make rash decisions until you test things, because Java is clever about context switching and swapping, so it will still work albeit marginally slower.
 
 ## Cached Executor
 
@@ -107,7 +107,7 @@ The cached execute is created by calling
 ExecutorService executor = Executors.newCachedThreadPool()
 ```
 
-One place you might want to use a cached thread pool would be for UI events. UI frameworks like Swing, or a browser DOM, will normally have one event thread controlling all rendering, for example hovering over buttons, or displaying keyboard entry. You want to avoid using the event thread for anything else, and so whenever it needs to do some work that might cause it to delay, it should delegate to another thread. For such cases, a cached thread pool would be in order, because the threads are short lived, and you don't generally want to impose arbitrary limits on the number of them, because you want all of your rendering to happen quickly
+One place you might want to use a cached thread pool would be for UI events. UI frameworks like Swing, or if you are building a Java-based web-browser dom, such cases will normally have a single event thread controlling all of its UI rendering, such as displaying mouse overs when hovering over buttons, or displaying typed keys on keyboard entry. You want to avoid using the event thread for anything else, and so whenever it needs to do some work that might cause it to delay, it should delegate to another thread. For such cases, a cached thread pool would be in order, because the threads are short lived, and you don't generally want to impose arbitrary limits on the number of them, because you want all of your rendering to happen quickly
 
 <!-- COMMENT (Brandi): Can we add a more concrete example of a situation we'd want to use this? -->
 <!-- how's this? -->
@@ -147,7 +147,7 @@ Line 1: value = getHitCounter();
 Line 2: value = value + 1;
 Line 3: setHitCounter(value);
 ```
-Now that looks all well and good, except, what happens if two threads call this code using is an inauspicious inter-collation of events.
+Now that looks all well and good, except, what happens if two threads call this code using an inauspicious sequencing of events.
 
 Let's say the hit counter is currently at 1000, when the two threads attack. Now follow me closely:
 
@@ -244,7 +244,7 @@ Don't be thrown by the fact that some of the numbers appear out of sequence; tha
 
 ## ReadWriteLock
 
-There are many more components in the `java.util.concurrent` package, each implementing some valuable concurrency design pattern. We will look at one more, but it pays to study the documentation to see the full treasury.
+There are many more components in the `java.util.concurrent` package, each implementing some valuable concurrency design pattern. We will look at one more, but it pays to study the documentation to see the full treasury: https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/package-summary.htm]
 
  The last concurrency component we will look at is the `ReadWriteLock`, which solves a common problem.
  
@@ -294,16 +294,15 @@ Once the last writer does its job, all of the waiting readers are free once agai
 To create a new `ReadWriteLock`, call exactly that:
 
 ```java
-ReadWriteLock rwl = new ReadWriteLock();
+ReadWriteLock readWriteLock = new ReadWriteLock();
 ```
 
-> Usage for reads: To grab a read lock, call `rwl.readLock().lock()`, and to relinquish the read lock, call `rwl.readLock().unlock()`.
+> Usage for reads: To grab a read lock, call `readWriteLock.readLock().lock()`, and to relinquish the read lock, call `readWriteLock.readLock().unlock()`.
 
-> Usage for writes: To grab a write lock, call `rwl.writeLock().lock()`, and to relinquish the write lock, call `rwl.writeLock().unlock()`.
+> Usage for writes: To grab a write lock, call `readWriteLock.writeLock().lock()`, and to relinquish the write lock, call `readWriteLock.writeLock().unlock()`.
 
 Let's look at an example, first without the read write lock, then again with.
-
-Study the difference between the two versions.
+Copy and paste the following into a single Java source file called _ReadWriteLockLesson_ in package _com.generalassembly.concurrency_.
 
 <details>
 <summary>ReadWriteLock</summary>
@@ -360,7 +359,7 @@ public class ReadWriteLockLesson {
     }
 
     // create our read write lock
-    ReadWriteLock rwl = new ReentrantReadWriteLock();
+//    ReadWriteLock readWriteLock = new ReentrantReadWriteLock(); // uncomment
 
     private void launch() {
         createPortfolio();
@@ -379,7 +378,7 @@ public class ReadWriteLockLesson {
 
     private void read() {
         while (true) {
-//            rwl.readLock().lock();
+//            readWriteLock.readLock().lock(); //uncomment
             double value = 0;
             for (int i = 0; i < portfolio.size(); i++) {
                 Holding holding = (Holding) portfolio.get(i);
@@ -394,7 +393,7 @@ public class ReadWriteLockLesson {
                     System.out.println(values);
                 }
             }
-//            rwl.readLock().unlock();
+//            readWriteLock.readLock().unlock(); // uncomment
         }
     }
 
@@ -407,13 +406,13 @@ public class ReadWriteLockLesson {
 
     private void write() {
         while (true) {
-//            rwl.writeLock().lock();
+//            readWriteLock.writeLock().lock(); // uncomment
             Holding fb = (Holding) portfolio.get(0);
             fb.setShares(fb.getShares() - plusMinus * 500);
             Holding abc = (Holding) portfolio.get(1);
             abc.setShares(abc.getShares() + plusMinus * 1000);
             plusMinus *= -1;
-//            rwl.writeLock().unlock();
+//            readWriteLock.writeLock().unlock(); // uncomment
             try {
                 // sleep briefly to give readers a chance to read
                 Thread.sleep(100);
@@ -444,15 +443,22 @@ That produces output:
 {2379700.0=0, 2203700.0=0, 2291700.0=0}
 ```
 
-So we see the portfolio has produced three different values, depending on the inter-collation of the calls.
+So we see the portfolio has produced three different values, depending on the sequence of how they were called.
 
-Now, uncomment the `ReadWriteLock` logic, and try again:
+Now, search for the five lines marked `uncomment` and uncomment those line, which inserts the `ReadWriteLock` logic, and try again. (A great keyboard shortcut to learn that is used in IntelliJ as well as the other popular IDEs is `Ctrl-/`, which will comment a line, and if already commented, will uncomment it. Please try that.)
 
 ```text
 {2291700.0=0}
 ```
 
 Doing that, we see there is a single value, as we had hoped. 
+
+## ConcurrentHashMap
+You will notice that we used a new Map implementation, _ConcurrentHashMap_. This is very similar to a standard _HashMap_, except that it is designed to handle concurrency.
+
+The main difference is that a standard HashMap prevents threads from iterating and writing at the same time, by throwing a ConcurrentModificationException. This is called _fail-fast_ and ensures that the data in the Map is the same throughout the iteration. In contrast, a ConcurrentHashMap assumes you will take care of any required locking externally, and so will not fail-fast when iterating and writing.
+
+Generally if you have multiple threads iterating and writing to a Map, you want to use a ConcurrentHashMap instead of a HashMap.
 
 ## Summary
 

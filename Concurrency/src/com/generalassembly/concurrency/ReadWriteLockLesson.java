@@ -8,7 +8,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Holding class is contains the ticker, shares, and prices of a stock in a portfolio
+ * Holding class contains the ticker, shares, and prices of a stock in a portfolio
  */
 class Holding {
     private String ticker;
@@ -49,7 +49,7 @@ public class ReadWriteLockLesson {
     }
 
     // create our read write lock
-    ReadWriteLock rwl = new ReentrantReadWriteLock();
+//    ReadWriteLock readWriteLock = new ReentrantReadWriteLock(); // uncomment
 
     private void launch() {
         createPortfolio();
@@ -68,7 +68,7 @@ public class ReadWriteLockLesson {
 
     private void read() {
         while (true) {
-            rwl.readLock().lock();
+//            readWriteLock.readLock().lock(); // uncomment
             double value = 0;
             for (int i = 0; i < portfolio.size(); i++) {
                 Holding holding = (Holding) portfolio.get(i);
@@ -83,7 +83,7 @@ public class ReadWriteLockLesson {
                     System.out.println(values);
                 }
             }
-            rwl.readLock().unlock();
+//            readWriteLock.readLock().unlock(); // uncomment
         }
     }
 
@@ -96,13 +96,13 @@ public class ReadWriteLockLesson {
 
     private void write() {
         while (true) {
-            rwl.writeLock().lock();
+//            readWriteLock.writeLock().lock(); // uncomment
             Holding fb = (Holding) portfolio.get(0);
             fb.setShares(fb.getShares() - plusMinus * 500);
             Holding abc = (Holding) portfolio.get(1);
             abc.setShares(abc.getShares() + plusMinus * 1000);
             plusMinus *= -1;
-            rwl.writeLock().unlock();
+//            readWriteLock.writeLock().unlock(); // uncomment
             try {
                 // sleep briefly to give readers a chance to read
                 Thread.sleep(100);

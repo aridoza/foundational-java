@@ -6,8 +6,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ReaderWriterExample {
-    private Object mutex = new Object();
-    private int index = 0;
+    private final Object MUTEX = new Object();
+    private volatile int index = 0;
     String[] files = {
             "Concurrency/resources/flatland.txt",
             "Concurrency/resources/war-and-peace.txt",
@@ -25,12 +25,10 @@ public class ReaderWriterExample {
                         byte[] strings = Files.readAllBytes(Paths.get(files[index]));
                         String string = new String(strings);
                         values[index] = string;
-                        synchronized (mutex) {
-                            mutex.notify();
+                        synchronized (MUTEX) {
+                            MUTEX.notify();
                         }
                         Thread.sleep(2000);
-
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
@@ -45,8 +43,8 @@ public class ReaderWriterExample {
             public void run() {
                 while(true) {
                     try {
-                        synchronized (mutex) {
-                            mutex.wait();
+                        synchronized (MUTEX) {
+                            MUTEX.wait();
                             System.out.println(values[index]);
                         }
                     } catch (InterruptedException e) {

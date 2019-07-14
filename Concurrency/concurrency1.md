@@ -125,7 +125,7 @@ Finally we define the `main()` method, which launches our program. It _starts_ o
 
 ### What About That Try-Catch Block?
 
-Coming back to the try-catch block, notice that `Thread.sleep()` throws an `InterruptedException`. That exception is thrown when the thread's `interrupt()` method is called (usually by frameworks or application servers), to initiate a smooth shutdown of the threads. Since `InterruptedException` is a checked exception (meaning we called it out in the catch), it _must_ be caught. One side-effect of catching an `InterruptedException`, is that the thread's _interrupt_ flag is reset, meaning that it is no longer interrupted. To propagate the interrupt, we must set the interrupt flag once again, which is why we call `Thread.currentThread().interrupt()`.
+Coming back to the try-catch block, notice that `Thread.sleep()` throws an `InterruptedException`. That exception is thrown when the thread's `interrupt()` method is called (usually by frameworks or application servers), to initiate a smooth shutdown of the threads. Since `InterruptedException` is a checked exception, by definition, you _must_ catch it. One side-effect of catching an `InterruptedException`, is that the thread's _interrupt_ flag is reset, meaning that it is no longer interrupted, which means that the container shutdown will be aborted. To propagate the interrupt back to the calling thread (so that the application server or container can continue its clean shutdown), we must set the interrupt flag once again, which is why we call `Thread.currentThread().interrupt()`. It's not critical to understand this; just remember to follow the recipe: whenever you catch an InterruptedException, call `Thread.currentThread().interrupt()` before exiting the catch block.
 
 Notice that we enclosed the while loop _inside_ the try-catch. A common mistake even advanced programmers make is to do the opposite, and they enclose the try-catch _inside the while loop_. Why is that wrong?
 
@@ -499,7 +499,7 @@ Thankfully, when we synchronize, our updates and accesses are guaranteed to occu
 > Atomic is a common word in computer science. It refers to a set of two or more events that all must either happen or not happen. A common example would be a credit card transaction... a user goes on line, orders a book, and her credit card is denied. Or, her credit card is debited, but the book is out of stock.    
  Now you might ask - why not just check that the book is in stock and that there is enough available credit, before executing the transaction? But when you think about it, that won't help, because what happens if just after you check, the last copy of the book gets sold, or the last dollar of credit gets used up? For these cases we need to ensure that the events are _atomic_ - they happen all or nothing.
 
-The two events - ordering the book and debiting the credit card, must occur atomically - you don't ever want a situation 
+The two events - ordering the book and debiting the credit card, must occur atomically - you don't ever want a situation where the merchandise gets shipped, but the credit card was rejected, or arguably worse - where the credit card was billed but the order was never shipped. Atomic transactions ensure that in a multi-step transaction such as this, either all of the steps of the transaction complete, or none of them do, (i.e. they all "roll-back").
 
 Note that using the synchronized method approach, if you have different instances of that class, it is entirely permissible for different threads to access those methods on _different_ object instances. If you want to lock a method across _all_ object instances of that class, then you can make that mutex static. There are a few variations, but in this course we will not look further into that approach.
  
@@ -529,7 +529,9 @@ It's easier to see it in an example. Let's say we have two threads, one that is 
 
 Now there is no reason for the writer to write anything, until the reader has read something. So the reader must have a way to signal to the writer that data is available. This is where wait/notify comes in handy.
 
-Here is the program. Let's study what it is doing:
+Copy and paste the following code into a single Java source file, named _ReaderWriterExample_ in package com.generalassembly.concurrency. 
+
+This program will start two threads. The first will read three popular books in turn, and then notify the second thread to start processing. The second thread will wake and display the contents of each:
 
 <details>
 <summary>Wait-Notify</summary>
@@ -543,7 +545,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class ReaderWriterExample {
-    private Object mutex = new Object();
+    private final Object MUTEX = new Object();
     private volatile int index = 0;
     String[] files = {
         "Concurrency/resources/flatland.txt",
@@ -562,8 +564,8 @@ public class ReaderWriterExample {
                         byte[] strings = Files.readAllBytes(Paths.get(files[index]));
                         String string = new String(strings);
                         values[index] = string;
-                        synchronized (mutex) {
-                            mutex.notify();
+                        synchronized (MUTEX) {
+                            MUTEX.notify();
                         }
                         Thread.sleep(2000);
                     } catch (IOException e) {
@@ -580,8 +582,8 @@ public class ReaderWriterExample {
             public void run() {
                 while(true) {
                     try {
-                        synchronized (mutex) {
-                            mutex.wait();
+                        synchronized (MUTEX) {
+                            MUTEX.wait();
                             System.out.println(values[index]);
                         }
                     } catch (InterruptedException e) {
@@ -607,7 +609,9 @@ Note that after the reader thread has read the file, it stores the result in our
 
 The call to `notify` immediately wakes up the writer thread, which then grabs the newly stored value, writes it to standard out, and then goes back to the wait state until it is notified to wake up again.
 
-In our example, the call to `notify` wakes up the waiting thread. This works great because we only created one waiting thread. But what happens if you have many waiting threads? A call to notify will wake up one of the waiting threads at random, which is often what you want. However there are times you want all waiting threads to wake. In that case you would call `notifyAll`, which will notify every waiting thread to wake up. (The observant student will notice that all threads are in the same synchronized block, so how can they all wake at the same time? The answer is they can't. `notifyAll` will transition all waiting threads from the waiting state to the blocked state, and then wake up one thread at random. As each thread relinquishes the lock, another thread will be selected at random to become runnable, until every thread has had a chance to wake up.)
+In our example, the call to `notify` wakes up the waiting thread. This works great because we only created one waiting thread. But what happens if you have many waiting threads? A call to notify will wake up one of the waiting threads at random, which is often what you want. However there are times when you want all waiting threads to wake up, for example where you have many threads, each of which performs some function, where order does not matter. For example, perhaps we have one thread that enriches new data, another thread that captures the new data in a ledger, and another thread that notifies a librarian that new data has arrived. In that case you would call `notifyAll`, which will notify each and every waiting thread to wake up. 
+
+(The observant student will notice that all of these threads are waiting in the same synchronized block, so how can they all wake at the same time, given what we said that only one running thread may ever hold a synchronized lock? The answer is they can't. `notifyAll` will transition all waiting threads from the waiting state to the blocked state, and then wake up one thread at a time, at random. As each thread relinquishes the lock, another thread will be selected by the thread scheduler at random to become runnable, until every thread has had a chance to wake up.)
 
 Incidentally, notice the keyword `volatile`, which is used before the declaration of the index variable.
 
