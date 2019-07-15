@@ -32,46 +32,276 @@
 | TIMING |         TYPE         |                                           TOPIC                                          |
 |:------:|:--------------------:|:----------------------------------------------------------------------------------------:|
 |  5 min |        Opening       |                                 Introduction to Functional Interfaces                                |
-| 5 min |     Introduction     |                         Functions                        |
-| 5 min |     Demo     |                         Functions Demo                        |
-| 5 min |         Introduction         |   BiFunctions   |
-| 5 min |     Demo     |                          BiFunctions Demo                         |
-|  5 min |         Introduction         |                      Suppliers                     |
-| 5 min |     Demo     |                         Suppliers Demo                       |
-|  5 min |         Introduction         |      Consumers      |
-| 5 min |     Demo     |                                      Consumers Demo | 
-|  5 min |         Introduction         |      Operators     |
-| 5 min |     Demo     |                                      Operators Demo |
-|  5 min |         Introduction         |      Predicates     |
-| 5 min |     Demo     |                                      Predicates Demo |
+| 10 min |     Introduction     |                         Functional Interfaces Deep Dive                        |
+| 10 min |     Demo     |                         Functional Interfaces Demo                        |
+| 5 min |     Introduction     |                         Function                        |
+| 5 min |     Demo     |                         Function Demo                        |
+| 5 min |         Introduction         |   BiFunction   |
+| 5 min |     Demo     |                          BiFunction Demo                         |
+|  5 min |         Introduction         |                      Supplier                     |
+| 5 min |     Demo     |                         Supplier Demo                       |
+|  5 min |         Introduction         |      Consumer      |
+| 5 min |     Demo     |                                      Consumer Demo | 
 | 20 min | Independent Practice | Take what we've learned and complete a program using functions, suppliers, consumers, operators, and predicates |
 |  5 min |      Conclusion      |                                       Review/Recap                                       |
 
 ## Opening - Introduction to Functional Interfaces   
+We have learned a lot in the first 2 modules.  Now we are going to dive deeper into Functional Interfaces.  This is the heart and soul of a lambda expression. To recap, a lambda expression is an anonymous function which provides a very concise and functional syntax which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes.  Remember that the lambda expression syntax is as follows:
 
-## Introduction - Functions
+    (arg1, arg2,...) -> lambda expression body
 
-## Demo - Functions
+To begin this lesson, we will take a look at how to create your own functional interfaces.
 
-## Introduction - BiFunctions  
+## Introduction - Functional Interfaces Deep Dive
+**What is a functional interface?**  A functional interface is an interface that contains only one abstract method. These interfaces should be annotated with the @FunctionalInterface annotation to aid the compiler to throw an error when more than one abstract method is defined.
 
-## Demo - BiFunctions  
+**Why use a functional interface?** The benefit of using a functional interface is that we can leverage lambda expressions to represent them, instead of having to use anonymous classes. It is also less verbose in terms of lines of code. Let's go through the demo to see some examples.
 
-## Introduction - Suppliers
+## Demo - Functional Interfaces
+For this demo, we will be using 4 different functional interfaces examples so that you can get familiar and comfortable with them. 
 
-## Demo - Suppliers
+###Example 1 - A functional interface that has no input and returns void.
+Given the following functional interface, we can use it to print "Hello World!"
 
-## Introduction - Consumers
+    @FunctionalInterface
+    public interface VoidFunctionalInterface {
+        public void greet();
+    }
 
-## Demo - Consumers
+    //Use the VoidFunctionalInterface to say Hello.
+    VoidFunctionalInterface greetTheWorld = () -> System.out.println("Hello World!");
+    greetTheWorld.greet();
 
-## Introduction - Operators
+Output:  
+Hello World!
 
-## Demo - Operators  
+Taking a look at the interface... You'll notice that it's annotated with @FunctionalInteface.  It also has only one abstract method, which meets the criteria of a functional interface.  
 
-## Introduction - Predicates
+To use the functional interface, we create a variable of type VoidFunctionalInterface called "greetTheWorld".  The value of the variable is a lambda expression that takes in no arguments and prints out "Hello World!".
 
-## Demo - Predicates
+The last thing we do is call the greet method for it to execute.
+
+###Example 1 Continued - Using an Anonymous class instead of lambdas.
+Let's write the same example as before, but instead, let's use an anonymous class.
+
+    //Anonymous class example of the above.
+    VoidFunctionalInterface voidFunctionalInterfaceImpl = 
+        new VoidFunctionalInterface() {
+            @Override
+            public void greet() {
+                System.out.println("Hello World!");
+            }
+        };
+    voidFunctionalInterfaceImpl.greet();
+
+The output is the same as before, but what stands out to you when you compare this version with the lambda expression version?  I don't know about you, but the anonymous class version seems verbose and harder to read when compared to the lambda expression version.  Let's look at some more examples.
+
+###Example 2 - A functional interface that takes in one input and returns void
+Given the following functional interface, it will greet a person based on a given name.
+
+    @FunctionalInterface
+    public interface GreetByName {
+        public void greet(String name);
+    }
+
+    GreetByName greetSomeone =
+            (name -> System.out.println("Hello " + name + "!  How are you doing today?"));
+    greetSomeone.greet("Mark");
+
+Output:  
+Hello Mark! how are you doing today.
+
+If you look at the greet method of the GreetByName functional interface.  You'll notice that it takes in a String parameter called "name".  This parameter will become the input parameter to the lambda expression that is used further down in the example.  In this case, the lambda input parameter is called "name".  The parameter names don't have to match, but it is good practice to name them according to what they are.
+
+###Example 3 - A functional interface that has one input and produces one output.
+The following example will use a functional interface to take an integer given as input and output the square of that given input.
+
+    @FunctionalInterface
+    public interface SquareMe {
+        public Integer square(Integer input);
+    }
+
+    SquareMe squareMe = (number) -> number * number;
+    System.out.println("The square of 11 is " + squareMe.square(11));
+
+Output:  
+The square of 11 is 121
+
+Similar to example 2, the functional interface method "square" takes in one input called "input".  However, this type the "square" method returns an integer.  If you look at the lambda expression, the input parameter "number" matches up to the "input" parameter of the "square" method. The body of the lambda expression will take the input and multiply it by itself.
+
+To get the output, you have to call the "square" method on the "squareMe" variable. ie.
+
+    squareMe.square(11)
+
+###Example 4 - A functional interface that takes multiple inputs and returns one output.
+The following example will use a functional interface method that takes in a first, middle, and last name and concatenate them together.
+
+    @FunctionalInterface
+    private static interface CreateFullName {
+        public String fullName(String firstName, String middleName, String lastName);
+    }
+
+    //Use the CreateFullName interface to greet a person by their full name.
+    CreateFullName whatsMyName =
+            ((firstName, middleName, lastName) -> firstName + " " + middleName + " " + lastName);
+
+    String fullName = whatsMyName.fullName("Michael", "Jeffrey", "Jordan");
+    System.out.println("Hello " + fullName + ", it's a pleasure to meet you.");
+
+Output:  
+Hello Michael Jeffrey Jordan, it's a pleasure to meet you.
+
+As before, compare the input parameters of the "fullName" functional interface method with the input parameters of the lambda expressions.  The lambda body does the dirty work of concatenating the name portions together.
+
+##Built-In Functional Interfaces
+In the previous section, we discussed how to create and use your own custom functional interfaces. However, Java was nice enough to provide us with a number of built-in functional interfaces that should meet a majority of our needs.  In the next 4 sections will discuss some of these built in functional interfaces.
+
+## Introduction - Function
+Function is a built-in functional interface that has one abstract method "apply" that accepts one input and produces one output. 
+
+Functional Interface looks like:
+
+    @FunctionalInterface
+    public interface Function<T, R> {
+
+        R apply(T t);
+
+        ...
+    }
+
+Usage of a Function is:
+
+    Function<T, R> functionVariable = (T arg) -> lambda body that returns the R type
+
+- T is the input argument of a type specified
+- R is the return of the function of a specified type. Let's check out the demo to see it in action.
+
+**Key abstract method**
+- apply - this triggers the Function execution to run the lambda expression body.
+
+**Professor Note**  
+Please have the class compare the SquareMe functional interface in Example 3 in the last demo with the Function interface above.  The SquareMe's abstract method is called "square", whereas the Function abstract method is called "apply".  Even though the method names are different, the SquareMe interface could be replaced with a built-in Function and create the same results.
+
+## Demo - Function
+Let's take a look at a couple of examples of how to use Function.
+
+The first example will take in a String that represents a name and the output will be a greeting.
+
+    //Create a greeting function
+    Function<String, String> greetingFunction = s -> "Good Morning " + s + "!";
+    String greeting = greetingFunction.apply("Kyle");
+    System.out.println(greeting);
+
+Output:  
+Good Morning Kyle!
+
+So let's talk about what's going on with this example.  Let's examine the first line:
+
+    Function<String, String> greetingFunction = s -> "Good Morning " + s + "!";
+
+If you look at Function generic "Function<String, String>".  The first String represents the type of the input.  The second String represents the type of the output.
+
+Looking at the lambda expression, the "s" input parameter will be of type String which coincides with the first String of the Function generic.  The lambda body will return a string as well, which coincides with the second String of the Function generic.
+
+Let's look at the 2nd line:  
+
+    String greeting = greetingFunction.apply("Kyle");
+
+The "apply" method is what executes the defined lambda expression and returns the result to the "greeting" variable.
+
+Here's another example of a Function that takes in an Integer and outputs an Integer that represents the square of the number.  This could be used to replace our custom SquareMe functional interface of Example 3 in the last demo.
+
+    Function<Integer, Integer> squareFunction = s -> s * s;
+    Integer squareOfNine = squareFunction.apply(9);
+    System.out.println(squareOfNine);
+
+
+## Introduction - BiFunction  
+BiFunction is another built-in functional interface.  Like Function, BiFunction has one abstract method called "apply".  However, BiFunction's apply method accepts 2 input parameters and produces 1 output. The layman's term way of thinking about this is that it takes in two inputs and gives one output.
+
+**Typical Use Case** TODO
+
+Functional Interface looks like:
+
+    @FunctionalInterface
+    public interface BiFunction<T, U, R> {
+
+        R apply(T t, U u);
+
+        ...
+}
+
+Usage of a BiFunction is:
+    
+    BiFunction<T, U, R> functionVariable = (T arg, U arg) -> lambda body that returns the R type
+
+- T is the 1st input argument of a type specified
+- U is the 2nd input argument of a type specified
+- R is the return type of the function. Let's check out the demo to see it in action.
+
+**Key Methods**
+- apply - this triggers the Function execution to run the lambda expression body.
+
+## Demo - BiFunction 
+Let's take a look at a couple of examples of how to use a BiFunction.  The first example will take 2 Integers as input and output an Integer result that represents the sum of the 2 Integers.
+
+    BiFunction<Integer, Integer, Integer> addFunction = (a, b) -> a + b;
+    Integer addResult = addFunction.apply(4,5);
+    System.out.println(addResult); 
+
+Output:  
+9
+
+Let's examine the first line:
+
+    BiFunction<Integer, Integer, Integer> addFunction = (a, b) -> a + b;
+
+The first 2 Integers in BiFunction generic represent the types of input #1 and input #2, respectively.  The last Integer represents the type of the output.
+
+The 2nd line runs the "apply" method which will trigger the lambda expression to run by passing 4 and 5 as the input.  The lambda body will run 4 + 5 and return the result.
+
+The next BiFunction example will take in 2 Integers and return an Integer that represents the result of multiplying the 2 Integers together.
+
+    BiFunction<Integer, Integer, Integer> multiplyFunction = (a, b) -> a * b;
+    Integer multiplyResult = multiplyFunction.apply(4,5);
+    System.out.println(multiplyResult);
+
+Output:  
+20
+
+
+## Introduction - Supplier
+Typical use case
+Structure of a Supplier lambda is:
+ 
+    Supplier<T> functionVariable = () -> lambda body that returns the T type
+
+- T is the return of the function of a specified type
+
+The layman's term way of thinking about this is that it takes no input and gives one output.
+
+**Key Methods**
+- get
+
+When to use:  
+In all scenarios where there is no input to an operation and it is expected to return an output the in-built functional interface Supplier<T> can be used without the need to define a new functional interface every time.
+
+## Demo - Supplier
+
+## Introduction - Consumer
+Typical Use Case
+Structure of a Consumer lambda is:
+
+    Consumer<T> functionVariable = (T arg) -> lambda body that has no return (void)
+
+- T is the input argument of a specified type
+
+The layman's term way of thinking about this is that it takes in one input and gives no output.
+
+**Key Methods**
+- accept
+
+## Demo - Consumer
 
 ## Independent Practice
 
@@ -84,3 +314,4 @@ You will need to use:
 
 ## References
 [Baeldung Functional Interfaces](https://www.baeldung.com/java-8-functional-interfaces)
+[Java Code Geeks - Consumer and Supplier](https://examples.javacodegeeks.com/core-java/java-8-consumer-supplier-example/)
