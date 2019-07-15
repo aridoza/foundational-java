@@ -60,7 +60,7 @@ To begin this lesson, we will take a look at how to create your own functional i
 ## Demo - Functional Interfaces
 For this demo, we will be using 4 different functional interfaces examples so that you can get familiar and comfortable with them. 
 
-###Example 1 - A functional interface that has no input and returns void.
+### Example 1 - A functional interface that has no input and returns void.
 Given the following functional interface, we can use it to print "Hello World!"
 
     @FunctionalInterface
@@ -81,7 +81,7 @@ To use the functional interface, we create a variable of type VoidFunctionalInte
 
 The last thing we do is call the greet method for it to execute.
 
-###Example 1 Continued - Using an Anonymous class instead of lambdas.
+### Example 1 Continued - Using an Anonymous class instead of lambdas.
 Let's write the same example as before, but instead, let's use an anonymous class.
 
     //Anonymous class example of the above.
@@ -96,7 +96,7 @@ Let's write the same example as before, but instead, let's use an anonymous clas
 
 The output is the same as before, but what stands out to you when you compare this version with the lambda expression version?  I don't know about you, but the anonymous class version seems verbose and harder to read when compared to the lambda expression version.  Let's look at some more examples.
 
-###Example 2 - A functional interface that takes in one input and returns void
+### Example 2 - A functional interface that takes in one input and returns void
 Given the following functional interface, it will greet a person based on a given name.
 
     @FunctionalInterface
@@ -113,7 +113,7 @@ Hello Mark! how are you doing today.
 
 If you look at the greet method of the GreetByName functional interface.  You'll notice that it takes in a String parameter called "name".  This parameter will become the input parameter to the lambda expression that is used further down in the example.  In this case, the lambda input parameter is called "name".  The parameter names don't have to match, but it is good practice to name them according to what they are.
 
-###Example 3 - A functional interface that has one input and produces one output.
+### Example 3 - A functional interface that has one input and produces one output.
 The following example will use a functional interface to take an integer given as input and output the square of that given input.
 
     @FunctionalInterface
@@ -133,7 +133,7 @@ To get the output, you have to call the "square" method on the "squareMe" variab
 
     squareMe.square(11)
 
-###Example 4 - A functional interface that takes multiple inputs and returns one output.
+### Example 4 - A functional interface that takes multiple inputs and returns one output.
 The following example will use a functional interface method that takes in a first, middle, and last name and concatenate them together.
 
     @FunctionalInterface
@@ -153,7 +153,7 @@ Hello Michael Jeffrey Jordan, it's a pleasure to meet you.
 
 As before, compare the input parameters of the "fullName" functional interface method with the input parameters of the lambda expressions.  The lambda body does the dirty work of concatenating the name portions together.
 
-##Built-In Functional Interfaces
+## Built-In Functional Interfaces
 In the previous section, we discussed how to create and use your own custom functional interfaces. However, Java was nice enough to provide us with a number of built-in functional interfaces that should meet a majority of our needs.  In the next 4 sections will discuss some of these built in functional interfaces.
 
 ## Introduction - Function
