@@ -57,6 +57,8 @@ To begin this lesson, we will take a look at how to create your own functional i
 
 **Why use a functional interface?** The benefit of using a functional interface is that we can leverage lambda expressions to represent them, instead of having to use anonymous classes. It is also less verbose in terms of lines of code. Let's go through the demo to see some examples.
 
+**What is a method reference?**  You use lambda expressions to create anonymous methods. Sometimes, however, a lambda expression does nothing but call an existing method. In those cases, it's often clearer to refer to the existing method by name. Method references enable you to do this; they are compact, easy-to-read lambda expressions for methods that already have a name. You'll see an example of a method reference later in one of our demos.
+
 ## Demo - Functional Interfaces
 For this demo, we will be using 4 different functional interfaces examples so that you can get familiar and comfortable with them. 
 
@@ -154,7 +156,9 @@ Hello Michael Jeffrey Jordan, it's a pleasure to meet you.
 As before, compare the input parameters of the "fullName" functional interface method with the input parameters of the lambda expressions.  The lambda body does the dirty work of concatenating the name portions together.
 
 ## Built-In Functional Interfaces
-In the previous section, we discussed how to create and use your own custom functional interfaces. However, Java was nice enough to provide us with a number of built-in functional interfaces that should meet a majority of our needs.  In the next 4 sections will discuss some of these built in functional interfaces.
+In the previous section, we discussed how to create and use your own custom functional interfaces. However, Java was nice enough to provide us with a number of built-in functional interfaces that should meet a majority of our needs.  In the next 4 sections will discuss some of these built in functional interfaces.  
+
+There is something that I want you to keep in mind while going through the following sections. These built-in functional interfaces are structures and NOT semantics.  In other words, their use cases are created by the implementor. 
 
 ## Introduction - Function
 Function is a built-in functional interface that has one abstract method "apply" that accepts one input and produces one output. 
@@ -219,8 +223,6 @@ Here's another example of a Function that takes in an Integer and outputs an Int
 ## Introduction - BiFunction  
 BiFunction is another built-in functional interface.  Like Function, BiFunction has one abstract method called "apply".  However, BiFunction's apply method accepts 2 input parameters and produces 1 output. The layman's term way of thinking about this is that it takes in two inputs and gives one output.
 
-**Typical Use Case** TODO
-
 Functional Interface looks like:
 
     @FunctionalInterface
@@ -271,37 +273,147 @@ Output:
 
 
 ## Introduction - Supplier
-Typical use case
-Structure of a Supplier lambda is:
+Supplier is a built-in functional interface that accepts no input and gives an output. 
+
+Functional Interface looks like:
+
+    @FunctionalInterface
+    public interface Supplier<T> {
+
+        T get();
+    }
+
+Usage of a Supplier is:
  
     Supplier<T> functionVariable = () -> lambda body that returns the T type
 
 - T is the return of the function of a specified type
 
-The layman's term way of thinking about this is that it takes no input and gives one output.
-
 **Key Methods**
-- get
+- get - this will trigger execution of the lambda body
 
-When to use:  
-In all scenarios where there is no input to an operation and it is expected to return an output the in-built functional interface Supplier<T> can be used without the need to define a new functional interface every time.
+**A Good Supplier Strategy**  
+A good strategy for using Supplier is for scenarios that require no input but may be expensive to run.  Suppliers leverage lazy evaluation, meaning they won't executed until actually needed.  You can use that to your advantage to avoid making the expensive method call until it's absolutely need.  The following demo will help explain it better.
 
 ## Demo - Supplier
+The following demo will show an example of how using a Supplier could save you from running an expensive operation when it's not necessary.  Let's say you have the following:
+
+     public static void main(String[] args) {
+
+        //Let's see an example without the supplier when calling an expensive operation.
+        String doTheyMatch =
+                eagerMatch(expensiveComputeOperation("bb"),    
+                           expensiveComputeOperation("aa"));
+        System.out.println(doTheyMatch);
+    }
+
+    private static String eagerMatch(boolean b1, boolean b2) {
+        return b1 && b2 ? "match" : "incompatible!";
+    }
+
+    private static boolean expensiveComputeOperation(String input) {
+        System.out.println("executing expensive computation...");
+        // expensive computation here
+        return input.contains("a");
+    }
+
+Output:  
+executing expensive computation...  
+executing expensive computation...  
+incompatible!  
+
+As you can see, the expensiveComputeOperation is called twice.  Even though the "bb" parameter returns false, the "aa" operation still runs when it doesn't need to.  Now let's look at how you could avoid that by using Suppliers.
+
+     public static void main(String[] args) {
+
+        //Let's use a supplier.
+        doTheyMatch = lazyMatch(() -> expensiveComputeOperation("bb"), () -> expensiveComputeOperation("aa"));
+        System.out.println(doTheyMatch);
+    }
+
+    private static boolean expensiveComputeOperation(String input) {
+        System.out.println("executing expensive computation...");
+        // expensive computation here
+        return input.contains("a");
+    }
+
+    private static String lazyMatch(Supplier<Boolean> a, Supplier<Boolean> b) {
+        return a.get() && b.get() ? "match" : "incompatible!";
+    }
+
+Output:  
+executing expensive computation...  
+incompatible!  
+
+Since we are now wrapping the expensiveComputeOperation with a Supplier, we now have the ability to only run that method when needed. Since a.get() in the lazyMatch method returns false, the b.get() will never execute.  This saves us from running the expensiveComputeOperation method when it's not needed.
 
 ## Introduction - Consumer
-Typical Use Case
-Structure of a Consumer lambda is:
+Consumer is a built-in functional interface that accepts one input and has no output. 
+
+Functional Interface looks like:
+
+    @FunctionalInterface
+    public interface Consumer<T> {
+
+        void accept(T t);
+    }
+
+Usage of a Consumer is:
 
     Consumer<T> functionVariable = (T arg) -> lambda body that has no return (void)
 
 - T is the input argument of a specified type
 
-The layman's term way of thinking about this is that it takes in one input and gives no output.
-
 **Key Methods**
-- accept
+- accept - this triggers execute of the lambda body.
+
 
 ## Demo - Consumer
+Let's take a look at a couple of examples of using Consumer. The following example will say Hello to a passed in String.
+
+    Consumer<String> sayHello = (name) -> System.out.println("Hello " + name);
+    sayHello.accept("John");
+
+Output:  
+Hello John
+
+As you can see the lambda expression takes in 1 argument "name".  The lambda body return no output. It simply prints out "Hello John".  
+
+The next example takes a list of names and iterates the list and prints out the names using a method reference.
+
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("John", "Lisa", "Amanda", "Matt");
+        Consumer<String> printNames = ConsumerExamples::printNames;
+        names.stream().forEach(name -> printNames.accept(name));
+    }
+
+    private static void printNames(String name) {
+        System.out.println(name);
+    }
+
+Output:  
+John  
+Lisa  
+Amanda  
+Matt  
+
+If you look at the Consumer variable, you'll notice "ConsumerExamples::printNames".  This is what's called a method reference.  What this means is that if a method adheres to the contract of a functional interface, you can use the method instead of creating your own lambda expression.  If you look at the printNames method, it takes in only 1 input and it produces no output (void).
+
+We could have also written the example to have the Consumer provide the lambda expression as follows, but I wanted to show you the method reference concept.
+
+    public static void main(String[] args) {
+
+        List<String> names = Arrays.asList("John", "Lisa", "Amanda", "Matt");
+
+        Consumer<String> printNames = (name) -> System.out.println(name);//ConsumerExamples::printNames;
+
+        names.stream().forEach(name -> printNames.accept(name));
+    }
+
+    private static void printNames(String name) {
+        System.out.println(name);
+    }
+
 
 ## Independent Practice
 
