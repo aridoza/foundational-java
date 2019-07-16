@@ -229,9 +229,8 @@ Functional Interface looks like:
     public interface BiFunction<T, U, R> {
 
         R apply(T t, U u);
-
         ...
-}
+    }
 
 Usage of a BiFunction is:
     
@@ -298,7 +297,7 @@ A good strategy for using Supplier is for scenarios that require no input but ma
 ## Demo - Supplier
 The following demo will show an example of how using a Supplier could save you from running an expensive operation when it's not necessary.  Let's say you have the following:
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
 
         //Let's see an example without the supplier when calling an expensive operation.
         String doTheyMatch =
@@ -324,7 +323,7 @@ incompatible!
 
 As you can see, the expensiveComputeOperation is called twice.  Even though the "bb" parameter returns false, the "aa" operation still runs when it doesn't need to.  Now let's look at how you could avoid that by using Suppliers.
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
 
         //Let's use a supplier.
         doTheyMatch = lazyMatch(() -> expensiveComputeOperation("bb"), () -> expensiveComputeOperation("aa"));
@@ -354,7 +353,6 @@ Functional Interface looks like:
 
     @FunctionalInterface
     public interface Consumer<T> {
-
         void accept(T t);
     }
 
