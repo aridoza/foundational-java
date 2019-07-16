@@ -464,4 +464,5 @@ Some quiz questions for you are:
 
 ## References
 [Baeldung Functional Interfaces](https://www.baeldung.com/java-8-functional-interfaces)
+
 [Java Code Geeks - Consumer and Supplier](https://examples.javacodegeeks.com/core-java/java-8-consumer-supplier-example/)
