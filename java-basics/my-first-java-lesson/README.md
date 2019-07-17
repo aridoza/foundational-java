@@ -20,7 +20,7 @@ The first two things you'll need to do in any Java program is create a `class` a
 
 ## Installing the JDK (5 mins)
 
-Before we can write any Java code on our local machines, we need to have the Java Development Kit (JDK) installed.
+Before we can write any Java code on our local machines, we need to install the Java Development Kit (JDK).
 
 The JDK is a package of tools for developing Java programs. It will run in the background of your computer as you're writing Java code in a text editor or IDE. It's available from Oracle, the company that manages the Java language.
 
@@ -36,7 +36,7 @@ That's it. You're ready to write your first Java code.
 
 We'll complete this activity using a text editor and the command line.
 
-Let's start with the all-time classic function, `Howdy Pardner`. To begin, let's create a file called `HowdyPardner.java` and save it.
+Let's start with the all-time classic function, `Howdy Pardner`. To begin, create a file called `HowdyPardner.java` and save it.
 
 All Java files must be defined as a class, so let's begin with a class definition. This class definition must match the name of the file, so we'll call ours `HowdyPardner`.
 
@@ -76,7 +76,9 @@ Finally, we name our function. In this case, the `main` function is absolutely r
 
 Inside the parentheses, you'll notice the function takes in one parameter: `String[] args`. `String` indicates the type, the array brackets tell the function to accept a list of strings, and the parameter is named `args` by convention. This array represents any command line arguments you pass when running the function, and for our purposes it will be empty.
 
-Phew, all that for Howdy Pardner? And we haven't even gotten to the one line of code that will actually **do** what we want: print "Howdy, Pardner!" to the console. How do we do that? At this point, I trust you to figure out that line for yourself through research (i.e., Google). Take a minute to do that now.
+Phew, all that for Howdy Pardner? And we haven't even gotten to the one line of code that will actually **do** what we want: Print "Howdy, Pardner!" to the console.
+
+How do we do that? At this point, I trust you to figure out that line for yourself through research (i.e., Google). Take a minute to do that now.
 
 <details>
 
@@ -96,7 +98,7 @@ Phew, all that for Howdy Pardner? And we haven't even gotten to the one line of 
 A quick note on comments. In Java, we have two options for writing comments:
 
 ```java
-//I'm a single-line comment. Just lil ol' me.
+// I'm a single-line comment. Just lil ol' me.
 /*
 	I'm a multi-line comment.
 	There are several of us.
@@ -104,7 +106,7 @@ A quick note on comments. In Java, we have two options for writing comments:
 */
 ```
 
-Jump back into `HowdyPardner.java` and comment your code to explain what the `class` definition means and what the `main` method does.
+Jump back into `HowdyPardner.java` and add comments to your code explaining what the `class` definition means and what the `main` method does.
 
 
 ## Code-Along: Getting Java to Run (10 mins)
@@ -125,15 +127,15 @@ This contrasts with what we did in JavaScript, where a file could be running in 
 
 JavaScript lets us get away with errors, while Java will enforce its rules before allowing us to run the code. After all, wouldn't it be better for a car to tell us our brakes are out and refuse to start, rather than letting us drive around without working brakes?
 
-> Fun fact: What we just described is the difference between **statically-typed** languages (like Java) and **dynamically-typed** languages (like JavaScript). We won't go into too much detail here, but now you have two more computer science terms to add to your toolbelt.
+> Fun fact: What we just described is the difference between **statically typed** languages (like Java) and **dynamically typed** languages (like JavaScript). We won't go into too much detail here, but now you have two more computer science terms to add to your tool belt.
 
 #### Step 2: Run
 
-When the file is successfully compiled, you should notice a new file with a `.class` extension has been created — this is our compiled class. Now, we can actually run the code with the command `java HowdyPardner`. (That's right — we can't run a file until it's compiled. A file with a `.java` extension won't run, but a compiled file with the `.class` extension will run.)
+When the file is successfully compiled, you should notice a new file with a `.class` extension has been created: This is our compiled class. Now, we can actually run the code with the command `java HowdyPardner`. (That's right — we can't run a file until it's compiled. A file with a `.java` extension won't run, but a compiled file with the `.class` extension will run.)
 
-When we start using the Eclipse IDE, we won't have to do any of this. The application will automatically compile our code when we save the file. And you can run the file by clicking one button. Thanks, abstraction!
+When we start using the Eclipse IDE, we won't have to do any of this. The application will automatically compile our code when we save the file, and you can run the file by clicking one button.
 
-## Variable Declarations (5 mins)
+## Variable Declaration (5 mins)
 
 To start writing our own functions, we'll have to declare variables at some point. 
 
@@ -152,14 +154,14 @@ We'll learn more about all of Java's different data types soon, but these are th
 - `String`: any combination of letters and words. The word "String" is a class, so it always begins with a capital letter.
 - `double`: a number with a decimal.
 
-Notice anything about how we write variables? That's right — it's in camel case.
+Notice anything about how we write variables? That's right — they're in camel case.
 
-Let's contrast that with how we defined the `HelloWorld` class. In Java, it's conventional for a class name to start each word with an uppercase letter (even the first word).
+Let's contrast that with how we defined the `HowdyPardner` class. In Java, it's conventional for a class name to start each word with an uppercase letter (even the first word).
 
 #### Independent Practice (10 mins)
 
 With a partner, take seven minutes to write these variables and print them to the console:
-- How many licks it takes to get to the center of a Tootsie pop.
+- How many licks it takes to get to the center of a Tootsie Pop.
 - Your home city and state.
 - The price of an ice cream cone from Mister Softee.
 
@@ -167,6 +169,5 @@ We'll have a few people demo what they did when they're done.
 
 ## Conclusion (5 mins)
 
-- Can someone explain the difference between compiling and running a Java program?
+- Can you explain the difference between compiling and running a Java program?
 - Without looking at your notes, can you explain the different parts of the `main` method?
-
