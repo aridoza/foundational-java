@@ -23,11 +23,11 @@ Take a moment to jot down a one-sentence definition of a computer. Then, get int
 
 A computer is a device that processes instructions — an instruction processor, more commonly known as a CPU or central processing unit.
 
-When you open an application on your computer, the machine is actually processing a series of instructions called a "computer program" that instructs the machine on what to display and how to respond to your input. This can't happen in isolation.
+When you open an application on your computer, the machine is actually processing a series of instructions called a computer program that instructs the machine on what to display and how to respond to your input. This can't happen in isolation.
 
-We need a way to enter a program, so that's why we have keyboards and mice. We need to display information, so that's why we have monitors and printers. We need a place to store these instructions, and any files for that matter, so that's why we have disks.
+We need a way to enter a program, which is why we have keyboards and mice. We need to display information, which is why we have monitors and printers. We need a place to store instructions and files, which is why we have disks.
 
-We also need a location to execute the instructions and store data, so that's why our computers have memory. We need a way to read and write to disk and to talk to other computers in our organization or across the World Wide Web, so that's why we have networks.
+We also need a location to execute the instructions and store data, which is why our computers have memory. We need a way to read and write to disk, and talk to other computers in our organization or across the World Wide Web, which is why we have networks.
 
 Ultimately, every computer must have an operating system, which is just a fancy name for a computer program that manages all the accessories, allocates time for processing, manages disk accesses, coordinates multiple threads to process concurrently, and all the other millions of operations that occur every single second your computer is functioning.
 
@@ -44,17 +44,17 @@ Unfortunately, computer data is nothing more than a sequence of zeros and ones. 
 
 ### What Is a Compiler?
 
-Computer languages consist of natural language commands that closely mimic the way we speak and think. Once a computer program is written, it's handed off to a **compiler**, another program that converts computer programs into machine code instructions — the sequences of zeros and ones that instruct the computer what to do.
+Computer programming languages consist of natural language commands that closely mimic the way we speak and think. Once a computer program is written, it's handed off to a **compiler**, another program that converts computer programs into machine code instructions — the sequences of zeros and ones that instruct the computer what to do.
 
 Compiled languages include C, C++, and Go (also known as Golang).
 
-Compilers produce the fastest code possible without actually writing the machine code. However, depending on the language and size of the program, it could take some time to compile. Additionally, the code needs to be compiled for each target platform, so if you want to run the same program in Windows and Linux, you generally have to compile it for each platform.
+Compilers produce the fastest code possible without actually writing the machine code. However, depending on the language and size of the program, it could take some time to compile. Additionally, it needs to be compiled for each target platform, so if you want to run the same program in Windows and Linux, you generally have to compile it for each platform.
 
 ### What Is an Interpreter?
 
-On the other side of the spectrum are interpreted languages, such as JavaScript, Ruby, and Python. These don't generally compile down to machine code; rather, they execute within an interpreter "shell," a program that "interprets" the natural language programs and executes the corresponding instructions.
+On the other side of the spectrum are interpreted languages such as JavaScript, Ruby, and Python. These don't generally compile down to machine code; rather, they execute within an interpreter "shell," a program that interprets the natural language programs and executes the corresponding instructions.
 
-Interpreted languages would generally execute slower than compiled languages, but there's no compilation step, so you can enter code and see it evaluated in real-time, or as you type it. Besides the slower execution speed, interpreted languages tend to be "dynamically typed," which makes it difficult for tools such as your IDE (integrated development environment) to catch errors in the code.
+Interpreted languages would generally execute slower than compiled languages, but there's no compilation step, so you can enter code and see it evaluated in real-time or as you type it. Besides the slower execution speed, interpreted languages tend to be dynamically typed, which makes it difficult for tools such as your IDE (integrated development environment) to catch errors in the code.
 
 ### JVM Languages
 
@@ -62,11 +62,11 @@ There's a happy medium between compiled and interpreted languages, and that's th
 
 These languages are compiled into an intermediate form called "bytecode," which is similar to the machine code of most platforms. In Java, the bytecode executes in an interpreter called a JVM (Java Virtual Machine). Such languages are "write once, run anywhere" because they don't generally need to be compiled for each platform.
 
-In the case of Java, there's also a JIT (just in time) compiler that inspects the code as it executes. Based on those inspections, it makes assumptions that allow it to compile segments of the code directly to machine code, making it blazing fast.
+In the case of Java, there's also a JIT (just in time) compiler that inspects the code as it executes. Based on those inspections, it makes assumptions that allow it to compile segments of code directly to machine code, making it blazing fast.
 
 ### What's the Big Deal About Java?
 
-Java was originally designed as an embedded language, intended to control devices like refrigerators and clocks. Since it was platform independent, it took off more as a service-side development environment for building client-server tools. Years later, Java found its way back to its original roots and became an embedded language, popular in IoT (internet of things) devices.
+Java was originally designed as an embedded language, intended to control devices like refrigerators and clocks. Because it was platform independent, it took off more as a server-side development environment for building client-server tools. Years later, Java found its way back to its original roots and became an embedded language, popular in IoT (internet of things) devices.
 
 Here are a few reasons why Java is the most popular language for server-side development:
 
