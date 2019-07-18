@@ -10,31 +10,31 @@ creator:
 
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Debugging Fundamentals in Java
 
-### LEARNING OBJECTIVES
-*After this lesson, you will be able to:*
-* Given sample code, set a breakpoint and look at the current state
-* Given a stack trace, identify which lines are within your application
-* Describe what a stack trace is saying
+### Learning Objectives
+At the end of this lesson, you'll be able to:
+* Set a breakpoint and look at the current state given sample code.
+* Identify which lines are within your application given a stack trace.
+* Describe what a stack trace is saying.
 
-### LESSON GUIDE
+### Lesson Guide
 
-| TIMING  | TYPE  | TOPIC  |
+| Timing  | Type  | Topic  |
 |:-:|---|---|
-| 5 min  | [Opening](#opening-5-mins)  | Discuss lesson objectives |
+| 5 min  | [Opening](#opening-5-mins)  | Learning Objectives |
 | 10 min  | [Introduction](#introduction-stack-trace-10-mins)  | Stack Trace |
 | 5 min  | [Demo](#demo-stack-trace-5-mins)  | Stack Trace |
 | 10 min  | [Introduction](#introduction-breakpoints-10-mins)  | Breakpoints |
 | 10 min  | [Demo](#demo-breakpoints-10-mins)  | Breakpoints |
 | 10 min  | [Independent Practice](#independent-practice-bug-fixing-10-mins)  | Bug Fixing |
-| 5 min  | [Conclusion](#conclusion-5-mins)  | Review / Recap |
+| 5 min  | [Conclusion](#conclusion-5-mins)  | Review and Recap |
 
 ## Opening (5 mins)
 
-Even the best programmers make mistakes when writing code, and a large amount of development time is often spent fixing mistakes in code, also known as bugs. Therefore, this is called debugging! There are many tools that can be used for debugging, but today we will be concentrating on **reading a stack trace** and **using breakpoints**.
+Even the best programmers make mistakes when writing code, and a large amount of development time is often spent fixing mistakes in code, also known as bugs. This is called debugging. Many tools can be used for debugging, but today, we'll be concentrating on **reading a stack trace** and **using breakpoints**.
 
 ## Introduction: Stack Trace (10 mins)
 
-Making mistakes is a natural part of programming, so an absolutely crucial skill set to have is the ability to debug your code. The first thing we are going to look at is the stack trace. You have probably seen the a stack trace in the past few days without realizing it.
+Making mistakes is a natural part of programming, so an absolutely crucial skill to have is the ability to debug your code. The first thing we'll be looking at is the stack trace. You've probably seen a stack trace in the past few days without realizing it.
 
 Let's take the following example. Can you spot the problem?
 
@@ -45,7 +45,7 @@ public class Main {
         printSomething(null);
     }
 
-    public static void printSomething(String s){
+    public static void printSomething(String s) {
         System.out.println(s.length());
     }
 }
@@ -64,17 +64,17 @@ Exception in thread "main" java.lang.NullPointerException
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
 ```
 
-While this might seem intimidating at first, you really only need to focus on a few key parts. First is the very top line, it tells you what the error actually was. In this case, we had a Null Pointer Exception, meaning we tried to call a method on a variable that was null.
+While this might seem intimidating at first, you really only need to focus on a few key parts. First is the top line, which tells you what the error actually was. In this case, we had a null pointer exception, meaning we tried to call a method on a variable that was null.
 
-The second thing to concentrate on are the lines that have our file name(s) in it, Main.java. This is called the Stack Trace because it shows the path of execution for your program. Since the errors in the code are in the files we write, those are the lines we concentrate on. The higher up in the stack trace, the more recent the execution.
+Next, concentrate on the lines with your file name(s) in it (`Main.java` in this case). This is called the stack trace because it shows the path of execution for your program. Because the errors in the code are in the files we wrote, those are the lines we focus on. The higher up in the stack trace, the more recent the execution.
 
-The number after the colon next to the file name is the line number the error occurred on. In our example, the error was in Main.java on line 11.
+The number after the colon next to the file name is the line number where the error occurred. In our example, the error was in `Main.java` on line 11.
 
 > Check: What does the second line of the stack trace after the `printSomething` call mean?
 
 ## Demo: Stack Trace (5 mins)
 
-Let's take a look at another example. Can you find the error in *here*?
+Let's take a look at another example. Can you find the error?
 
 ```java
 public class Main {
@@ -85,7 +85,7 @@ public class Main {
         printSomethingArray(arr);
     }
 
-    public static void printSomethingArray(int[] arr){
+    public static void printSomethingArray(int[] arr) {
         System.out.println(arr[0]);
     }
 }
@@ -106,45 +106,44 @@ Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
 
 > Check: Who can explain what's going on here?
 
-The two errors we just saw, NullPointerException and ArrayIndexOutOfBoundsException are very common, so they are something you will probably see come up in your stack traces.
+The two errors we just saw, `NullPointerException` and `ArrayIndexOutOfBoundsException`, are common, so they're something you'll probably see in your stack traces.
 
-> Check: How could we avoid the ArrayIndexOutOfBoundsException?
+> Check: How could we avoid the `ArrayIndexOutOfBoundsException`?
 
 ## Introduction: Breakpoints (10 mins)
 
-The second topic we are going to cover today is the Breakpoint. In general terms, a breakpoint is a position in the code you want to halt execution at.
+The second topic we'll be covering today is the breakpoint. In general terms, a breakpoint is a position in the code you want to halt execution at.
 
 > Check: Why would we want to do this?
 
-Adding a breakpoint allows us to do a few very basic things:
-- Trace execution of the code, step by step
-- Inspect the value of all variables in scope
+Adding a breakpoint allows you to:
+- Trace execution of the code, step by step.
+- Inspect the value of all variables in scope.
 
-That second point can make debugging your code much faster. Instead of adding a lot of print statements to monitor your variables, you can just stop your code in place!
+That second point can make debugging your code much faster. Instead of adding a lot of print statements to monitor your variables, you can just stop your code in place.
 
 > Check: Why are breakpoints cleaner for debugging than print statements?
 
 ## Demo: Breakpoints (10 mins)
 
-Let's continue with the array example from the previous demo. Enabling breakpoints in IntelliJ is very simple. Go ahead and click the margin next to line 13 where we access index 0 in the array.
+Let's continue with the array example from the previous demo. Enabling breakpoints in IntelliJ is simple. Go ahead and click the margin next to line 13 where we access index 0 in the array.
 
-Next, you need to run the program in debugging mode. Instead of pressing the Run icon like normal, you need to press the Debug button.
+Next, you need to run the program in debugging mode. Instead of pressing the "Run" icon like normal, you need to press the "Debug" button.
 
 The program should run, but a new window will pop up on the bottom, and you should see your code change slightly.
 
-The console now shows us the values of the variables, as well as any errors that might show up. Also, in the actual code it shows us what the values of the variables are!
+The console now shows us the values of the variables, as well as any errors that might show up. Also, in the actual code, it shows us what the values of the variables are.
 
-Let's add one more breakpoint in main where we call the printSomethingArray method. If we initialize the array with a few values and re-run the program, you should see these values change, and the error should go away.
+Let's add one more breakpoint in `main` where we call the `printSomethingArray` method. If we initialize the array with a few values and re-run the program, you should see these values change, and the error should go away.
 
 > Check: How can you use breakpoints and a stack trace together?
 
 ## Independent Practice: Bug Fixing (10 mins)
 
-You have been provided the starter code for [a simple calculator](starter-code). Given that the user enters two numbers, a result is shown depending on what choice the user made from the main menu.
+You've been provided the starter code for [a simple calculator](starter-code). Given the user enters two numbers, a result is shown depending on what choice the user made from the main menu.
 
-However, it is broken in certain cases. Sometimes it behaves unexpectedly or throws errors.
+However, it's broken in certain cases. Sometimes it behaves unexpectedly or throws errors.
 
 ## Conclusion (5 mins)
 
-Learning to debug well is a crucial skill, and what we covered today is a great way to start. What we learned today can apply to almost any programming language you might learn in the future.
-
+Learning to debug well is a crucial skill, and what we covered today is a great way to start. You can apply it to almost any programming language you might learn in the future.
