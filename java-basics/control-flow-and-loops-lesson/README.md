@@ -16,7 +16,7 @@ At the end of this lesson, you'll be able to:
 - Use if-else conditionals to control program flow based on boolean conditions.
 - Use switch conditionals to control program flow based on explicit conditions.
 - Use comparison operators to evaluate and compare statements.
-- Use boolean logic (!, &&, ||) to combine and manipulate conditionals.
+- Use boolean logic to combine and manipulate conditionals.
 - Loop over a code block one or more times.
 
 ### Lesson Guide
@@ -26,7 +26,7 @@ At the end of this lesson, you'll be able to:
 | 5 min  | [Opening](#opening-5-mins)  | Learning Objectives |
 | 10 min  | [Introduction](#introduction-logical-operators-and-control-flow-10-mins)  | Logical Operators and Control Flow |
 | 10 min  | [Demo](#demo-conditional-statements-10-mins)  | Conditional Statements |
-| 15 min  | [Guided Practice](#guided-practice-boolean-or-logical-operators-15-mins)  | Boolean/Logical Operators |
+| 15 min  | [Guided Practice](#guided-practice-boolean-or-logical-operators-15-mins)  | Boolean or Logical Operators |
 | 10 min  | [Demo](#demo-comparison-operators-10-mins)  | Comparison Operators |
 | 10 min  | [Introduction](#introduction-switch-statement-10-mins)  | Switch Statement |
 | 15 min  | [Demo](#demo-loops-15-mins)  | Loops |
@@ -35,13 +35,15 @@ At the end of this lesson, you'll be able to:
 
 ## Opening (5 mins)
 
-From culttt.com: "Control flow structures are an important aspect of programming languages that allow your code to take certain actions based on a variety of scenarios. Control flow is a fundamental concept in programming that allows you to dictate how your code runs under different conditions or until a certain condition is met."
+> Control flow structures are an important aspect of programming languages that allow your code to take certain actions based on a variety of scenarios. Control flow is a fundamental concept in programming that allows you to dictate how your code runs under different conditions or until a certain condition is met.
+
+*Text above from culttt.com*
 
 Control flow is a concept that's consistent across most programming languages. The components of control flow (loops, if-else conditionals, switch statements, comparison operators) are also universal principles.
 
 The way the different control flow components are implemented is what varies from language to language. Let's see how it's done in Java.
 
-Java supports a compact set of statements, specifically control flow statements, that you can use to incorporate interactivity in your application.
+Java supports a compact set of statements — specifically control flow statements — you can use to incorporate interactivity in your application.
 
 ## Introduction: Logical Operators and Control Flow (10 mins)
 
@@ -137,7 +139,7 @@ System.out.println(name); //=> "kittens!!"
 
 #### Ternary Operator
 
-Java has a ternary operator for conditional expressions. You can think about the ternary operator as a concise if-else in one line:
+Java has a ternary operator for conditional expressions. You can think of the ternary operator as a concise if-else in one line:
 
 ```java
 int age = 12;
@@ -147,7 +149,7 @@ String allowed = (age > 18) ? "yes" : "no";
 System.out.println(allowed); //=> "no"
 ```
 
-#### Truth-y & False-y
+#### Truth or False
 
 It's important to know that all of the following become `false` when converted to a `Boolean`:
 
@@ -166,7 +168,7 @@ Boolean b = new Boolean("");
 System.out.println(b); //=> false
 ```
 
-This can be helpful when checking if conditions exist, are undefined, or if variables don't hold value.
+This can be helpful when checking if conditions exist or are undefined, or if variables don't hold value.
 
 ## Guided Practice: Boolean or Logical Operators (15 mins)
 
@@ -182,7 +184,7 @@ A third unary operator requires only one value:
 
 #### `&&` (AND)
 
-The `&&` operator requires both values to the left and right of the operator to be `true` to evaluate the entire statement as `true`:
+The `&&` operator requires both values to its left and right to be `true` to evaluate the entire statement as `true`:
 
 ```java
 boolean result = false;
@@ -331,7 +333,7 @@ boolean withSigns = (bl+ue == blue);            //=> false
 boolean withWords = (bl+ue).equals(blue);       //=> true
 ```
 
-Why isn't `withSigns` true? The output looks the same.
+Why isn't `withSigns` true when the output looks the same?
 
 Objects and arrays are complex collections of values, and when we refer to them, we're actually referencing where they live in memory. That's why we say objects are **passed by reference**, while `int` and `float` are **passed by value**.
 
@@ -351,7 +353,7 @@ There's also an `!=` operator, which is the inverse of `==`.
 
 ## Introduction: Switch Statement (10 mins)
 
-The switch statement can be used for multiple branches based on a number or string:
+The switch statement can be used for multiple branches based on a number or `String`:
 
 ```java
   String food = "apple";
@@ -373,9 +375,9 @@ In this case, the `switch` statement compares `food` to each of the cases (`pear
 
 The default clause is optional.
 
-**Note: Breaks are important.** If you don't put a break statement, the expression will continue to be evaluated for the next cases. This might cause unintended consequences.
+**Note: Breaks are important.** If you don't put a `break` statement, the expression will continue to be evaluated for the next cases. This might cause unintended consequences.
 
-For example, if you eliminate the break statements:
+For example, if you eliminate the `break` statements:
 
 ```java
   String food = "apple";
@@ -405,7 +407,7 @@ I like apples
 No favorite
 ```
 
-This is not exactly what we had intended.
+This isn't what we intended.
 
 ## Demo: Loops (15 mins)
 
@@ -498,4 +500,4 @@ for (int i = 1; i < 101; i++) {
 
 ## Conclusion (5 mins)
 
-These are some of the foundational tools you'll use in many of your applications. You'll probably need to refresh yourself on the exact syntax a few times before you memorize it. But it's important to remember these core control flow concepts because they'll come up in almost every programming language you'll encounter. The Java doc on [control flow](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html) is a helpful reference.
+These are some of the foundational tools you'll use in many of your applications. You'll probably need to refresh yourself on the exact syntax a few times before you memorize it. But it's important to remember these core control flow concepts because they'll come up in almost every programming language you'll encounter. The Java doc on [control flow statements](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html) is a helpful reference.
