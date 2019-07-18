@@ -35,9 +35,9 @@ Write code that implements various functions, following the requirements in the 
 
 - Write a function `findLongestWord` that takes an array of words and returns the length of the longest one.
 
-- Write a function `filterLongWords` that takes an array of words and a number `i` and returns the array of words longer than `i` characters long.
+- Write a function `filterLongWords` that takes an array of words and a number `i` and returns the word(s) in the array longer than `i` characters long.
 
-- Create a `Car` class with the following member variables: `mTopSpeed` and `mNumberOfDoors`. In that class, write a constructor method that assigns random values to the member variables. Also, write a method that prints out the line "Your car has the top speed of ___ mph, and for some reason has ____ doors."
+- Create a `Car` class with the following member variables: `mTopSpeed` and `mNumberOfDoors`. In that class, write a constructor method that assigns random values to the member variables. Also, write a method that prints out the line "Your car has a top speed of ___ mph, and for some reason has ____ doors."
 
 #### Starter Code
 
