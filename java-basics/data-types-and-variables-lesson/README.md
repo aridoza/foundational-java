@@ -13,9 +13,9 @@ creator:
 
 ### Learning Objectives
 At the end of this lesson, you'll be able to:
-- Identify and describe the Java data types and use cases.
-- Describe the different types of variables (local, instance, constant) and when to use them.
-- Use class methods to manipulate data in the Math and String classes.
+- Identify and describe Java data types and their use cases.
+- Describe the different types of variables and when to use them.
+- Use class methods to manipulate data in the `Math` and `String` classes.
 - Describe the difference between NaN and null.
 
 ---
@@ -24,19 +24,19 @@ At the end of this lesson, you'll be able to:
 
 | Timing  | Type  | Topic  |
 |:-:|---|---|
-| 5 min  | [Opening](#opening-5-min)  | Learning Objectives |
+| 5 min  | [Opening](#opening-5-mins)  | Learning Objectives |
 | 10 min  | [Introduction](#introduction-data-types-in-java-10-mins)  | Data Types in Java |
-| 15 min  | [Demo](#demo-lets-start-with-numbers-15-mins)  | Let's Start With numbers |
+| 15 min  | [Demo](#demo-lets-start-with-numbers-15-mins)  | Let's Start With Numbers |
 | 10 min  | [Demo](#demo-using-special-number-operators-10-mins)  | Using Special Number Operators |
 | 10 min  | [Introduction](#introduction-primitives-vs-objects-10-mins)  | Primitives vs. Objects |
 | 15 min  | [Demo](#demo-creating-a-new-string-15-mins)  | Creating a New String |
 | 10 min  | [Demo](#demo-converting-between-data-types-10-mins)  | Converting Between Data Types |
-| 15 min  | [Independent Practice](#independent-practice-practice-15-minutes)  | Practice |
+| 15 min  | [Independent Practice](#independent-practice-15-mins)  | Practice |
 | 5 min  | [Conclusion](#conclusion-5-mins)  | Review and Recap |
 
 <a name="opening"></a>
 
-## Opening (5 min)
+## Opening (5 mins)
 
 In programming, we need a way to store information while our programs are running. This could be anything from names and numbers to dates and many other things, which are all known as **data types**. These data types are stored in **variables**, just like in algebra class. Today, we'll be exploring how data types and variables are the basic building blocks of programming and how we use them to store information in our programs.
 
@@ -57,7 +57,7 @@ Data types are similar across different languages, including English.
 |Category    | Data Type                     | Description          | Example |
 |------------|------------------------------|----------------------|---------|
 |True or False  | `boolean`, `Boolean`                   | Represents either true or false                               |true, false|
-|Integers    | `short`, `int`, `Integer`, `long`, `Long`    | Whole numbers, with no delimiter. Can optionally have underscores to make large numbers easier to read	| 42, 1024, 1_000_000 |
+|Integers    | `short`, `int`, `Integer`, `long`, `Long`    | Whole numbers, with no delimiter. Can optionally have underscores to make large numbers easier to read.	| 42, 1024, 1_000_000 |
 |Decimals    | `float`, `Float`, `double`, `Double`       | Decimals, with no delimiter                                   | 42.123, 2.5 |
 |Characters  | `char`                               | Single character surrounded by single quotation marks                 | 'a', 'A'|
 |Strings     | `String`                             | Single words or sentences surrounded by double quotation marks        | "lots of kittens", "a lazy lizard"    |                                                                | true, false
@@ -76,7 +76,7 @@ We'll elaborate on all of the categories on the board, and show you some helper 
 
 <!-- Instructor note: As you code the following examples, ask the students the questions below. If they guess correctly, ask them to explain why.-->
 
-First off, let's talk a bit about those numeric data types.
+First off, let's talk about numeric data types.
 
 What do you expect to be printed to the console?
 
@@ -94,9 +94,9 @@ System.out.println("num2, type int = 5/2 = " + num2);
 => num2 = 2
 ```
 
-But why is `num2` not 2.5? Well, in low-level languages (unlike JavaScript, Ruby, or PHP), numbers are strictly typed, and a type is either an integer or decimal. An `int` stores an integer, not a decimal, as demonstrated in the previous function.
+But why is `num2` not 2.5? In low-level languages (unlike JavaScript, Ruby, or PHP), numbers are strictly typed, and a type is either an integer or a decimal. An `int` stores an integer, not a decimal, as demonstrated in the previous function.
 
-So, what data type would we use if we wanted to assign a variable to a decimal?
+So what data type would we use if we wanted to assign a variable to a decimal?
 
 How about `float`?
 
@@ -108,7 +108,7 @@ System.out.println("num3, type float = 5/2 = " + num3);
 
 > Check: That didn't work quite as expected. Can anyone guess why?
 
-Because both 5 and 2 are automatically assigned data type `int`, when the calculation is done, the answer is also an `int`. We must tell the computer that the divisors are of a decimal type, not an integer type.
+Because both 5 and 2 are automatically assigned data type `int`, when the calculation is done, the answer is also an `int`. We must tell the computer that both the dividend and divisor are of a decimal type, not an integer type.
 
 ```java
 float num4 = 5f / 2f;
@@ -145,9 +145,9 @@ The same data type differentiation exists in integers, between `short`, `int`, a
 
 | Name  | Width in Bits | Range    |
 |-------|---------------|----------|
-| `short` | 16           | -32,768 to 32,768                  |
-| `int`   | 32           | -(2^31) to 2^31 (approx 2 billion) |
-| `long`  | 64           | -(2^63) to 2^63                    |
+| `short` | 16           | -32,768 to 32,767                  |
+| `int`   | 32           | -(2^31) to (2^31)-1 (approx. 2 billion) |
+| `long`  | 64           | -(2^63) to (2^63)-1                    |
 
 `int` will cover almost all of your integer needs.
 
@@ -206,9 +206,9 @@ int range = Math.abs(max - min) + 1;
 
 ## Introduction: Primitives vs. Objects (10 mins)
 
-Before we get into Strings, let's take a step back. Have you noticed that all the data types we've used so far begin with a lowercase letter? What do you notice about the `String` data type?
+Before we get into Strings, let's take a step back. Have you noticed all the data types we've used so far begin with a lowercase letter? What do you notice about the `String` data type? Do you notice it begins with a capital letter?
 
-What's the difference? Do you notice it begins with a capital letter? This is a naming convention used to distinguish between primitive and object data types. Primitive types always start with a lowercase letter (e.g., `int`, `double`, `boolean`), while classes start with an uppercase letter (e.g., `String`, `Integer`).
+This is a naming convention used to distinguish between primitive and object data types. Primitive types always start with a lowercase letter (e.g., `int`, `double`, `boolean`), while objects start with an uppercase letter (e.g., `String`, `Integer`).
 
 **Primitive data types** are **pass by value**. Using a primitive as a parameter is like writing a number on a Post-it note and handing it off. `int a = 1;` is a **copy** of the numeric data, not a reference to where the data is stored.
 
@@ -216,7 +216,9 @@ What's the difference? Do you notice it begins with a capital letter? This is a 
 
 In other words, using an object is like using a Dewey Decimal System in the library. A variable assigned to an object is given a number that references where a book can be found in the computer's library but is not a copy of the book itself. `Person a = new Person(Nancy, Drew);` is a reference to the data object that contains all info and methods in the class of that object.
 
-> Java naming convention tips: Classes should start with a capital letter (e.g., `String`, `Integer`), primitives always start with a lowercase letter (e.g., `int`, `boolean`), variables and method names start with a lowercase letter (e.g., `main()`), and multi-word names are camel case (e.g., `vannaWhite`). Class constants (i.e., `final` instance and static variables) are generally all capitalized, with words separated by underscores (e.g., `private final Object MY_MUTEX`).
+#### Java Naming Convention Tips
+
+Classes and objects should start with a capital letter (e.g., `String`, `Integer`), primitives always start with a lowercase letter (e.g., `int`, `boolean`), variables and method names start with a lowercase letter (e.g., `main()`), and multi-word names are camel case (e.g., `vannaWhite`). Class constants (i.e., `final` instance and static variables) are generally all capitalized, with words separated by underscores (e.g., `private final Object MY_MUTEX`).
 
 > Discuss with the person next to you: What does a primitive contain? What does an object contain? What's one easy way to tell the difference between an object and a primitive data type? Be ready to share your answers.
 
@@ -244,14 +246,14 @@ char data[] = {'a', 'b', 'c'};
 
 Strings are a special type of object.
 
-Try this with me. You can instantiate (or create an instance) of a `String` in a few ways:
+Try this with me. You can instantiate (or create an instance) of a `String` like this:
 
 ``` java
 // variable can be assigned like a primitive
 String a = "I'm a string."
 ```
 
-Which is really short for:
+This is short for:
 
 ``` java
 // variable assigned like an object
@@ -303,7 +305,7 @@ String twoStringsTogether = "Hello" + " World";
 => "Hello World"
 ```
 
-##### A Special Note on Equality Among Strings:
+##### A Special Note on Equality Among Strings
 
 What if you want to compare two strings?
 
@@ -313,7 +315,7 @@ boolean withSign = (blue == "blue");            //=> true
 boolean withWords = (blue).equals("blue");      //=> true
 ```
 
-Do you know which one of these would be preferred? Well, let's do another example to show you which and why:
+Do you know which one of these would be preferred? Let's do another example to show you which and why:
 
 ```java
 String blue = "blue";
@@ -324,9 +326,9 @@ boolean withSigns = (bl+ue == blue);            //=> false
 boolean withWords = (bl+ue).equals(blue);       //=> true
 ```
 
-Why isn't `withSigns` true? The output looks the same. Remember, `String` is actually an object, and objects are **passed by reference.**
+Why isn't `withSigns` true when the output looks the same? Remember, `String` is actually an object, and objects are **passed by reference.**
 
-`==` compares the place where the object was stored on the computer to see whether they're the same. `String blue` contains a reference to where it's stored on the computer, and that's different from where `String bl` is stored. `equals`, on the other hand, is a method that can be called on an instance (`str1`) of a `String` object and compares whether the `char` arrays in each `String` are the same, not whether the references are the same.
+`==` compares the place where the object was stored on the computer to see whether they're the same. `String blue` contains a reference to where it's stored on the computer, and that's different from where `String bl` is stored. `equals`, on the other hand, is a method that can be called on an instance of a `String` object and compares whether the `char` arrays in each `String` are the same, not whether the references are the same.
 
 In short, use `equals` when comparing strings.
 
@@ -354,7 +356,7 @@ int b = (int) a;
 System.out.println(b);
 ```
 
-While that's useful for numbers, to cast successfully, a variable must be an **instance of** the second object.
+While that's useful for numbers, to cast successfully, a variable must be an **instance** of the second object.
 
 What do you think would happen if you tried to cast a `String` to an `int`? There's a different way to convert strings to numbers.
 
@@ -391,7 +393,7 @@ A null value is an empty value. Taken from a Stack Overflow post:
 
 <a name="ind-practice"></a>
 
-## Independent Practice (15 minutes)
+## Independent Practice (15 mins)
 <!-- Instructor note: This can be a pair programming activity or done independently.-->
 
 Grab the starter code found in `VariablePractice` and complete all tasks. We'll go over the answers in 12 minutes.
@@ -405,6 +407,6 @@ Grab the starter code found in `VariablePractice` and complete all tasks. We'll 
 - Identify the different types of data.
 - What type of data do you think is passed as a web request?
 
-### ADDITIONAL RESOURCES
+### Additional Resources
 - [Oracle Java Docs on Primitive Data Types](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html)
 - [Oracle Java Docs on Math Object](https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html)
