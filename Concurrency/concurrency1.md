@@ -45,10 +45,10 @@ However today's computers have powers far beyond what we have seen or used thus 
 
 Why would we ever need to have multiple threads performing concurrent work?
 
-Consider a web application with dozens (or millions!) of concurrent users. We would not expect each user to wait in line until the previous user is done; rather we 
-want to handle these requests _concurrently_.
+Consider a web application with dozens (or millions!) of concurrent users. Imagine if you were a user of this website perhaps you want to download a movie or purchase a new gadget. We would certainly not want to wait in line until all of the previous users are done; rather we 
+expect the web application to handle these requests _concurrently_.
 
-Or let's say our application requires a lot of processing such as database queries, file reads and writes, and calling other services over a network, where there's lots of I/O. Do we 
+Or let's say our application requires a lot of processing such as database queries, file reads and writes, or calling other services over a network, where there's lots of I/O. Do we 
 want each outgoing request to wait for the other to return before the next one starts? Wouldn't it be better to have all of our requests process _concurrently_?
 
 For these reasons, the designers of Java made the decision to include concurrency in the core JDK, making it perhaps the first language to do so.
@@ -618,3 +618,34 @@ Incidentally, notice the keyword `volatile`, which is used before the declaratio
 This is a deep concept. The JVM will generally make a local copy of variables that are used by each thread, and the thread has the right to assume that the value will not be changed by any other thread.
 
 If one thread modifies that variable, due to a JVM optimization, Java makes no guarantees that that the change will be seen by another thread, unless we mark the variable `volatile`, which tells the JVM to read the value of the variable on every access, instead of using the thread's local copy. The reason this is done is an optimization because accessing memory by threads across CPUs and cores can be a relatively slow operation.
+
+## Concurrency considerations
+Reasoning about concurrency is hard, and it is very easy to fall into traps like the dreaded deadlock or livelock.
+
+Deadlock occurs when some thread #1 holds some lock, say Lock-A, and another thread #2 is holding some other lock, say Lock-B. That's not so bad... yet! But now let's say thread #1 tries to acquire Lock-B at around the same time thread #2 tries to acquire Lock-A. Neither one can ever succeed, because each will wait for the other before continuing.
+
+
+## Dining Philosophers Problem
+This is illustrated humorously (if not poignantly) by the class "Dining Philosophers" problem.
+
+Here are the rules
+![](resources/dining-philosophers.png) 
+<!-- borrowed from https://www.slideshare.net/YashMittal3/dining-philosophers-problem -->
+
+Now, a naive solution might say each philopsopher should pick up the fork on their left, and then the one on the right. However what would happen if they all start at the same exact time. So each will be waiting forever for the right fork. That's "deadlock" - the application just stops and waits forever.
+
+Let's say they apply an additional strategy - if we don't receive a fork after one  minute, we will put down, wait 10 seconds, and try again. Well that can also fail, if they all put down their forks at the same time, then when they start again they will be in the same boat. That's "livelock" - the application is moving, but it can't proceed.
+
+There are many solutions to this. For example, you can introduce an arbiter - a waiter. In order to pick up the forks, a philosopher must ask permission of the waiter. The waiter gives permission to only one philosopher at a time until the philosopher has picked up both of their forks. Putting down a fork is always allowed. The waiter can be implemented as a mutex. 
+ 
+ You can find more solutions on [Wikipedia](https://en.wikipedia.org/wiki/Dining_philosophers_problem#Resource_hierarchy_solution).
+
+For our purposes, let's just keep in mind that if you're holding a lock on an object, and try to grab a lock on a different object, you are setting up a potential deadlock. This can happen if you call a synchronized method on object #1, and that method calls another synchronized method on object #2. If at the same time another thread is in another synchronized method on object #2, and tries to enter a method that is synchronized on object #1, a deadlock will occur. This is also known as a "Deadly Embrace":   
+ ![](resources/deadly-embrace.png)
+ 
+ Perhaps setting a random timeout would alleviate the situation, but you cannot set a timeout on a synchronized block.  However there are higher lever Java locks, such as ReentrantLock, that will forfeit the lock after a specified (possibly random) timeout. It's a deep an interesting problem, and I encourage you to learn more about it on your own. 
+ 
+ The classic books [Concurrent Programming in Java](https://www.amazon.com/Concurrent-Programming-Java%C2%99-Principles-Pattern/dp/0201310090/ref=asc_df_0201310090/) by Doug Lea (more theoretical), and [Java Concurrency in Practice](https://www.amazon.com/gp/product/0321349601/ref=dbs_a_def_rwt_bibl_vppi_i0) by Brian Goetz et.al. (more practical) cover these and many other concurrency patterns in depth and are highly recommended. 
+
+
+
