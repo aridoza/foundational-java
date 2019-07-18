@@ -30,7 +30,7 @@ At the end of this lesson, you'll be able to:
 
 ## Opening (5 mins)
 
-Even the best programmers make mistakes when writing code, and a large amount of development time is often spent fixing mistakes in code, also known as bugs. This is called debugging. Many tools can be used for debugging, but today, we'll be concentrating on **reading a stack trace** and **using breakpoints**.
+Even the best programmers make mistakes when writing code, and a large amount of development time is often spent fixing mistakes in code, also known as bugs. The process of fixing bugs is called debugging. Many tools can be used for debugging, but today, we'll be concentrating on **reading a stack trace** and **using breakpoints**.
 
 ## Introduction: Stack Trace (10 mins)
 
@@ -64,9 +64,9 @@ Exception in thread "main" java.lang.NullPointerException
 	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:144)
 ```
 
-While this might seem intimidating at first, you really only need to focus on a few key parts. First is the top line, which tells you what the error actually was. In this case, we had a null pointer exception, meaning we tried to call a method on a variable that was null.
+While this might seem intimidating, you only need to focus on a few key parts. First is the top line, which tells you what the error actually was. In this case, we had a `NullPointerException`, meaning we tried to call a method on a variable that was null.
 
-Next, concentrate on the lines with your file name(s) in it (`Main.java` in this case). This is called the stack trace because it shows the path of execution for your program. Because the errors in the code are in the files we wrote, those are the lines we focus on. The higher up in the stack trace, the more recent the execution.
+Next, concentrate on the lines with your file name (`Main.java` in this case) in it. This is called the stack trace; it shows the path of execution for your program. Because the errors in the code are in the files we wrote, those are the lines we focus on. The higher up in the stack trace, the more recent the execution.
 
 The number after the colon next to the file name is the line number where the error occurred. In our example, the error was in `Main.java` on line 11.
 
@@ -91,7 +91,7 @@ public class Main {
 }
 ```
 
-If we run this code, we get the following error.
+If we run this code, we get the following error:
 
 ```
 Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 0
@@ -134,7 +134,7 @@ The program should run, but a new window will pop up on the bottom, and you shou
 
 The console now shows us the values of the variables, as well as any errors that might show up. Also, in the actual code, it shows us what the values of the variables are.
 
-Let's add one more breakpoint in `main` where we call the `printSomethingArray` method. If we initialize the array with a few values and re-run the program, you should see these values change, and the error should go away.
+Let's add one more breakpoint in `main` where we call the `printSomethingArray` method. If we initialize the array with a few values and rerun the program, we should see these values change, and the error should go away.
 
 > Check: How can you use breakpoints and a stack trace together?
 
