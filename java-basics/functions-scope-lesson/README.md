@@ -32,7 +32,7 @@ At the end of this lesson, you'll be able to:
 
 ## Opening (5 mins)
 
-We previously covered variables and data types, two important building blocks of all programming languages. Today, we'll learn about two more topics: functions and scope. Functions are reusable chunks of code that complete some task, and scope is defining where the variables actually have relevance in your program.
+We previously covered variables and data types, two important building blocks of all programming languages. Today, we'll learn about two more topics: functions and scope. Functions are reusable chunks of code that complete some task, while scope defines where the variables actually have relevance in your program.
 
 ## Introduction: Writing Functions (5 mins)
 
@@ -48,7 +48,7 @@ public static void main(String[] args)
 
 ## Demo: Let's Break It Down (15 mins)
 
-Let's look at what the parts of this method do. We'll start with the basics, which we covered a bit in explaining the `main` method.
+Let's look at what each part of this method does. We'll start with the basics, which we covered a bit in explaining the `main` method.
 
 <!-- Instructor note: Write the method on the board (or add body to `main` method signature, at the appropriate time), and underline and label each part as you go through the following sections.-->
 
@@ -72,7 +72,8 @@ Access modifiers include:
 - **`private`**: visible only to the class.
 - **`protected`**: visible to the package and all subclasses.
 - **`public`**: visible to the world.
-- **no modifier:** when none is specified, this is the default.
+
+When no access modifier is specified, the method is visible only to the class and package.
 
 Non-access modifiers include:
 - **`static`**: for creating class methods and variables.
@@ -84,7 +85,7 @@ We'll explain more of what all these keywords mean in later lessons. For now, us
 
 <!--Instructor note: Refer back to `main` method and point out `static` modifier. Perhaps eliminate `static` from a method and point out the error. -->
 
-Any method called from within a static context must also be static. So, for all methods, use `public static` for now. Again, we'll explain more on what this means later.
+Any method called from within a static context must also be static. So for now, use `public static` for all methods. Again, we'll explain more on what this means later.
 
 #### Return Type
 
@@ -184,7 +185,7 @@ By convention, a method name should be a **verb** in **camel case** — just lik
 
 #### Parameters (Enclosed Within Parentheses)
 
-Parameters are arguments passed into the function when it's called. This makes a function much more dynamic.
+Parameters are arguments passed into the function when it's called. This makes a function more dynamic.
 
 Let's look back at the `returnSum` method.
 
@@ -226,7 +227,7 @@ It's also possible to have a return type for an unknown number of arguments, whi
 public static void myFunction(String... vars) {}
 ```
 
-or like so:
+Or like so:
 
 ```java
 public static void myFunction(String[] vars) {}
@@ -234,7 +235,9 @@ public static void myFunction(String[] vars) {}
 
 These two signatures are the same thing under the covers.
 
-From where does the last one look familiar? The `main` class. Like `main`, `myFunction` will take an indefinite amount of parameters of the type `String`. For now, just know it exists.
+> Check: From where does the last one look familiar?
+ 
+Like `main`, `myFunction` will take an indefinite amount of parameters of the type `String`. For now, just know it exists.
 
 In Java, if a method declares a parameter, that **parameter** is required to be sent as an **argument** from the calling method.
 
@@ -246,7 +249,7 @@ This is where the main functionality of your method will be called.
 
 <!--Instructor note: Take a look at the [solution-code](solution-code) and run the `askAQuestion` Java program, so students have an idea of what they'll be creating.-->
 
-Let's work through the following example. The `Scanner` class we'll be creating will be required in the lab.
+Let's work through the following example. The `Scanner` class we'll be using will be required in the lab.
 
 Some things to mention:
 
@@ -273,7 +276,7 @@ public static void askAQuestion() {
     Scanner input = new Scanner(System.in);
     String userInput = input.nextLine();
     
-    if (userString.equals("who")) {
+    if (userInput.equals("who")) {
         System.out.println("We're the Java class.");
     }
 }
@@ -283,7 +286,7 @@ Actually, let's allow the user to put in a more complicated question, such as "W
 
 ```java
 ...
-if (userString.contains("who")) {
+if (userInput.contains("who")) {
   ...
 }
 ```
@@ -297,7 +300,7 @@ Let's add a default:
   }
 ```
 
-Wait, what if we actually want to try again?
+Wait, what if the user actually wants to try again?
 
 ```java
     ...System.out.println("Try again...");
@@ -310,11 +313,11 @@ This is called **recursion**, wherein a recursive method calls itself. A resourc
 
 <!--Instructor note: Run the program and prove that it executes circularly.-->
 
-What if we want to exit out of the program?
+What if the user wants to exit out of the program?
 
 ```java
 
-    else if (userString.contains("exit")) {
+    else if (userInput.contains("exit")) {
             askAgain();
         }
     }
@@ -338,7 +341,7 @@ What if we want to exit out of the program?
 
 Create a new Java project in Eclipse and work through as many of these exercises as you can within the next 15 minutes. Use the official [Oracle Java Docs](https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html) to help you through these exercises and look up the different class methods you can use.
 
-1. Write a method called `divide152By`. This method should accept a number as an argument and divide 152 by the given number. For example, the `divide152By` result of 2 is 76. Your function should return the result.
+1. Write a method called `divide152By`. This method should accept a number as an argument and divide 152 by the given number. For example, the `divide152By` result of 2 — `152/2` — is 76. Your function should return the result.
 
     Use your function to find the following:
 
