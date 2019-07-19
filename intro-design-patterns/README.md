@@ -19,6 +19,8 @@ To start, let's work through the [myGA lesson on Design Patterns](https://my.gen
 When you're done, let's recap:
 - Explain it to me like I'm 5: What's a design pattern?
 - How do design patterns compare to the frameworks and structures we use as developers?
+- What are the three categories of design patterns?
+- What questions do you still have?
 
 ---
 
