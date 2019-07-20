@@ -8,6 +8,7 @@
     - (Victor) - Done
 - To explain locking, I would re-order the MUTEX object to be first (easier to visualize) and the synchronized methods (with intrinsic locks) to be second.
   - Alex - I am not sure which example you are referring to. Can you please make the change.
+  - (Alex) You can ignore. It makes sense the way it is now.
 - Something missing here “The two events - ordering the book and debiting the credit card, must occur atomically - you don't ever want a situation “
     - (Victor) Corrected. Plase review.
 - In Wait-Notify ReaderWriterExample, private Object mutex = new Object(); —> should be final and all caps?
@@ -26,6 +27,7 @@
     - (Victor) Done
 - In the ReadWriteLock example, it may be better to break into two executable programs. Also, if using ConcurrentHashMap, you'd need to explain it and how it's used in this context to hold different possible portfolio values.
     - (Victor) there are four lines inserted. I have now made it very clear which lines to uncomment, and showed the IntelliJ keyboard shortcut for that. Do you think that is fine?
+    - (Alex) looks good to me
 
 
 
