@@ -1,11 +1,8 @@
-   
-
 | Title | Type | Duration | Creator |
 | --- | -- | -- | --- |
 | Intro to Object-Oriented Programming | Lesson | 0:30 | Victor Grazi, NYC |
 
-
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Intro to Object-Oriented Programmng
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Intro to Object-Oriented Programming
 
 ### LEARNING OBJECTIVES
 
@@ -27,6 +24,8 @@
 *Object-Oriented Programming* (OOP) is a concept that was introduced around 1962 with the advent of the Simula programming language, and became popular some 25 years later in C++.
 
 Where earlier languages were _procedural_ in nature, object-oriented programming introduced the concept of _objects_, which were compartments of data and functionality that could easily retain and modify their own instance data. 
+
+-----
 
 ## The Four Principles of OOP (10 mins)
 
@@ -60,6 +59,8 @@ Inheritance allows classes to "inherit" code from one another. The base class is
 ### Polymorphism
 
 Polymorphism simply means "many forms". It refers to the fact that a method could have multiple implementations, either differing between an parent and a child class (method overriding) or depending on the type and number of arguments (method overloading).
+
+----
 
 ## Classes and Modifiers (10 mins)
 
@@ -121,6 +122,8 @@ This nifty table from [Oracle's docs on access control](https://docs.oracle.com/
 
 ![](https://res.cloudinary.com/briezh/image/upload/v1560810976/Screen_Shot_2019-06-17_at_3.35.38_PM_fq9ffm.png)
 
+----
+
 ## Conclusion (5 mins)
 
 Object-oriented programming is the practice of using classes and objects to make code that is modular (encapsulated) and often reusable. A class can be thought of as a blueprint or a pattern for a dress. There is one blueprint, but with it you can build many buildings. There is one dress pattern, but with it you can manufacture many dresses.
@@ -138,79 +141,3 @@ Check for understanding - can you define each of the four OOP pillars?
 * [4 Principles of OOP (article)](https://medium.com/@cancerian0684/what-are-four-basic-principles-of-object-oriented-programming-645af8b43727)
 
 
-<!--
-### Todo potential topics:
-#### calling the super constructor. 
-#### implicitly calling the default super constructor
-~~Inheritance (included in subclasses lesson)~~
-~~Polymorphism (included in subclasses lesson~~
-~~Encapsulation (included in subclasses lesson)~~
-### scope
-### Difference between instance variables, class variables and method variables
-#### equals
-#### hashCode
-#### toString
-~~Interfaces (see lessons above)~~
-~~Abstract classes (see lessons above)~~
-### Static members (Already handled static methods. Do we still need this rubric?)
-### Member visibility
-~~Singleton (see lessons above)~~
-~~Inner classes (won't do, see note above): Inner classes are classes that are nested inside of other classes. Even though we said a file may contain only one top level public class, it may contain inner classes as well, which are members of its parent class) So in our case, public class HelloWorld is the only public class defined in the file HelloWorld.java. (On the other hand, a file is not required to have any public classes.)~~
-### ~~Static Inner classes~~
-### ~~Anonymous Inner classes~~
-### Overloaded methods (and constructors) / can't have same signature
-### Overriding methods (and constructors) -->
-
-<!--
-Object Oriented Programming in Java
-OOP recap
-Introductory Examples 
-A cat
-An automobile
---- Difference between procedural, functional, object oriented programming
-SOLID 
-OOP & Java Syntax (i.e., the basics of Java, continued)
-Concept: Objects & Relationships between them
-Methods and Classes, 
-Classes vs Objects / Instantiation
-Constructors
-Method Calls 
-Method arguments
-Concept: Internal State
-Instance Variables
-Primitives vs References
-Encapsulation and Information Hiding
-Basic Java Data Types  – String and int 
-setters/getters
-Concept: Reuse 
---- Inheritance “is a” vs Composition “has a” - composition is generally preferable. Unlike C++, Java only allows you to inherit from 1 class at a time. Additionally, the super class can have methods that apply to some subclasses but not to others. It might be tempting to move these methods into a new abstract class but then you end up with the same problem of inheriting from multiple classes. Interfaces help address these issues. Create an interface for each behavior and have classes implement them in a way specific to that class. 
-Interfaces
---- Default method implementations in interfaces
---- Abstract classes and methods
-Polymorphism and overriding
---- Single inheritance, multiple interfaces (instead of multiple inheritance)
---- Programming to an interface not an implementation
-Scope and Modifier (keywords and what they mean) 
-default
-public
-private
-protected
-static
-final
-volatile (advanced)
-transient (advanced)
---- Annotations
---- How annotations work in Java
---- Byte code and compilers
---- Core Java annotations
---- @Override
---- @Deprecated
---- @FunctionalInterface (bonus)
--->
-
-
-<!-- Not including because too advanced
-- Inner classes: (2)
-   - advanced topic
-- Annotations (1)
-   - advanced topic -->

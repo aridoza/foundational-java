@@ -45,6 +45,8 @@ In that example, both returned 0.
 
 Now suppose a different developer implemented a subclass, such as `Circle`, and they were not clear that the initial developer of the `Shape` class intended those two methods to be overridden to provide an implementation. Then they would leave those unimplemented, and we would suddenly find circles with circumferences and areas equal to zero! Whoops!
 
+----
+
 ## Demo - Abstract Classes (10 mins)
 
 To prevent this sort of communication breakdown, the developer of the `Shape` class can mark the class as an **abstract class**. Abstract classes allow us to define _abstract_ methods, that _force_ the developer to define an implementation. If they don't, the Java compiler will throw an error.
@@ -82,6 +84,8 @@ You can see that IntelliJ warns us with a big red underline and a fat dialog, th
 Once we implement the missing method, and everything is back to normal:
 
 ![](resources/implement-abstract.png)
+
+----
 
 ## Guided Practice - Abstract classes in action (10 mins) 
 
@@ -130,7 +134,7 @@ public class MemoryMonitor extends AbstractMonitor {
 }
 ```
 
-<!-- NOTE TO INSTRUCTOR: Execute this method, then open the test.txt file in IntelliJ and watch it refresh every second. If it does not refresh on its own, keep hitting Ctrl-Alt-Y every second or so and it will tail the file. -->
+----
 
 ## Demo - Interfaces (10 mins)
 
@@ -176,6 +180,8 @@ auto.startEngine();
 ```
 
 Note that we did not specify a visibility for the interface methods. That is because all interface methods are always public, and we should also mention they are always non-static.
+
+-----
 
 ## Guided Practice - Implementing Interfaces (15 mins)
 
@@ -251,9 +257,6 @@ Surprisingly interfaces may contain field variables, but these fields _must_ be 
 
 ### Extending, Extending, Extending
 
-<!--### Interfaces Extending Multiple Interfaces
-One important difference between classes and interfaces, is that where a class can only extend one class, an interface can extend many interfaces, and then it would inherit all of the methods (and fields) from all of the parent interfaces.-->
-
 Just like classes can extend classes, interfaces can extend other interfaces, and they inherit all of the methods of the base interface. This is useful for complex systems we might find in real life.
 
 Classes can also implement multiple interfaces! Let's take a look.
@@ -313,6 +316,8 @@ class DodgeRam implements Automobile, TowVehicle {
 
 Take a second to consider the `DodgeRam` class. What methods are legal to run on it compared to the `HondaAccord` and the `TeslaSatellite`?
 
+---
+
 ## Independent Practice - Creating and implementing interfaces (20 mins)
 
 Let's work through another example!
@@ -338,6 +343,8 @@ Then assign it to variables of each of the types, `Sapient`, `Sentient`, `Biped`
 > Tip: Want to use IntelliJ ike a pro? Place the variable name on a new line, followed by a dot. Then hit Ctrl-Space and IntelliJ will show you the methods you can call!
 
 The solution is in the `src` directory.
+
+-----
 
 ## Demo - Breaking it down (10 mins)
  
@@ -372,6 +379,8 @@ Since even though the instance is a person, the interface is a `Sentient`, and s
 
 This feature provides a way to have a sort of multiple inheritance in Java that is otherwise not supported.
 
+----
+
 ## Demo - Interfaces vs Abstract Classes (10 mins)
 
 Take a moment to think. What is the difference between an interface and an abstract class? 
@@ -402,6 +411,8 @@ Now our Person class (that implements Sapient) gets the _speak_ method:
 ```java
 new Person().speak(); // displays I think therefore I am!
 ```
+
+----
 
 ## Conclusion (5 mins)
 
