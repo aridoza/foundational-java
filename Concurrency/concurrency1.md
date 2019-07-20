@@ -10,7 +10,6 @@
 - Explain the fundamentals of concurrency in Java.
 - Create and launch a thread using Thread or by subclassing Runnable interface.
 - Handle thread contention.
-- Estimate how many threads to use for an application.
 
 ### LESSON GUIDE
 
@@ -715,8 +714,14 @@ Perhaps setting a random timeout would alleviate the situation, but you cannot s
 
 ## Conclusion (5 min)
 
-### Resources
+Whew - concurrency is a complex topic that makes even every experienced developers shake in their boots. With a partner, take a few minutes to chat through these questions:
 
+- What is concurrency?
+- How does Java handle concurrency?
+- What are the two methods for creating a Thread?
+- What are some ways to handle thread contention?
+
+### Resources
 
 The classic books [Concurrent Programming in Java](https://www.amazon.com/Concurrent-Programming-Java%C2%99-Principles-Pattern/dp/0201310090/ref=asc_df_0201310090/) by Doug Lea (more theoretical), and [Java Concurrency in Practice](https://www.amazon.com/gp/product/0321349601/ref=dbs_a_def_rwt_bibl_vppi_i0) by Brian Goetz et.al. (more practical) cover these and many other concurrency patterns in depth and are highly recommended. 
 
