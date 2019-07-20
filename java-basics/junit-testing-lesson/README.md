@@ -164,21 +164,22 @@ To run the test, you right click on the class in the Project View and click "Run
 
 Now, it's your turn to write some tests!
 
-Java's `MathUtils` are a package that provide some handy math functions. Let's test them to make sure they're doing what they're supposed to!
+`Math` class provides some handy methods that allow us to perform mathematical operations on numbers. Let's write some tests to make sure it's working properly!
 
-* `MathUtils.multiply(number1, number2, number3, etc.)` correctly multiplies the numbers you provide it
+* `Math.abs(x)` returns the absolute value of x.
 	* Test for both integer and decimal point numbers
 
-* `MathUtils.add(number1, number2, number3, etc.)` correctly adds the numbers you provide it
-		* Test for both integer and decimal point numbers
+* `Math.sqrt(x)` returns the square root of x.
 
-* `MathUtils.square(number)` correctly squares the numbers you provide it
-		* Test for both integer and decimal point numbers
+* `Math.pow(x, y)` returns the value of x to the power of y.
 
-* `MathUtils.pythagorean(a, b)` correctly calculates the results of using a and b in Pythagorean theorem
-		* Test for both integer and decimal point numbers
+* `Math.max(x, y)` returns the larger value between x and y.
+	* Test for both integer and decimal point numbers
 
-    _Note: Note every method will have errors._
+* `Math.min(x, y)` returns the smaller value between x and y.
+	* Test for both integer and decimal point numbers
+
+*Need a hint? Check out the [Oracle docs for the Math class](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html).*
 
 > Check: With 5 minutes left, let's review the solution. 
 
