@@ -17,7 +17,7 @@ Your game must:
 
 - Have a main menu with options to enter "2 players" or "vs. computer."
 - If the user enters "2 players," they should be able to play rock-paper-scissors against a human competitor.
-- If the user enters "vs. computer," they should be able to play , against the computer.
+- If the user enters "vs. computer," they should be able to play against the computer.
 - When the game is over, the winner should be declared.
 
 ## Technical Requirements
@@ -35,7 +35,7 @@ Your game must:
 
 - Write automated JUnit tests for your application.
 - Use an agile project management framework for your game.
-- If the user enters "history", the program should display previous game history (winner's name, game date, and more).
+- If the user enters "history," the program should display previous game history (winner's name, game date, and more).
 - Use Java packages to modularize code. Place any helper tools in these packages — they could be related input, networking, or graphics.
 - Use Maven to install external dependencies your game might require.
 - Use [generics](https://docs.oracle.com/javase/tutorial/extra/generics/index.html) on collections such as arrays and array lists to store different data composed of different types.
@@ -79,7 +79,7 @@ MAIN MENU
 play
 
 
-Type in 'rock' 'paper' or 'scissors' to play.
+Type 'rock', 'paper', or 'scissors' to play.
 Type 'quit' to go back to the main menu.
 
 paper
