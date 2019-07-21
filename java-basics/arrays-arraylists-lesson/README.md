@@ -29,7 +29,7 @@ At the end of this lesson, you'll be able to:
 | 10 min  | [Demo](#demo-problems-with-arrays-10-mins)  | Problems With Arrays |
 | 15 min  | [Demo](#demo-collections-15-mins)  | Collections |
 | 15 min  | [Guided Practice](#guided-practice-iterating-through-a-list-with-for-loops-15-mins)  | Iterating Through a List With `for` Loops |
-| 15 min  | [Independent Practice](#independent-practice-15-mins)  |   |
+| 15 min  | [Independent Practice](#independent-practice-arrays-and-array-lists-15-mins)  | Arrays and Array Lists  |
 | 5 min  | [Conclusion](#conclusion-5-mins)  | Review and Recap |
 
 ## Opening (5 mins)
@@ -59,7 +59,6 @@ Each item in an array is called an **element**, and each element can be accessed
   INDEX  | 0 | 1 | 2 | 3 | 4
   -------|---|---|---|---|---
 | ELEMENT| x | x | x | x | x |
-  -------|---|---|---|---|---
 
 > Check: If a fixed size is required, how would we add more space?
 
@@ -161,7 +160,7 @@ Note that indexing (getting or setting the item based on its position in the arr
         int indexOf11 = Arrays.binarySearch(primeNumbers, 11);
         System.out.println("index of 11: " + indexOf11);
 
-        // CHECK: How to get the value?
+        // check: how to get the value?
         // if(indexOf11 >= 0) {
             System.out.println("looking for 11, found value: " + primeNumbers[indexOf11]);
         // }
@@ -195,19 +194,19 @@ It's important to consider when the results of our actions might throw an except
 
 ## Demo: Problems With Arrays (10 mins)
 
-What if we decide that actually, we want this array to include four things instead of three? For example, let's go back to our `favoriteThings` list and add chocolate as the fourth favorite thing.
+What if we decide we want an array to include four things instead of three? For example, let's go back to our `favoriteThings` array and add "chocolate" as the fourth favorite thing.
 
 ```java
   public static void addFourthFav() {
     String[] favoriteThings = {"roses","whiskers on kittens","raindrops"};
-    favoriteThings[3] = "chocolate"; // **Check:** Why 3 not 4?
+    favoriteThings[3] = "chocolate"; // check: why 3 and not 4?
     System.out.println(Arrays.toString(favoriteThings));
   }
 ```
 
 That throws an `ArrayIndexOutOfBoundsException`.
 
-Why? As mentioned, arrays are fixed in size. To add chocolate as a fourth item in an array, we would have to create a new array of a larger size, copy the info over, and then initialize the additional elements.
+Why? As mentioned, arrays are fixed in size. To add "chocolate" as a fourth item in the array, we would have to create a new array of a larger size, copy the info over, and then initialize the additional elements.
 
 ```java
   public static void addFourthFav() {
@@ -246,7 +245,7 @@ Let's take the array we made of favorite things and convert it into an `ArrayLis
   }
 ```
 
-Note that the data type of each element is defined in angle brackets `<>`. This data type could be any object type. So, if you'd created a `Person` object, you could create an `ArrayList` of `Person` (i.e., an `ArrayList<Person>`).
+Note that the data type of each element is defined in angle brackets `<>`. This data type could be any object type. So, if you created a `Person` object, you could create an `ArrayList` of `Person` (i.e., an `ArrayList<Person>`).
 
 If you want to make an `ArrayList` of a primitive type, you need to use a "boxed" version of that type in the angle brackets. For example, if you want to store data of type `int`, you would use an `ArrayList<Integer>`.
 
@@ -274,7 +273,7 @@ Check out the following methods:
     favoriteThings.set(0, "tarnished copper kettles");
     System.out.println("favoriteThings = " + favoriteThings);
 
-    //to search for an entry
+    // to search for an entry
     int indexOfIceCream = favoriteThings.indexOf("icecream");
     if(indexOfIceCream != -1) {
       String ic = favoriteThings.get(indexOfIceCream);
@@ -314,7 +313,7 @@ For example, let's create a list of five movies and iterate through it, printing
 
   public static void printMovies(ArrayList<String> movies) {
     for (int i = 0; i < movies.size(); i++) {
-      System.out.println("where i =" + i + ": " + movies.get(i));
+      System.out.println("where i = " + i + ": " + movies.get(i));
     }
   }
 
@@ -334,13 +333,13 @@ There's also another `for` loop syntax made especially for arrays and lists. Thi
 
 The enhanced `for` loop is the form recommended by Oracle for arrays and collections.
 
-A normal `for` loop is still useful sometimes — it makes it easier to work with the index of each item alongside its value, or to modify the collection while you're iterating over it. But if you just need to do something with each element, the enhanced `for` loop is cleaner and more efficient.
+A normal `for` loop is still useful sometimes: It makes it easier to work with the index of each item alongside its value, or to modify the collection while you're iterating over it. But if you just need to do something with each element, the enhanced `for` loop is cleaner and more efficient.
 
 > Check: Why might you want to iterate through an array?
 
 ----
 
-## Independent Practice (15 mins)
+## Independent Practice: Arrays and Array Lists (15 mins)
 
 Complete as many of the following challenges as you can in the next 15 minutes. Each challenge should be completed in its own method.
 
@@ -361,9 +360,9 @@ Create a method that, given an array of type `int`, returns the sum of the first
 #### Igpay Atinlay
 
 Create a method that, given an `ArrayList` of words (strings), turns each word into Pig Latin. The rules of Pig Latin are as follows:
-    - The first consonant is moved to the end of the word and suffixed with an "ay." 
-    - If a word begins with a vowel you just add "way" to the end.
-    - For example, pig becomes "igpay," banana becomes "ananabay," twig becomes "wigtay," and aardvark becomes "aardvarkway."
+- The first consonant is moved to the end of the word and suffixed with an "ay." 
+- If a word begins with a vowel, just add "way" to the end.
+- For example, pig becomes "igpay," banana becomes "ananabay," twig becomes "wigtay," and aardvark becomes "aardvarkway."
     
  -----   
 
