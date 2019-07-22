@@ -14,7 +14,7 @@
 ### LESSON GUIDE
 
 | TIMING  | TYPE  | TOPIC  |
-|:-:|---|---|
+|:---:|---|---|
 | 5 min  | Opening  | Discuss lesson objectives |
 | 10 min | Introduction  | What's the Big Deal? |
 | 20 min | Demo  | Override the Thread Class |
