@@ -67,7 +67,7 @@ In this approach, we will create a new class that _extends_ `Thread` and _overri
 
 The `Thread` class has a method called `public void run()` that is called implicitly when you _start_ your thread. 
 
-Once we overrride `Thread.run()`, we will call our class's `start()` method, which will start the thread and implicitly call `run()`. 
+Once we override `Thread.run()`, we will call our class's `start()` method, which will start the thread and implicitly call `run()`. 
  
  > Reminder: Be sure to get this clear... you _implement_ `run()` but you _call_ `start()`! Tricky! 
 
@@ -176,7 +176,7 @@ Also, notice that we enclosed the while loop _inside_ the try-catch. A common mi
 
 Think about it. If the try catch was inside the while loop, imagine what would happen if someone calls the interrupt method. The exception would trap the interrupt, set the interrupt flag, and then loop again! The program would never end, even after an interrupt! So we fix that by including the while _inside_ the try catch. If an interrupt occurs, the while loop exits and the catch block takes over, sets the interrupt flag, and exits, returning control to the caller.
 
-> Hint: This is a _very_ common idiom in Java concurrency: execute some activity in a loop, sleep, and catch the `InterruptedException` outside the loop. Now you know!
+> Hint: This is a _very_ common idiom in Java concurrency: execute some activity in a loop, sleep, and catch the `InterruptedException` _outside_ the loop. Now you know!
 
 #### Make it Run!
 
@@ -685,7 +685,7 @@ Deadlock occurs when some thread #1 holds some lock, say Lock-A, and another thr
 
 ### Dining Philosophers Problem
 
-This is illustrated humorously (if not poignantly) by the class "Dining Philosophers" problem.
+This is illustrated humorously (if not poignantly) by the classic "Dining Philosophers" problem.
 
 Here are the rules:
 
@@ -714,7 +714,7 @@ Perhaps setting a random timeout would alleviate the situation, but you cannot s
 
 ## Conclusion (5 min)
 
-Whew - concurrency is a complex topic that makes even every experienced developers shake in their boots. With a partner, take a few minutes to chat through these questions:
+Whew - concurrency is a complex topic that makes even very experienced developers shake in their boots. With a partner, take a few minutes to chat through these questions:
 
 - What is concurrency?
 - How does Java handle concurrency?
