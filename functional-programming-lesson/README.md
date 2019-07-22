@@ -3,7 +3,7 @@
 ## Table of Contents
 
 | Order | Topic | Type | Timing |
-| -- | ------ | --- | -- |
+| --- | ------ | --- | --- |
 | 1 | Lambda Expressions | Lesson | 1:30 |
 | 2 | Stream processing and Collectors | Lesson | 1:30 |
 | 3 | Functional Interfaces | Lesson | 1:30 |
