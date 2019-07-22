@@ -1,6 +1,6 @@
 ---
 title: Linked Lists and Maps
-type: lesson
+type: Lesson
 duration: "1:30"
 creator:
     name: Drew Mahrt
@@ -48,7 +48,7 @@ We'll be learning about and comparing them today to understand their strengths a
 
 ## Introduction: Lists (10 mins)
 
-First, we'll cover lists, one of the most popular collection types. They hold collections of data and provide a large set of helper functions that make manipulating the data much easier. You can search, sort, add, and remove with ease. But one of the major drawbacks of lists is that they have a larger overhead than a simple array (more memory, slightly slower due to all the work behind the scenes).
+First, we'll cover lists, one of the most popular collection types. They hold collections of data and provide a large set of helper functions that make manipulating data much easier. You can search, sort, add, and remove with ease. But one of the major drawbacks of lists is that they have a larger overhead than a simple array (more memory, slightly slower due to all the work behind the scenes).
 
 The two most commonly used types of lists are the `ArrayList` and the `LinkedList`. We already met the `ArrayList` — it's backed by an array to hold data. As you know, one major advantage of the `ArrayList` over arrays is that you don't need to manually create larger arrays if your data set grows. Keep in mind that because `ArrayList` takes care of this for you, the operation isn't free. Therefore, an `ArrayList` isn't the best choice for rapidly growing or shrinking sets of data.
 
@@ -58,10 +58,10 @@ A `LinkedList` is backed by a collection of objects linked together by pointers 
 
 <details>
 
-<summary>Check: What are some examples of a use case for `ArrayList` and `LinkedList`?</summary>
+<summary>Check: What are some examples of use cases for `ArrayList` and `LinkedList`?</summary>
 
-  - `ArrayList`: contacts list.
-  - `LinkedList`: to-do lists.
+  - `ArrayList`: Contacts list.
+  - `LinkedList`: To-do lists.
 
 </details> 
 
@@ -95,7 +95,7 @@ String[] cookieFlavors = new String[]{"chocolate chip", "oatmeal raisin"};
 List<String> stringArrayList = Arrays.asList(cookieFlavors);
 ```
 
-The process for creating a `LinkedList` and an `ArrayList` is the same, just with the class name changed.
+The process for creating a `LinkedList` and an `ArrayList` is the same, but with the class name changed.
 
 ```java
   public static void main(String[] args) {
@@ -132,7 +132,7 @@ One of the most popular implementations of a map is the `HashMap`. A `HashMap` i
 
 ***
 
-### Optional: Collision (10 mins)
+### Collision (10 mins)
 
 The hash function isn't flawless. What happens if it gives us the same index for two keys? This is called a **collision**.
 
@@ -146,7 +146,7 @@ Java handles this by using a structure like a `LinkedList` in place of the actua
 
 ## Demo: Maps (10 mins)
 
-Let's try implementing a `HashMap`. Pretend we have a class called `Student` which contains the student's name, grades, and more. Each student has a unique student ID we'll use as the key.
+Let's try implementing a `HashMap`. Let's say we have a class called `Student` which contains the student's name, grades, and more. Each student has a unique student ID we'll use as the key.
 
 ``` java
 HashMap<String,Student> studentMap = new HashMap<String,Student>();
@@ -161,7 +161,7 @@ studentMap.remove("542ijk");
 
 ```
 
-As you can see, a map isn't that different from a list; you can add and retrieve objects. One major difference is you have no control over the underlying data structure. There's no way for you to sort or control the order of elements in a map.
+As you can see, a map isn't that different from a list: You can add and retrieve objects. One major difference is you have no control over the underlying data structure. There's no way for you to sort or control the order of elements in a map.
 
 > Check: Write the code for removing an object through the key. You'll probably have to look it up in the documentation.
 
