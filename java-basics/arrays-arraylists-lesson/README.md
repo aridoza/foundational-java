@@ -38,7 +38,7 @@ So far, we have stored all of the information for our programs in individual var
 
 >  In pairs, come up with a few more examples of where storing our data in a collection would be beneficial (data situations or example programs). (1-2 minutes)
 
-<a name="introduction"></a>
+----
 
 ## Introduction: Basic Arrays (5 mins)
 
@@ -62,6 +62,8 @@ Each item in an array is called an *element*, and each element can be accessed b
   -------|---|---|---|---|---
 
 > Check: If a fixed size is required, how would we add more space?
+
+----
 
 ## Demo: Creating Arrays (5 mins)
 
@@ -92,6 +94,8 @@ Let's create an Array together:
 
 > Check: How would I find the index of the last element in the array using the length property?
 
+----
+
 ## Independent Practice: Creating Arrays (10 mins)
 
 Create a String array of *three* of your favorite things. Print the result to the command line.
@@ -107,6 +111,8 @@ Create a String array of *three* of your favorite things. Print the result to th
   3) initialize/assign values
 
 </details> 
+
+----
 
 ## Demo: Manipulating Arrays (15 mins)
 
@@ -184,6 +190,8 @@ It is important to consider when the results of our actions might throw an excep
 
 > Check:  If an array is 5 elements long, what happens if we look for `myArray[5]`?
 
+----
+
 ## Demo: Problems with Arrays (10 min)
 
 But what if I decide that actually, I want this array to include 4 things instead of 3? For example, let's go back to our favoriteList; I decide I really like chocolate and want it to be the fourth favorite thing.
@@ -215,6 +223,8 @@ Why? As mentioned, arrays are fixed in size. To add chocolate as a fourth item i
 ```
 
 Luckily, Java has provided something better: collections.
+
+----
 
 ## Demo: Collections (15 mins)
 
@@ -278,6 +288,8 @@ An ArrayList is an object, with methods, which makes it much easier to manipulat
 
 > Check: What are advantages of using an ArrayList over an array?
 
+-----
+
 ## Guided Practice: Iterating Through a List with For Loops (15 mins)
 
 #### The For Loop
@@ -325,29 +337,34 @@ A normal for loop is still useful sometimes -- it makes it easier to work with t
 
 > Check: Why might you want to iterate through an array?
 
+----
+
 ## Independent Practice (15 mins)
 
 Complete as many of the following challenges as you can in the next 15 minutes. Each challenge should be completed in its own method.
 
-1. Find the size
-  a. Create an array of ints.
-  b. Print the length of the array to the command line.
+#### Find the size
 
-2. Concrete Jungle
-  a. Create a ArrayList of New York City wildlife.
-  b. Create a function that, given an ArrayList of Strings, prints for each element: "Today, I spotted a /*Thing here*/ in the concrete jungle!"
+1. Create an array of ints.
+1. Print the length of the array to the command line.
 
-3. Create a method that, given an array of ints, return the sum of the first 2 elements in the array. If the array length is 1, just return the single element, and return 0 if the array is empty (has length 0).
+#### Concrete jungle
 
-4. Create an method that, given an ArrayList of words (Strings), turns each word into Pig Latin. The rules of Pig Latin are as follows:
-  a. The first consonant is moved it to the end of the word and suffixed with an `ay`.
-  b. If a word begins with a vowel you just add `way` to the end.
+1. Create a ArrayList of New York City wildlife.
+1. Create a function that, given an ArrayList of Strings, prints for each element: "Today, I spotted a /*Thing here*/ in the concrete jungle!"
 
-For example, `pig` becomes `igpay`, `banana` becomes `ananabay`, `twig` becomes `wigtay`, and `aadvark` becomes `aadvarkway`.
+#### Sum it up 
 
-<!-- Instructor Note: The example for Pig Latin can be posted online if students do not get to it, as it will probably take too long to do in class.-->
+Create a method that, given an array of ints, return the sum of the first 2 elements in the array. If the array length is 1, just return the single element, and return 0 if the array is empty (has length 0).
 
-<a name="conclusion"></a>
+#### Igpay Atinlay
+
+Create an method that, given an ArrayList of words (Strings), turns each word into Pig Latin. The rules of Pig Latin are as follows:
+    - The first consonant is moved it to the end of the word and suffixed with an `ay`. 
+    - If a word begins with a vowel you just add `way` to the end.
+    - For example, `pig` becomes `igpay`, `banana` becomes `ananabay`, `twig` becomes `wigtay`, and `aadvark` becomes `aadvarkway`.
+    
+ -----   
 
 ## Conclusion (5 mins)
 

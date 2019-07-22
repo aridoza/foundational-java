@@ -21,25 +21,6 @@
 | 40 mins | Independent Practice | Shapes |
 | 10 min  | Conclusion  | Review / Recap |
 
-<!--- Topics:
-   - The Object Class
-   - Upcasting
-   - Downcasting
-   - Overriding Methods
-   - Visibility
-   - Inheritance
-   - Revisit the Four Pillars of OOP
-- Activities:
-   - Cat example
-   - Shape calculator
-- Sizing: 3 (medium)-->
-
-<!--
-Additional materials to structure this section: 
-- [lesson (with short practice section)](https://git.generalassemb.ly/ed-product-library/programming-fundamentals-in-java/tree/master/baseline-materials/subclassing-lesson)
-- [lab](https://git.generalassemb.ly/ed-product-library/programming-fundamentals-in-java/tree/master/baseline-materials/subclassing-lab
--->
-
 ## Opening (5 mins)
 
 In our use of language and observations from the world, we naturally categorize objects of similar types. We understand what a cat is. We understand that a lion is a member of the cat family, and although we have no confusion between a cat and a lion, we know that lions share qualities with cats.
@@ -52,11 +33,11 @@ We can say that `Lion` is a subclass of `Cat`, and will inherit basic properties
 
 > Note: You may also hear subclasses and superclasses referred to as parent and child classes, which may help visualize what is meant by "inheritance".
 
+-----
+
 ## Guided Practice: Superclasses and subclasses (15 mins)
 
 Let's create a class `Cat`: 
-
-<!-- NOTE TO INSTRUCTOR: Instructor should code this for the class -->
 
 ```java
 public class Cat {
@@ -105,8 +86,7 @@ lion.favoriteSnack();
 lion.getLives();       
 ```
 
-**Think: What will each of these calls return?**
-
+**Think: What will each of the above calls return?**
 
 <details>
  <summary>Answers</summary>
@@ -116,7 +96,6 @@ lion.getLives();
 * `getLives()` returns 1. Why? A cat may have nine lives, but a `Lion` was not so endowed, because its `getLives()` method was _overridden_.
 
 </details>
-
 
 A subclass will inherit every field and method that it can see, i.e., every public member, protected member, and default member (provided they are in the same package). 
 
@@ -149,10 +128,6 @@ There's a lot to be said about annotations, but here are a few quick hit facts:
 
 ### Restricting Inheritance
 
-<!--Note from Melissa - this section needs an example:
-- when would we want to ensure a class cannot be subclassed?
-- what does the code look like using `final`?-->
-
 There are times that you want to ensure that your class cannot be subclassed. In such cases, you can declare your class to be _final_. If you try to subclass a final class, the compiler will warn you with a message like:
 
 ```java
@@ -163,10 +138,7 @@ Sometimes you might want a class to be able to be inherited from, but perhaps yo
 
 A subclass can override any member that is visible to it, except if the method is final or static, simply by defining the method using the exact same name and method signature as the base method it is overriding.
 
-<!--### The Object Class
-There is one detail that the Java class definition hides from you, and that is that every class ultimately inherits from the primordial Java _Object_ class. Object is the superclass of all other classes in Java.
-Let's look at the structure of the `Object` class:
-![](resources/Object.png)-->
+-----
 
 ## Guided Practice - Upcasting and Downcasting (15 mins)
 
@@ -178,12 +150,9 @@ You can declare a variable to be of a certain type, and assign it any subtype. F
 Cat cat = new Lion();
 ````
 
-<!-- NOTE TO INSTRUCTOR: Discuss the following question with the class -  there will be opinions on both sides! -->
-
 **Knowledge Check!**
 
 Now if you call ```cat.getLives()``` after declaring it like above, what do you expect will be returned - the 9 lives of the `Cat`, or the 1 life of the `Lion`?
-
 
 <details>
 <summary>The answer may be surprising!</summary>
@@ -199,7 +168,6 @@ In plain English, maybe you want a collection (like an Array or ArrayList) of Ca
 That's upcasting! Did the answer surprise you?
 
 </details>
-
 
 ### Downcasting
 
@@ -234,11 +202,7 @@ public static void main(String[] args) {
 ```
 you will get a "ClassCastException" from the compiler!
 
-<!--
-COMMENT (Brandi): This part isn't clear or really connected to the surrounding lesson... can we clarify and maybe flesh out with an example?  
-### Fields go by the variable not the instance
-One surprising fact (that you don't want to get wrong in an interview), is that fields do not work the same way!
-Field accesses go by the variable type, not the instance type. -->
+----
 
 ## Independent Practice - Shapes (40 mins)
 
@@ -301,7 +265,6 @@ In this case, `p = (a+b+c)/2`. To take a square root, use the `Math.sqrt()` meth
 
 When you're done, check your answer below. 
  
- 
 <details>
 <summary>Solution</summary>
 
@@ -337,11 +300,9 @@ public class Triangle extends Shape{
 
 </details>
 
-
 **Part 2: Bonus!**
 
 Do the same for `Circle` and for `Rectangle`. Remember these should all _extend_ the `Shape` class.
-
 
 <details>
 <summary>Solution</summary>
@@ -392,15 +353,13 @@ public class Rectangle extends Shape{
 
 </details>
 
-
 **Part 3 (5 mins)**
 
 Now, let's say we want to create a `Square` shape. We remember from Geometry class, that a square is a special kind of rectangle, where all sides are equal. 
 
 Together, we will create a `Square` class that extends `Rectangle`, and instead of overriding the `getCircumference()` and `getArea()` methods, just provide a constructor that will pass in the same value for all sides into the rectangle constructor. 
 
-<!-- NOTE TO INSTRUCTOR: Ask students for suggestions before implementing. Get students talking if you can! -->
-
+> Check: How do you think we should implement this? Shout out some possible solutions!
 
 <details>
  <summary>Solution:</summary>
@@ -414,7 +373,6 @@ public class Square extends Rectangle {
 ```
 
 </details>
-
 
 Now this `Square` will automatically calculate its circumference and area.
 
@@ -446,13 +404,11 @@ Square circumference, area = 16.0, 16.0
 
 When you're ready, check your answer with the solution below.
 
-
 <details>
     <summary>Need a hint?</summary>
 
 The important thing to note here is that the method _getCircumferanceAndArea_ accepts a Shape argument, and even though our Shapes are Triangles, Rectangle, Circle, and Square, the method still accepts them since they extend Shape. Anything that extends a class, _is_ that class... A Rectangle _is a_ Shape!
 </details>
-
 
 <details>
 <summary>Solution</summary>
@@ -482,6 +438,7 @@ public class ShapeCalc {
 
 </details>
 
+----
 
 ## Conclusion (10 mins)
 

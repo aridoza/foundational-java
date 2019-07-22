@@ -37,8 +37,6 @@ Write code that implements various functions, following the requirements listed 
 
 - Write a function, `filterLongWords()`, that takes an array of words and a number, `i`, and returns the word(s) in the array that are longer than `i` characters.
 
-- Create a `Car` class with the following member variables: `mTopSpeed` and `mNumberOfDoors`. In that class, write a constructor method that assigns random values to the member variables. Additionally, write a method that prints out the line "Your car has a top speed of ___ mph and for some reason has ____ doors."
-
 #### Starter Code
 
 There is no starter code for this lab.

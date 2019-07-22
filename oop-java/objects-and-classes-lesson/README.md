@@ -24,19 +24,7 @@
 | 20 min | Guided / Independent Practice | Constructors |
 | 10 min  | Conclusion  | Review / Recap |
 
-<!-- 
-NOTE TO INSTRUCTOR: Before you can execute Java code you must install a JDK (latest build of JDK 1.8).
-Then you must assign that JDK to your IntelliJ Project The first time you try to execute the code, IntelliJ will prompt you for a JDK. Just point to the root directory of the JDK installation, on my machine that is: 
-![](resources/jdk-setup.png)
- -->
-
 ## Opening (5 mins)
-
-<!-- 
-This is a good reference. Please don't delete
-Reference [this lesson](https://git.generalassemb.ly/ed-product-library/programming-fundamentals-in-java/tree/master/baseline-materials/classes-lesson) or [this lab](https://git.generalassemb.ly/ed-product-library/programming-fundamentals-in-java/tree/master/baseline-materials/classes-pair-programming-lab) for ideas.
-I added an assignment below, the Calculator class
--->
 
 In OOP a class is a kind of template for creating _objects_. An object is an _instance_ of a class, meaning it contains all of the data fields and functionality defined in its class. However, each object can contain its own set of values for those fields. For example, a class might define a _name_ field of type _String_, but individual _instances_ of that class might have unique values assigned to that name field such as "Jeremy", "Maria", "Carlotta", etc. 
 
@@ -45,6 +33,8 @@ In OOP a class is a kind of template for creating _objects_. An object is an _in
 **Think of it as follows:**
 
 We know 'HumanKind' is a classification of creature that thinks, has senses, a body, etc. But we don't think of a specific person as a 'HumanKind'; HumanKind is the class; Vanna White is an _instance_ of HumanKind. Vanna has a name, a birthdate, brown eyes, two ears, legs, etc. 
+
+----
 
 ## Guided Practice: Step-By-Step Class Creation (15 mins)
 
@@ -115,26 +105,10 @@ So in plain English, this statement is saying, "declare a new variable named "va
 HumanKind vannaWhite = new HumanKind();
 ```
 
-<!-- todo: move this to the lesson on visibility, and be careful to move the instantiation outside the main method and into the class, or else it is a compile error to declare a visibility.
-In this example we omitted the visibility, implying default visibility, which as we said means that it is only visible to classes in the same package. More commonly we will make instance variables private, by prefacing the declaration with the word _private_, as follows:
-```java
-private HumanKind vannaWhite = new HumanKind(); // this is only visible in this class file
-```
-(We could also assign public visibility to make this instance available to all objects outside this class, or protected to make it available to subclasses. Move on subclasses later.)
-(Don't be confused with my earlier statement, when I said that top level classes can only be public or default. That is true about the class declarations themselves, i.e. when we say ```public class SomeClass``` or ```class SomeClass```. But variables referring to those classes can be any visibility.
-Just to be clear, it is a compile error to try to declare the following as a top level class:
-```java
-private class InvalidClass{}
-```
-but it is perfectly valid to say
-```java
-private MyValidClass someVariable;
-```
---> 
-
 ### Step 4 
 
 Finally, to run our program in IntelliJ, notice the little green arrow in the margin, to the left of our _main_ method. 
+
 ![](resources/execute-main.png)
 
 Give that arrow a left-click, then click on "Run HumanKind.main"
@@ -142,6 +116,8 @@ Give that arrow a left-click, then click on "Run HumanKind.main"
 That will compile and execute our code, and produce output something like:
 
 ![](resources/execute-main-output.png)
+
+----
 
 ## Guided Practice: Class Features (20 mins)
 
@@ -154,8 +130,6 @@ So far we have seen how to define the shell of the class. But the value starts t
 
 We will look at fields and methods now.
 
-<!-- Instructor note: If you're feeling like this topic is a bit of review, try searching Google for information about Inner classes which are a little more advanced!-->
-
 ### Fields
 
 Fields are the variables associated with every instance of this class. What are some fields our `HumanKind` class might have? Take a few minutes to create three fields for the `HumanKind` class.
@@ -165,6 +139,9 @@ Fields are the variables associated with every instance of this class. What are 
 
 ```java
 public class HumanKind {
+    private int ID;
+    private String name;
+    private String address;
 }
 ```
 
@@ -183,9 +160,7 @@ For example, if our HumanKind class has an _age_ field, then `vannaWhite.age` mi
 
 Not all fields are instance variables. If a field is declared _static_, then they are called _class_ variables. A class variable shares its value among all instances of that class. Additionally, you do not need to have access to an instance in order to access a class variable. If the value of a class varibale changes for one instance, it changes for all instances. We will see examples of this shortly, and we will see why this is useful.
 
-<!---Another fancy name for an instance variables that you will encounter is a "property". A property is basically an instance field with a getter and setter. A read only property only has a getter but no setter.
-**Important note on properties**
-There is one rule you want to remember starting from today - you will almost always want to make fields in a class private, and then provide _accessor_ ("getter") and _mutator_ ("setter") methods for those fields. This is called encapsulation - it means that you never expose the structure of a class to anything outside the class; anyone accessing the class has to go through your exposed API (Application Program Interface). These are the methods that you expose to external classes by assigning a visibility like _public_. -->
+There is one rule you want to remember starting from today - you will almost always want to make fields in a class private, and then provide _accessor_ ("getter") and _mutator_ ("setter") methods for those fields. This is called encapsulation - it means that you never expose the structure of a class to anything outside the class.
 
 ### Methods
 
@@ -196,37 +171,22 @@ What methods might we add to the `HumanKind` class?
 <details>
   <summary>Possible solution</summary>
 
-For example, we might have a `setAddress()` method that alters the `address` field's value.
+We might have a `setAddress()` method that alters the `address` field's value.
 
 ```java
 public class HumanKind {
+    public void setAddress(String address) {
+        this.address = address;
 }
 ```
 
 </details>
 
-<!--Here is an example of a method declaration on a `MathHelpers` class:
-```java
-public class MathHelpers() {
-    // Other stuff... 
-    public double sum(double first, double second) {
-    }
-}
-```-->
-
 Let's study that structure!
 
-1) As with any class member, we start the method declaration with the *visibility*, in this case public.
-2) Next, we declare the *return type*. In this case, we are... 
-
-<!--Some methods return nothing at all, say for example, a print method, or a method that writes to a database and does not need to return anything. There are many cases of such methods. To express a method that does not return anything, use _void_ as the return type.
-```java
-public void writeToDatabase(DBConnection conn, String data) {
-}
-```
-This defines a method called _writeToDatabase_ that takes two input parameters, and returns nothing.-->
-
-3) Finally, we enclose the arguments in parentheses - those represent the values that one must supply when they call the method.
+1. As with any class member, we start the method declaration with the *visibility*, in this case public.
+1. Next, we declare the *return type*. In this case, it's a String.
+1. Finally, we enclose the arguments in parentheses - those represent the values that one must supply when they call the method.
 
 We refer to the method name and arguments collectively as the _method signature_.
 
@@ -238,13 +198,12 @@ How would we call our `setAddress` method above?
   <summary>Possible solution</summary>
   
 ```java
-
+HumanKind.setAddress(String "123 Main St, Burbank, CA");
 ```
 
 </details>
 
-
-In IntelliJ, if you don't remember the names of the parameters for a particular method, type the method where you want to use it, put your cursor between the parentheses and hit Ctrl-p. This will show a neat display of the parameters and types.
+> Tip: In IntelliJ, if you don't remember the names of the parameters for a particular method, type the method where you want to use it, put your cursor between the parentheses and hit Ctrl-p. This will show a neat display of the parameters and types.
 
 ![](resources/ctrl-p.png)
 
@@ -255,16 +214,6 @@ In IntelliJ, if you don't remember the names of the parameters for a particular 
 Like fields, methods can be static or not. Non-static methods are known as _instance methods_. Static methods are also known as _class methods_. 
 
 The implementation of an instance method has access to every field and method declared in the class, no matter what the visibility. It can also create its own variables, but these are lost once the method returns.
-
-<!--Let's try implementing our sum method:
-```java
-public double sum(double first, double second) {
-    double result = first + second;
-    return result;
-}
-```
-Methods that return void can have (but do not require) a return statement, whereas non-void methods _must_ have at least one return statement.
-![](resources/debugger.png)-->
 
 **Static methods**
 
@@ -280,6 +229,8 @@ System.out.println(a + "**" + b + "=" + (Math.pow(4, 2)));
 ``` 
 
 If a method does not access any of the instance fields or methods from the class that it is defined in, consider making it static.
+
+----
 
 ## Independent Practice - Calculator (10 mins)
 
@@ -314,35 +265,7 @@ public class Calculator {
 
 </details>  
 
-<!--### Accessing Instance Variables 
-A common idiom you are sure to encounter is when a method parameter has the same name as an instance variable.
-For example, let's say you have the following class:
-```java
-class Person {
-    private float age;
-    public void setAge(float age) {        
-    }
-}
-```
-Now there are two different variables with the same name _age_; the instance variable `private float age` and the method argument float age.
-Let's say you want to assign the value of the method variable to the class variable.
-If you say:
-```java
-    private float age;
-    public void setAge(float age) {
-        age = age;   
-    }
-```
-that is called a "no-op" - nothing changes at all - it just assigns the value of the method's _age_ variable to itself.
-What you really want is:
-```java
-    private float age;
-    public void setAge(float age) {
-        this.age = age;   
-    }
-```
-When you prepend a variable with the word _this._ you are making it eminently clear that you are referring to the instance variable and not the method variable. Some developers will always refer to instance variables using _this._ (even when it is optional), just because it makes it clear that you are referring to a class variable.
-> Tip: Using best practices will make you look like a pro. Make a habit of always using "this" for accessing instance variables!-->
+----
 
 ### Constructors (20 mins)
 
@@ -407,7 +330,7 @@ Here are some basic rules for writing our own constructors (as opposed to just u
 2. A constructor has no return type.
 3. A constructor may not be static.
 
-#### Independent Practice: HumanKind class
+### Independent Practice: HumanKind class
 
 Add a constructor to our `HumanKind` class that accepts three arguments for initial values of ID (int), name (String), and address (String).
 
@@ -467,12 +390,9 @@ HumanKind patSajak = new HumanKind(456, "Sajak, Pat", "123 Main St, Burbank, CA"
 
 If we do not define a constructor for a class, Java supplies one implicitly. We saw that in our initial implementation of the `HumanKind` class. 
 
-Now that we've defined our own constructor, Java _will no longer_ supply a default constructor, so we're good to go from here.
-
 > Tip: If you're not doing anything in the constructor, it's totally fine–and a good practice–to just use the default that Java provides!
 
-<!--### Multiple Constructors
-A class may have multiple constructors, as long as each has a signature that is distinct from the other constructors in the class. This is an example of *method overloading* which we mentioned in the previous lesson as one of the many cool features of object-oriented programming.-->
+--- 
 
 ## Conclusion (5 mins)
 
