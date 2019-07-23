@@ -47,19 +47,22 @@
 
 # ![](./LambdaSyntax.png)
 
-A Lambda expression is an anonymous function which provides a very concise and functional syntax which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes.  However, one issue with anonymous classes is that if the implementation of your anonymous class is very simple, such as an interface that contains only one method, then the syntax of anonymous classes may seem unwieldy and unclear. In these cases, you're usually trying to pass functionality as an argument to another method, such as what action should be taken when someone clicks a button. Lambda expressions enable you to do this, to treat functionality as method argument, or code as data. 
+A Lambda expression is an anonymous function that provides a very concise and functional syntax, which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes, in that they enable you to express functionality as data, for example to pass functionality into a method as a parameter.  But where anonymous classes require a lot of boilerplate code to set up the class, lambda expressions provide a concise syntaxt specifically for expressing code as  data.
 
 A lambda expression consists of the following:
 - A comma-separated collection of formal parameters enclosed in parentheses.
-- The arrow token, ->
-- A body, which consists of a single expression or a statement block.
+- Followed by an arrow, ->
+- Followed by the body, consisting of either a single expression or a statement block.
 
-**Notes:** You can omit the data type of the parameters in a lambda expression. In addition, you can omit the parentheses if there is only one parameter.  
+**Notes:** You may, but are not required to specify the data type of the parameters in a lambda expression, and where there is no ambiguity they are usually omitted.  In addition, you can omit the parentheses around the parameter list, providing there is exactly one parameter.  
 
 **Example:**
 
     (int a, int b) -> { return a * b;}
-The above example has 2 int type parameters, "a" and "b" respectively.  The expression body will multiply the int parameter "a" with the int parameter "b".
+The above example has 2 _int_ type parameters, "a" and "b" respectively.  The expression body will multiply the int parameter "a" with the int parameter "b".
+
+In this example the type _int_ is usually optional (depending on context), and can be expressed as:
+    (a, b) -> { return a * b;}  
 
 ## Demo: To Lambda Or Not To Lambda, That Is The Question
 
@@ -120,11 +123,11 @@ The output will be the following:
     
         public static void main(String[] args) {
     
-            Computation add = (int a, int b) -> { return a + b; };
+            Computation add = (a, b) -> { return a + b; };
     
             System.out.println("5 + 6 = " + add.operation(5,6));
     
-            Computation subtract = (int a, int b) -> { return a - b; };
+            Computation subtract = (a, b) -> { return a - b; };
     
             System.out.println("10 - 6 = " + subtract.operation(10,6));
         }
@@ -133,33 +136,45 @@ The output will be the following:
 **Note:** Notice the reduction of the amount of code needed to do the computation.  Stress this to the class!  
 
 **Example 1:** 680 Characters and 32 lines  
-**Example 2:** 456 Characters and 19 lines  
+**Example 2:** 440 Characters and 19 lines  
 
 This is a 33% reduction in characters and 41% reduction in lines of code! Also, in most cases, the code becomes more reader friendly.
 
 ## Introduction: Streams and Collections
 
 **What is a Stream?**  
-A stream is a sequence of elements. Unlike a collection, it is not a data structure that stores elements. Instead, a stream carries values from a source, such as collection, through a pipeline.  Stream operations leverage the use of lambda expressions to achieve a task, as you'll see shortly.
+Where a collection is a data structure that stores elements, a stream is a sequence of elements that moves values from a source, such as collection, through a pipeline of steps.  Stream operations leverage the use of lambda expressions to achieve a task, as we'll see shortly.
 
 **What is a Pipeline?**  
-A pipeline is a sequence of stream operations, such as filtering and aggregation operations. Aggregate operations typically accept lambda expressions as parameters, enabling you to customize how they behave.  Some of the common aggregation operations are forEach, filter, sum, average, and sort.
+A pipeline is a sequence of operations, such as filtering, modifying, or aggregating operations, that are applied to a source stream to produce an output. The output can be anything, for example a primitive, an object, a collection, or even another stream. Such operations accept lambda expressions as parameters, enabling you to customize how they behave.  Some of the common stream operations are _map_, _filter_, _sum_, _average_, _sort_, and _forEach_.
 
 **Types of Stream Operations**  
-Stream operations are used to modify streams to create an end result. There are 2 main types of stream operations.  
-- Intermediate operations - Intermediate operations take a stream as input and modify it to produce a different stream. Some of the commonly used intermediate operations are map, filter, sorted, and flatMap. 
-- Terminal operations - Terminal operations mark the stream as consumed, after which point it can no longer be used further.  In other words, you will use terminal operations to create your end result objects. Some common terminal operations are forEach and collect.
+Stream operations are used to modify streams to create an end result. There are 2 main types of stream operations:  
+- Intermediate operations - take a stream as input and modify it to produce a different stream. Some of the commonly used intermediate operations are _map_, _filter_, _sort_, and _flatMap_. 
+- Terminal operations - produce a final result, marking the stream as consumed. Once a terminal operation is reached, the stream is consumed, and no further operations can be applied to the stream.  In other words, you will use terminal operations to create your end result objects. Some common terminal operations are _collect_, _reduce_, and _forEach_.
 
 **Getting a Stream from a Collection**
+Let's say we have the following list
+```java
+List<String> stringList = Arrays.asList("Hello", "World");
+```
+To generate a stream from the list we say:
+```java
+Stream stream = stringList.stream();
+```
 
-    List<String> stringList = Arrays.asList("Hello", "World");
-    //To get the stream of the list, do the following:
-    stringList.stream();
-    
-    //To print out the elements of the stringList collection, we could do the following:
-    stringList.stream().forEach(stringValue -> {
-        System.out.println(stringValue);
-    });
+To print out the elements of the stringList collection using a stream, we could do the following:
+```java
+stringList.stream().forEach(stringValue -> {
+    System.out.println(stringValue);
+});
+```
+
+or even simpler:
+```java
+stringList.forEach(x -> System.out.println(x));
+```
+which works because collections like the List interface have a built-in _forEach_ method, which implicitly creates the stream.
 
 The output would be:  
 Hello  
