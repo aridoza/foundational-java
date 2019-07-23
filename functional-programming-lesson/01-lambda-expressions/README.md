@@ -54,15 +54,28 @@ A lambda expression consists of the following:
 - Followed by an arrow, ->
 - Followed by the body, consisting of either a single expression or a statement block.
 
-**Notes:** You may, but are not required to specify the data type of the parameters in a lambda expression, and where there is no ambiguity they are usually omitted.  In addition, you can omit the parentheses around the parameter list, providing there is exactly one parameter.  
+> You may, but are not required to, specify the data type of the parameters in a lambda expression, and where there is no ambiguity they are usually omitted for brevity.  
+
+> In addition, you may omit the parentheses around the parameter list, providing there is exactly one parameter. 
+
+> Finally, if the body consists of more than one statement, it must be enclosed in squiggly brackets. However if it consists of exactly one statement, the brackets may be omitted, in which case the "return" key word must also be omitted, and the semicolon at the end of the lambda must also be omitted.
 
 **Example:**
 
     (int a, int b) -> { return a * b;}
 The above example has 2 _int_ type parameters, "a" and "b" respectively.  The expression body will multiply the int parameter "a" with the int parameter "b".
 
-In this example the type _int_ is usually optional (depending on context), and can be expressed as:
+In this example the type _int_ is usually optional (depending on context), and can be expressed as:  
+
     (a, b) -> { return a * b;}  
+    
+Since it is a one statement Lambda, we can also drop the brackets, return, and semicolon:
+
+    (a, b) -> a * b  
+
+<!-- todo: We should also include an example of a single parameter Lambda, omitting the parentheses: a-> System.out.println(a) - Victor-->
+ 
+ <!-- todo: We should also include an example of a no-parameter Lambda, demoing the common idiom ()->lambda - Victor->
 
 ## Demo: To Lambda Or Not To Lambda, That Is The Question
 
@@ -123,11 +136,11 @@ The output will be the following:
     
         public static void main(String[] args) {
     
-            Computation add = (a, b) -> { return a + b; };
+            Computation add = (a, b) -> a + b;
     
             System.out.println("5 + 6 = " + add.operation(5,6));
     
-            Computation subtract = (a, b) -> { return a - b; };
+            Computation subtract = (a, b) -> a - b;
     
             System.out.println("10 - 6 = " + subtract.operation(10,6));
         }
@@ -136,22 +149,22 @@ The output will be the following:
 **Note:** Notice the reduction of the amount of code needed to do the computation.  Stress this to the class!  
 
 **Example 1:** 680 Characters and 32 lines  
-**Example 2:** 440 Characters and 19 lines  
+**Example 2:** 416 Characters and 19 lines  
 
-This is a 33% reduction in characters and 41% reduction in lines of code! Also, in most cases, the code becomes more reader friendly.
+This is a 39% reduction in characters and 41% reduction in lines of code! Also, in most cases, code that uses Lambdas becomes more expressive and more readable.
 
 ## Introduction: Streams and Collections
 
 **What is a Stream?**  
-Where a collection is a data structure that stores elements, a stream is a sequence of elements that moves values from a source, such as collection, through a pipeline of steps.  Stream operations leverage the use of lambda expressions to achieve a task, as we'll see shortly.
+Where a _collection_ is a data structure that stores elements, a stream is a sequence of elements that moves values from a source, such as a collection, through a pipeline of steps.  Stream operations leverage Lambda expressions to produce a result, as we'll see shortly.
 
 **What is a Pipeline?**  
-A pipeline is a sequence of operations, such as filtering, modifying, or aggregating operations, that are applied to a source stream to produce an output. The output can be anything, for example a primitive, an object, a collection, or even another stream. Such operations accept lambda expressions as parameters, enabling you to customize how they behave.  Some of the common stream operations are _map_, _filter_, _sum_, _average_, _sort_, and _forEach_.
+A pipeline is a sequence of operations, such as filtering, modifying, or aggregating operations, that are applied to a source stream to produce a result. The result can be anything; a primitive, an object, a collection, or even another stream. The operations are supplied as parameters, expressed as lambda expressions.  Some of the common stream operations are _map_, _filter_, _sum_, _average_, _sort_, and _forEach_.
 
 **Types of Stream Operations**  
-Stream operations are used to modify streams to create an end result. There are 2 main types of stream operations:  
-- Intermediate operations - take a stream as input and modify it to produce a different stream. Some of the commonly used intermediate operations are _map_, _filter_, _sort_, and _flatMap_. 
-- Terminal operations - produce a final result, marking the stream as consumed. Once a terminal operation is reached, the stream is consumed, and no further operations can be applied to the stream.  In other words, you will use terminal operations to create your end result objects. Some common terminal operations are _collect_, _reduce_, and _forEach_.
+Stream operations are used to modify streams to create an end result. Stream operations come in two major flavors:  
+- _Intermediate operations_ take a stream as input, filtering and modifying the input elements to produce a new stream as output. Some of the commonly used intermediate operations are _map_, _filter_, _sort_, and _flatMap_. 
+- _Terminal operations_ consume a stream to produce a final result. Once a terminal operation is reached, the stream is fully consumed, and no further operations can be applied to the stream. Some common terminal operations are _collect_, _reduce_, and _forEach_.
 
 **Getting a Stream from a Collection**
 Let's say we have the following list
@@ -174,7 +187,8 @@ or even simpler:
 ```java
 stringList.forEach(x -> System.out.println(x));
 ```
-which works because collections like the List interface have a built-in _forEach_ method, which implicitly creates the stream.
+
+We can use the _forEach_ operator directly on the List, because Java Collections have a built-in _forEach()_ method, which implicitly calls _stream().forEach()_.
 
 The output would be:  
 Hello  
@@ -182,37 +196,33 @@ World
 
 ## Demo: Iterating a collection using streams
 
-In this demo, we will take an existing list of String objects and iterate it. While doing so, we will create another list of strings
-by concatenating a string value to each value of the original string list.
+In this demo, we will take an existing list of String objects and iterate it to produce a new list of strings, consisting of the values from the original list concatenated with a constant string value.
 
-    package com.ga.examples;
-    
-    import java.util.ArrayList;
-    import java.util.Arrays;
-    import java.util.List;
-    
-    public class ListIterationWithConcatenationDemo {
-    
-        public static void main(String[] args) {
-    
-            List<String> stringList = Arrays.asList("My name is ", "My friends call me ", "My mother calls me ");
-            List<String> concatenatedList = new ArrayList<>();
-    
-            stringList.stream().forEach(stringValue -> {
-                concatenatedList.add(stringValue + "Jim");
-            });
-    
-            //Now output the values of the concatenatedList using streams.
-            concatenatedList.stream().forEach(stringValue -> {
-                System.out.println(stringValue);
-            });
-    
-            //Now output the values of the original stringList using streams to show that the list is unaltered.
-            stringList.stream().forEach(stringValue -> {
-                System.out.println(stringValue);
-            });
-        }
+<!-- todo: I did not check my syntax changes in the IDE; please double check -->
+```java
+package com.ga.examples;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class ListIterationWithConcatenationDemo {
+
+    public static void main(String[] args) {
+        // The original list
+        List<String> stringList = Arrays.asList("My name is ", "My friends call me ", "My mother calls me ");
+        List<String> concatenatedList = new ArrayList<>();
+
+        stringList.forEach(stringValue -> concatenatedList.add(stringValue + "Jim");
+
+        //Now output the values of the concatenatedList using streams.
+        concatenatedList.forEach(stringValue -> System.out.println(stringValue) );
+
+        //Now output the values of the original stringList using streams to show that the list is unaltered.
+        stringList.forEach(stringValue -> System.out.println(stringValue) );
     }
+}
+```
     
 The output would be:  
 My name is Jim  
@@ -233,7 +243,7 @@ My mother calls me
 The map() intermediate operation is a method in the Stream class that represents a functional programming concept. In simple words, the map() is used to transform one object into a different object by using a lambda expression.
 
 **Syntax:**  
-.map(**argument -> { function to apply}) <-- Notice the lambda expression**
+.map(**argument -> function to apply) <-- Notice the lambda expression**
 
 **Example:**  
     
@@ -241,35 +251,37 @@ The map() intermediate operation is a method in the Stream class that represents
     
     Stream<Integer> numberListStream =
         numbersList.stream()
-            .map(number -> { 
-                return Integer.valueOf(number);
-            });
+            .map(number -> Integer.valueOf(number) );
 
-In the example above, the "number" argument will represent each number list value.  The function
-applied is "Integer.valueOf(number)".  The result is a stream of Integer values that can
-be filtered, aggregated, or converted to other objects.
+In the example above, we are iterating the list, and for each value, the "number" argument represents the next number in the list.  The function
+"Integer.valueOf(number)" is applied to eachof those "number" values in-turn, producing a new stream of Integer values, that itself can
+be further filtered, aggregated, and converted to other objects.
 
 **Note:**  
 The map() function will always return a stream since it's an intermediate operation.  
 
 **What are collectors?**  
-In the previous examples, we've seen how to iterate streams and map streams to different objects.  But how do you come up with an end result? That's where collectors come in. Collectors are terminal operations used to implement various useful reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, etc.  In layman's terms, this a way to convert a stream into your end result.
+In the previous examples, we've seen how to iterate streams and how to map streams to new objects, to produce new streams. But at the end of the day, we want values not streams, so how do you come up with an end result? That's where collectors come in. 
 
-There are various functions of the Collectors class.  The one we will be focused on is "toList()".  
-Let's expand our earlier example by converting the stream to a list of Integers.
+Collectors are terminal operators that are used to implement various useful reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, etc. In short, collectors produce an end result from an input stream. 
+
+Java provides a _Collectors_ class with many static methods. Let's zoom-in on one of those methods- "_toList()_", which we will use to expand our earlier example by consuming a stream of String objects representing integers, to produce a new list of corresponding Integers.
 
     List<String> numbersList = Arrays.asList("1", "2", "3", "4", "5");
     
     List<Integer> newNumbersList =
         numbersList.stream()
-            .map(number -> {
-                return Integer.valueOf(number);
-            })
+            .map(number -> Integer.valueOf(number))
             .collect(Collectors.toList());
  
+ The _map_ operation converts each String from the input stream into an Integer, producing a new List of Integers.
+ 
+ The _collect_ operation consumes that resulting Integer stream and produces a List of corresponding Integer objects.
+ 
+ <!-- todo: we should talk about lazy execution of operators. I see this is mentioned in lesson 2 but not really explained. Victor -->
 
 ## Demo: Rewrite Previous Demo using Collectors
-For this demo, we are going to take the previous demo and use a Collector instead of manually adding elements to a new list.
+For this demo, we are going to revisit the "My name is Jim" demo above, this time using a Collector, instead of manually adding elements to a new list.
 
     package com.ga.examples;
     
@@ -286,20 +298,14 @@ For this demo, we are going to take the previous demo and use a Collector instea
     
             List<String> concatenatedList =
                 stringList.stream()
-                    .map(stringValue -> {
-                        return stringValue + "Jim";
-                    })
+                    .map(stringValue -> stringValue + "Jim" )
                     .collect(Collectors.toList());
     
             //Now output the values of the concatenatedList using streams.
-            concatenatedList.stream().forEach(stringValue -> {
-                System.out.println(stringValue);
-            });
+            concatenatedList.stream().forEach(stringValue -> System.out.println(stringValue) );
     
             //Now output the values of the original stringList using streams to show that the list is unaltered.
-            stringList.stream().forEach(stringValue -> {
-                System.out.println(stringValue);
-            });
+            stringList.stream().forEach(stringValue -> System.out.println(stringValue) );
         }
     }
 
@@ -316,12 +322,11 @@ My mother calls me
 - Also point out the stream pipeline of stringList.stream(), map, and collect.
 
 ## Introduction: Filters
-So far we discussed about streams and how they can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation "map" and the terminal operations "forEach" and "collect".  But what if we had a requirement where we only needed a subset of the data based on certain criteria?  This is where a very useful intermediate operation called "filter" comes in.
+So far we discussed how streams can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation "map" and the terminal operations "forEach" and "collect".  But what if we had a requirement where we only needed a subset of the data based on certain criteria?  This is where a very useful intermediate operation called "filter" comes in.
 
 **What is a filter?**  
-The filter method essentially selects elements based on a condition you provide. That's why the filter 
-(Predicate condition) accepts a Predicate object, which provides a function that is applied to a condition. 
-If the condition evaluates true, the object is selected. Otherwise, it will be ignored.  
+The filter method essentially selects a subset of elements from the original list based on a "Predicate" condition that is expressed as a Lambda. The _filter_ method accepts a Predicate object, which provides a function that is applied to a condition. We will see in the section on Functional Interfaces, that the Lambda is used to express the _Predicate_ functional interface, by taking an input value and producing a boolean. 
+If the condition evaluates true, the object is selected. Otherwise, it is ignored.  
 
 **Example:**
 
@@ -333,8 +338,9 @@ If the condition evaluates true, the object is selected. Otherwise, it will be i
             .filter(number -> number % 2 == 0)
             .collect(Collectors.toList());
 
-    evenNumberList.stream().forEach(number -> System.out.println(number));
+    evenNumberList.forEach(number -> System.out.println(number));
     
+In this example we use a Lambda expression in the filter method to express the condition "if the number is even, return true and keep it, otherwise return false and ignore it".
 The output would be:  
 2  
 4  
@@ -427,7 +433,7 @@ The completed example can be found in the repo in the file named "IndependentPra
 
 
 ## Conclusion
-We've covered a lot in this brief introduction to lambda expressions, streams, filtering, and collecting. Hopefully this introduction shows how this functional style can improve code readability. Also, it can reduce the amount of code needed to achieve a task when compared to the imperative style.
+We've covered a lot in this brief introduction to lambda expressions, streams, filtering, and collecting. Hopefully this introduction shows how this _functional_ style can improve code readability and reduce the amount of code needed to achieve a task when compared to the classic _imperative_ style.
 
 #### Let's Review
 
