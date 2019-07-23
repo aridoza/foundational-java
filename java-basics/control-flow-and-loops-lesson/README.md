@@ -1,6 +1,6 @@
 ---
 title: Control Flow and Loops
-type: lesson
+type: Lesson
 duration: "1:35"
 creator:
     name: Kristen Tonga
@@ -11,43 +11,45 @@ creator:
 
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Control Flow and Loops
 
-### LEARNING OBJECTIVES
-*After this lesson, you will be able to:*
-- Use if/else if/else conditionals to control program flow based on boolean conditions
-- Use switch conditionals to control program flow based on explicit conditions
-- Use comparison operators to evaluate and compare statements
-- Use boolean logic (!, &&, ||) to combine and manipulate conditionals
-- Loop over a code block one or more times
+### Learning Objectives
+At the end of this lesson, students will be able to:
+- Use `if...else` conditionals to control program flow based on Boolean conditions.
+- Use `switch` conditionals to control program flow based on explicit conditions.
+- Use comparison operators to evaluate and compare statements.
+- Use Boolean logic to combine and manipulate conditionals.
+- Loop over a code block one or more times.
 
-### LESSON GUIDE
+### Lesson Guide
 
-| TIMING  | TYPE  | TOPIC  |
+| Timing  | Type  | Topic  |
 |:-:|---|---|
-| 5 min  | [Opening](#opening-5-mins)  | Discuss lesson objectives |
-| 10 min  | [Introduction](#introduction-logical-operators-and-control-flow-10-mins)  | Logical operators and control flow |
-| 10 min  | [Demo](#demo-conditional-statements-10-mins)  | Conditional statements |
-| 15 min  | [Guided Practice](#guided-practice-booleanlogical-operators-15-mins)  | Boolean/Logical Operators |
+| 5 min  | [Opening](#opening-5-mins)  | Learning Objectives |
+| 10 min  | [Introduction](#introduction-logical-operators-and-control-flow-10-mins)  | Logical Operators and Control Flow |
+| 10 min  | [Demo](#demo-conditional-statements-10-mins)  | Conditional Statements |
+| 15 min  | [Guided Practice](#guided-practice-boolean-or-logical-operators-15-mins)  | Boolean or Logical Operators |
 | 10 min  | [Demo](#demo-comparison-operators-10-mins)  | Comparison Operators |
-| 10 min  | [Introduction](#introduction-switch-statement-10-mins)  | Switch Statement |
+| 10 min  | [Introduction](#introduction-switch-statement-10-mins)  | `switch` Statements |
 | 15 min  | [Demo](#demo-loops-15-mins)  | Loops |
-| 15 min  | [Independent Practice](#fizz-buzz-independent-practice-15-minutes)  |  Fizz Buzz |
-| 5 min  | [Conclusion](#conclusion-5-mins)  | Review / Recap |
+| 15 min  | [Independent Practice](#independent-practice-fizz-buzz-15-mins)  |  Fizz Buzz |
+| 5 min  | [Conclusion](#conclusion-5-mins)  | Review/Recap |
 
-## Opening (5 mins)
+## Opening (5 min)
 
-From Culttt.com: "Control Flow Structures are an important aspect of programming languages that allow your code to take certain actions based on a variety of scenarios. Control Flow is a fundamental concept in programming that allows you to dictate how your code runs under different conditions or until a certain condition is met."
+> Control flow structures are an important aspect of programming languages that allow your code to take certain actions based on a variety of scenarios. Control flow is a fundamental concept in programming that allows you to dictate how your code runs under different conditions or until a certain condition is met.
 
-"Control flow" is a concept that's consistent across most programming languages. The components of control flow (loops, if/else conditionals, switch statements, comparison operators) are also universal principles.
+*The text above is from culttt.com.*
 
-The way the control flow different components are implemented is what varies from language to language. So let's see how it's done in Java.
+Control flow is a concept that's consistent across most programming languages. The components of control flow (loops, `if...else` conditionals, `switch` statements, comparison operators) are also universal principles.
 
-Java supports a compact set of statements, specifically control flow statements, that you can use to incorporate a great deal of interactivity in your application.
+What varies is the way different control flow components are implemented from language to language. Let's see how it's done in Java.
 
-## Introduction: Logical operators and control flow (10 mins)
+Java supports a compact set of statements — specifically control flow statements — that you can use to incorporate interactivity in your application.
+
+## Introduction: Logical Operators and Control Flow (10 min)
 
 #### Block Statements
 
-Statements meant to be executed after a control flow operation will be grouped into what is called a **block statement**. These statements are wrapped into a pair of curly braces:
+Statements meant to be executed after a control flow operation will be grouped into a **block statement**. These statements are wrapped around a pair of curly braces:
 
 ```java
 {
@@ -56,28 +58,30 @@ Statements meant to be executed after a control flow operation will be grouped i
 }
 ```
 
-#### Block scope
+#### Block Scope
 
-Scope changes depending on whether a variable is defined in the class (we use the `mVariableName` convention for these), or in a method (these variables have local scope only and are not available outside that method).
+Scope changes depending on whether a variable is defined in the class (we use the `mVariableName` convention for these) or in a method (these variables have local scope only and are not available outside that method).
 
 In Java, variables defined in **block statements** modify scope, meaning those variables are not available outside of the block.
 
-<!-- Instructor Note: Show the scope error in the IDE, then correct it as shown in the second code block.-->
+<!-- **Instructor Note**: Show the scope error in the IDE, then correct it as shown in the second code block.-->
 
 For example:
 
 ```java
 boolean beautiful = true;
+
 if (beautiful)
 {
   String name = "lydia";
 }
+
 System.out.println(name); // symbol 'name' cannot be resolved
 ```
 
 Variables defined in **block statements** are not available outside of the curly braces. How might we resolve this issue?
 
-<!-- Instructor note: first try to print out name without an else statement, then add the else, when the program still won't compile.-->
+<!-- **Instructor Note**: First, try to print out `name` without an `else` statement, then add the `else` when the program still won't compile.-->
 
 ```java
 boolean beautiful = true;
@@ -85,33 +89,43 @@ String name = "pepe";
 
 if (beautiful)
 {
-  name = "robin"; // use the predefined variable
+  name = "robin"; // Use the predefined variable.
 }
-System.out.println(name);
-//=> robin
+
+System.out.println(name); //=> robin
 ```
 
-## Demo: Conditional statements (10 mins)
+## Demo: Conditional Statements (10 min)
 
-Conditional statements are a way of essentially skipping over a block of code if it does not pass a boolean expression. Java supports two conditional statements: `if`...`else` and `switch`.
+Conditional statements are a way of skipping over a block of code if it doesn't pass a Boolean expression. Java supports two conditional statements: `if...else` and `switch`.
 
-#### if...else statement
-
-`if(expr) { code }`
-
-... means run the `code` block if `expr` is `true`
+#### `if...else` Statements
 
 ```java
-if (1 > 0) {
-  System.out.println("hi");
+if (expr) {
+    code
+} else {
+    other code
+}
+```
+This means run the `code` block if `expr` is `true`, otherwise (if `expr` is `false`), run the `other code` block:
+
+```java
+int i = 9;
+
+if (i > 0) {
+    System.out.println("hi");
+} else {
+    System.out.println("goodbye");
 }
 //=> hi
 ```
 
-When you need to test more than one case, you may use `else if`:
+When you need to test more than one case, you may use `else...if`:
 
 ```java
 String name = "kittens";
+
 if (name.equals("puppies")) {
     name += "!!!";
 } else if (name.equals("kittens")) {
@@ -119,26 +133,25 @@ if (name.equals("puppies")) {
 } else {
     name = "!" + name;
 }
-System.out.println(name);
-//=> "kittens!!"
+
+System.out.println(name); //=> "kittens!!"
 ```
 
 #### Ternary Operator
 
-Java has a ternary operator for conditional expressions. You can think about the ternary operator as a concise "if-else in one line":
+Java has a ternary operator for conditional expressions. You can think of the ternary operator as a concise `if...else` in one line:
 
 ```java
 int age = 12;
 
 String allowed = (age > 18) ? "yes" : "no";
 
-System.out.println(allowed);
-//=> "no"
+System.out.println(allowed); //=> "no"
 ```
 
-#### Truth-y & False-y
+#### `true` or `false`
 
-It's important to know that all of the following become `false` when converted to a Boolean:
+It's important to know that all of the following become `false` when converted to a `Boolean`:
 
 - `false`
 - `0`
@@ -151,117 +164,117 @@ For example:
 
 ```java
 Boolean b = new Boolean("");
-System.out.println(b);
-//=> false
+
+System.out.println(b); //=> false
 ```
 
-This can be vary helpful when checking if conditions exist, are undefined, or if variables don't hold value.
+This can be helpful when checking if conditions exist or are undefined, or if variables don't hold value.
 
-## Guided Practice: Boolean/Logical Operators (15 mins)
+## Guided Practice: Boolean or Logical Operators (15 min)
 
-[Logical operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/opsummary.html) will always return a boolean value `true` or `false`.
+[Logical operators](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/opsummary.html) will always return a Boolean value, `true` or `false`.
 
-There are two "binary" operators that require two values:
-- **AND**, denoted `&&`
-- **OR**, denoted `||`
+There are two binary operators that require two values:
+- **`AND`**, denoted `&&`.
+- **`OR`**, denoted `||`.
 
-A third "unary" operator requires only one value:
+A third unary operator requires only one value:
 
-* **NOT**, denoted `!`
+* **`NOT`**, denoted `!`.
 
-#### && (AND)
+#### `&&` (`AND`)
 
-Do these with me!
-
-The `&&` operator requires both values to the left and right of the operator to be `true` in order to return the entire statement as `true`:
+The `&&` operator requires both values to its left and right to be `true` in order to evaluate the entire statement as `true`:
 
 ```java
 boolean result = false;
 
-if(true && true) {
+if (true && true) {
   result = true;
 }
-System.out.println(result);
-//=> true
+
+System.out.println(result); //=> true
 ```
 
-Any other combination using the `&&` operator is `false`.  What happens if I check `true && false`?
+Any other combination using the `&&` operator is `false`.
+
+What happens if I check `true && false`?
 
 ```java
 boolean result = false;
 
-if(true && false) {
+if (true && false) {
   result = true;
 }
-System.out.println(result);
-//=> false
+
+System.out.println(result); //=> false
 ```
 
 ```java
 boolean result = false;
 
-if(false && false) {
+if (false && false) {
   result = true;
 }
-System.out.println(result);
-//=> false
+
+System.out.println(result); //=> false
 ```
 
-#### || (OR)
+#### `||` (`OR`)
 
-The `||` operator requires just one of the left or right values to be `true` in order to return true.
+The `||` operator requires just one of the left or right values to be `true` in order to evaluate the entire statement as `true`.
 
-So, now, if I do `true || false`, what will be returned?
+So, if I do `true || false`, what will be returned?
 
 ```java
-if(true || false) {
+if (true || false) {
   System.out.println("true");
 }
 //=> true
 
-if(false || true) {
+if (false || true) {
   System.out.println("true");
 }
 //=> true
 
-if(false || false) {
+if (false || false) {
     System.out.println("true");
 }
 //=> ... silence ...
 ```
 
-> Check: What is the only combination that will return false?
+> **Knowledge Check**: What is the only combination that will return `false`?
 
 Only `false || false` will return `false`.
 
-The `!` takes a value and returns the opposite boolean value, i.e.
+The `!` takes a value and returns the opposite Boolean value:
 
 ```java
 !(true)
 //=> false
 ```
 
-The `&&` and `||` operators use short-circuit logic, which means that whether they will execute their second operand is dependent on the first.
+The `&&` and `||` operators use short-circuit logic, which means whether or not they execute their second operand depends on the first.
 
-> Check: Can you think of a time when this might be useful?
+> **Knowledge Check**: Can you think of a time when this might be useful?
 
-This is useful for checking for null objects before accessing their attributes:
+This is useful for checking for `null` objects before accessing their attributes:
 
 ```java
-if(instructor != null && instructor.getName().equals("drew")) {
-  System.out.println("davis")
+if (instructor != null && instructor.getName().equals("drew")) {
+  System.out.println("davis");
 }
 ```
 
-In this case, if the first operand `instructor != null` is false, then the second operand `instructor.getName().equals("drew")` will not be evaluated. The expression is basically saying "we already know the whole `&&` expression is false, because `instructor != null` is false. Why bother dealing with the second operand?"
+In this case, if the first operand, `instructor != null`, is `false`, then the second operand, `instructor.getName().equals("drew")`, will not be evaluated. The expression is basically saying, "We already know the whole `&&` expression is `false` because `instructor != null` is `false`. Why bother dealing with the second operand?"
 
-This is also important because a `Null Pointer Exception` will be thrown if we try to call a method using "dot notation" on a null Object reference.
+This is also important because a `NullPointerException` will be thrown if we try to call a method using "dot notation" on a `null` object reference.
 
-## Demo: Comparison Operators (10 mins)
+## Demo: Comparison Operators (10 min)
 
 [Comparisons](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html) in Java can be made on primitives using `<`, `>`, `<=`, and `>=`.
 
-> Check: What is a primitive data type?
+> **Knowledge Check**: What is a primitive data type?
 
 ```java
 'A' > 'a'
@@ -275,7 +288,7 @@ This is also important because a `Null Pointer Exception` will be thrown if we t
 
 ```
 
-Note that you _cannot_ do:
+Note that you **cannot** do:
 
 ```java
 12 >= "12"
@@ -287,18 +300,18 @@ Note that you _cannot_ do:
 
 #### Equality Operator `==`
 
-When verifying equality between primitives use double equal `==`:
+When verifying equality between primitives, use `==`:
 
 ```java
 System.out.println(1 == 2);
-=> false
+//=> false
 ```
 
-But what about with Objects like strings?
+But what about with objects like `String`s?
 
-##### A special note on Equality among Strings:
+##### A Special Note on Equality Among `String`s
 
-There are actually two ways to compare the equality of strings.
+There are two ways to compare the equality of `String`s:
 
 ```java
 String blue = "blue";
@@ -308,41 +321,39 @@ boolean withWords = (blue).equals("blue");      //=> true
 
 Do you know which one of these would be preferred?
 
-Well, let's do another example to show you which and why:
+Let's do another example to show you which and why:
 
 ```java
 String blue = "blue";
 String bl = "bl";
 String ue = "ue";
+
 System.out.println(bl+ue);                      //=> blue
 boolean withSigns = (bl+ue == blue);            //=> false
 boolean withWords = (bl+ue).equals(blue);       //=> true
 ```
 
-Why isn't `withSigns` true? The print out looks the same.
+Why isn't `withSigns` `true` when the output looks the same?
 
-Well, Objects and arrays are complex collections of values, and when we refer to them, we're actually referencing where they live in memory. That's why we say Objects are **passed by reference** while things like ints and floats are **passed by value**.
+Objects and arrays are complex collections of values, and when we refer to them, we're actually referencing where they live in memory. That's why we say objects are **passed by reference**, while `int` and `float` are **passed by value**.
 
-`==` compares the place where the object was stored on the computer.
+`==` compares the place where the object was stored on the computer. What this means is that Java doesn't care if they look similar; it only compares whether or not they're the exact same object in memory. When checking for equality in each of the cases above, we're actually comparing two objects that are in two different places in memory.
 
-What this means is that Java doesn't care if they look similar. It only compares whether or not they are the exact same object in memory. In each of the cases above, when checking for equality, we're actually comparing two Objects that are in two different places in memory.
+`String blue` has a reference to where it's stored on the computer, and that's a different place than where `String bl` is stored. They're not exactly the same, according to `==`.
 
-`String blue` has a reference to where it is stored on the computer, and that is a different place than `String bl` is stored. They're not exactly "the same" according to `==`.
+`equals()`, on the other hand, can be called on an instance of a `String` object. This method checks if the `char` arrays in each `String` are the same, not if the references are the same.
 
-`equals()`, on the other hand, is a method that can be called on an instance (`str1`) of a String Object. And this method checks whether the `char` arrays in each String are the same, not whether the references are the same.
+In short, use `equals()` when comparing `String`s.
 
-The long and short of it, use `equals` when comparing strings.
-
-> Check: Why can we call methods on a variable with data type string but not on an int?
+> **Knowledge Check**: Why can we call methods on a variable of a `String` data type but not on an `int`?
 
 #### Don't Forget About Me: `!=`
 
-There is also an `!=` operator, which is the inverse `==`.
+There's also an `!=` operator, which is the inverse of `==`.
 
+## Introduction: `switch` Statements (10 min)
 
-## Introduction: Switch Statement (10 mins)
-
-The switch statement can be used for multiple branches based on a number or string:
+The `switch` statement can be used for multiple branches based on a number or `String`:
 
 ```java
   String food = "apple";
@@ -360,13 +371,13 @@ The switch statement can be used for multiple branches based on a number or stri
 //=> I like apples
 ```
 
-In this case, the `switch` statement compares `food` to each of the cases (`pear` and `apple`) and evaluates the expressions beneath them if there is a match. It uses `String.equals` method in this case, or `==` in the case of primitives, to evaluate equality.
+In this case, the `switch` statement compares `food` to each of the cases (`pear` and `apple`) and evaluates the expressions beneath them if there's a match. It uses the `String.equals` method in this case, or `==` in the case of primitives, to evaluate equality.
 
 The default clause is optional.
 
-**Note: Breaks are important!** If you don't put a break statement, the expression will continue to be evaluated for each following case. This might cause unintended consequences.
+**Note: Breaks are important.** If you don't put a `break` statement, the expression will continue to be evaluated for the next cases. This might cause unintended consequences.
 
-For example if you eliminate the break statements:
+For example, if you eliminate the `break` statements:
 
 ```java
   String food = "apple";
@@ -382,12 +393,13 @@ For example if you eliminate the break statements:
 ```
 
 The result would be:
+
 ```
 I like apples 
 No favorite
 ```
 
-If `food = "pear"` then the output would be:
+If `food = "pear"`, then the output would be:
 
 ```
 I like pears  
@@ -395,19 +407,17 @@ I like apples
 No favorite
 ```
 
-This is not exactly what we had intended.
+This isn't what we intended.
 
-## Demo: Loops (15 mins)
+## Demo: Loops (15 min)
 
-In just about all programming languages, loop-ing exists.  A loop is a statement or block of code that will continue to execute while or until a condition exists.
+Looping exists in just about all programming languages. A loop is a statement or block of code that will continue to execute while or until a condition exists.
 
-`while` loops, for example, will run a block of code **while** a condition is `true`.
+`while` loops, for example, will run a block of code **while** a condition is `true`. Java has `while` loops and `do...while` loops.
 
-Java has `while` loops and `do-while` loops.
+The `while` loop is good for basic looping, but there's a possibility it will never run.
 
-The `while` loop is good for basic looping, but there's a possibility it will never get run.
-
-> Check: In what case will the while loop never run?
+> **Knowledge Check**: In what case will the `while` loop never run?
 
 ```java
 while (true) {
@@ -415,10 +425,11 @@ while (true) {
 }
 ```
 
-Using a `do-while` loop makes sure that the body of the loop is executed at least once, because `while()` isn't evaluated until after the block of code runs.
+Using a `do...while` loop makes sure the body of the loop is executed at least once, because `while` isn't evaluated until after the block of code runs:
 
 ```java
 int input = 0;
+
 do {
   System.out.println(input++);
 } while (input < 10);
@@ -426,20 +437,21 @@ do {
 
 You can use looping in combination with iteration: a way of incrementally repeating a task.
 
-For example, using a for loop:
+For example, using a `for` loop:
 
 ```java
 int iterations = 10;
+
 for (int i = 0; i < iterations; i++) {
   System.out.println(i);
 }
 ```
 
-Notice the placement of the comma and semicolons, and let's take a look at what each of the parts do:
+Notice the placement of the semicolons. Now, let's take a look at what each of the parts do:
 
 1. `int i = 0;` is the **initialization** phase.
   - This is executed once, before the loop begins.
-  - Note that `int i` is declared within this phase. This means that the lifespan of `i` is limited to within the for loop, which is a much cleaner, and leads to less problems down the line.  
+  - Note that `int i` is declared within this phase. This means the lifespan of `i` is limited to within the `for` loop, which is much cleaner and leads to less problems down the line.
 
 2. `i < iterations;` is the **termination** phase.
   - Every time the loop evaluates, it checks this statement.
@@ -449,17 +461,17 @@ Notice the placement of the comma and semicolons, and let's take a look at what 
 3. `i++` is the **increment** expression.
   - This happens every time the loop evaluates.
   - This is equivalent to the `do` section of the `do...while` loop.
-  - In this case, each loop, `i` is incremented by 1.
+  - In this case, for each loop, `i` is incremented by `1`.
 
-## Fizz Buzz - Independent Practice (15 minutes)
+## Independent Practice: Fizz Buzz (15 min)
 
-Fizz buzz is a game about division. Create a program that will iterate through numbers from 1 to 101 and log each number in the console.
+Fizz buzz is a game about division. Create a program that will iterate through numbers `1` to `101`, and log each number in the console.
 
-- In the loop every time a number is divisible by **3**, instead of logging the number itself, the word "fizz" should appear.
-- If the number is divisible by  **5**, the word "buzz" should be logged.
-- If the number is divisible by both **3** and  **5**, then the word "fizzbuzz" should be logged.
+- If the number is divisible by **three**, the word `fizz` should be logged instead of logging the number itself.
+- If the number is divisible by **five**, the word `buzz` should be logged.
+- If the number is divisible by both **three** and **five**, the word `fizzbuzz` should be logged.
 
-Hint: Remember the _modulus_ operator?
+**Hint**: Remember the **modulo** operator?
 
 A typical output would look like this:
 
@@ -467,7 +479,7 @@ A typical output would look like this:
 
 <details> 
 
-  <summary>Solution</summary>
+<summary>Solution</summary>
 
 ```java
 for (int i = 1; i < 101; i++) {
@@ -486,8 +498,6 @@ for (int i = 1; i < 101; i++) {
 
 </details>
 
-## Conclusion (5 mins)
+## Conclusion (5 min)
 
-These are some of the foundational tools you'll use in many of your applications. You'll probably need to refresh yourself on the exact syntax a few times before you memorize it, but it's important to be able to remember, these core "control flow" concepts, in general, because they'll come up in pretty much every programming language you'll ever encounter.
-
-- [Control Flow](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
+These are some of the foundational tools you'll use in many of your applications. You'll probably need to refresh yourself on the exact syntax a few times before you memorize it. But it's important to remember these core control flow concepts, because they'll come up in almost every programming language you'll encounter. The Java documentation on [control flow statements](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html) is a helpful reference.
