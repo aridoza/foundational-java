@@ -9,7 +9,7 @@
 At the end of this lesson, you'll be able to:
 - Explain what a computer is and how its component parts work together.
 - Differentiate between compiled and interpreted programming languages.
-- Tell all your friends what makes Java great.
+- Tell all of your friends what makes Java great.
 
 ### What Is a Computer?
 
@@ -17,30 +17,30 @@ At the end of this lesson, you'll be able to:
 
 Before we get into Java, let's start with the basics. How would you define a computer?
 
-Take a moment to jot down a one-sentence definition of a computer. Then, get into a group of 3–4 people. Have everyone share their own definitions, and create one shared definition based on everyone's answers. Be prepared to share it with the class.
+Take a moment to jot down a one-sentence definition of a computer. Then, get into a group of 3–4 people. Have everyone share their own definitions and create one shared definition based on everyone's answers. Be prepared to share it with the class.
 
-**In (Sort of) Technical Terms ...**
+**In (Sort of) Technical Terms...**
 
-A computer is a device that processes instructions — an instruction processor, more commonly known as a CPU or central processing unit.
+A computer is a device that processes instructions — an instruction processor, more commonly known as a CPU, or **central processing unit**.
 
 When you open an application on your computer, the machine is actually processing a series of instructions called a computer program that instructs the machine on what to display and how to respond to your input. This can't happen in isolation.
 
 We need a way to enter a program, which is why we have keyboards and mice. We need to display information, which is why we have monitors and printers. We need a place to store instructions and files, which is why we have disks.
 
-We also need a location to execute the instructions and store data, which is why our computers have memory. We need a way to read and write to disk, and talk to other computers in our organization or across the World Wide Web, which is why we have networks.
+We also need a location to execute the instructions and store data, which is why our computers have memory. We need a way to read and write to disk and talk to other computers in our organization or across the World Wide Web, which is why we have networks.
 
-Ultimately, every computer must have an operating system, which is just a fancy name for a computer program that manages all the accessories, allocates time for processing, manages disk accesses, coordinates multiple threads to process concurrently, and all the other millions of operations that occur every single second your computer is functioning.
+Ultimately, every computer must have an operating system, which is just a fancy name for a computer program that manages all the accessories, allocates time for processing, manages disk accesses, coordinates multiple threads to process concurrently, and all of the other millions of operations that occur every single second your computer is functioning.
 
 <img src="https://cdn-images-1.medium.com/max/1600/1*rk1o0WQWtR1tEGcsEMIpEQ.png"/>
 
-### So What Is a Computer Programming Language?
+### So, What Is a Computer Programming Language?
 
 Now, what **we** call instructions and what a **computer** calls instructions are two different things. We'd like to think of instructions as a set of natural language commands we can feed to the computer, just like we might tell our friend.
 
 Unfortunately, computer data is nothing more than a sequence of zeros and ones. And by extension, computer instructions are sequences of zeros and ones as well. These instructions comprise the machine code understood by your particular operating system. Depending on the operating system and hardware you're using — be it Windows, Mac, Android, or others — a compiler must convert the computer program to the machine code understood by that particular operating system. That's why we have computer programming languages.
 
 ![](https://git.generalassemb.ly/GA-Cognizant/foundational-java/blob/master/java-basics/computers-and-java-lesson/0s-and-1s.jpeg)
-*It's basically just the Matrix in there.*
+*It's basically just The Matrix in there.*
 
 ### What Is a Compiler?
 
@@ -54,35 +54,35 @@ Compilers produce the fastest code possible without actually writing the machine
 
 On the other side of the spectrum are interpreted languages such as JavaScript, Ruby, and Python. These don't generally compile down to machine code; rather, they execute within an interpreter "shell," a program that interprets the natural language programs and executes the corresponding instructions.
 
-Interpreted languages would generally execute slower than compiled languages, but there's no compilation step, so you can enter code and see it evaluated in real-time or as you type it. Besides the slower execution speed, interpreted languages tend to be dynamically typed, which makes it difficult for tools such as your IDE (integrated development environment) to catch errors in the code.
+Interpreted languages would generally execute slower than compiled languages, but there's no compilation step, so you can enter code and see it evaluated in real time or as you type it. Besides the slower execution speed, interpreted languages tend to be dynamically typed, which makes it difficult for tools such as your IDE (integrated development environment) to catch errors in the code.
 
 ### JVM Languages
 
 There's a happy medium between compiled and interpreted languages, and that's the class of bytecode-compiled languages such as C#, Scala, and your soon-to-be favorite language, Java.
 
-These languages are compiled into an intermediate form called "bytecode," which is similar to the machine code of most platforms. In Java, the bytecode executes in an interpreter called a JVM (Java Virtual Machine). Such languages are "write once, run anywhere" because they don't generally need to be compiled for each platform.
+These languages are compiled into an intermediate form called "bytecode," which is similar to the machine code of most platforms. In Java, the bytecode executes in an interpreter called a **JVM** (Java virtual machine). Such languages are "write once, run anywhere" because they don't generally need to be compiled for each platform.
 
-In the case of Java, there's also a JIT (just in time) compiler that inspects the code as it executes. Based on those inspections, it makes assumptions that allow it to compile segments of code directly to machine code, making it blazing fast.
+In the case of Java, there's also a JIT (just in time) compiler that inspects the code as it executes. Based on those inspections, it makes assumptions that allow it to compile segments of code directly to machine code, making it blazing fast!
 
-### What's the Big Deal About Java?
+### What's the Big Deal With Java?
 
-Java was originally designed as an embedded language, intended to control devices like refrigerators and clocks. Because it was platform independent, it took off more as a server-side development environment for building client-server tools. Years later, Java found its way back to its original roots and became an embedded language, popular in IoT (internet of things) devices.
+Java was originally designed as an embedded language, intended to control devices like refrigerators and clocks. Because it was platform independent, it took off more as a server-side development environment for building client-server tools. Years later, Java found its way back to its original roots and became an embedded language, popular in IoT (Internet of Things) devices.
 
 Here are a few reasons why Java is the most popular language for server-side development:
 
-1. **Platform independent**: Where .Net requires you to use Windows (and pay for Microsoft Windows licenses), Java can run anywhere. The term "write once, run anywhere" was made for Java.
+1. **Platform independence**: Where .Net requires you to use Windows (and pay for Microsoft Windows licenses), Java can run anywhere. The term "write once, run anywhere" was made for Java.
 
 2. **Maturity and ecosystem**: If you need tools, they're present, free, and mature, with huge developer support in the open-source industry. If you're looking to write something using Java, chances are you'll find libraries to help you.
 
-3. **Memory management**: The Java Virtual Machine has a built-in garbage collector. This is a facility (running mostly in the background) used to locate objects that no longer have anything referring to them, and removes them from the heap. Java silently performs this housekeeping, allowing you to worry about coding your business logic and not get bogged down in the vagaries of memory management.
+3. **Memory management**: The Java virtual machine has a built-in garbage collector. This is a facility (running mostly in the background) used to locate objects that no longer have anything referring to them and remove them from the heap. Java silently performs this housekeeping, allowing you to worry about coding your business logic without getting bogged down in the vagaries of memory management.
 
 4. **Backward compatibility**: Java goes to great lengths to make sure everything is backward compatible: Every time a new version comes out, you can be confident the old version of your code will still work. This is important when you're building a long-term enterprise application.
 
 ### A Word on Background
 
-The language was originally branded "Oak," but someone realized that name was already taken. So while contemplating alternate options in a cafe over a cup of hot Java coffee, someone came up with the inspiration for the name we've all come to know and love.
+The language was originally branded "Oak," but someone realized that name was already taken. So, while contemplating alternate options in a cafe over a cup of hot Java coffee, someone came up with the inspiration for the name we've all come to know and love.
 
-> And remember: Just like fire is not the same thing as firefly, Java is not JavaScript. The two languages have nothing in common other than the first four letters in their names.
+> And remember: Just like fire is not the same thing as firefly, Java is not JavaScript. The two languages have nothing in common other than the first four letters of their names.
 
 ## Check for Understanding
 
