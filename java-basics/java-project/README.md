@@ -2,12 +2,12 @@
 
 ## Overview
 
-It's time to put your Java knowledge to use. Create a basic version of rock-paper-scissors that allows users to play against the computer in the console. The game consists of a few main features:
+It's time to put your Java knowledge to use. Create a basic version of rock–paper–scissors that allows users to play against the computer in the console. The game consists of a few main features:
 
-- Play rock-paper-scissors against a computer player.
-- Play rock-paper-scissors against a human player.
+- Play rock–paper–scissors against a computer player.
+- Play rock–paper–scissors against a human player.
 
-> Hint: Use a [random number generator](https://docs.oracle.com/javase/8/docs/api/java/util/Random.html) to pick the computer's choice.
+> **Hint**: Use a [random number generator](https://docs.oracle.com/javase/8/docs/api/java/util/Random.html) to make the computer's choice.
 
 ---
 
@@ -15,9 +15,9 @@ It's time to put your Java knowledge to use. Create a basic version of rock-pape
 
 Your game must:
 
-- Have a main menu with options to enter "2 players" or "vs. computer."
-- If the user enters "2 players," they should be able to play rock-paper-scissors against a human competitor.
-- If the user enters "vs. computer," they should be able to play against the computer.
+- Have a main menu with options to enter `2 players` or `vs. computer`.
+- If the user enters `2 players`, they should be able to play rock–paper–scissors against a human competitor.
+- If the user enters `vs. computer`, they should be able to play against the computer.
 - When the game is over, the winner should be declared.
 
 ## Technical Requirements
@@ -34,8 +34,8 @@ Your game must:
 ## Bonus Ideas
 
 - Write automated JUnit tests for your application.
-- Use an agile project management framework for your game.
-- If the user enters "history," the program should display previous game history (winner's name, game date, and more).
+- Use an Agile project management framework for your game.
+- If the user enters `history`, the program should display previous game history (winner's name, game date, and more).
 - Use Java packages to modularize code. Place any helper tools in these packages — they could be related input, networking, or graphics.
 - Use Maven to install external dependencies your game might require.
 - Use [generics](https://docs.oracle.com/javase/tutorial/extra/generics/index.html) on collections such as arrays and array lists to store different data composed of different types.
@@ -123,8 +123,8 @@ quit
 
 ### Useful Resources
 
-- [Random number generator](https://docs.oracle.com/javase/8/docs/api/java/util/Random.html)
-- [Rules and history of rock-paper-scissors](https://en.wikipedia.org/wiki/Rock-paper-scissors)
+- [Random Number Generator](https://docs.oracle.com/javase/8/docs/api/java/util/Random.html)
+- [Rules and History of Rock–Paper–Scissors](https://en.wikipedia.org/wiki/Rock-paper-scissors)
 
 ---
 
@@ -140,4 +140,4 @@ Score | Expectations
 **2** | Meets expectations. Good job!
 **3** | Exceeds expectations. You wonderful creature, you!
 
-This will serve as a helpful overall gauge of whether you meet the project goals, but **the more important scores are the individual ones** above, which can help you identify where to focus your efforts for the next project.
+This will serve as a helpful overall gauge of whether or not you meet the project goals, but **the more important scores are the individual ones** above, which can help you identify where to focus your efforts for the next project.
