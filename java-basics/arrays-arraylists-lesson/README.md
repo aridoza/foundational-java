@@ -30,60 +30,60 @@ At the end of this lesson, you'll be able to:
 | 15 min  | [Demo](#demo-collections-15-mins)  | Collections |
 | 15 min  | [Guided Practice](#guided-practice-iterating-through-a-list-with-for-loops-15-mins)  | Iterating Through a List With `for` Loops |
 | 15 min  | [Independent Practice](#independent-practice-arrays-and-array-lists-15-mins)  | Arrays and Array Lists  |
-| 5 min  | [Conclusion](#conclusion-5-mins)  | Review and Recap |
+| 5 min  | [Conclusion](#conclusion-5-mins)  | Review/Recap |
 
-## Opening (5 mins)
+## Opening (5 min)
 
-So far, we've stored all the information for our programs in individual variables. That works for a small amount of information, but what if we had to manage larger sets of data? For instance, what if we had credit card transactions in a customer's banking app? Would we want to store every transaction in its own variable, or have a single variable to hold all transactions at once?
+So far, we've stored all of the information for our programs in individual variables. That works for a small amount of information, but what if we had to manage larger sets of data? For instance, what if we had credit card transactions in a customer's banking app? Would we want to store every transaction in its own variable or have a single variable hold all transactions at once?
 
->  In pairs, take 1–2 minutes to come up with a few more examples of where storing our data in a collection would be beneficial (data situations or sample programs).
+>  In pairs, take 1–2 minutes to come up with a few more examples of when storing our data in a collection would be beneficial (data situations or sample programs).
 
 ----
 
-## Introduction: Basic Arrays (5 mins)
+## Introduction: Basic Arrays (5 min)
 
 An array is a container object that holds a **fixed** number of values of **a single type**. You've already seen an example in the `main` method.
 
-<!-- Instructor note: Draw a picture on the board similar to the one below to visually display each element and corresponding index.-->
+<!-- **Instructor Note**: Draw a picture on the board similar to the one below to visually display each element and corresponding index.-->
 
 <details>
 
-<summary>Check: This is different than arrays in JavaScript. How so?</summary>
+<summary> Knowledge Check: This is different than arrays in JavaScript. How so?</summary>
 
    In JS, arrays aren't fixed in size.
 
 </details>
 
-Each item in an array is called an **element**, and each element can be accessed by its **index**. The index of elements starts at 0. Visually, this means:
+Each item in an array is called an **element**, and each element can be accessed by its **index**. The index of elements starts at `0`. Visually, this means:
 
   INDEX  | 0 | 1 | 2 | 3 | 4
   -------|---|---|---|---|---
 | ELEMENT| x | x | x | x | x |
 
-> Check: If a fixed size is required, how would we add more space?
+> **Knowledge Check**: If a fixed size is required, how would we add more space?
 
 ----
 
-## Demo: Creating Arrays (5 mins)
+## Demo: Creating Arrays (5 min)
 
 Let's create an array together:
 
-<!-- Instructor note:  Explain each piece of syntax here-->
+<!-- **Instructor Note**: Explain each piece of syntax here.-->
 
 ```java
   class ArrayDemo {
     public static void main(String[] args) {
-      // declares an array of integers
-      int[] anArray; // note data type, followed by [] indicating array
+      // Declares an array of integers.
+      int[] anArray; // Note data type, followed by [] indicating array.
 
-      // allocates memory for 10 integers
+      // Allocates memory for 10 integers:
       anArray = new int[10];
 
-      // assign elements
+      // Assign elements:
       anArray[0] = 111;
-      anArray[1] = 222; // and so on
+      anArray[1] = 222; // And so on...
 
-      // access elements
+      // Access elements:
       System.out.println("Element at index 0: " + anArray[0]);
       System.out.println("Element at index 1: " + anArray[1]); // and so on
       System.out.println("The array has a size of " + anArray.length);
@@ -91,19 +91,19 @@ Let's create an array together:
   }
 ```
 
-> Check: How would you find the index of the last element in the array using the length property?
+> **Knowledge Check**: How would you find the index of the last element in the array using the `length` property?
 
 ----
 
-## Independent Practice: Creating Arrays (10 mins)
+## Independent Practice: Creating Arrays (10 min)
 
 Create a `String` array containing **three** of your favorite things. Print the result to the command line.
 
-<!--Instructor note: Go over how you would create `String[] favoriteThings;`-->
+<!--**Instructor Note**: Review how you would create `String[] favoriteThings;`-->
 
 <details>
   
-<summary>Check: What are the three parts of creating an array?</summary>
+<summary>Check: What are the three steps of creating an array?</summary>
 
   1. Declare variable.
   2. Allocate memory.
@@ -113,19 +113,19 @@ Create a `String` array containing **three** of your favorite things. Print the 
 
 ----
 
-## Demo: Manipulating Arrays (15 mins)
+## Demo: Manipulating Arrays (15 min)
 
 Arrays can also be created and initialized with one statement. The length of the array is automatically determined by the number of elements inside the curly braces.
 
 ```java
   class FavoriteThings {
     public static void main(String[] args) {
-      // shortened syntax: assign variable, allocate memory, and initialize values all in one statement
+      // Shortened syntax: Assign variable, allocate memory, and initialize values all in one statement.
       String[] favoriteThings = {
         "raindrops",
         "roses",
         "whiskers on kittens"
-      } // length will be inferred as 3
+      } // Length will be inferred as 3.
     }
   }
 ```
@@ -138,29 +138,29 @@ Note that indexing (getting or setting the item based on its position in the arr
 
 ```java
   class ArrayManipulationDemo {
-        // initialize array
+        // Initialize array:
         int[] primeNumbers = {5,3,11,7,2}; // next 13, 17, 19, 23
 
-        // get the element at a specified index
+        // Get the element at a specified index:
         int firstPrime = primeNumbers[0];
         System.out.println("index 0: " + firstPrime);
 
-        // print it
+        // Print it:
         System.out.println(Arrays.toString(primeNumbers));
 
-        // sort it
+        // Sort it:
         Arrays.sort(primeNumbers);
         System.out.println(Arrays.toString(primeNumbers));
 
-        // get its length
+        // Get its length:
         System.out.println(primeNumbers.length); // it's a constant, not a method (we'll talk about this later)
 
-        // see if value is found in array, returns -1 if not found
-        // note: binarySearch() only works if the array is sorted
+        // See if value is found in array, returns -1 if not found.
+        // Note: binarySearch() only works if the array is sorted:
         int indexOf11 = Arrays.binarySearch(primeNumbers, 11);
         System.out.println("index of 11: " + indexOf11);
 
-        // check: how to get the value?
+        // Check: how to get the value?
         // if(indexOf11 >= 0) {
             System.out.println("looking for 11, found value: " + primeNumbers[indexOf11]);
         // }
@@ -169,9 +169,9 @@ Note that indexing (getting or setting the item based on its position in the arr
 
 #### Error Checking
 
-Now, what if we searched for a value that isn't in the array? Let's see if 10 is a prime number.
+Now, what if we searched for a value that isn't in the array? Let's see if `10` is a prime number.
 
-<!-- Instructor note: Add the lines below, leaving out the commented code. Throw the exception, ask the students why it was thrown, and ONLY THEN should you add in the >=0 check commented out below and above.-->
+<!-- **Instructor Note**: Add the lines below, leaving out the commented code. Throw the exception, ask the students why it was thrown, and ONLY THEN should you add in the >=0 check commented out above and below.-->
 
 ```java
   int[] primeNumbers = {5,3,11,7,2};
@@ -184,17 +184,17 @@ Now, what if we searched for a value that isn't in the array? Let's see if 10 is
   // }
 ```
 
-An exception is thrown when the computer is asked to do something it can't do, like accessing index -1 or 4 in a four-element array. Exceptions bubble up, and unless caught (which we'll talk about in a later lesson), cause the program to quit.
+An exception is thrown when the computer is asked to do something it can't do, like accessing index `-1` or `4` in a four-element array. Exceptions bubble up and, unless caught (which we'll talk about in a later lesson), cause the program to quit.
 
-It's important to consider when the results of our actions might throw an exception, and add checks as needed.
+It's important to consider when the results of our actions might throw an exception and add checks as needed.
 
-> Check: If an array is five elements long, what happens if we look for `myArray[5]`?
+> **Knowledge Check**: If an array is five elements long, what happens if we look for `myArray[5]`?
 
 ----
 
-## Demo: Problems With Arrays (10 mins)
+## Demo: Problems With Arrays (10 min)
 
-What if we decide we want an array to include four things instead of three? For example, let's go back to our `favoriteThings` array and add "chocolate" as the fourth favorite thing.
+What if we decide we want an array to include four things instead of three? For example, let's go back to our `favoriteThings` array and add `"chocolate"` as the fourth favorite thing:
 
 ```java
   public static void addFourthFav() {
@@ -206,7 +206,7 @@ What if we decide we want an array to include four things instead of three? For 
 
 That throws an `ArrayIndexOutOfBoundsException`.
 
-Why? As mentioned, arrays are fixed in size. To add "chocolate" as a fourth item in the array, we would have to create a new array of a larger size, copy the info over, and then initialize the additional elements.
+Why? As mentioned, arrays are fixed in size. To add `"chocolate"` as a fourth item in the array, we would have to create a new array of a larger size, copy the info over, and then initialize the additional elements:
 
 ```java
   public static void addFourthFav() {
@@ -220,19 +220,19 @@ Why? As mentioned, arrays are fixed in size. To add "chocolate" as a fourth item
   }
 ```
 
-Fortunately, Java has provided something better: collections.
+Fortunately, Java has provided something better: **collections**.
 
 ----
 
-## Demo: Collections (15 mins)
+## Demo: Collections (15 min)
 
-Collections won't only provide us with more convenience methods — allowing us to do more things with the data we have — but will also **automatically increase in size** if needed.
+Collections not only provide us with more convenience methods — allowing us to do more things with the data we have — they also **increase in size automatically** if needed.
 
 Just like data types, we can use many different collection classes, each of which provides some distinct functionality. But for today, we'll focus on just one of them: `ArrayList`.
 
 #### `ArrayList`
 
-Let's take the array we made of favorite things and convert it into an `ArrayList`.
+Let's take the array we made of favorite things and convert it into an `ArrayList`:
 
 ```java
   public static void main(String[] args) {
@@ -245,7 +245,7 @@ Let's take the array we made of favorite things and convert it into an `ArrayLis
   }
 ```
 
-Note that the data type of each element is defined in angle brackets `<>`. This data type could be any object type. So, if you created a `Person` object, you could create an `ArrayList` of `Person` (i.e., an `ArrayList<Person>`).
+Note that the data type of each element is defined in angle brackets, `<>`. This data type could be any object type. So, if you created a `Person` object, you could create an `ArrayList` of `Person` (i.e., an `ArrayList<Person>`).
 
 If you want to make an `ArrayList` of a primitive type, you need to use a "boxed" version of that type in the angle brackets. For example, if you want to store data of type `int`, you would use an `ArrayList<Integer>`.
 
@@ -256,24 +256,24 @@ An `ArrayList` is an object with methods, which makes it much easier to manipula
 Check out the following methods:
 
 ```java
-    // to print, no need to explicitly convert it to a String first
-    // because ArrayList has a toString() method, which automatically gets called here
+    // To print, no need to explicitly convert it to a String first
+    // because ArrayList has a toString() method, which automatically gets called here:
     System.out.println("favoriteThings = " + favoriteThings);
 
-    // add(item): adds to the end of the list
+    // add(item) adds to the end of the list:
     favoriteThings.add("chocolate");
     System.out.println("favoriteThings = " + favoriteThings);
 
-    // add(index, item): adds to the list at the specified index and moves all other entries over
-    // check: what you would have to do with a simple array to do that?
+    // add(index, item) adds to the list at the specified index and moves all other entries over.
+    // Check: What you would have to do with a simple array in order to do that?
     favoriteThings.add(1, "warm woolen mittens");
     System.out.println("favoriteThings = " + favoriteThings);
 
-    // set(index, item): replaces the item at the given index with a new one
+    // set(index, item) replaces the item at the given index with a new one:
     favoriteThings.set(0, "tarnished copper kettles");
     System.out.println("favoriteThings = " + favoriteThings);
 
-    // to search for an entry
+    // To search for an entry:
     int indexOfIceCream = favoriteThings.indexOf("icecream");
     if(indexOfIceCream != -1) {
       String ic = favoriteThings.get(indexOfIceCream);
@@ -282,27 +282,27 @@ Check out the following methods:
       System.out.println("icecream not found");
     }
 
-    // here's another good one: get number of things in the ArrayList
+    // Here's another good one: To get number of things in the ArrayList:
     favoriteThings.size();
 ```
 
-> Check: What are the advantages of using an `ArrayList` over an array?
+> **Knowledge Check**: What are the advantages of using an `ArrayList` over an array?
 
 -----
 
-## Guided Practice: Iterating Through a List With `for` Loops (15 mins)
+## Guided Practice: Iterating Through a List With `for` Loops (15 min)
 
 #### The `for` Loop
 
-Remember the `for` loop? We used it in the control flow lesson to print something to the command line for a set number of times.
+Remember the `for` loop? We used it in the control flow lesson to print something to the command line a set number of times.
 
-> Check: What's the syntax of a basic `for` loop?
+> **Knowledge Check**: What's the syntax of a basic `for` loop?
 
 The `for` loop is also commonly used with arrays and collections to iterate through each of the elements and do something with each entry.
 
 For example, let's create a list of five movies and iterate through it, printing each one to the command line.
 
-<!-- Instructor note: Get movie suggestions from the class. -->
+<!-- **Instructor Note**: Get movie suggestions from the class. -->
 
 ```java
   public static void main(String[] args) {
@@ -319,11 +319,11 @@ For example, let's create a list of five movies and iterate through it, printing
 
 ```
 
-To recap, a `for` loop has an initialization stage (where `i` is initialized), a termination condition (which includes the logic for when the loop stops), and an increment stage (that will occur on the completion of each loop).
+To recap, a `for` loop has an initialization stage (where `i` is initialized), a termination condition (which includes the logic for when the loop stops), and an increment stage (which will occur upon the completion of each loop).
 
 #### The Enhanced `for` Loop
 
-There's also another `for` loop syntax made especially for arrays and lists. This is sometimes referred to as the **enhanced** `for` loop.
+There's also another `for` loop syntax made especially for arrays and lists. This is sometimes referred to as the **enhanced** `for` loop:
 
 ```java
  for (String movie : movieList) {
@@ -333,15 +333,15 @@ There's also another `for` loop syntax made especially for arrays and lists. Thi
 
 The enhanced `for` loop is the form recommended by Oracle for arrays and collections.
 
-A normal `for` loop is still useful sometimes: It makes it easier to work with the index of each item alongside its value, or to modify the collection while you're iterating over it. But if you just need to do something with each element, the enhanced `for` loop is cleaner and more efficient.
+A normal `for` loop is still useful sometimes: It makes it easier to work with the index of each item alongside its value or modify the collection while you're iterating over it. But, if you just need to do something with each element, the enhanced `for` loop is cleaner and more efficient.
 
-> Check: Why might you want to iterate through an array?
+> **Knowledge Check**: Why might you want to iterate through an array?
 
 ----
 
-## Independent Practice: Arrays and Array Lists (15 mins)
+## Independent Practice: Arrays and Array Lists (15 min)
 
-Complete as many of the following challenges as you can in the next 15 minutes. Each challenge should be completed in its own method.
+Work through as many of the following challenges as you can in the next 15 minutes. Each should be completed in its own method.
 
 #### Find the Size
 
@@ -355,23 +355,23 @@ Complete as many of the following challenges as you can in the next 15 minutes. 
 
 #### Sum It Up 
 
-Create a method that, given an array of type `int`, returns the sum of the first two elements in the array. If the array length is 1, just return the single element, and return 0 if the array is empty (has length 0).
+Create a method that, given an array of type `int`, returns the sum of the first two elements in the array. If the array length is `1`, just return the single element, and return `0` if the array is empty (has `length 0`).
 
 #### Igpay Atinlay
 
-Create a method that, given an `ArrayList` of words (strings), turns each word into Pig Latin. The rules of Pig Latin are as follows:
-- The first consonant is moved to the end of the word and suffixed with an "ay." 
-- If a word begins with a vowel, just add "way" to the end.
+Create a method that, given an `ArrayList` of words (`String`s), turns each word into Pig Latin. The rules of Pig Latin are as follows:
+- The first consonant is moved to the end of the word and suffixed with an "-ay." 
+- If a word begins with a vowel, just add "-way" to the end.
 - For example, pig becomes "igpay," banana becomes "ananabay," twig becomes "wigtay," and aardvark becomes "aardvarkway."
     
  -----   
 
-## Conclusion (5 mins)
+## Conclusion (5 min)
 
 Quick review:
 - List some differences between arrays and array lists.
 
-Arrays and array lists are fundamental tools to store and manipulate collections of data. Now that you know how to use them, you can start creating apps with collections of data. Excited?
+Arrays and array lists are fundamental tools for storing and manipulating collections of data. Now that you know how to use them, you can start creating apps with collections of data. Excited?
 
 ### Additional Resources
 - [Oracle Java Docs: Arrays](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html)
