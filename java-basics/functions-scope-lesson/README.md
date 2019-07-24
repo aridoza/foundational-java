@@ -10,7 +10,7 @@ creator:
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Functions and Scope
 
 ### Learning Objectives
-At the end of this lesson, you'll be able to:
+At the end of this lesson, students will be able to:
 - Describe how parameters relate to functions.
 - Compare different types of variable scope.
 - Identify the parts of a method.
@@ -28,17 +28,17 @@ At the end of this lesson, you'll be able to:
 | 10 min  | [Demo](#demo-more-functions-10-mins)  | More Functions |
 | 15 min  | [Guided Practice](#guided-practice-writing-functions-15-mins)  | Writing Functions |
 | 15 min  | [Independent Practice](#independent-practice-write-a-few-functions-15-mins)  | Write a Few Functions |
-| 5 min  | [Conclusion](#conclusion-5-mins)  | Review and Recap |
+| 5 min  | [Conclusion](#conclusion-5-mins)  | Review/Recap |
 
-## Opening (5 mins)
+## Opening (5 min)
 
-We previously covered variables and data types, two important building blocks of all programming languages. Today, we'll learn about two more topics: functions and scope. Functions are reusable chunks of code that complete some task, while scope defines where the variables actually have relevance in your program.
+We've previously covered variables and data types — two important building blocks for all programming languages. Today, we'll learn about two more topics: functions and scope. **Functions** are reusable chunks of code that complete some task, while **scope** defines where the variables actually have relevance in your program.
 
-## Introduction: Writing Functions (5 mins)
+## Introduction: Writing Functions (5 min)
 
-#### Main Method
+#### `main` Method
 
-We've already met a function before: the `main` method. Every Java program needs it. It's the entry point to the rest of the application, and it will invoke all the other methods required by your program.
+We've already met a function: the `main` method. Every Java program needs it. It's the entry point to the rest of the application, and it will invoke all of the other methods required by your program.
 
 Let's briefly review it:
 
@@ -46,11 +46,11 @@ Let's briefly review it:
 public static void main(String[] args)
 ```
 
-## Demo: Let's Break It Down (15 mins)
+## Demo: Let's Break It Down (15 min)
 
 Let's look at what each part of this method does. We'll start with the basics, which we covered a bit in explaining the `main` method.
 
-<!-- Instructor note: Write the method on the board (or add body to `main` method signature, at the appropriate time), and underline and label each part as you go through the following sections.-->
+<!-- **Instructor Note**: Write the method on the board (or add `body` to the `main` method signature at the appropriate time) and underline and label each part as you go through the following sections.-->
 
 ```java
 public                       void            interestingMethod(  String input  )     throws IOException
@@ -69,29 +69,29 @@ public                       void            interestingMethod(  String input  )
 Modifiers are used to modify how a method can be called.
 
 Access modifiers include:
-- **`private`**: visible only to the class.
-- **`protected`**: visible to the package and all subclasses.
-- **`public`**: visible to the world.
+- **`private`**: Visible only to the class.
+- **`protected`**: Visible to the package and all subclasses.
+- **`public`**: Visible to the world.
 
-When no access modifier is specified, the method is visible only to the class and package.
+When no access modifier is specified, the method is only visible to the class and package.
 
 Non-access modifiers include:
-- **`static`**: for creating class methods and variables.
-- **`final`**: for making something permanent.
-- **`abstract`**: to create abstract classes and methods.
-- **`synchronized`**: used for threads.
+- **`static`**: For creating class methods and variables.
+- **`final`**: For making something permanent.
+- **`abstract`**: For creating abstract classes and methods.
+- **`synchronized`**: For threads.
 
-We'll explain more of what all these keywords mean in later lessons. For now, use `public`.
+We'll explain more of what all of these keywords mean in later lessons. For now, use `public`.
 
-<!--Instructor note: Refer back to `main` method and point out `static` modifier. Perhaps eliminate `static` from a method and point out the error. -->
+<!--**Instructor Note**: Refer back to `main` method and point out `static` modifier. Maybe eliminate `static` from a method and point out the error. -->
 
-Any method called from within a static context must also be static. So for now, use `public static` for all methods. Again, we'll explain more on what this means later.
+Any method called from within a `static` context must also be `static`. So for now, use `public static` for all methods. Again, we'll explain more on what this means later.
 
 #### Return Type
 
 A method can return a value, but the type of that returned value must be specified so the calling function knows what to do with it.
 
-Let's see how that works. Create a new Java program using the given console template from Eclipse, or create a basic class with an inner `main` method. Then, code the two methods below. Use the commented print statements to explain local scope.
+Let's see how that works. Create a new Java program using the given console template from Eclipse, or create a basic class with an inner `main` method. Then, code the two methods below. Use the commented `print` statements to explain local scope.
 
 The problem:
 
@@ -135,13 +135,13 @@ class Main {
   }
 ```
 
-A function executes until it reaches a `return` statement or a closing curly brace. If a data type has been specified, that data (or null) must be returned or the code will not compile.
+A function executes until it reaches a `return` statement or a closing curly brace. If a data type has been specified, that data (or `null`) must be returned, or the code will not compile.
 
 Another solution (if it wasn't appropriate to use a return type) would be to use a global variable.
 
-> Check: What do you think a global variable allows you to do?
+> **Knowledge Check**: What do you think a global variable allows you to do?
 
-Global variables are defined at the top of a class, and by convention are named using `mVariableName`.
+Global variables are defined at the top of a class and by convention are named using `mVariableName`:
 
 ```java
 class Main {
@@ -163,33 +163,33 @@ class Main {
   }
 ```
 
-> Check: When is it appropriate to use a return type? When is a global variable more appropriate?
+> **Knowledge Check**: When is it appropriate to use a return type? When is a global variable more appropriate?
 
-## Independent Practice: Discuss (10 mins)
+## Independent Practice: Discuss (10 min)
 
-Take five minutes and discuss these questions with the person next to you:
+Take five minutes and discuss the following questions with the person next to you:
 
 - What are some data types a method could return?
 - Why might you want to return a value from a method?
-- What is the naming convention for global variables and where do you put them?
+- What is the naming convention for global variables, and where do you put them?
 
 Be ready to share your answers to the class.
 
-## Demo: More Functions (10 mins)
+## Demo: More Functions (10 min)
 
 #### Method Name
 
-The method name is what the method is called. It's important to be explicit in naming your method, so when a new developer comes in, they'll understand what the method does just by looking at its name.
+The method name is what the method is called. It's important to be explicit in naming your method so that, when a new developer comes in, they'll understand what the method does just by looking at its name.
 
 By convention, a method name should be a **verb** in **camel case** — just like variable names. For example: `getName()`, not `GetName()` or `getname()` or `get_name()`.
 
 #### Parameters (Enclosed Within Parentheses)
 
-Parameters are arguments passed into the function when it's called. This makes a function more dynamic.
+Parameters are arguments passed into a function when it's called. This makes the function more dynamic.
 
-Let's look back at the `returnSum` method.
+Let's look back at the `returnSum()` method.
 
-> Check: What would you need to do if you wanted to pass a number to this method?
+> **Knowledge Check**: What would you need to do if you wanted to pass a number to this method?
 
 ```java
 public static int returnSum(int num1) {
@@ -198,7 +198,7 @@ public static int returnSum(int num1) {
 }
 ```
 
-> Check: How about two numbers?
+> **Knowledge Check**: How about two numbers?
 
 ```java
 public static int returnSum(int num1, int num2) {
@@ -219,25 +219,25 @@ public static void main(String[] args) {
 }
 ```
 
-<!--Instructor note: Emphasize the ability to reuse code without rewriting it. Remind students of the DRY principle.-->
+<!--**Instructor Note**: Emphasize the ability to reuse code without rewriting it. Remind students of the DRY principle.-->
 
-It's also possible to have a return type for an unknown number of arguments, which can be declared like so:
+It's also possible to have a return type for an unknown number of arguments, which can be declared like this:
 
 ```java
 public static void myFunction(String... vars) {}
 ```
 
-Or like so:
+Or like this:
 
 ```java
 public static void myFunction(String[] vars) {}
 ```
 
-These two signatures are the same thing under the covers.
+These two signatures are the same thing under the hood.
 
-> Check: From where does the last one look familiar?
+> **Knowledge Check**: From where does the last one look familiar?
  
-Like `main`, `myFunction` will take an indefinite amount of parameters of the type `String`. For now, just know it exists.
+Like `main`, `myFunction()` will take an indefinite amount of parameters of the type `String`. For now, just know that it exists.
 
 In Java, if a method declares a parameter, that **parameter** is required to be sent as an **argument** from the calling method.
 
@@ -245,19 +245,19 @@ In Java, if a method declares a parameter, that **parameter** is required to be 
 
 This is where the main functionality of your method will be called.
 
-## Guided Practice: Writing Functions (15 mins)
+## Guided Practice: Writing Functions (15 min)
 
-<!--Instructor note: Take a look at the [solution-code](solution-code) and run the `askAQuestion` Java program, so students have an idea of what they'll be creating.-->
+<!--**Instructor Note**: Take a look at the [solution-code](solution-code) and run the `askAQuestion` Java program so students have an idea of what they'll be creating.-->
 
 Let's work through the following example. The `Scanner` class we'll be using will be required in the lab.
 
 Some things to mention:
 
-- Methods must be within a class definition.
-- No nesting a method within another method.
+- Methods must be contained within a class definition.
+- Nesting a method within another method isn't allowed.
 - Take note of scope and global variables.
 
-> Check: Take a minute and try to come up with the syntax needed to print this message: "\nAsk: who, what, why, when, or where."
+> **Knowledge Check**: Take a minute and try to come up with the syntax necessary to print this message: "\nAsk: who, what, why, when, or where."
 
 Here's a basic `main` class:
 
@@ -269,7 +269,7 @@ public class Main {
 }
 ```
 
-Let's add a method that gets user input and responds.
+Let's add a method that gets user input and responds:
 
 ```java
 public static void askAQuestion() {
@@ -282,7 +282,7 @@ public static void askAQuestion() {
 }
 ```
 
-Actually, let's allow the user to put in a more complicated question, such as "Who are you?"
+Actually, let's allow the user to put in a more complicated question, such as "Who are you?":
 
 ```java
 ...
@@ -309,9 +309,9 @@ Wait, what if the user actually wants to try again?
     }
 ```
 
-This is called **recursion**, wherein a recursive method calls itself. A resource is included at the end of the lesson that talks about the ways to use recursion to solve basic algorithms.
+This is called **recursion**, wherein a recursive method calls itself. A resource is included at the end of the lesson that talks about the ways to use recursion in order to solve basic algorithms.
 
-<!--Instructor note: Run the program and prove that it executes circularly.-->
+<!--**Instructor Note**: Run the program and prove that it executes circularly.-->
 
 What if the user wants to exit out of the program?
 
@@ -337,11 +337,11 @@ What if the user wants to exit out of the program?
 }
 ```
 
-## Independent Practice: Write a Few Functions (15 mins)
+## Independent Practice: Write a Few Functions (15 min)
 
-Create a new Java project in Eclipse and work through as many of these exercises as you can within the next 15 minutes. Use the official [Oracle Java Docs](https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html) to help you through these exercises and look up the different class methods you can use.
+Create a new Java project in Eclipse and work through as many of these exercises as you can within the next 15 minutes. Use the official [Oracle Java Docs](https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html) to help you through these exercises and look up the different class methods available.
 
-1. Write a method called `divide152By`. This method should accept a number as an argument and divide 152 by the given number. For example, the `divide152By` result of 2 — `152/2` — is 76. Your function should return the result.
+1. Write a method called `divide152By()`. It should accept a number as an argument and divide `152` by the given number. For example, the `divide152By` result of `2` — `152/2` — is `76`. Your function should return the result.
 
     Use your function to find the following:
 
@@ -351,7 +351,7 @@ Create a new Java project in Eclipse and work through as many of these exercises
     divide152By(8);
     ```
 
-2. Write a method called `thirdAndFirst`. This method accepts two strings and checks if the third letter of the first string is the same as the first letter of the second string. It should be case insensitive, meaning `thirdAndFirst("Apple","Peon")` should return `true`.
+2. Write a method called `thirdAndFirst()`. This method accepts two strings and checks if the third letter of the first string is the same as the first letter of the second string. It should be case insensitive, meaning `thirdAndFirst("Apple","Peon")` should return `true`.
 
     Check the following:
     
@@ -361,7 +361,7 @@ Create a new Java project in Eclipse and work through as many of these exercises
     thirdAndFirst("Times","thyme");
     ```
 
-3. Write a method called `transmogrifier`. This method should accept three arguments, which you can assume will be numbers. Your function should return the "transmogrified" result, which is the product of the first two numbers raised to the power of the third number. For example, the transmogrified result of 5, 3, and 2 — `(5 times 3) to the power of 2` — is 225.
+3. Write a method called `transmogrifier()`. This method should accept three arguments, which you can assume will be numbers. Your function should return the "transmogrified" result, which is the product of the first two numbers raised to the power of the third number. For example, the transmogrified result of `5`, `3`, and `2` — `(5 times 3) to the power of 2` — is `225`.
    
     Use your function to find the following:
 
@@ -371,7 +371,7 @@ Create a new Java project in Eclipse and work through as many of these exercises
     transmogrifier(42, 13, 7);
     ```
 
-4. Write a method called `reverseString`. This method should take one argument, a `String`. The method should return a `String` with the order of the words reversed. Don't worry about punctuation.
+4. Write a method called `reverseString()`. This method should take one argument, a `String`. The method should return a `String` with the order of the words reversed. Don't worry about punctuation.
 
     Check the following:
     
@@ -381,7 +381,7 @@ Create a new Java project in Eclipse and work through as many of these exercises
     reverseString("I can ride my bike with no handlebars"); => "srabeldnah on htiw ekib ym edir nac I"
     ```
 
-## Conclusion (5 mins)
+## Conclusion (5 min)
 
 - Why do we use methods?
 - When might you use a method?
@@ -390,6 +390,6 @@ Create a new Java project in Eclipse and work through as many of these exercises
 
 - [Oracle Java Docs: Defining Methods](https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html)
 - [Oracle Java Docs: A Closer Look at the "Hello World!" Application](https://docs.oracle.com/javase/tutorial/getStarted/application/)
-- [Princeton Java Programming Cheat Sheet](http://introcs.cs.princeton.edu/java/11cheatsheet/)
+- [Princeton: Java Programming Cheat Sheet](http://introcs.cs.princeton.edu/java/11cheatsheet/)
 - [Java Modifier Types](http://www.tutorialspoint.com/java/java_modifier_types.htm)
-- [Princeton Recursion](http://introcs.cs.princeton.edu/java/23recursion/)
+- [Princeton: Recursion](http://introcs.cs.princeton.edu/java/23recursion/)
