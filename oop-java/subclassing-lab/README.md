@@ -20,10 +20,14 @@ Each subclass should have some unique property that differentiates it from its p
 
 #### Requirements
 
-- Create an Animal class with the following properties set in the constructor: numLegs, topSpeed, isEndangered, name.
+- Create an Animal class with the following properties set in the constructor:  topSpeed, isEndangered, name.
 - Create subclasses of Animal called Mammal and Reptile
 - Create at least one subclass of Mammal, and one subclass of Reptile
 - Each subclass must have something that makes it unique from its parent class.
+- Create a Main class with main method
+- Initialize a list of animals, add differnt types of mammals and reptiles in it
+
+The main objective is to practice everything that was covered in the lesson. Also, try to break your code, debug and learn from the exceptions you get.
 
 **Bonus:**
 - Create more than the minimum number of mammal or reptile subclasses

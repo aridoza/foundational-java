@@ -1,10 +1,8 @@
-package ly.generalassemb.drewmahrt.subclassinglab;
+package com.ga.subclasses;
 
-/**
- * Created by drewmahrt on 12/7/15.
- */
 public class Reptile extends Animal {
-    boolean hasShell;
+	
+	private boolean hasShell;
 
     public Reptile(boolean hasLegs, int topSpeed, boolean isEndangered, String name){
         super(topSpeed, isEndangered, name);
@@ -14,8 +12,9 @@ public class Reptile extends Animal {
     public boolean getHasShell() {
         return hasShell;
     }
-
-    public void setHasShell(boolean hasShell) {
-        this.hasShell = hasShell;
+    
+    @Override
+    public String toString() {
+        return super.getName() + (super.getIsEndangered()? " (Endangered)" : "");
     }
 }
