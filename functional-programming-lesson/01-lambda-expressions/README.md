@@ -47,7 +47,7 @@
 
 # ![](./LambdaSyntax.png)
 
-A Lambda expression is an anonymous function that provides a very concise and functional syntax, which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes, in that they enable you to express functionality as data, for example to pass functionality into a method as a parameter.  But where anonymous classes require a lot of boilerplate code to set up the class, lambda expressions provide a concise syntaxt specifically for expressing code as  data.
+A Lambda expression is an anonymous function that provides a very concise and functional syntax, which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes, in that they enable you to express functionality as data, for example to pass functionality into a method as a parameter.  But where anonymous classes require a lot of boilerplate code to set up the class, lambda expressions provide a concise syntax specifically for expressing code as data.
 
 A lambda expression consists of the following:
 - A comma-separated collection of formal parameters enclosed in parentheses.
@@ -73,52 +73,50 @@ Since it is a one statement Lambda, we can also drop the brackets, return, and s
 
     (a, b) -> a * b  
 
-<!-- todo: We should also include an example of a single parameter Lambda, omitting the parentheses: a-> System.out.println(a) - Victor-->
- 
- <!-- todo: We should also include an example of a no-parameter Lambda, demoing the common idiom ()->lambda - Victor->
-
 ## Demo: To Lambda Or Not To Lambda, That Is The Question
 
 In the following demo, we will create a "Computation" interface.  We will use this interface to solve simple math problems.
 We will create 2 versions of the demo: Without Lambda Expressions and With Lambda Expressions.
 
 **Example Without Lambda Expressions:**
-    
-    package com.ga.examples;
-    
-    public class NonLambdaExpressionIntroDemo {
-    
-        //Here's the Computation Interface
-        interface Computation {
-            int operation(int a, int b);
-        }
-    
-        public static void main(String[] args) {
-    
-            //Notice the use of the anonymous inner class.
-            Computation add = new Computation() {
-    
-                @Override
-                public int operation(int a, int b) {
-                    return a + b;
-                }
-            };
-    
-            System.out.println("5 + 6 = " + add.operation(5,6));
-    
-            //Notice the use of yet another anonymous inner class.
-            Computation subtract = new Computation() {
-    
-                @Override
-                public int operation(int a, int b) {
-                    return a - b;
-                }
-            };
-    
-            System.out.println("10 - 6 = " + subtract.operation(10,6));
-    
-        }
+
+```java    
+package com.ga.examples;
+
+public class NonLambdaExpressionIntroDemo {
+
+    //Here's the Computation Interface
+    interface Computation {
+        int operation(int a, int b);
     }
+
+    public static void main(String[] args) {
+
+        //Notice the use of the anonymous inner class.
+        Computation add = new Computation() {
+
+            @Override
+            public int operation(int a, int b) {
+                return a + b;
+            }
+        };
+
+        System.out.println("5 + 6 = " + add.operation(5,6));
+
+        //Notice the use of yet another anonymous inner class.
+        Computation subtract = new Computation() {
+
+            @Override
+            public int operation(int a, int b) {
+                return a - b;
+            }
+        };
+
+        System.out.println("10 - 6 = " + subtract.operation(10,6));
+
+    }
+}
+```
 
 The output will be the following:
 5 + 6 = 11
@@ -126,32 +124,72 @@ The output will be the following:
 
 **Example WITH Lambda Expressions:**
 
-    package com.ga.examples;
-    
-    public class LambdaExpressionIntroDemo {
-    
-        interface Computation {
-            int operation(int a, int b);
-        }
-    
-        public static void main(String[] args) {
-    
-            Computation add = (a, b) -> a + b;
-    
-            System.out.println("5 + 6 = " + add.operation(5,6));
-    
-            Computation subtract = (a, b) -> a - b;
-    
-            System.out.println("10 - 6 = " + subtract.operation(10,6));
-        }
+```java
+package com.ga.examples;
+
+public class LambdaExpressionIntroDemo {
+
+    interface Computation {
+        int operation(int a, int b);
     }
-    
+
+    public static void main(String[] args) {
+
+        Computation add = (a, b) -> a + b;
+
+        System.out.println("5 + 6 = " + add.operation(5,6));
+
+        Computation subtract = (a, b) -> a - b;
+
+        System.out.println("10 - 6 = " + subtract.operation(10,6));
+    }
+}
+```
+
 **Note:** Notice the reduction of the amount of code needed to do the computation.  Stress this to the class!  
 
 **Example 1:** 680 Characters and 32 lines  
 **Example 2:** 416 Characters and 19 lines  
 
 This is a 39% reduction in characters and 41% reduction in lines of code! Also, in most cases, code that uses Lambdas becomes more expressive and more readable.
+
+Let's take a look at a couple more examples of lambda expressions. The next example has the following functional interface:
+
+```java
+interface HelloYou {
+    void greetYou(String name);
+}
+```
+
+If you notice, the "greetYou" method take in one parameter "name" and returns void.  The following code implements this method with the following lambda on line 1:
+
+```java
+HelloYou helloYou = name -> System.out.println("Hello " + name);
+helloYou.greetYou("Michael");
+```
+Output:  
+Hello Michael  
+
+You'll notice that the lambda has one parameter, so you can omit the parentheses. The parameter also corresponds to the 1 input parameter to the "greetYou" method.  The println statement in the lambda body is a void, which corresponds to the void return of the "greetYou" method.
+
+The next example has the following functional interface:
+
+```java
+ interface Greeting {
+    void greet();
+}
+```
+
+The "greet" method has no input parameters and returns a void.  The following code shows how to implement this with a lambda expression (line 1):
+
+```java
+Greeting greeting = () -> System.out.println("Hello whomever you are!");
+greeting.greet();
+```
+Output:  
+Hello whomever you are!  
+
+To represent the empty parameter from the "greet" method in a lambda expression, you'd use "()".  The println method is a void, which corresponds with the return type of the "greet" method.
 
 ## Introduction: Streams and Collections
 
@@ -198,7 +236,6 @@ World
 
 In this demo, we will take an existing list of String objects and iterate it to produce a new list of strings, consisting of the values from the original list concatenated with a constant string value.
 
-<!-- todo: I did not check my syntax changes in the IDE; please double check -->
 ```java
 package com.ga.examples;
 
@@ -247,14 +284,16 @@ The map() intermediate operation is a method in the Stream class that represents
 
 **Example:**  
     
-    List<String> numbersList = Arrays.asList("1", "2", "3", "4", "5");
-    
-    Stream<Integer> numberListStream =
-        numbersList.stream()
-            .map(number -> Integer.valueOf(number) );
+```java
+List<String> numbersList = Arrays.asList("1", "2", "3", "4", "5");
+
+Stream<Integer> numberListStream =
+    numbersList.stream()
+        .map(number -> Integer.valueOf(number) );
+```
 
 In the example above, we are iterating the list, and for each value, the "number" argument represents the next number in the list.  The function
-"Integer.valueOf(number)" is applied to eachof those "number" values in-turn, producing a new stream of Integer values, that itself can
+"Integer.valueOf(number)" is applied to each of those "number" values in-turn, producing a new stream of Integer values, that itself can
 be further filtered, aggregated, and converted to other objects.
 
 **Note:**  
@@ -267,47 +306,51 @@ Collectors are terminal operators that are used to implement various useful redu
 
 Java provides a _Collectors_ class with many static methods. Let's zoom-in on one of those methods- "_toList()_", which we will use to expand our earlier example by consuming a stream of String objects representing integers, to produce a new list of corresponding Integers.
 
-    List<String> numbersList = Arrays.asList("1", "2", "3", "4", "5");
-    
-    List<Integer> newNumbersList =
-        numbersList.stream()
-            .map(number -> Integer.valueOf(number))
-            .collect(Collectors.toList());
+```java
+List<String> numbersList = Arrays.asList("1", "2", "3", "4", "5");
+
+List<Integer> newNumbersList =
+    numbersList.stream()
+        .map(number -> Integer.valueOf(number))
+        .collect(Collectors.toList());
+```
+
+The _map_ operation converts each String from the input stream into an Integer, producing a new List of Integers.
  
- The _map_ operation converts each String from the input stream into an Integer, producing a new List of Integers.
+The _collect_ operation consumes that resulting Integer stream and produces a List of corresponding Integer objects.
  
- The _collect_ operation consumes that resulting Integer stream and produces a List of corresponding Integer objects.
- 
- <!-- todo: we should talk about lazy execution of operators. I see this is mentioned in lesson 2 but not really explained. Victor -->
+>**A side note about how intermediate operators are evaluated:** Intermediate operators, such as map, are lazy in nature.  Meaning, they don't execute until a terminal operator is encountered.  In the case of the code of above, the .map logic won't execute until the .collect is encountered.
 
 ## Demo: Rewrite Previous Demo using Collectors
 For this demo, we are going to revisit the "My name is Jim" demo above, this time using a Collector, instead of manually adding elements to a new list.
 
-    package com.ga.examples;
-    
-    import java.util.ArrayList;
-    import java.util.Arrays;
-    import java.util.List;
-    import java.util.stream.Collectors;
-    
-    public class MapWithConcatenationDemo {
-    
-        public static void main(String[] args) {
-    
-            List<String> stringList = Arrays.asList("My name is ", "My friends call me ", "My mother calls me ");
-    
-            List<String> concatenatedList =
-                stringList.stream()
-                    .map(stringValue -> stringValue + "Jim" )
-                    .collect(Collectors.toList());
-    
-            //Now output the values of the concatenatedList using streams.
-            concatenatedList.stream().forEach(stringValue -> System.out.println(stringValue) );
-    
-            //Now output the values of the original stringList using streams to show that the list is unaltered.
-            stringList.stream().forEach(stringValue -> System.out.println(stringValue) );
-        }
+```java
+package com.ga.examples;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class MapWithConcatenationDemo {
+
+    public static void main(String[] args) {
+
+        List<String> stringList = Arrays.asList("My name is ", "My friends call me ", "My mother calls me ");
+
+        List<String> concatenatedList =
+            stringList.stream()
+                .map(stringValue -> stringValue + "Jim" )
+                .collect(Collectors.toList());
+
+        //Now output the values of the concatenatedList using streams.
+        concatenatedList.stream().forEach(stringValue -> System.out.println(stringValue) );
+
+        //Now output the values of the original stringList using streams to show that the list is unaltered.
+        stringList.stream().forEach(stringValue -> System.out.println(stringValue) );
     }
+}
+```
 
 The output would be:  
 My name is Jim  
@@ -330,16 +373,18 @@ If the condition evaluates true, the object is selected. Otherwise, it is ignore
 
 **Example:**
 
-    List<Integer> numberList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
-    
-    //We want to create a list of only the even numbers.
-    List<Integer> evenNumberList =
-        numberList.stream()
-            .filter(number -> number % 2 == 0)
-            .collect(Collectors.toList());
+```java
+List<Integer> numberList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
 
-    evenNumberList.forEach(number -> System.out.println(number));
-    
+//We want to create a list of only the even numbers.
+List<Integer> evenNumberList =
+    numberList.stream()
+        .filter(number -> number % 2 == 0)
+        .collect(Collectors.toList());
+
+evenNumberList.forEach(number -> System.out.println(number));
+```
+
 In this example we use a Lambda expression in the filter method to express the condition "if the number is even, return true and keep it, otherwise return false and ignore it".
 The output would be:  
 2  
@@ -359,75 +404,77 @@ iterate each list that you create and output the results.
 
 ### Independent Practice Template
 
-    package com.ga.examples;
-    
-    import java.util.Arrays;
-    import java.util.List;
-    
-    public class IndependentPractice {
-    
-        static class Person {
-    
-            private String name;
-            private int age;
-    
-            public Person(String name, int age) {
-    
-                this.name = name;
-                this.age = age;
-            }
-    
-            public String getName() {
-                return name;
-            }
-    
-            public void setName(String name) {
-                this.name = name;
-            }
-    
-            public int getAge() {
-                return age;
-            }
-    
-            public void setAge(int age) {
-                this.age = age;
-            }
-            
-            @Override
-            public String toString() {
-                return "Person{" +
-                        "name='" + name + '\'' +
-                        ", age=" + age +
-                        '}';
-            }
+```java
+package com.ga.examples;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class IndependentPractice {
+
+    static class Person {
+
+        private String name;
+        private int age;
+
+        public Person(String name, int age) {
+
+            this.name = name;
+            this.age = age;
         }
-    
-        public static void main(String[] args) {
-    
-            List<Person> personList = createPersonList();
-    
-            //TODO: Create a List of Person Objects whose name starts with the letter M
-    
-            //TODO: Create a List of Strings containing the names of the Persons over the age of 40
-    
-            //TODO: Create a List of Person Objects whose name starts with the letter J and are under the age of 47
-            
+
+        public String getName() {
+            return name;
         }
-    
-        private static List<Person> createPersonList() {
-    
-            return Arrays.asList(
-                new Person("Mark", 45),
-                new Person("Henry", 30),
-                new Person("John", 18),
-                new Person("Morgan", 6),
-                new Person("Amanda", 23),
-                new Person("Tiffany", 60),
-                new Person("Jim", 50),
-                new Person("Janet", 45)
-            );
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+        
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
         }
     }
+
+    public static void main(String[] args) {
+
+        List<Person> personList = createPersonList();
+
+        //TODO: Create a List of Person Objects whose name starts with the letter M
+
+        //TODO: Create a List of Strings containing the names of the Persons over the age of 40
+
+        //TODO: Create a List of Person Objects whose name starts with the letter J and are under the age of 47
+        
+    }
+
+    private static List<Person> createPersonList() {
+
+        return Arrays.asList(
+            new Person("Mark", 45),
+            new Person("Henry", 30),
+            new Person("John", 18),
+            new Person("Morgan", 6),
+            new Person("Amanda", 23),
+            new Person("Tiffany", 60),
+            new Person("Jim", 50),
+            new Person("Janet", 45)
+        );
+    }
+}
+```
 
 The completed example can be found in the repo in the file named "IndependentPracticeCompleted.java".
 
