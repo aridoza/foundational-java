@@ -10,7 +10,7 @@ creator: James Davis
 
 ## Introduction
 
-Using the code from a previous lab — where we wrote several basic functions — you'll write tests (that pass) for the code. Here's a refresher of the functions you wrote:
+Using the code from a previous lab (where we wrote several basic functions), you'll write tests that pass. Here's a refresher of the functions you wrote:
 
 - Define a function `maxOfTwoNumbers` that takes two numbers as arguments and returns the largest of them. I would suggest using conditional statements. Do a Google search to figure this out if you forgot how conditionals work.
 
@@ -34,4 +34,4 @@ Start the code you already created in [this lab](https://git.generalassemb.ly/GA
 
 ## Additional Resources
 
-- [JUnit docs](https://junit.org/)
+- [JUnit Docs](https://junit.org/)
