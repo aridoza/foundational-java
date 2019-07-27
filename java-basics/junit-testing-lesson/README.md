@@ -11,14 +11,14 @@ creator: James Davis (NYC)
 ### Learning Objectives
 
 At the end of this lesson, you'll be able to:
-* Given a class, add conditional methods to a test case.
+* Add conditional methods to a test case.
 * Perform a JUnit test.
 
 ### Lesson Guide
 
 | Timing  | Type  | Topic  |
 |:-:|---|---|
-| 10 min  | Opening  | Learning Objectives |
+| 10 min  | Opening  | Man vs. Machine |
 | 5 min   | Introduction  | Unit Tests |
 | 20 min  | Demo  | Creating a Unit Test |
 | 40 min  | Independent Practice  | Automated Testing |
@@ -28,15 +28,15 @@ At the end of this lesson, you'll be able to:
 
 There are many ways to test something. You can do it by hand, which a lot of QA teams do. However, this could get tedious because you usually have to test the full feature even for small changes.
 
-For instance, imagine you're a home inspector checking out a newly built home. Let's say you (the inspector) have to test if a bedroom is indeed a bedroom. The room must have at least a bed, a dresser, and a closet.
+For instance, imagine you're a home inspector checking out a newly built home. As the inspector, you'll have to test if a bedroom is indeed a bedroom. The room must have at least a bed, a dresser, and a closet.
 
-Let's also say an interior designer adds a lamp to the dresser. You then have to go back to the room and check if the dresser, bed, and closet are still there.
+Let's say an interior designer adds a lamp to the dresser. You then have to go back to the room and check if the dresser, bed, and closet are still there.
 
 Now let's say the designer added a rug. You'll have to check again if the bed, dresser, and closet are still there.
 
 Every time something changes, you have to ensure what you're checking does what it's required to do. This can be repetitive, and in some cases, a waste of time.
 
-> Check: Take one minute to discuss with the person next to you what some ways are to prevent this. Be prepared to share your answers to the class.
+> Check: Take one minute to discuss with the person next to you how to prevent this. Be prepared to share your answers with the class.
 
 There are a few ways to tackle this problem. We'll talk about one today called **automation**.
 
@@ -73,13 +73,13 @@ Create a new project in IntelliJ. In the **`src`** folder, you'll find two folde
 
 We'll build a simple app that returns a student's name and grade.
 
-First, let's create a `Student` class, which has the methods `getFullName` and `getLetterGrade`. The first constructor takes a first name and last name, while the second one takes a numeric grade.
+First, let's create a `Student` class, which has the methods `getFullName` and `getLetterGrade`. The first constructor takes a first name and last name, while the second one takes a letter grade.
 
 Then, we'll create a new test in the `src/test` package and call it `StudentTest`.
 
-The idea of testing is to have methods in the test that **implement** the class being tested, and **assert** that their methods are working.
+The idea of testing is to have methods that **implement** the class being tested, and **assert** that the methods of the class are working.
 
-In the `StudentTest` class, add methods that test if the `getFullName` and `getLetterGrade` methods are correct. Make sure to add the `@Test` annotation, or else JUnit doesn't recognize it.
+In the `StudentTest` class, add methods that test if the `getFullName` and `getLetterGrade` methods are correct. Make sure to add the `@Test` annotation, or else JUnit won't recognize it.
 
 <details>
 <summary>Here's what it should look like:</summary>
@@ -148,7 +148,7 @@ public class StudentTest {
 }
 ```
 
-To run the test, right click on the class in the "Project View" and click "Run StudentTest".
+To run the test, right click on the class in the "Project View" and click "Run StudentTest."
 
 **Note**: If you write multiple test classes, you can right click on the folder that contains the classes and click "Run tests in ______" to run all of them.
 
