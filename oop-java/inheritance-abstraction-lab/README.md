@@ -9,7 +9,9 @@ creator:
 
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Inheritance and Abstraction 
 
-This homework will provide you with some more practice on creating abstract classes, subclasses, and interfaces. You need to design a program that manages a school. The school has Classrooms, and the Classrooms have Teachers and Students assigned to them. Each classroom contains students in a single grade (1st, 2nd, 3rd, etc.).
+This homework will provide you with more practice on creating abstract classes, subclasses, and interfaces.
+
+You need to design a program that manages a school. The school has classrooms, and the classrooms have teachers and students assigned to them. Each classroom contains students in a single grade (i.e., first, second, third, and so on).
 
 The actions and properties of each class is up to you to decide.
 
@@ -17,14 +19,14 @@ The actions and properties of each class is up to you to decide.
 
 #### Requirements
 
-- At least one abstract class
-- At least one interface
-- At least 3 subclasses
-- Each subclass must be unique from the others
+- At least one abstract class.
+- At least one interface.
+- At least three subclasses.
+- Each subclass must be unique from the others.
 
-**Bonus:**
-- Add extra classes/subclasses/interfaces
+**Bonus**
+- Add extra classes, subclasses, or interfaces.
 
 #### Deliverable
 
-Java code for classes/interface(s) that meet the requirements above.
+Java code for classes or interfaces that meet the requirements above.
