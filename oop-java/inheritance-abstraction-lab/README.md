@@ -13,7 +13,7 @@ This homework will provide you with more practice on creating abstract classes, 
 
 You need to design a program that manages a school. The school has classrooms, and the classrooms have teachers and students assigned to them. Each classroom contains students in a single grade (i.e., first, second, third, and so on).
 
-The actions and properties of each class is up to you to decide.
+You decide what the actions and properties of each class will be.
 
 ## Exercise
 
