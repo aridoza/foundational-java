@@ -28,14 +28,14 @@ Respond to these questions based on what we've learned (and maybe what we haven'
 
 6. Consider the following code, where class `Refrigerator` extends class `Appliance`, and `getTemperature()` is a method in `Refrigerator`, but **not** in `Appliance`:
 
-  ```
-  Appliance myAppliance = new Refrigerator();
-  double temperature = myAppliance.getTemperature();
-  ```
+    ```
+    Appliance myAppliance = new Refrigerator();
+    double temperature = myAppliance.getTemperature();
+    ```
 
-Why will this call to `getTemperature()` cause an error? How will **casting** help solve this issue?
+   Why will this call to `getTemperature()` cause an error? How will **casting** help solve this issue?
 
-7. In a normal class (also called a **concrete** class), do you need to **implement** all of the methods, or can you simply **declare** some? What about in an `abstract` class?
+7. In a normal class (also called a **concrete** class), do you need to **implement** all the methods, or can you simply **declare** some? What about in an `abstract` class?
 
 8. What about an `interface`? Can you implement any methods in an `interface`? Can you declare methods in an `interface`?
 
