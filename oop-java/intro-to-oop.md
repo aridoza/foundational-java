@@ -12,7 +12,7 @@ At the end of this lesson, you'll be able to:
 
 ### Lesson Guide
 
-| TIMING  | TYPE  | TOPIC  |
+| Timing  | Type  | Topic  |
 |:-:|---|---|
 | 5 min  | Opening  | Learning Objectives |
 | 10 min  | Introduction  | The Four Principles of OOP |
@@ -46,7 +46,7 @@ The idea behind abstraction is that the average person doesn't need to know the 
 
 Encapsulation is related to abstraction, but goes a step further. Not only does the average user need not have access to the inner workings of something in order to use it, but if they do have access, it may actually be harmful.
 
-You could technically start your car with a screwdriver or directly with electricity, but you really shouldn't. You might hurt yourself or damage your car. Likewise, your users don't always need direct access to sensitive parts of your code.
+You could technically start your car with a screwdriver or directly with electricity, but you really shouldn't — you might hurt yourself or damage your car. Likewise, your users don't always need direct access to sensitive parts of your code.
 
 ![](https://res.cloudinary.com/briezh/image/upload/v1560812857/bike-brakes_pvfblg.jpg)
 
@@ -54,7 +54,7 @@ You could technically start your car with a screwdriver or directly with electri
 
 ### Inheritance
 
-Inheritance allows classes to "inherit" code from one another. The base class is called the "parent" and the inheriter or beneficiary class is called the "child" class. It's just one more way to keep our code shorter and simpler.
+Inheritance allows classes to "inherit" code from one another. The base class is called the "parent" and the inheriter or beneficiary class is called the "child." It's just one more way to keep our code shorter and simpler.
 
 ### Polymorphism
 
@@ -80,7 +80,7 @@ That would basically allow you to carve out memory for all of the structure's va
 
 Now that we have data as a `struct`, why not add **functionality** to that structure (e.g., derive a person's age given today's date) and include that functionality inside the `struct` itself? That's exactly what a class is — a data structure with functions or methods.
 
-> In our example of deriving a person's age from their birth date, we might make a method called `getCurrentAge()` or something similar.
+> In our example of deriving a person's age given today's date, we might create a method called `getCurrentAge()` or something similar.
 
 ### Defining a Class
 
@@ -94,11 +94,11 @@ public class MyClass {
 
 In this example, **`public`** refers to the class visibility. Top-level classes can only be `public` or default (unspecified). Top-level means they're not inner classes, which we'll define later in this lesson.
 
-**`public`** classes can be referenced by any other class, and this is the most common class visibility. A file may contain **no more than one** `public` class. The rule is that every top-level `public` Java class must reside in a file that exactly matches the file name (minus the `.java` file type). 
+`public` classes can be referenced by any other class, and this is the most common class visibility. A file may contain **no more than one** `public` class. The rule is that every top-level `public` Java class must reside in a file that exactly matches the file name (minus the `.java` file type). 
 
 #### Default Classes
 
-Default classes are classes that don't specify an access modifier. For example:
+Default classes don't specify an access modifier. For example:
 
 ```java
 class MyDefaultClass {}
@@ -110,7 +110,7 @@ Package and public are the only access levels available for top-level classes. B
 
 #### Access Levels
 
-The access levels, going from most restrictive to least restrictive, are:
+The access levels — going from most restrictive to least restrictive — are:
 
 ```
 private --> package --> protected --> public
@@ -118,7 +118,7 @@ private --> package --> protected --> public
 
 `private`, `protected`, and `public` are all **access modifiers**, which means you specifically add them in so you can change the access (or protection) level away from the default we described above.
 
-This nifty table from [Oracle's docs on access control](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) shows what's unique about each level.
+This nifty table from [Oracle's docs on access control](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html) shows what's unique about each level:
 
 ![](https://res.cloudinary.com/briezh/image/upload/v1560810976/Screen_Shot_2019-06-17_at_3.35.38_PM_fq9ffm.png)
 
@@ -129,10 +129,10 @@ This nifty table from [Oracle's docs on access control](https://docs.oracle.com/
 Object-oriented programming is the practice of using classes and objects to make code modular (encapsulated) and often reusable. A class can be thought of as a blueprint for a building or a pattern for a dress. There's one blueprint, but you can build many buildings with it. There's one dress pattern, but you can manufacture many dresses with it.
 
 > Check: Can you define each of the four OOP pillars?
-- Abstraction
-- Polymorphism
-- Inheritance
-- Encapsulation
+> - Abstraction
+> - Polymorphism
+> - Inheritance
+> - Encapsulation
 
 ## Additional Resources
 
