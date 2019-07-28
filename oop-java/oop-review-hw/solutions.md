@@ -1,12 +1,12 @@
 ---
-title: OOP Review: Solutions
-type: Homework Solution
+title: OOP Review: Answers
+type: Homework Answers
 duration: "1:00"
 creator:
     name: Charlie Drews
 ---
 
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) OOP Review: Solutions
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) OOP Review: Answers
 
 ## Questions
 
@@ -16,12 +16,12 @@ creator:
 
 2. Does it make sense to write **getter** and **setter** methods for a `public` member variable? What about `private` variables?
 
-   - Public variables can be accessed and modified directly, so there's no need to have getter and setter methods. Private variables **cannot** be accessed or modified directly; they're only visible from within the class.
+   - `public` variables can be accessed and modified directly, so there's no need to have getter and setter methods. `private` variables **cannot** be accessed or modified directly; they're only visible from within the class.
 
 3. What are some benefits of making member variables `private`?
 
-   - Another developer won't be able to assign your member variable an invalid value by putting logic in your setter method that checks the parameter before assigning its value to the member variable.
-   - Also, if your program crashes due to a private variable having a null or unexpected value, you know the bug must be in that class file. With public variables, on the other hand, the bug could reside anywhere in your program, because a public variable is visible and modifiable to code outside its class.
+   - Another developer won't be able to assign your member variable an invalid value by putting logic in your setter method to check the parameter before assigning its value to the member variable.
+   - Also, if your program crashes due to a `private` variable having a null or unexpected value, you know the bug must be in that class file. With `public` variables, on the other hand, the bug could reside anywhere in your program, because a `public` variable is visible and modifiable to code outside its class.
 
 4. If class A extends class B, which is the superclass and which is the subclass? Which would you call parent, and which would you call child?
 
@@ -59,10 +59,10 @@ creator:
 
 10. What happens when a method **overrides** another method? If a parent and child class have methods with the same name, and when you call that method on an instance of the child class, which implementation of the method will be executed?
 
-   - Say class B has a method `goFaster()` and class A extends class B. If class A defines a new method also named `goFaster()`, then this new method **hides** the method of the same name from class B. If you call `goFaster()` on an instance of class A, the overridden version of `goFaster()` defined in class A will be executed, rather than the version defined in class B.
+    - Say class B has a method `goFaster()`, and class A extends class B. If class A defines a new method also named `goFaster()`, then this new method **hides** the method of the same name from class B. If you call `goFaster()` on an instance of class A, the overridden version of `goFaster()` defined in class A will be executed, rather than the version defined in class B.
 
 11. What's the relationship between `List`, `LinkedList`, and `ArrayList`? Why do we call a method **polymorphic** if it takes an input of type `List` rather than an input of type `LinkedList` or `Arraylist`, and why is that useful?
 
-   - `List` is an interface. `LinkedList` and `ArrayList` are both concrete classes that implement the `List` interface.
-   - If a method requires an input of type `LinkedList`, then you can't supply it with an input value of type `ArrayList`. You'd have to write another version of the method that takes an input of type `ArrayList`. That means repeating yourself, which is no good.
-   - But if the method requires an input of type `List` instead, then you're free to pass that method an input value of type `LinkedList` or `ArrayList` (or any other class that implements `List`). This means you don't have to write multiple versions of the method. This is the benefit of polymorphism.
+    - `List` is an interface. `LinkedList` and `ArrayList` are both concrete classes that implement the `List` interface.
+    - If a method requires an input of type `LinkedList`, then you can't supply it with an input value of type `ArrayList`. You'd have to write another version of the method that takes an input of type `ArrayList`. That means repeating yourself, which is no good.
+    - But if the method requires an input of type `List` instead, then you're free to pass that method an input value of type `LinkedList` or `ArrayList` (or any other class that implements `List`). This means you don't have to write multiple versions of the method. This is the benefit of polymorphism.
