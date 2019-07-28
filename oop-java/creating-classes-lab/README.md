@@ -26,7 +26,7 @@ In this lab, you'll use your knowledge of classes to build a Java program that u
 - Instantiate an `Animal` object and display some of its properties.
 - Use the setter methods to modify some of the animal's properties and show the modified animal.
 
-**Bonus:**
+**Bonus**
 - Include additional methods in your `Animal` class that return a formatted `String` using the class properties.
 
 #### Starter Code
