@@ -26,13 +26,15 @@ At the end of this lesson, you'll be able to:
 
 ## Opening (5 min)
 
-In OOP, a class is a kind of template for creating **objects**. An object is an **instance** of a class — it contains all the data fields and functionality defined in its class. However, each object can contain its own set of values for those fields. For example, a class might define a `name` field of type `String`, but individual instances of that class might have unique values assigned to the `name` field, such as "Jeremy," "Maria," "Carlotta," and so on. 
+In OOP, a class is a kind of template for creating **objects**. An object is an **instance** of a class — it contains all the data fields and functionality defined in its class.
+
+However, each object can contain its own set of values for those fields. For example, a class might define a `name` field of type `String`, but individual instances of that class might have unique values assigned to the `name` field, such as "Jeremy," "Maria," "Carlotta," and so on. 
 
 > Tip: Instantiation is a large word, but it comes from the word "instance," which is a little easier to understand. Instantiation is the practice of creating instances (aka objects) from classes.
 
 **Think of it as follows:**
 
-We know humankind is a classification of a creature that thinks, has senses and a body, and more. But we don't think of a specific person as humankind — `HumanKind` is the class while "Vanna White" is an **instance** of `HumanKind`. Vanna has a name, a birthdate, brown eyes, two ears, legs, and so on. 
+We know humankind is a classification of a creature that thinks, senses, has a body, and more. But we don't think of a specific person as humankind: `HumanKind` is the class, while "Vanna White" is an **instance** of `HumanKind`. Vanna has a name, a birth date, brown eyes, two ears, legs, and so on. 
 
 ----
 
@@ -44,7 +46,7 @@ Let's make this more concrete. Let's create a class called `HumanKind`. For now,
 
 First, create the file for the `public` `HumanKind` class. 
 
-> Check: Who can tell me the name of that file? It should be `HumanKind.java`.
+> Check: What would the file name be? It should be `HumanKind.java`.
 
 We must create it in a directory that mimics the package name, i.e., `src/com/generalassembly/oop/intro/HumanKind.java`.
 
@@ -72,7 +74,7 @@ public class HumanKind {
 }
 ```
 
-Now we've defined our `HumanKind` class. But classes are not much good until they're **instantiated**.
+We've now defined our `HumanKind` class. But classes are not much good until they're **instantiated**.
 
 ### Step 3
 
@@ -97,23 +99,23 @@ Voila! We have a new instance of `HumanKind`.
 
 - `HumanKind vannaWhite` declares a variable of type `HumanKind` and names that variable `vannaWhite`. The `=` sign assigns everything on its right to the variable on its left.
 
-> Tip: Remember the Java naming convention: camel case variable names, classes starting with a capital letter, variables starting with a lowercase letter.
+   > Tip: Remember the Java naming convention: camel case variable names, classes starting with a capital letter, variables starting with a lowercase letter.
 
-- `new HumanKind()` calls the constructor, which is a method with the same name as the `HumanKind` class. Notice that even though we didn't write a constructor method called `HumanKind()`, Java provides one by default. A constructor is called to **construct** (or create) a new instance of a class using that class as a template. This process is known as instantiation; we're **instantiating** a new object (i.e., creating a new instance of the class).
+- `new HumanKind()` calls the constructor, which is a method with the same name as the `HumanKind` class. Notice that even though we didn't write a constructor method called `HumanKind()`, Java provides one by default. A constructor is called to **construct** (or create) a new instance of a class using that class as a template. This process is known as instantiation: We're **instantiating** a new object (i.e., creating a new instance of the class).
 
-So in plain English, this statement is saying, "Declare a new variable named `vannaWhite` of type `HumanKind` and assign it a new instance of the class `HumanKind`. 
+  So in plain English, this statement is saying, "Declare a new variable named `vannaWhite` of type `HumanKind`, and assign it a new instance of the class `HumanKind`. 
 
-```java
-HumanKind vannaWhite = new HumanKind();
-```
+    ```java
+    HumanKind vannaWhite = new HumanKind();
+    ```
 
 ### Step 4 
 
-Finally, to run our program in IntelliJ, notice the little green arrow in the margin, to the left of our `main` method. 
+Finally, to run our program on IntelliJ, notice the little green arrow on the margin, to the left of our `main` method. 
 
 ![](resources/execute-main.png)
 
-Give that arrow a left click, then click on "Run HumanKind.main." That will compile and execute our code, and produce output similar to this:
+Give that arrow a left click, then click on "Run HumanKind.main()." That will compile and execute our code, and produce output similar to this:
 
 ![](resources/execute-main-output.png)
 
@@ -160,7 +162,7 @@ For example, if our `HumanKind` class has an `age` field, then `vannaWhite.age` 
 
 > How neat is that syntax? `vannaWhite.age` references the age field of the object referred to by the `vannaWhite` variable.
 
-Not all fields are instance variables. If a field is declared `static`, then it's called a **class variable**. A class variable shares its value among all instances of that class. Additionally, you don't need to have access to an instance to access a class variable. If the value of a class varibale changes for one instance, it changes for all instances. We'll see examples of this shortly, and we'll see why it's useful.
+Not all fields are instance variables. If a field is declared `static`, then it's called a **class variable**. A class variable shares its value among all instances of that class. Additionally, you don't need to have access to an instance to access a class variable. If the value of a class variable changes for one instance, it changes for all instances. We'll see examples of this shortly, and we'll see why it's useful.
 
 There's one rule you'll need to remember starting today: Make fields in a class `private`, then provide **accessor** (also called **getter**) and **mutator** (also called **setter**) methods for those fields. This is known as encapsulation: You never expose the structure of a class to anything outside of it.
 
@@ -186,21 +188,21 @@ public class HumanKind {
 
 Let's study that structure:
 
-1. As with any class member, we start the method declaration with its **visibility**, in this case, `public`.
+1. As with any class member, we start the method declaration with its **visibility**. In this case, it's `public`.
 1. Next, we declare the **return type**. In this case, it's a `String`.
 1. Finally, we enclose the arguments in parentheses. They represent the values one must supply when calling the method.
 
 We refer to the method name and arguments collectively as the **method signature**.
 
-To call a method, specify the method name followed by parentheses, and inside the parentheses, enclose the values represented by the arguments in the method declaration. If a return value is required, you should assign that return value to a variable, or use it in an expression — otherwise, it will be lost.
+To call a method, specify the method name followed by parentheses, and inside the parentheses, enclose the values represented by the arguments in the method declaration. If a return value is required, you should assign that return value to a variable or use it in an expression — otherwise, it's lost.
 
-How would we call our `setAddress` method above?
+> Check: How would we call our `setAddress` method above?
 
 <details>
 <summary>Possible Solution</summary>
   
 ```java
-HumanKind.setAddress(String "123 Main St, Burbank, CA");
+HumanKind.setAddress("123 Main St, Burbank, CA");
 ```
 
 </details>
@@ -221,7 +223,7 @@ The implementation of an instance method has access to every field and method de
 
 Most of the methods and fields we've defined so far have been instance methods, which require an instance to invoke.
 
-However, Java also provides **static** (aka **class**) methods that don't require an instance — they just execute on a class. These methods get the word `static` before the return type.
+However, Java also provides **static** (aka **class**) methods that don't require an instance — they just execute on a class. These methods get the keyword `static` before the return type.
 
 Some common examples of static methods are those in the `Math` class: 
 
@@ -261,9 +263,9 @@ public class Calculator {
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
         
-        System.out.println(sum(10 , 20));
-        System.out.println(sum(3.14 , 2.718));
-        System.out.println(sum(1.414,3.14));
+        System.out.println(sum(10, 20));
+        System.out.println(sum(3.14, 2.718));
+        System.out.println(sum(1.414, 3.14));
     }
 }
 ```
@@ -272,7 +274,7 @@ public class Calculator {
 
 ----
 
-### Constructors (20 mins)
+### Constructors (20 min)
 
 Often, it may be convenient to pass some data into a new class after construction.
 
@@ -314,12 +316,12 @@ Now, because all members of our class will have an ID, name, and address, we mig
 
 ```java
 HumanKind vannaWhite = new HumanKind();
-vannaWhite.setID(123);
+vannaWhite.setId(123);
 vannaWhite.setName("Vanna White");
 vannaWhite.setAddress("123 Main St, Burbank, CA");
 
 HumanKind patSajak = new HumanKind();
-patSajak.setID(456);
+patSajak.setId(456);
 patSajak.setName("Pat Sajak");
 patSajak.setAddress("456 Elm St, New York, NY");
 ```
@@ -344,7 +346,7 @@ Add a constructor to our `HumanKind` class that accepts three arguments for the 
 <summary>Solution</summary>
   
 ```java
-package com.generalassembly.oo.intro;
+package com.generalassembly.oop.intro;
 
 public class HumanKind {
     private int id;
@@ -352,7 +354,7 @@ public class HumanKind {
     private String address;
 
     public HumanKind(int id, String name, String address) {
-        this.ID = id;
+        this.id = id;
         this.name = name;
         this.address = address;
     }
