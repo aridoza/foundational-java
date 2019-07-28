@@ -1,52 +1,52 @@
 | Title | Type | Duration | Creator |
 | --- | -- | -- | --- |
-| Objects and Classes | Lesson | 1:25 | Victor Grazi, NYC |
+| Objects and Classes | Lesson | 1:15 | Victor Grazi, NYC |
 
 
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Objects and Classes
 
-### LEARNING OBJECTIVES
+### Learning Objectives
 
-*After this lesson, you will be able to:*
+At the end of this lesson, you'll be able to:
 - Instantiate and use an object from a class.
-- Create an instance with the "new" keyword.
+- Create an instance with the `new` keyword.
 - Add fields and methods to a class.
 - Write constructors (including ones that accept arguments).
 
-### LESSON GUIDE
+### Lesson Guide
 
-| TIMING  | TYPE  | TOPIC  |
+| Timing  | Type  | Topic  |
 |:-:|---|---|
-| 5 min  | Opening  | Discuss lesson objectives | 
-| 15 min | Guided Practice | Class creation |
-| 20 min | Guided Practice | Class features | 
-| 15 min | Independent Practice | Calculator class |
-| 20 min | Guided / Independent Practice | Constructors |
-| 10 min  | Conclusion  | Review / Recap |
+| 5 min  | Opening  | Learning Objectives | 
+| 15 min | Guided Practice | Class Creation |
+| 20 min | Guided Practice | Class Features | 
+| 10 min | Independent Practice | Calculator Class |
+| 20 min | Guided and Independent Practice | Constructors |
+| 5 min  | Conclusion  | Review and Recap |
 
-## Opening (5 mins)
+## Opening (5 min)
 
-In OOP a class is a kind of template for creating _objects_. An object is an _instance_ of a class, meaning it contains all of the data fields and functionality defined in its class. However, each object can contain its own set of values for those fields. For example, a class might define a _name_ field of type _String_, but individual _instances_ of that class might have unique values assigned to that name field such as "Jeremy", "Maria", "Carlotta", etc. 
+In OOP, a class is a kind of template for creating **objects**. An object is an **instance** of a class — it contains all the data fields and functionality defined in its class. However, each object can contain its own set of values for those fields. For example, a class might define a `name` field of type `String`, but individual instances of that class might have unique values assigned to the `name` field, such as "Jeremy," "Maria," "Carlotta," and so on. 
 
-> Tip: Instantiation is a large word, but it comes from the word "instance", which is a little easier to understand. Instantiation is the practice of creating instances (aka objects) from classes!
+> Tip: Instantiation is a large word, but it comes from the word "instance," which is a little easier to understand. Instantiation is the practice of creating instances (aka objects) from classes.
 
 **Think of it as follows:**
 
-We know 'HumanKind' is a classification of creature that thinks, has senses, a body, etc. But we don't think of a specific person as a 'HumanKind'; HumanKind is the class; Vanna White is an _instance_ of HumanKind. Vanna has a name, a birthdate, brown eyes, two ears, legs, etc. 
+We know humankind is a classification of a creature that thinks, has senses and a body, and more. But we don't think of a specific person as humankind — `HumanKind` is the class while "Vanna White" is an **instance** of `HumanKind`. Vanna has a name, a birthdate, brown eyes, two ears, legs, and so on. 
 
 ----
 
-## Guided Practice: Step-By-Step Class Creation (15 mins)
+## Guided Practice: Step-by-Step Class Creation (15 min)
 
-Let's make this more concrete. Let's create a class called HumanKind. For now, we will just create a shell of the class, and we can add to it as we go. 
+Let's make this more concrete. Let's create a class called `HumanKind`. For now, we'll just create a shell of the class, and we can add to it as we go.
 
 ### Step 1
 
-First, create the file to contain the public _HumanKind_ class. 
+First, create the file for the `public` `HumanKind` class. 
 
 > Check: Who can tell me the name of that file? It should be `HumanKind.java`.
 
-We must create it in a directory that mimics the package name, i.e. src/com/generaassembly/oop/intro/HumanKind.java:
+We must create it in a directory that mimics the package name, i.e., `src/com/generalassembly/oop/intro/HumanKind.java`.
 
 ```java
 package com.generalassembly.oop.intro;
@@ -58,9 +58,9 @@ public class HumanKind {
 
 ### Step 2
 
-Next, let's add a _main_ method so we can execute our code (remember a main method defines the entry point of a program):
+Next, let's add a `main` method so we can execute our code. (Remember: A main method defines the entry point of a program.)
 
-> Tip: If you hate typing, IntelliJ has a convenient shortcut for defining a main method... just type _psvm_ and hit the tab key; that stands for "public static void main". That is an example of an IntelliJ _live template_. Getting familiar with these will make you a speed programmer!
+> Tip: If you hate typing, IntelliJ has a convenient shortcut for defining a main method: Just type `psvm` (which stands for `public static void main`) and hit the "Tab" key. That's an example of an IntelliJ **live template**. Getting familiar with those will make you a speedy programmer.
 
 ```java
 package com.generalassembly.oop.intro;
@@ -72,11 +72,13 @@ public class HumanKind {
 }
 ```
 
-Now we have defined our HumanKind class! But classes are not much good until they are _instantiated_.
+Now we've defined our `HumanKind` class. But classes are not much good until they're **instantiated**.
 
 ### Step 3
 
-To create an instance of the HumanKind class, you need to call the HumanKind _constructor_. This is done using the _new_ keyword. Let's add that instance creation to our _main_ method, then print out our instance, as follows:
+To create an instance of the `HumanKind` class, you need to call the `HumanKind` **constructor**. This is done using the `new` keyword.
+
+Let's add that instance creation to our `main` method, then print out our instance, as follows:
 
 ```java
 package com.generalassembly.oop.intro;
@@ -89,17 +91,17 @@ public class HumanKind {
 }
 ```
 
-Voila! We have a new instance of a HumanKind!
+Voila! We have a new instance of `HumanKind`.
 
 **Let's analyze that:**
 
-- `HumanKind vannaWhite` means declare a variable of type 'HumanKind' and name that variable vannaWhite. The `=` sign means assign everything on the right of the equal sign, to the variable on the left.
+- `HumanKind vannaWhite` declares a variable of type `HumanKind` and names that variable `vannaWhite`. The `=` sign assigns everything on its right to the variable on its left.
 
-> Tip: Remember the Java naming convention - camel case variable names, classes start with a capital, variables start with a lower case letter.
+> Tip: Remember the Java naming convention: camel case variable names, classes starting with a capital letter, variables starting with a lowercase letter.
 
-- `new HumanKind()` calls the 'constructor', which is the method of the HumanKind with the same name as the class. Notice that even though we didn't write a constructor method called `HumanKind`, Java provides one by default. A constructor is called to _construct_ (create) a new instance of the HumanKind class (i.e. using the HumanKind class as a template). This process is known as instantiation; we are 'instantiating' a new object, i.e. creating a new instance, of the HumanKind class.
+- `new HumanKind()` calls the constructor, which is a method with the same name as the `HumanKind` class. Notice that even though we didn't write a constructor method called `HumanKind()`, Java provides one by default. A constructor is called to **construct** (or create) a new instance of a class using that class as a template. This process is known as instantiation; we're **instantiating** a new object (i.e., creating a new instance of the class).
 
-So in plain English, this statement is saying, "declare a new variable named "vannaWhite" of type "HumanKind", and assign it a new instance of the class HumanKind". 
+So in plain English, this statement is saying, "Declare a new variable named `vannaWhite` of type `HumanKind` and assign it a new instance of the class `HumanKind`. 
 
 ```java
 HumanKind vannaWhite = new HumanKind();
@@ -107,39 +109,39 @@ HumanKind vannaWhite = new HumanKind();
 
 ### Step 4 
 
-Finally, to run our program in IntelliJ, notice the little green arrow in the margin, to the left of our _main_ method. 
+Finally, to run our program in IntelliJ, notice the little green arrow in the margin, to the left of our `main` method. 
 
 ![](resources/execute-main.png)
 
-Give that arrow a left-click, then click on "Run HumanKind.main"
-
-That will compile and execute our code, and produce output something like:
+Give that arrow a left click, then click on "Run HumanKind.main." That will compile and execute our code, and produce output similar to this:
 
 ![](resources/execute-main-output.png)
 
 ----
 
-## Guided Practice: Class Features (20 mins)
+## Guided Practice: Class Features (20 min)
 
 Now that we've looked at an example of a class, let's break down the different pieces and take a look at what exactly they're doing.
 
-So far we have seen how to define the shell of the class. But the value starts to be realized when we add _members_ to the class. Members of a class include...
-- Fields
-- Methods
-- Inner classes
+So far, we've seen how to define the shell of a class. But we'll start to realize the value of a class when we add **members** to it. Members of a class include:
+- Fields.
+- Methods.
+- Inner classes.
 
-We will look at fields and methods now.
+Let's look at fields and methods.
 
 ### Fields
 
-Fields are the variables associated with every instance of this class. What are some fields our `HumanKind` class might have? Take a few minutes to create three fields for the `HumanKind` class.
+Fields are variables associated with each instance of a class.
+
+> Check: What are some fields our `HumanKind` class might have? Take a few minutes to create three fields for our `HumanKind` class.
 
 <details>
-  <summary>Possible solution</summary>
+<summary>Possible Solution</summary>
 
 ```java
 public class HumanKind {
-    private int ID;
+    private int id;
     private String name;
     private String address;
 }
@@ -148,28 +150,28 @@ public class HumanKind {
 </details>
 
 
-#### Instance vs. class variables
+#### Instance vs. Class Variables
 
-Most fields are called _instance_ variables, because they are contained within an instance of the object. Two different object instances of the same class type might have completely different values for their instance variables. 
+Most fields are called **instance variables** because they're contained within an instance of a class. Two different instances of the same class might have completely different values for their instance variables.
 
-You will frequently hear the fields of an object referred to as its _state_. State essentially describes this object, and defines what distinguishes this object from any other object of the same class.
+You'll frequently hear the fields of an object referred to as its **state**. State essentially describes the object and defines what distinguishes it from any other object of the same class.
 
-For example, if our HumanKind class has an _age_ field, then `vannaWhite.age` might be 62, where `patSajak.age` might be 72.
+For example, if our `HumanKind` class has an `age` field, then `vannaWhite.age` might be 62, while `patSajak.age` might be 72.
 
-> (Now, how neat is that syntax: `vannaWhite.age` means "the age field of the object referred to by the vannaWhite variable". Nice, huh?)
+> How neat is that syntax? `vannaWhite.age` references the age field of the object referred to by the `vannaWhite` variable.
 
-Not all fields are instance variables. If a field is declared _static_, then they are called _class_ variables. A class variable shares its value among all instances of that class. Additionally, you do not need to have access to an instance in order to access a class variable. If the value of a class varibale changes for one instance, it changes for all instances. We will see examples of this shortly, and we will see why this is useful.
+Not all fields are instance variables. If a field is declared `static`, then it's called a **class variable**. A class variable shares its value among all instances of that class. Additionally, you don't need to have access to an instance to access a class variable. If the value of a class varibale changes for one instance, it changes for all instances. We'll see examples of this shortly, and we'll see why it's useful.
 
-There is one rule you want to remember starting from today - you will almost always want to make fields in a class private, and then provide _accessor_ ("getter") and _mutator_ ("setter") methods for those fields. This is called encapsulation - it means that you never expose the structure of a class to anything outside the class.
+There's one rule you'll need to remember starting today: Make fields in a class `private`, then provide **accessor** (also called **getter**) and **mutator** (also called **setter**) methods for those fields. This is known as encapsulation: You never expose the structure of a class to anything outside of it.
 
 ### Methods
 
-Methods provide the functionality to the objects instantiated from this class. We'd call a method when we want our object to do something or change something. 
+Methods provide the functionality for objects instantiated from a class. We call a method when we want our object to do something or change something. 
 
-What methods might we add to the `HumanKind` class? 
+> Check: What methods might we add to the `HumanKind` class? 
 
 <details>
-  <summary>Possible solution</summary>
+<summary>Possible Solution</summary>
 
 We might have a `setAddress()` method that alters the `address` field's value.
 
@@ -182,20 +184,20 @@ public class HumanKind {
 
 </details>
 
-Let's study that structure!
+Let's study that structure:
 
-1. As with any class member, we start the method declaration with the *visibility*, in this case public.
-1. Next, we declare the *return type*. In this case, it's a String.
-1. Finally, we enclose the arguments in parentheses - those represent the values that one must supply when they call the method.
+1. As with any class member, we start the method declaration with its **visibility**, in this case, `public`.
+1. Next, we declare the **return type**. In this case, it's a `String`.
+1. Finally, we enclose the arguments in parentheses. They represent the values one must supply when calling the method.
 
-We refer to the method name and arguments collectively as the _method signature_.
+We refer to the method name and arguments collectively as the **method signature**.
 
-To call a method, specify the method name, followed by parentheses, and inside the parentheses enclose the values represented by the arguments in the method declaration. If there is a return value, you can (and generally should), assign that return value to a variable, or use it in an expression. Otherwise it is lost.
+To call a method, specify the method name followed by parentheses, and inside the parentheses, enclose the values represented by the arguments in the method declaration. If a return value is required, you should assign that return value to a variable, or use it in an expression — otherwise, it will be lost.
 
 How would we call our `setAddress` method above?
 
 <details>
-  <summary>Possible solution</summary>
+<summary>Possible Solution</summary>
   
 ```java
 HumanKind.setAddress(String "123 Main St, Burbank, CA");
@@ -203,40 +205,40 @@ HumanKind.setAddress(String "123 Main St, Burbank, CA");
 
 </details>
 
-> Tip: In IntelliJ, if you don't remember the names of the parameters for a particular method, type the method where you want to use it, put your cursor between the parentheses and hit Ctrl-p. This will show a neat display of the parameters and types.
+> Tip: In IntelliJ, if you don't remember the names of the parameters for a particular method, type the method where you want to use it, put your cursor between the parentheses and hit "Ctrl+P." This will show a neat display of the parameters and types.
 
 ![](resources/ctrl-p.png)
 
-#### Instance vs. static methods
+#### Instance vs. Static Methods
 
-**Instance methods**
+##### Instance Methods
 
-Like fields, methods can be static or not. Non-static methods are known as _instance methods_. Static methods are also known as _class methods_. 
+Like fields, methods may or may not be static. Static methods are also known as **class methods**, while non-static methods are known as **instance methods**. 
 
-The implementation of an instance method has access to every field and method declared in the class, no matter what the visibility. It can also create its own variables, but these are lost once the method returns.
+The implementation of an instance method has access to every field and method declared in the class, no matter the visibility. It can also create its own variables, but these are lost once the method returns.
 
-**Static methods**
+##### Static Methods
 
-Most of the methods and fields we have defined so far have been _instance_ methods; methods that require an instance to invoke.
+Most of the methods and fields we've defined so far have been instance methods, which require an instance to invoke.
 
-However Java also provides _static_ (aka _class_) methods, that don't require an instance, they just execute on a class. These methods get the word _static_ before the return type.
+However, Java also provides **static** (aka **class**) methods that don't require an instance — they just execute on a class. These methods get the word `static` before the return type.
 
-Some common examples of static methods are the methods in the Math class. 
+Some common examples of static methods are those in the `Math` class: 
 
 ```java
 System.out.println(a + "**" + b + "=" + (Math.pow(4, 2))); 
 // displays 4**2=16.0 (Java has no exponent operator, so we invent ** just for display purposes)
 ``` 
 
-If a method does not access any of the instance fields or methods from the class that it is defined in, consider making it static.
+If a method doesn't access any of the instance fields or methods from the class it's defined in, consider making it static.
 
 ----
 
-## Independent Practice - Calculator (10 mins)
+## Independent Practice: `Calculator` Class (10 min)
 
-We have covered a lot of ground, so let's do an exercise!
+We've covered a lot of ground, so let's do an exercise.
 
-Let's create a class called Calculator, and add the sum method. Then add a main method to perform the following sums and print out the result:
+Create a class called `Calculator`, and add the `sum` method. Then, add a `main` method to perform the following sums and print out the result:
 
 ```java
 10 + 20
@@ -245,17 +247,20 @@ Let's create a class called Calculator, and add the sum method. Then add a main 
 ```
 
 <details>
-  <summary>Solution</summary>
+<summary>Solution</summary>
     
 ```java
 package com.generalassembly.oop.intro;
+
 public class Calculator {
     public static double sum(double first, double second) {
         double sum = first + second;
         return sum;
     }
+    
     public static void main(String[] args) {
         Calculator calculator = new Calculator();
+        
         System.out.println(sum(10 , 20));
         System.out.println(sum(3.14 , 2.718));
         System.out.println(sum(1.414,3.14));
@@ -269,22 +274,22 @@ public class Calculator {
 
 ### Constructors (20 mins)
 
-Very often, it will be convenient to pass some data into a new class after construction.
+Often, it may be convenient to pass some data into a new class after construction.
 
-Let's imagine that we want to add some fields, and some getters and setters:
+Let's imagine we want to add some fields, as well as some getters and setters:
 
 ```java
 public class HumanKind {
-    private int ID;
+    private int id;
     private String name;
     private String address;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -305,58 +310,59 @@ public class HumanKind {
 }
 ```
 
-Now, since all members of our class will have an ID, name, and address, we might do the following for each member of HumanKind:
+Now, because all members of our class will have an ID, name, and address, we might do the following for each instance of `HumanKind`:
 
 ```java
 HumanKind vannaWhite = new HumanKind();
 vannaWhite.setID(123);
-vannaWhite.setName("White, Vanna");
+vannaWhite.setName("Vanna White");
 vannaWhite.setAddress("123 Main St, Burbank, CA");
 
 HumanKind patSajak = new HumanKind();
 patSajak.setID(456);
-patSajak.setName("Sajak, Pat");
+patSajak.setName("Pat Sajak");
 patSajak.setAddress("456 Elm St, New York, NY");
 ```
 
-That's a lot of lines to repeat for each operation. If that feels unnecessarily repetitive, you're right, there's a better way to do this. 
+Those are a lot of lines to repeat for each operation. But there's a better way to do it. 
 
-### Constructors with Arguments
+### Constructors With Arguments
 
-Remember the constructor method we discussed earlier? The one with the same name as the class itself that gets called whenever a new instance is created? We can pass arguments to that to seriously speed up our process.
+Remember the constructor method we discussed earlier? The one with the same name as the class that gets called whenever a new instance is created? We can pass arguments to that to speed up our process.
 
 Here are some basic rules for writing our own constructors (as opposed to just using the empty ones Java provides by default):
-1. A constructor must exactly match the class name it is contained in.
+
+1. A constructor must exactly match the class name it's contained in.
 2. A constructor has no return type.
 3. A constructor may not be static.
 
-### Independent Practice: HumanKind class
+### Independent Practice: `HumanKind` Class
 
-Add a constructor to our `HumanKind` class that accepts three arguments for initial values of ID (int), name (String), and address (String).
+Add a constructor to our `HumanKind` class that accepts three arguments for the initial values of `id` (`int`), `name` (`String`), and `address` (`String`).
 
 <details>
-  <summary>Solution</summary>
+<summary>Solution</summary>
   
 ```java
 package com.generalassembly.oo.intro;
 
 public class HumanKind {
-    private int ID;
+    private int id;
     private String name;
     private String address;
 
-    public HumanKind(int ID, String name, String address) {
-        this.ID = ID;
+    public HumanKind(int id, String name, String address) {
+        this.ID = id;
         this.name = name;
         this.address = address;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -382,31 +388,30 @@ public class HumanKind {
 So given the constructor, we can now save a few lines of code (and make it clearer along the way) by entering:
 
 ```java
-HumanKind vannaWhite = new HumanKind(123, "White, Vanna", "123 Main St, Burbank, CA");
-HumanKind patSajak = new HumanKind(456, "Sajak, Pat", "123 Main St, Burbank, CA");
+HumanKind vannaWhite = new HumanKind(123, "Vanna White", "123 Main St, Burbank, CA");
+HumanKind patSajak = new HumanKind(456, "Pat Sajak", "123 Main St, Burbank, CA");
 ```
 
 ### Default Constructor
 
-If we do not define a constructor for a class, Java supplies one implicitly. We saw that in our initial implementation of the `HumanKind` class. 
+If we don't define a constructor for a class, Java supplies one implicitly. We saw that in our initial implementation of the `HumanKind` class. 
 
-> Tip: If you're not doing anything in the constructor, it's totally fine–and a good practice–to just use the default that Java provides!
+> Tip: If you're not doing anything in the constructor, it's totally fine — and a good practice — to just use the default Java provides.
 
 --- 
 
-## Conclusion (5 mins)
+## Conclusion (5 min)
 
-There's a lot to know about creating classes and objects, isn't there?! 
+There's a lot to know about creating classes and objects, isn't there?
 
 With a partner, discuss the following prompts:
 
 * Explain the difference between:
-    * Classes and Objects (Instances)
-    * Class Variables and Instance Variables
-    * Static and Non-Static Methods
+    * Classes and objects (instances).
+    * Class variables and instance variables.
+    * Static and non-static methods.
     
 * Define:
     * Constructors
     * Instances
     * Properties
-    
