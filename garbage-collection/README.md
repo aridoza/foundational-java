@@ -27,11 +27,13 @@ At the end of this lesson, you'll be able to:
 
 ## Opening (5 min)
 
-We've already seen quite a bit about how Java allocates data, objects, arrays, collections, and more.
+We've already seen quite a bit about how Java allocates data, objects, arrays, collections, and more. But we've glossed over a few subtle points:
+- Where does Java put all this data?
+- We can assume that memory is allocated as needed, but where does that memory come from?
+- How does Java manage that memory?
+- How does memory get reclaimed when the data is no longer required?
 
-But we've glossed over a few subtle points: Where does Java put all this data? We can assume that memory is allocated as needed, but where does that memory come from? How does Java manage that memory? How does memory get reclaimed when the data is no longer required?
-
-This is where the garbage collector comes in, which isn't as ominous as it sounds.
+This is where the garbage collector comes in. (Don't worry, it isn't as ominous as it sounds.)
 
 ## The Garbage Collector (10 min) 
 
@@ -52,7 +54,7 @@ for (int i = 0; i < 100; i++) {
 }
 ```
 
-> Check: What happens to created during the loop?
+> Check: What happens to the `message` object created during the loop?
 
 <details>
 	
@@ -82,7 +84,7 @@ You can specify the heap size when you launch your program using launch flags:
 -Xmx allocates the maximum heap size. 
 ```
 
-For example, the following will allocate an initial memory of 10 GB and will increase that to 100 GB:
+For example, the following will allocate an initial memory of 10 GB and increase that to 100 GB:
 
 ```java
 java -Xms10g -Xmx100g MyCode
@@ -90,24 +92,22 @@ java -Xms10g -Xmx100g MyCode
 
 If your `-Xmx` setting is greater than your `-Xms` setting, then Java will start with an initial heap size equal to your `-Xms` setting, then will allocate more heap as needed until the `-Xmx` value is reached. 
 
-#### Default Heap
+#### Default Heap Size
 
-If you don't specify a heap size, Java will allocate a default heap for you based on your machine's physical memory. However, it's a good practice to determine your maximum expected heap size by observing the program during execution using tools like Linux's `ps` or `top`.
+If you don't specify a heap size, Java will allocate a default heap size for you based on your machine's physical memory. However, it's a good practice to determine your maximum expected heap size by observing the program during execution using tools like Linux's `ps` or `top`.
 
 #### The Stack
 
 Note that when your program executes, even if there isn't a single object allocated, it still uses some memory to keep track of the call stack of every thread running.
 
-For example, if method A calls method B calls method C, Java must remember that when method C exits, it must return to the spot in method B that called it, and when that returns, return to method A. 
-
-This memory is called the **stack** and is distinct from the heap. 
+For example, if method A calls method B calls method C, Java must remember that when method C exits, it must return to the spot in method B that called it, and when that returns, return to method A. This memory is called the **stack** and is distinct from the heap. 
 
 The stack also holds any method-local data that will be swept off once the method returns. The stack works on a 
 "first in, first out" (aka FIFO) basis: It's allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, the stack is swept in a FIFO manner, so the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
 
 ## Demo: `OutOfMemory` Error (10 min) 
 
-Does this mean that Java can never run out of memory? 
+Does this mean Java can never run out of memory? 
 
 What do we think will happen when we run this program?
 
@@ -139,9 +139,9 @@ Here are two reasons a program might ever run out of memory:
 
 ## Resolving an `OutOfMemory` Error (10 min)
 
-So, it's possible to run out of memory. That means we should be asking ourselves, "What do we do when that happens?"
+So, it is possible to run out of memory. That means we should be asking ourselves, "What do we do when that happens?"
 
-Our memory leak generator is an extreme example of what can happen if your program creates objects with reckless abandon. To prevent this, make sure you're not allowing collections to grow indefinitely.
+Our memory leak generator is an extreme example of what can happen if our program creates objects with reckless abandon. To prevent this, make sure you're not allowing collections to grow indefinitely.
 
 If your collection belongs to a singleton object or is a static reference, then many objects might be adding to it. If an unlimited number of objects are being added, you need to rethink your program design. 
 
