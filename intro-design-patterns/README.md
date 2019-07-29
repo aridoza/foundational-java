@@ -10,7 +10,7 @@ Creator:
 
 ## Introduction (30 min)
 
-In this exercise, we'll learn the basics of design patterns: the underlying rules and customs that define how we build a lot of software. It's an admittedly heady concept, so let's try to make it as simple as possible.
+In this exercise, we'll learn the basics of design patterns — the underlying rules and customs that define how we build a lot of software. It's an admittedly heady concept, so let's try to make it as simple as possible.
 
 ### What's a Design Pattern, Anyway?
 
@@ -28,7 +28,7 @@ When you're done, let's recap:
 
 Let's look at some of the most famous patterns and see how they work.
 
-Let's get into pairs. Choose one of the following design patterns to research:
+Get into pairs and choose one of the following design patterns to research:
 
 - MVC
 - Singleton
@@ -36,7 +36,7 @@ Let's get into pairs. Choose one of the following design patterns to research:
 - Factory
 - Observer
 
-You should answer the questions:
+You should be able to answer these questions:
 - How does this design pattern work?
 - Why do we use it? What benefits does it provide?
 - What does it look like in Java?
