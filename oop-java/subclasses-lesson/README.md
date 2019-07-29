@@ -23,7 +23,7 @@ At the end of this lesson, you'll be able to:
 
 ## Opening (5 min)
 
-In our use of language and observations from the world, we naturally categorize objects of similar types. We understand what a cat is. We understand that a lion is a member of the cat family, and although we have no confusion between a cat and a lion, we know that lions share qualities with cats.
+In our use of language and observations from the world, we naturally categorize objects of similar types. For example, we understand what a cat is, and we understand that a lion is a member of the cat family. And although we have no confusion between a cat and a lion, we know that lions share qualities with cats.
 
 ![](resources/cat-lion.png)
 
@@ -65,7 +65,7 @@ public class Cat {
 }
 ```
 
-We create a subclass of `Lion` by using the `extends` keyword:
+We create a subclass of `Cat` by using the `extends` keyword:
 
 ````java
 class Lion extends Cat {
@@ -102,7 +102,7 @@ A subclass will inherit every field and method it can see, i.e., every `public` 
 
 `private` members can't be inherited, except by classes defined in the **same file**.
  
-### Best Practices: `@Override`
+### Best Practice: `@Override`
 
 For the `Lion` subclass, notice how we put `@Override` above the `getLives()` method:
 
@@ -115,9 +115,9 @@ class Lion extends Cat {
 }
 ````
 
-It's best practice to annotate an overridden method by placing the `@Override` annotation above the method. It tells the compiler to ensure it's overriding a method from the base class.
+It's best practice to annotate an overridden method by placing the `@Override` annotation above it. That tells the compiler to ensure it's overriding a method from the base class.
 
-Although this isn't required, it's a good defensive practice, because in the future, if the base method happens to get renamed along the way, the code will fail to compile (because it's no longer overridding anything). Therefore, this will help with early detection of some subtle bugs that would result from calling an overridden method which is actually a new method.
+Although this isn't required, it's a good defensive practice. In the future, if the base method happens to get renamed along the way, the code will fail to compile (because it's no longer overridding anything). Therefore, this will help with early detection of some subtle bugs that would result from calling an overridden method which is actually a new method.
 
 An overridden method can be of the same visibility as the method it's overriding, or it can be more public. However, it can't be more private.
 
@@ -139,7 +139,7 @@ Error: java: cannot inherit from final class
 
 Sometimes, you might want your class to be inherited from, but perhaps you don't want the subclass to change a particular method or field in your class. If needed, particular members can be marked `final`.
 
-A subclass can override any member visible to it — except if the method is `final` or `static` — by defining the method using the exact same name and method signature as the base method it's overriding.
+A subclass can override any method visible to it — except if the method is `final` or `static` — by defining the method using the exact same name and method signature as the base method it's overriding.
 
 -----
 
@@ -160,7 +160,7 @@ Cat cat = new Lion();
 
 The rule to remember is that when you call a method on a variable, you're really calling the method on the instance contained in that variable. So in our case, since the `cat` variable contains a `Lion` instance, the `getLives()` method will return the one life of the `Lion` and not the nine of the parent `Cat`. This is generally a good thing, because library vendors can now define subclasses, and they'll function as the vendor intends them to.
 
-In plain English, maybe you want a collection (like an `Array` or `ArrayList`) of cats, but you want to be able to put lions, cats, and anything else in the cat family — say tigers or leopards all in that same collection. That's known as upcasting.
+In plain English, maybe you want a collection (like an `Array` or `ArrayList`) of cats, but you want to be able to put lions, cats, and anything else in the cat family — say tigers or leopards — all in that same collection. That's known as upcasting.
 
 Did the answer surprise you?
 
@@ -170,7 +170,7 @@ Did the answer surprise you?
 
 Downcasting works as well, as long as you're casting to the correct object type.
 
-So we can say `Cat cat = new Lion()`, which as we saw above works fine because lion **is** a cat. But we can't say `Lion lion = new Cat()`, because in general, cats are not lions.
+So we can say `Cat cat = new Lion()`, which as we saw above works fine because lion is a cat. But we can't say `Lion lion = new Cat()`, because in general, cats are not lions.
 
 However, given the assignment `Cat cat = new Lion()`, we know the `cat` variable contains a `Lion` instance; therefore, we should be able to assign it.
 
@@ -189,7 +189,7 @@ Lion lion = (Lion)cat;
 
 By preceding the variable `cat` with `(Lion)`, you're **casting** the `cat` instance to a `Lion` class, which is your way of signing a pact with the compiler guaranteeing that the variable will contain a `Lion` instance.
 
-And if you break that pact, as follows:
+And if you break that pact, like below:
 
 ```java
 public static void main(String[] args) {
@@ -225,7 +225,7 @@ public class Shape {
 
 Our Shape class has methods `getCircumference()` and `getArea()` that, depending on the shape, will calculate the circumference and area of the shape.
 
-As we define some subclasses to inherit from `Shape`, remember that each of these shapes has a slightly different function to determine it's area or circumference.
+As we define some subclasses to inherit from `Shape`, remember that each of these shapes has a slightly different function to determine its area or circumference.
 
 Let's start by defining a subclass of `Shape` called `Triangle` that takes three sides in its constructor:
 
@@ -249,7 +249,7 @@ public class Triangle extends Shape {
 
 Your assignment is to implement the `getCircumference()` and `getArea()` methods.
 
-The circumference (or perimeter) is defined as the length of the outline of the shape. So for a triangle or rectangle, it's the sum of the sides, and for a circle, it's 2πr, where r is the radius and π is `Math.PI`.
+The circumference (or perimeter) is defined as the length of the outline of the shape. So for a triangle, it's the sum of the sides, and for a circle, it's 2πr, where r is the radius and π is `Math.PI`.
 
 The area is the square footage covered by the shape. For a triangle, we can use Heron's formula:
 
@@ -328,21 +328,21 @@ package com.generalassembly.oop;
 
 public class Rectangle extends Shape {
     private int length;
-    private int height;
+    private int width;
 
-    public Rectangle(int length, int height) {
+    public Rectangle(int length, int width) {
         this.length = length;
-        this.height = height;
+        this.width = width;
     }
 
     @Override
     public double getCircumference() {
-        return 2*length + 2*height;
+        return 2*length + 2*width;
     }
 
     @Override
     public double getArea() {
-        return length *height;
+        return length * width;
     }
 }
 ```
