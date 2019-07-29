@@ -370,29 +370,109 @@ the "TODO" portions that are in the comments.  To confirm that your results are 
 iterate each list that you create and output the results.  
 
 **Hint:**  
-- You'll need to leverage the intermediate operations "map" and "filter"
-- You'll also need to use the terminal operation "Collectors.toList"
+- You'll need to use _ofNullable_
+- You'll need to leverage the _flatMap_ and _filter_ methods
+- You'll also need to use _orElseGet_
 
 ### Independent Practice Template
 
 ```java
+package com.ga;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+public class independentPractice {
+
+    private static class Television {
+
+        private Optional<String> skuId;
+        private Optional<Boolean> hdmiEnabled;
+        private Optional<Boolean> fourKEnabled;
+        private Optional<Integer> price;
+
+        private Television(String skuId, boolean hdmiEnabled, boolean fourKEnabled, Integer price) {
+            this.skuId = Optional.ofNullable(skuId);
+            this.hdmiEnabled = Optional.ofNullable(hdmiEnabled);
+            this.fourKEnabled = Optional.ofNullable(fourKEnabled);
+            this.price = Optional.ofNullable(price);
+        }
+
+        public Optional<String> getSkuId() {
+            return skuId;
+        }
+
+        public void setSkuId(Optional<String> skuId) {
+            this.skuId = skuId;
+        }
+
+        public Optional<Boolean> getHdmiEnabled() {
+            return hdmiEnabled;
+        }
+
+        public void setHdmiEnabled(Optional<Boolean> hdmiEnabled) {
+            this.hdmiEnabled = hdmiEnabled;
+        }
+
+        public Optional<Boolean> getFourKEnabled() {
+            return fourKEnabled;
+        }
+
+        public void setFourKEnabled(Optional<Boolean> fourKEnabled) {
+            this.fourKEnabled = fourKEnabled;
+        }
+
+        public Optional<Integer> getPrice() {
+            return price;
+        }
+
+        public void setPrice(Optional<Integer> price) {
+            this.price = price;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Optional<Television> televisionOptional1 =
+                Optional.of(new Television("DDDD", true, true, null));
+
+        //TODO #1: Write a lambda using orElseGet to default the price to 500 if the price is missing. Print the output
+        //to confirm the price.
+
+        //TODO #3: Call the method that you created in TODO #2 for the following Television objects and print out the
+        //output.
+        Television television1 =
+                new Television("AAAA", true, true, 1500);
+
+        Television television2 =
+                new Television("BBBB", true, false, 1000);
+
+        Television television3 =
+                new Television("CCCC", false, false, 500);
+    }
+
+    //TODO #2 Write a method that takes in a Television object and returns true if the price is greater than $999.
+}
+
 ```
 
 The completed example can be found in the repo in the file named "IndependentPracticeCompleted.java".
 
 
-## Conclusion
+## Conclusion - Review/Recap
+To recap, we've learned
 
+- What Optionals are used for
+- How to create Optionals
+- How to get values from Optionals
+- How to use Optional stream operations such as _filter_, _map_, and _flatMap_
 
-#### Let's Review
-Key Takeaways
-- Prefer "ofNullable" when creating Optionals
-- Prefer _orElseGet_ over _orElse_ and _get_
-
+####Quiz Questions####
 With a partner, draft a one sentence answer to each of these questions:
-- Question 1?
-- Question 2?
-- Question 3?
+- Why is _Optional.ofNullable_ preferred over using __Optional.of_?
+- Which one of the following methods is the preferred way of getting values from an Optional? _orElseGet_ over _orElse_ and _get_?
+- Using the answer from the previous question, tell me why it's preferred?
 
 ## References
 - [Baeldung Optionals](https://www.baeldung.com/java-optional)
