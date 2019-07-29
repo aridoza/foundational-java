@@ -34,7 +34,7 @@ Today's computers have powers far beyond what we've seen or used thus far. Even 
 
 > Fun history lesson: The designers of Java included concurrency in the core JDK, making it perhaps the first language to do so.
 
-So, let's turn our programs up to 11 by introducing them to concurrency.
+So, let's turn our programs up by introducing them to concurrency.
 
 --- 
 
@@ -44,17 +44,17 @@ Before we dive in, let's think: Why would we ever need to have multiple threads 
 
 Amazon, for example, might have dozens (or millions) of customers using the site at the same time. Many of them are trying to perform a similar task: purchase a shiny new gadget. To complete the purchase, users certainly don't want to wait in line until all previous users are done; that's why they're shopping online. We expect the web application to handle these requests **concurrently**.
 
-Similarly, think of an application that requires a lot of database queries, file reads and writes, and service calls over a network. Do we want each outgoing request to wait for the other to return before the next one starts? Wouldn't it be better to have all requests process concurrently?
+Similarly, think of an application that requires a lot of database queries, file reads and writes, and service calls over a network. Do we want each outgoing request to wait for the other to return before it starts? Wouldn't it be better to have all requests process concurrently?
 
 ### Threads
 
 The backbone of Java concurrency are **threads**. A thread is a lightweight process that has its own call stack but can access shared data of other threads in the same process.
 
-Threads are easy to create, but with great simplicity comes great responsibility. We'll discuss some of the common pitfalls in a little while; for now, let's jump straight into creating and starting our first thread.
+Threads are easy to create, but with great simplicity comes great responsibility. We'll discuss some of the common pitfalls in a little while — for now, let's jump straight into creating and starting our first thread.
 
 There are two popular ways to create a thread, and you'll see both heavily used:
 * **Override the `Thread` class**, implementing the `run` method.
-* **Implement the `Runnable` interface**, implementing its `run` method, and passing that `Runnable` to a `Thread`.
+* **Implement the `Runnable` interface**, implementing its `run` method and passing that `Runnable` to a `Thread`.
 
 Let's use both of these approaches to start a thread that's tasked with the job of writing the current time to system output every two seconds.
 
@@ -64,9 +64,7 @@ Let's use both of these approaches to start a thread that's tasked with the job 
 
 In this approach, we'll create a new class that **extends** `Thread` and **overrides** that thread's `run()` method. 
 
-The `Thread` class has a method called `public void run()` that's called implicitly when you start your thread. 
-
-Once we override `Thread.run()`, we'll call our class's `start()` method, which will start the thread and implicitly call `run()`. 
+The `Thread` class has a `public void run()` method that's called implicitly when you start your thread. Once we override `Thread.run()`, we'll call our class's `start()` method, which will start the thread and implicitly call `run()`. 
  
  > Reminder: Be sure to get this clearly: You **implement** `run()` but you **call** `start()`. 
 
@@ -99,7 +97,7 @@ public class TimeLogger extends Thread {
 }
 ```
 
-There's a lot going on here, so let's talk through it.
+There's a lot going on here, so let's walk through it.
 
 #### Step 1
 
@@ -120,7 +118,7 @@ public class TimeLogger extends Thread {
 
 #### Step 3
 
-Now comes the meat. 
+Now comes the meat: We overrode the `Thread` class's `run()` method.
 
 ```java
 @Override
@@ -136,8 +134,6 @@ public void run() {
         }
 }
 ```
-
-We overrode the `Thread` class's `run()` method.
 
 The first thing the `run()` method does is to declare a `try-catch` block. We surround code that can throw an exception with the `try` portion, and make some code to gracefully handle the exception in the `catch` portion.
 
@@ -159,11 +155,11 @@ public static void main(String[] args) {
 }
 ```    
 
-> Note: We get the implementation of the `start()` method from the `Thread` class which we're extending. That's why we don't have to write it ourselves.
+> Note: We get the implementation of the `start()` method from the `Thread` class, which we're extending. That's why we don't have to write it ourselves.
 
 #### What About That `try-catch` Block?
 
-Notice that `Thread.sleep()` throws an `InterruptedException`. That exception is thrown when the thread's `interrupt()` method is called (usually by frameworks or application servers) to initiate a smooth shutdown of the threads. Because `InterruptedException` is a checked exception, by definition, you **must** catch it. One side-effect of catching an `InterruptedException` is that the thread's `interrupt` flag is reset, meaning it's no longer interrupted and the container shutdown will be aborted.
+Notice that `Thread.sleep()` throws an `InterruptedException`. That exception is thrown when the thread's `interrupt()` method is called (usually by frameworks or application servers) to initiate a smooth shutdown of the threads. Because `InterruptedException` is a checked exception, by definition, you **must** catch it. One side effect of catching an `InterruptedException` is that the thread's `interrupt` flag is reset, meaning it's no longer interrupted and the container shutdown will be aborted.
 
 To propagate the interrupt back to the calling thread (so the application server or container can continue its clean shutdown), we must set the `interrupt` flag once again, which is why we call `Thread.currentThread().interrupt()`. 
 
@@ -175,7 +171,7 @@ Also, notice that we enclosed the while loop **inside the `try-catch`** block. A
 
 Think about it: If the `try-catch` block was inside the `while` loop, imagine what would happen if someone calls the `interrupt()` method. The exception would trap the interrupt, set the `interrupt` flag, and then loop again. The program would never end, even after an interrupt. So we fix that by including the `while` inside the `try-catch` block. If an interrupt occurs, the `while` loop exits and the `catch` block takes over — setting the `interrupt` flag and exiting — thereby returning control to the caller.
 
-> Hint: This is a common idiom in Java concurrency: Execute some activity in a loop, sleep, and catch the `InterruptedException` **outside** the loop.
+> Hint: This is a common concept in Java concurrency: Execute some activity in a loop, sleep, and catch the `InterruptedException` **outside** the loop.
 
 #### Make It Run
 
@@ -255,13 +251,13 @@ There are several advantages to the `Runnable` approach:
 
 ### Using Anonymous Inner Classes
 
-There's another common idiom you should be aware of for creating threads using the `Runnable` interface: using **anonymous inner classes**. We won't be looking at this approach in much detail, but you'll see the syntax in your development work, so you should be aware of it.
+There's another common concept you should be aware of for creating threads using the `Runnable` interface: using **anonymous inner classes**. We won't be looking at this approach in much detail, but you'll see the syntax in your development work, so you should be aware of it.
 
-The idea behind anonymous inner classes is that we shouldn't need to assign a name to a class that we're only ever going to use once in a limited context. For such cases, Java allows you to create anonymous inner classes, which are declared and used in-line, without having to name them.
+The idea behind anonymous inner classes is that we shouldn't need to assign a name to a class that we're only ever going to use once in a limited context. For such cases, Java allows you to create anonymous inner classes, which are declared and used in-line without having to name them.
 
 > Aside: You may have seen anonymous functions in a language like JavaScript. The motivation for doing so here is exactly the same.
 
-In our second thread example, we created a new class called `TimeRunnable` and then instantiated it, and passed in that instance to the `Thread` class. 
+In our second thread example, we created a new class called `TimeRunnable` and instantiated it, then passed in that instance to the `Thread` class. 
 
 Contrast this code, which uses an anonymous inner class, to the previous `TimeRunnable` version:
 
@@ -292,7 +288,7 @@ public static void main(String[] args) {
 
 The syntax looks a bit tricky at first glance. Basically, the first line of the `main()` method is declaring a new `Runnable` instance, but we're calling an anonymous constructor (`new Runnable()`) formed by implementing the `Runnable.run()` method.
 
-To highlight the difference, compare the two versions. You can copy and paste the first version into IntelliJ, then copy the second version into you clipboard, right click, and choose "Compare to Clipboard."
+To highlight the difference, compare the two versions. You can copy and paste the first version into IntelliJ, then copy the second version into your clipboard, right click, and choose "Compare to Clipboard."
 
 ![](resources/compare-to-clipboard1.png)
 
@@ -313,7 +309,7 @@ We want to capture some metrics in our logs to ensure our application is properl
 
 **Challenge:** Most seasoned developers are allergic to copy-and-paste code, so try not to use any duplicated code. 
 
-> Hint: To get the current time, call `LocalTime.now()`. To get the free memory, call `Runtime.freeMemory()`. To get the total memory, call `Runtime.totalMemory()`. 
+> Hint: To get the current time, call `LocalTime.now()`. To get the free memory, call `Runtime.getRuntime().freeMemory()`. To get the total memory, call `Runtime.getRuntime().totalMemory()`. 
 
 <details>
 <summary>Solution: Memory and Time Threads</summary>
@@ -330,7 +326,6 @@ public class FreeMemoryAndTime {
     }
     
     static class TimePrinter implements Printer {
-
         @Override
         public void printMessage() {
             System.out.println("Current time: " + LocalTime.now());
@@ -338,7 +333,6 @@ public class FreeMemoryAndTime {
     }
     
     static class MemoryPrinter implements Printer {
-
         @Override
         public void printMessage() {
             System.out.println("Free memory: " + Runtime.getRuntime().freeMemory() + " Total memory: " + Runtime.getRuntime().totalMemory());
@@ -369,7 +363,7 @@ public class FreeMemoryAndTime {
 
 **What are those underscores?**
 
-Underscores in numeric literals are ignored in Java and used for readability. In the code above, the `delay` is a time in milliseconds, which is difficult to read. Putting the underscore in allows us to easily identify that the sleep timer of the threads waits for 60 and 15 seconds respectively on each iteration.
+Underscores in numeric literals are ignored in Java and used for readability. In the code above, the `delay` is a time in milliseconds, which is difficult to read. Putting the underscore in allows us to easily identify that the sleep timer of the threads waits for 60 and 15 seconds, respectively, on each iteration.
 
 </details>
 
@@ -379,7 +373,7 @@ Underscores in numeric literals are ignored in Java and used for readability. In
 
 It's entirely possible that our time-printing thread could have started before our main thread got around to printing the "Thread was started" message. If that happened, "Thread was started" would have printed as the second message instead of the first. 
 
-Each thread operates independently, so the intercalation is unpredictable. In plain English, this means we can't know the order they will happen ahead of time. This is known as a **race condition**, which sometimes makes testing threaded code difficult. A race condition essentially means that different threads execute independently, so they can appear to randomly execute their steps in different orders.
+Each thread operates independently, so the intercalation is unpredictable. In plain English, this means we can't know the order they will happen ahead of time. This is known as a **race condition**, which sometimes makes testing threaded code difficult. A race condition essentially means different threads execute independently, so they can appear to randomly execute their steps in different orders.
 
 This can have some interesting side effects, especially when trying to assign and access a shared variable from different threads.
 
@@ -459,9 +453,11 @@ When you want to make absolutely sure that two threads cannot execute at the sam
 
 The other way is to use the `java.util.concurrent` package introduced in Java 5, which we'll get to later. Let's first take a look at the `synchronized` keyword.
 
-When you declare methods as `synchronized`, that ensures that **only one thread at a time** can be executing any of the synchronized methods on any given object. This works because every object instance has a built-in "intrinsic lock."
+When you declare methods as `synchronized`, that ensures **only one thread at a time** can be executing any of the synchronized methods on any given object. This works because every object instance has a built-in "intrinsic lock."
 
-When a thread enters a `synchronized` method, it automatically grabs that lock. If any other threads try to access a `synchronized` method while one thread already has the lock, then the other threads must **block** until the current thread relinquishes the lock by exiting the `synchronized` block. When a thread is blocked, there's no way for it to move until the lock is relinquished or the program ends. If many threads are waiting for the lock on an object, there's no guarantee that they will acquire the locks fairly, and it's possible that any given thread will have to wait indefinitely, depending on the volume of threads. 
+When a thread enters a `synchronized` method, it automatically grabs that lock. If any other threads try to access a `synchronized` method while one thread already has the lock, then the other threads must **block** until the current thread relinquishes the lock by exiting the `synchronized` block.
+
+When a thread is blocked, there's no way for it to move until the lock is relinquished or the program ends. If many threads are waiting for the lock on an object, there's no guarantee they'll acquire the locks fairly, and it's possible that any given thread will have to wait indefinitely, depending on the volume of threads. 
 
 So be careful how you synchronize, and try to visualize all the execution paths. 
 
@@ -469,7 +465,7 @@ So be careful how you synchronize, and try to visualize all the execution paths.
 
 ![](https://res.cloudinary.com/briezh/image/upload/v1561421042/DMV-cartoon_x2twcy.jpg)
 
-Have you ever been in a grocery line trying to buy one item behind someone buying 100 items? Or have you been waiting in a customer service line while whoever is in front of you had a complex problem? You were left waiting indefinitely, and if the person in front of you felt like taking more time, you'd have no choice but to keep waiting.
+Have you ever been in a grocery line trying to buy one item behind someone buying 100 items? Or, have you been waiting in a customer service line while whoever is in front of you had a complex problem? You were left waiting indefinitely, and if the person in front of you felt like taking more time, you'd have no choice but to keep waiting.
 
 It turns out, we don't like our Java threads to wait on hold either. Java has a `ReentrantLock` that allows you to lock in a fair way. For more information, see the [`ReentrantLock` Java docs](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/locks/ReentrantLock.html).
 
@@ -588,7 +584,7 @@ So, if a thread is in the timed-wait state and the time lapses, we said our thre
 
 Now, let's say our thread is moving merrily along, until it comes to a point where it needs to wait for some data to be available from another thread. This is a common concurrency problem, and Java provides the `notify` and `notifyAll` keywords to solve it.
 
-It's easier to see it in an example. Let's say we have two threads, one that reads file data (the **reader** thread), and another that formats and displays that data (the **writer** thread). There's no reason for the writer to write anything until the reader has read something. So the reader must have a way to signal the writer that data is available. This is where `notify` comes in handy.
+It's easier to see it in an example. Let's say we have two threads: one that reads file data (the **reader** thread) and another that formats and displays that data (the **writer** thread). There's no reason for the writer to write anything until the reader has read something. So the reader must have a way to signal the writer that data is available. This is where `notify` comes in handy.
 
 Copy and paste the code below into a single Java source file named `ReaderWriterExample` in package `com.generalassembly.concurrency`. This program will start two threads: The first will read three popular books in turn and then notify the second thread to start processing, while the second thread will wake and display the contents of each.
 
@@ -666,15 +662,15 @@ public class ReaderWriterExample {
 
 In this example, a reader thread reads a file then stores it in an array, storing the index to the array in a shared variable called `index`. Then, it sleeps for two seconds. 
 
-Note that after the reader thread has read the file, it stores the result in our array, and then it **notifies** the writer thread to do its job. The call to `notify` immediately wakes up the writer thread, which then grabs the newly stored value, writes it to standard out, and goes back to the wait state until it's notified to wake up again.
+Note that after the reader thread has read the file, it stores the result in the array, and then **notifies** the writer thread to do its job. The call to `notify` immediately wakes up the writer thread, which then grabs the newly stored value, writes it to standard output, and goes back to the wait state until it's notified to wake up again.
 
 In our example, the call to `notify` wakes up the waiting thread. This works perfectly because we only created one waiting thread. 
 
-But what happens if you have many waiting threads? A call to `notify` will wake up one of the waiting threads at random, which is often what you want. However, there are times when you want all waiting threads to wake up — for example, when you have many threads, each of which performs some function, where order doesn't matter. Perhaps we have one thread that enriches new data, another thread that captures the new data in a ledger, and another thread that notifies a librarian that new data has arrived. In that case, you would call `notifyAll`, which will notify each and every waiting thread to wake up. 
+But what happens if you have many waiting threads? A call to `notify` will wake up one of the waiting threads at random, which is often what you want. However, there are times when you want all waiting threads to wake up — for example, when you have many threads, each of which performs some function where order doesn't matter. Perhaps we have one thread that enriches new data, another thread that captures the new data in a ledger, and another thread that notifies a librarian that new data has arrived. In that case, you would call `notifyAll`, which will notify each and every waiting thread to wake up. 
 
-Incidentally, notice the keyword `volatile`, which is used before the declaration of the index variable. This is a deep concept. The JVM will generally make a local copy of variables that are used by each thread, and the thread has the right to assume that the value will not be changed by any other thread.
+Incidentally, notice the keyword `volatile`, which is used before the declaration of the `index` variable. This is a deep concept. The JVM will generally make a local copy of variables that are used by each thread, and the thread has the right to assume that the value will not be changed by any other thread.
 
-If one thread modifies that variable, due to a JVM optimization, Java makes no guarantees that the change will be seen by another thread, unless we mark the variable `volatile`, which tells the JVM to read the value of the variable on every access instead of using the thread's local copy. The reason this is an optimization is because accessing memory by threads across CPUs and cores can be a relatively slow operation.
+If one thread modifies that variable, due to a JVM optimization, Java makes no guarantees that the change will be seen by another thread unless we mark the variable `volatile`, which tells the JVM to read the value of the variable on every access instead of using the thread's local copy. The reason this is an optimization is because accessing memory by threads across CPUs and cores can be a relatively slow operation.
 
 ----
 
@@ -682,7 +678,7 @@ If one thread modifies that variable, due to a JVM optimization, Java makes no g
 
 Reasoning about concurrency is hard, and it's easy to fall into traps like the dreaded deadlock or livelock.
 
-Deadlock occurs when some thread 1 holds some lock (say Lock-A) and another thread 2 is holding some other lock (say Lock-B). That's not so bad ... yet. But now let's say thread 1 tries to acquire Lock-B at the same time as thread #2 tries to acquire Lock-A. Neither one can ever succeed, because each will wait for the other before continuing.
+Deadlock occurs when some thread 1 holds some lock (say Lock-A) and another thread 2 is holding some other lock (say Lock-B). That's not so bad ... yet. But now let's say thread 1 tries to acquire Lock-B at the same time as thread 2 tries to acquire Lock-A. Neither one can ever succeed, because each will wait for the other before continuing.
 
 ### Dining Philosophers Problem
 
@@ -695,9 +691,9 @@ Here are the rules:
 
 > Check: Turn to a partner and discuss the problem. What might some solutions be? 
 
-You **could** say each philosopher should pick up the fork on their left and then the one on the right. However, what would happen if they all start at the exact same time? Each will be waiting forever for the right fork. That's "deadlock" — the application just stops and waits forever.
+You could say each philosopher should pick up the fork on their left and then the one on the right. However, what would happen if they all start at the exact same time? Each will be waiting forever for the right fork. That's "deadlock" — the application just stops and waits forever.
 
-Let's say they apply an additional strategy: If we don't receive a fork after one minute, we'll put our fork down, wait 10 seconds, and try again. That can **also** fail — if they all put down their forks at the same time, when they start again, they'll be in the same boat. That's "livelock" — the application is moving, but it can't proceed.
+Let's say they apply an additional strategy: If we don't receive another fork after one minute, we'll put our current fork down, wait 10 seconds, and try again. That can **also** fail: If they all put down their forks at the same time, when they start again, they'll be in the same boat. That's "livelock" — the application is moving, but it can't proceed.
 
 Another approach? You can introduce an arbiter — a waiter. To pick up the forks, a philosopher must ask permission from the waiter. Putting down a fork is always allowed. The waiter gives permission to only one philosopher at a time until the philosopher has picked up both of their forks. The waiter can be implemented as a mutex. 
  
