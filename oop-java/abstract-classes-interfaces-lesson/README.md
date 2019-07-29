@@ -25,9 +25,9 @@
 
 ## Opening (5 min)
 
-There are times when you want to implement some behavior in a class, but you want to leave it to another developer to implement some other behavior.
+There are times when you want to implement some behavior in a class, but want another developer to implement some other behavior.
 
-For example, in our earlier example of the `Shape` class, we subtly provided a default implementation for the `getCircumference()` and `getArea()` methods.
+For instance, in our earlier example of the `Shape` class, we provided a default implementation for the `getCircumference()` and `getArea()` methods.
 
 ```java
 public class Shape {
@@ -92,7 +92,7 @@ Once we implement the missing method, everything will go back to normal:
 
 A common use of abstract classes is to implement a **framework** or **template method** design pattern. This pattern allows the framework to define the larger behavior, leaving the particulars to the framework developer.
 
-Suppose we want to create a framework that does some (undefined) processing and writes the results to a file. This is a common operation in monitoring applications, where input could be coming from a database, files, event logs, devices, and more. It's a great use case for abstract classes.
+Suppose we want to create a framework that does some (undefined) processing and writes the results to a file. This is a common operation in monitoring applications, where input could come from a database, files, event logs, devices, and more. It's a perfect use case for abstract classes.
 
 > Note: We purposely design the abstract class as generic so subclasses can handle potentially any of these cases.
 
@@ -140,7 +140,7 @@ public class MemoryMonitor extends AbstractMonitor {
 
 ## Demo: Interfaces (10 min)
 
-Let's switch gears to interfaces. As we're walking through what an interface is and what it does, think about how they compare and contrast to abstract classes.
+Let's switch gears to interfaces. As we're walking through what an interface is and what it does, think about how it compares and contrasts to an abstract class.
 
 In Java, an interface defines an API, which is essentially a contract that a class will contain the methods defined in the interface.
 
@@ -156,7 +156,7 @@ public interface Automobile {
 }
 ```
 
-That defines the shell of an interface. The declaration of an interface is similar to a class, except that it uses the keyword `interface` in place of `class`. And like a class, an inteface can have public or default (package-private) visibility.
+That defines the shell of an interface. The declaration of an interface is similar to a class, except it uses the keyword `interface` in place of `class`. And like a class, an interface can have public or default (package-private) visibility.
 
 Let's add some functionality to our `Automobile` interface:
 
@@ -181,7 +181,7 @@ int year = auto.getYear();
 auto.startEngine();
 ```
 
-Note that we didn't specify a visibility for the interface methods. That's because all interface methods are always public, and we should also mention they're always non-static.
+Note that we didn't specify any visibility for the interface methods. That's because all interface methods are always public and non-static.
 
 -----
 
@@ -239,9 +239,9 @@ class HondaAccord implements Automobile {
 
 Let's say we're an auto manufacturing company, and last year we bought a large library of Java code from you for managing cars. Let's say we're coming out with a new kind of car, a model called Tesla Satellite, and we want to use the functionality in your `Automobile` library.
 
-All we have to do is implement your `Automobile` interface, and we can use your existing library to manage our new car that didn't even exist when your library was written. It's one thing to write a `HondaAccord` class because we already know everything about Hondas, but now we're really able to realize the usefulness of an interface.
+All we have to do is implement your `Automobile` interface, and we can use your existing library to manage our new car that didn't even exist when your library was written. It's one thing to write a `HondaAccord` class because we already know everything about it, but now we're able to realize the usefulness of an interface.
 
-By **implementing** your interface, the Java compiler will ensure our new `TeslaSatellite` class has implemented all the methods in our `Automobile` interface, thus ensuring it's usable by our libraries.
+By **implementing** your interface, the Java compiler will ensure our new `TeslaSatellite` class has implemented all the methods in your `Automobile` interface, thus ensuring it's usable by our libraries.
 
 ![](resources/unimplemented-interface.png)
 
@@ -253,7 +253,7 @@ So let's implement those methods and try again.
 
 ### Fields in Interfaces
 
-Surprisingly, interfaces may contain variables, but these variables **must** be assigned values in the interface and they're static. Remember that static means the field can be accessed from the interface name — as in the example below — or from any class that implements that interface. And these variables are **final**: They may not be changed, as indicated by the red underline in IntelliJ.
+Surprisingly, interfaces may contain variables, but these variables are static and **must** be assigned values in the interface. Remember that static means the field can be accessed from the interface name — as in the example below — or from any class that implements that interface. And these variables are **final**: They may not be changed, as indicated by the red underline in IntelliJ.
 
 ![](resources/reassign-interface-variable.png)
 
@@ -273,7 +273,7 @@ public interface TowVehicle {
 }
 ```
 
-We might want to create a `DodgeRam` class that implements **both** interfaces. To do so, include a comma-separated list of interfaces to implement after the `implements` keywords, like this:
+We might want to create a `DodgeRam` class that implements **both** interfaces. To do so, include a comma-separated list of interfaces to implement after the `implements` keyword, like this:
 
 ```java
 class DodgeRam implements Automobile, TowVehicle {
