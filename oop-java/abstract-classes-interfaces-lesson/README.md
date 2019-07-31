@@ -21,13 +21,13 @@
 | 20 min | Independent Practice | Creating and Implementing Interfaces |
 | 10 min | Demo | Breaking It Down |
 | 10 min | Demo | Interfaces vs. Abstract Classes |
-| 5 min  | Conclusion  | Review and Recap |
+| 5 min  | Conclusion  | Review/Recap |
 
 ## Opening (5 min)
 
-There are times when you want to implement some behavior in a class, but want another developer to implement some other behavior.
+There are times when you want to implement some behavior in a class but want another developer to implement some other behavior.
 
-For instance, in our earlier example of the `Shape` class, we provided a default implementation for the `getCircumference()` and `getArea()` methods.
+For instance, in our earlier example of the `Shape` class, we provided a default implementation for the `getCircumference()` and `getArea()` methods:
 
 ```java
 public class Shape {
@@ -42,17 +42,17 @@ public class Shape {
 
 ```
 
-In that example, both returned 0.
+In that example, both returned `0`.
 
-Now suppose a different developer implemented a subclass, such as `Circle`, and they weren't clear that the initial developer of the `Shape` class intended those two methods to be overridden to provide an implementation. Then, they would leave those unimplemented, and we would suddenly find circles with circumferences and areas equal to zero.
+Now suppose a different developer implemented a subclass, such as `Circle`, and they weren't clear that the initial developer of the `Shape` class intended those two methods to be overridden to provide an implementation. Then, they would leave those unimplemented and we would suddenly find circles with circumferences and areas equal to zero.
 
 ----
 
 ## Demo: Abstract Classes (10 min)
 
-To prevent this sort of communication breakdown, the developer of the `Shape` class can mark the class as an **abstract class**. Abstract classes allow us to define abstract methods that **force** the developer to define an implementation. If they don't, the Java compiler will throw an error.
+To prevent this sort of communication breakdown, the developer of the `Shape` class can mark it as an **abstract class**. Abstract classes allow us to define abstract methods that **force** the developer to define an implementation. If they don't, the Java compiler will throw an error.
 
-An abstract method can **only** be defined in an abstract class. To define an abstract class, put `abstract` before the keyword `class`:
+An abstract method can **only** be defined in an abstract class. To define an abstract class, put `abstract` before the `class` keyword:
 
 ```java
 public abstract class Shape {
@@ -60,7 +60,7 @@ public abstract class Shape {
 }
 ``` 
 
-With that done, we can now define some abstract methods. These get a method signature and return type, but don't get an implementation. The return type must be preceded by the keyword `abstract`, as in the following example:
+With that done, we can now define some abstract methods. These get a method signature and return type but don't get an implementation. The return type must be preceded by the `abstract` keyword, as in the following example:
 
 ```java
 
@@ -72,7 +72,7 @@ public abstract class Shape {
 
 ```
 
-By seeing this, the developer and the Java compiler both understand that there must be an implementation of a method called `getCircumference()` in a subclass of `Shape`, and that it must return a `double` result. 
+By seeing this, the developer and Java compiler both understand that there must be an implementation of a method called `getCircumference()` in a subclass of `Shape` and that it must return a `double` result. 
 
 **What if we forget to implement a method marked as `abstract`?**
 
@@ -80,7 +80,7 @@ Let's say we wanted to create a `Circle` subclass, but we forgot to implement th
 
 ![](resources/failed-to-implement-abstract.png)
 
-You can see that IntelliJ warns us — with a big red underline and a fat dialog — that our class is doomed to fail compiling.
+You can see that IntelliJ warns us — with a big red underline and a fat dialog box — that our class is doomed to fail when compiling.
 
 Once we implement the missing method, everything will go back to normal:
 
@@ -94,11 +94,11 @@ A common use of abstract classes is to implement a **framework** or **template m
 
 Suppose we want to create a framework that does some (undefined) processing and writes the results to a file. This is a common operation in monitoring applications, where input could come from a database, files, event logs, devices, and more. It's a perfect use case for abstract classes.
 
-> Note: We purposely design the abstract class as generic so subclasses can handle potentially any of these cases.
+> **Note**: We purposely design the abstract class as generic so subclasses can handle potentially any of these cases.
 
-We wish to process that information by writing individual `Monitor` subclasses that call the `process()` method and write the result to the file system.
+We want to process that information by writing individual `Monitor` subclasses that call the `process()` method and write the result to the file system.
 
-Let's write a base abstract class called `AbstractMonitor`, with an abstract method called `process()` that returns a `String`, and a non-abstract method called `startMonitoring(String fileName)`.
+Let's write a base abstract class called `AbstractMonitor`, with an abstract method called `process()` that returns a `String`, and a non-abstract method called `startMonitoring(String fileName)`:
 
 ```java
 public abstract class AbstractMonitor {
@@ -120,7 +120,7 @@ public abstract class AbstractMonitor {
 
 Subclasses benefit from the `AbstractMonitor` class in that they don't have to rewrite the `startMonitoring(String filename)` method; they just have to worry about their own particular functionality for the `process()` method.
 
-For example, let's write a subclass called `MemoryMonitor` that outputs the current time and CPU utilization.
+For example, let's write a subclass called `MemoryMonitor` that outputs the current time and CPU utilization:
 
 ```java
 public class MemoryMonitor extends AbstractMonitor {
@@ -144,7 +144,7 @@ Let's switch gears to interfaces. As we're walking through what an interface is 
 
 In Java, an interface defines an API, which is essentially a contract that a class will contain the methods defined in the interface.
 
-> Note: We're using API as "application programming interface," in that we know certain methods we can use to access something — in this case, a Java class. You may have heard the term "API" used to mean a web API, which is usually meant to access some sort of data. In the generic sense, an application programming interface describes that process as well.
+> **Note**: We're using API to mean "application programming interface," in that we know certain methods we can use to access something — in this case, a Java class. You may have heard the term "API" used to mean a web API, which is usually leveraged to access some sort of data. In the generic sense, an application programming interface describes that process as well.
 
 An interface is not a class; it **cannot be instantiated**. It's just a contract declaring to the compiler that whatever instance is assigned to it will contain the methods in the interface. An interface is similar to an abstract class in that its methods are declared but not defined.
 
@@ -156,7 +156,7 @@ public interface Automobile {
 }
 ```
 
-That defines the shell of an interface. The declaration of an interface is similar to a class, except it uses the keyword `interface` in place of `class`. And like a class, an interface can have public or default (package-private) visibility.
+That defines the shell of an interface. The declaration of an interface is similar to a class, except it uses the `interface` keyword in place of `class`. And, like a class, an interface can have public or default (package-private) visibility.
 
 Let's add some functionality to our `Automobile` interface:
 
@@ -169,12 +169,12 @@ public interface Automobile {
 }
 ```
  
-Our `Automobile` is now contracted to provide a year, make, and model, and some functionality to start the engine. Notice how these methods are defined exactly like abstract methods in abstract classes.
+Our `Automobile` is now contracted to provide a year, make, and model, and some functionality to start the engine. Notice how these methods are defined exactly like abstract methods in abstract classes?
 
 Now we can have some code that says something like:
 
 ```java
-Automobile auto = getAutomobileById("12357"); // get an Automobile from our database
+Automobile auto = getAutomobileById("12357"); // Get an Automobile from our database.
 String make = auto.getMake();
 String model = auto.getModel();
 int year = auto.getYear();
@@ -187,7 +187,7 @@ Note that we didn't specify any visibility for the interface methods. That's bec
 
 ## Guided Practice: Implementing Interfaces (15 min)
 
-To implement an interface means you're committing to fulfill the interface contract for the class that implements it. 
+To implement an interface means you're committing to fulfilling the interface contract for the class that implements it. 
 
 The syntax is as follows:
 
@@ -204,15 +204,15 @@ In a more concrete example, we might take our `Automobile` interface and create 
 
 ```java
 class HondaAccord implements Automobile {
-    // Instance variable
+    // Instance variable:
     public int year; 
 
-    // Constructor
+    // Constructor:
     public HondaAccord(year) {
         this.year = year;
     }
 
-    // Methods that the interface needs
+    // Methods that the interface needs:
     @Override
     public int getYear() {
         return this.year;
@@ -237,19 +237,19 @@ class HondaAccord implements Automobile {
 
 ### Why Is This Important?
 
-Let's say we're an auto manufacturing company, and last year we bought a large library of Java code from you for managing cars. Let's say we're coming out with a new kind of car, a model called Tesla Satellite, and we want to use the functionality in your `Automobile` library.
+Let's say we're an auto manufacturing company, and last year we bought a large library of Java code from you for managing cars. We're coming out with a new kind of car, a model called Tesla Satellite, and we want to use the functionality in your `Automobile` library.
 
 All we have to do is implement your `Automobile` interface, and we can use your existing library to manage our new car that didn't even exist when your library was written. It's one thing to write a `HondaAccord` class because we already know everything about it, but now we're able to realize the usefulness of an interface.
 
-By **implementing** your interface, the Java compiler will ensure our new `TeslaSatellite` class has implemented all the methods in your `Automobile` interface, thus ensuring it's usable by our libraries.
+By **implementing** your interface, the Java compiler will ensure our new `TeslaSatellite` class has implemented all of the methods in your `Automobile` interface, thus ensuring it's usable by our libraries:
 
 ![](resources/unimplemented-interface.png)
 
-So let's implement those methods and try again.
+So, let's implement those methods and try again:
 
 ![](resources/implemented-interface.png)
  
-> Tip: As we saw before, the `@Override` annotation is optional but desirable. 
+> **Tip**: As we saw before, the `@Override` annotation is optional but desirable. 
 
 ### Fields in Interfaces
 
@@ -259,11 +259,11 @@ Surprisingly, interfaces may contain variables, but these variables are static a
 
 ### Extending, Extending, Extending
 
-Just like classes can extend classes, interfaces can extend other interfaces, and they inherit all the methods of the base interface. This is useful for complex systems we might find in real life.
+Just like classes can extend classes, interfaces can extend other interfaces, and they inherit all the methods of the base interface. This is useful for complex systems we might encounter in real life.
 
 Classes can also implement multiple interfaces. Let's take a look.
 
-Think back to our `Automobile` interface. Imagine we also have a `TowVehicle` interface that deals with towing capacity, carrying capacity, and fuel type. 
+Think back to our `Automobile` interface. Imagine we also have a `TowVehicle` interface that deals with towing capacity, carrying capacity, and fuel type:
 
 ```java
 public interface TowVehicle {
@@ -277,7 +277,7 @@ We might want to create a `DodgeRam` class that implements **both** interfaces. 
 
 ```java
 class DodgeRam implements Automobile, TowVehicle {
-    // Methods that the Automobile interface needs
+    // Methods that the Automobile interface needs:
     @Override
     public int getYear() {
         return 2019;
@@ -298,7 +298,7 @@ class DodgeRam implements Automobile, TowVehicle {
         System.out.println("VROOM!");
     }
 
-    // Methods that the TowVehicle class needs
+    // Methods that the TowVehicle class needs:
     @Override
     int getCarryingCapacity() {
         return 2000;
@@ -316,7 +316,7 @@ class DodgeRam implements Automobile, TowVehicle {
 }
 ```
 
-> Check: Take a second to consider the `DodgeRam` class. What methods are legal to run on it compared to the `HondaAccord` and the `TeslaSatellite` classes?
+> **Knowledge Check**: Take a second to consider the `DodgeRam` class. What methods are legal to run on it compared to the `HondaAccord` and the `TeslaSatellite` classes?
 
 ---
 
@@ -338,11 +338,11 @@ Add a default method to the `Sapient` interface called `void speak()`.
 
 ### Step 2
 
-Create a `Person` class that implements all these interfaces. For the implementation, do `System.out.println("some appropriate message")`.
+Create a `Person` class that implements all of these interfaces. For the implementation, use `System.out.println("some appropriate message")`.
 
 Then, assign it to variables of each of the types (`Sapient`, `Sentient`, `Biped`, and `Person`), and see what methods you can call on each.
 
-> Tip: Want to use IntelliJ like a pro? Place the variable name on a new line, followed by a dot. Then hit "Ctrl+Space" and IntelliJ will show you the methods you can call.
+> **Tip**: Want to use IntelliJ like a pro? Place the variable name on a new line, followed by a dot. Then hit `ctrl+space` and IntelliJ will show you the methods you can call.
 
 The solution is in the `src` directory.
 
@@ -361,7 +361,7 @@ Sapient sapient = person;
 Biped biped = person;
 ```
 
-Each of the variables would contain the same instance; however, you would only be allowed to call the methods exposed by the interface, depending on the variable.
+Each of the variables would contain the same instance. However, you would only be allowed to call the methods exposed by the interface, depending on the variable.
 
 So the following are all legal (assuming the interfaces define those methods):
 
@@ -377,9 +377,9 @@ However, the following is illegal:
 sentient.walk();
 ```
 
-Because even though the instance is a `Person`, the interface is a `Sentient`, so you can only call methods from the `Sentient` interface.
+This is because, even though the instance is a `Person`, the interface is a `Sentient`, so you can only call methods from the `Sentient` interface.
 
-This feature provides a way to have multiple inheritance in Java that's otherwise not supported.
+This feature provides a way of having multiple inheritance in Java that's otherwise not supported.
 
 ----
 
@@ -389,13 +389,13 @@ This feature provides a way to have multiple inheritance in Java that's otherwis
 
 The main difference is that a class can only extend one class (abstract or not), but it can implement many interfaces. This can be helpful in the use cases above, where we need to refer to a single instance under different APIs.
 
-So why use an abstract class? An abstract class allows you to provide some implementation, which is useful when you want to define some methods but not others, as we saw in our earlier example with `Monitor`.
+So, why use an abstract class? An abstract class allows you to provide some implementation, which is useful when you want to define some methods but not others, as we saw in our earlier example with `Monitor`.
 
 ### Default Methods in Interfaces
 
 In fact, the difference between abstract classes and interfaces has started to blur since Java 8, when the ability to define **default methods** was added to interfaces.
 
-A default method essentially provides some functionality we want to add to all classes that implement an interface. Such methods become public, non-static members of all implementing classes. And like any public method, they may be overridden by an implementing class.
+A default method essentially provides some functionality we want to add to all classes that implement an interface. Such methods become public, non-static members of all implementing classes. And, like any public method, they may be overridden by an implementing class.
 
 For example:
 
@@ -409,7 +409,7 @@ public interface Sapient {
 }
 ```
 
-Now our `Person` class (that implements `Sapient`) gets the `speak` method:
+Now our `Person` class (that implements `Sapient`) gets the `speak()` method:
 
 ```java
 new Person().speak(); // displays I think therefore I am.
@@ -419,26 +419,26 @@ new Person().speak(); // displays I think therefore I am.
 
 ## Conclusion (5 min)
 
-Both interfaces and abstract classes are used for abstraction. They're used in similar ways, but interfaces are most useful when you don't have any shared code between the subclasses, unlike our `Monitor` example, wherein all `Monitor` instances were able to share the `startMonitoring(String filename)` method.
+Both interfaces and abstract classes are used for abstraction. They're implemented in similar ways, but interfaces are most useful when you don't have any shared code between the subclasses, unlike our `Monitor` example, wherein all `Monitor` instances were able to share the `startMonitoring(String filename)` method.
 
 Remember that interfaces:
-* Cannot be instatiated.
+* Cannot be instantiated.
 * Cannot be static.
 * Cannot implement methods.
 
-You should use an **abstract class** when:
+You should use **abstract classes** when:
 * You need both static and non-static methods.
 * You need both abstract and non-abstract methods.
 * You don't want all your fields to be `final`.
 
-You should use **interfaces over abstract classes** when:
+You should use **interfaces rather than abstract classes** when:
 * All the methods you're defining are abstract.
 * You need future developers to follow a certain pattern (this is our contract).
 * You need to use more than one interface. (Remember: A class can only extend one class.)
 
-The difference is somewhat subtle. Both interfaces and abstract classes are used for abstraction, but the key takeaway for knowing which one to use is whether the classes that would implement or extend the interface or abstract class will **share lines of code**.
+The difference is somewhat subtle. Both interfaces and abstract classes are used for abstraction, but the key takeaway for knowing which one to use is whether or not the classes that would implement or extend the interface or abstract class will **share lines of code**.
 
-This may require some thinking about your particular task or situation. There's no one right answer for each and every situation. It's okay, though; we trust you.
+This may require some thinking about your particular task or situation. There's no one right answer for each and every situation. It's OK, though; we trust you!
 
 ![](https://media.giphy.com/media/vpUbmR24hx6mc/giphy.gif)
 
