@@ -10,23 +10,23 @@ creator:
 
 ## Requirements
 
-Respond to these questions based on what we've learned (and maybe what we haven't covered yet).
+Respond to the following questions based on what we've learned (and maybe what we haven't covered yet).
 
 ---
 
 ## Questions
 
-1. What's the difference between **member variables** (also called **instance variables**) and **class variables** (with keyword `static`)? Which can be accessed without creating an instance of the class?
+1. What's the difference between **member variables** (also called **instance variables**) and **class variables** (with the `static` keyword)? Which can be accessed without creating an instance of the class?
 
 2. Does it make sense to write **getter** and **setter** methods for a `public` member variable? What about `private` variables?
 
 3. What are some benefits of making member variables `private`?
 
-4. If class A extends class B, which is the superclass and which is the subclass? Which would you call parent, and which would you call child?
+4. If Class A extends Class B, which is the superclass and which is the subclass? Which would you call the parent, and which would you call the child?
 
 5. What does it mean for a class to **inherit** methods or variables (or both) from its parent class?
 
-6. Consider the following code, where class `Refrigerator` extends class `Appliance`, and `getTemperature()` is a method in `Refrigerator`, but **not** in `Appliance`:
+6. Consider the following code, where the `Refrigerator` class extends the `Appliance` class, and `getTemperature()` is a method in `Refrigerator`, but **not** in `Appliance`:
 
     ```
     Appliance myAppliance = new Refrigerator();
@@ -41,9 +41,9 @@ Respond to these questions based on what we've learned (and maybe what we haven'
 
 9. Can you create an instance of an `abstract` class? Also, look up the Java keyword `final` and see if you can explain why a class **cannot** be both `abstract` and `final`.
 
-10. What happens when a method **overrides** another method? If a parent and child class have methods with the same name, and when you call that method on an instance of the child class, which implementation of the method will be executed?
+10. What happens when a method **overrides** another method? If parent and child classes have methods with the same name, when you call that method on an instance of the child class, which implementation of the method will be executed?
 
-11. What is the relationship between `List`, `LinkedList`, and `ArrayList`? Why do we call a method **polymorphic** if it takes an input of type `List` rather than an input of type `LinkedList` or `Arraylist`, and why is that useful?
+11. What's the relationship between `List`, `LinkedList`, and `ArrayList`? Why do we call a method **polymorphic** if it takes an input of type `List` rather than an input of type `LinkedList` or `Arraylist`? Why is that useful?
 
 ### Deliverable
 
