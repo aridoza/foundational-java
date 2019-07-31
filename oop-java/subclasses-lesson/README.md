@@ -7,7 +7,7 @@
 
 ### Learning Objectives
 
-At the end of this lesson, you'll be able to:
+At the end of this lesson, students will be able to:
 - Create a subclass.
 - Use a subclass to augment the functionality of the base class.
 
@@ -19,19 +19,19 @@ At the end of this lesson, you'll be able to:
 | 15 min | Guided Practice | Superclasses and Subclasses |
 | 15 min | Guided Practice | Upcasting and Downcasting |
 | 40 min | Independent Practice | Shapes |
-| 10 min  | Conclusion  | Review and Recap |
+| 10 min  | Conclusion  | Review/Recap |
 
 ## Opening (5 min)
 
-In our use of language and observations from the world, we naturally categorize objects of similar types. For example, we understand what a cat is, and we understand that a lion is a member of the cat family. And although we have no confusion between a cat and a lion, we know that lions share qualities with cats.
+In our use of language and observations from the world, we naturally categorize objects of similar types. For example, we understand what a cat is and that a lion is a member of the cat family. And, although we have no confusion between a cat and a lion, we know that lions share qualities with cats.
 
 ![](resources/cat-lion.png)
 
 <!-- Taken from https://odditymall.com/includes/content/thumb1366252920.png. -->
 
-We can say that `Lion` is a subclass of `Cat`, and will inherit basic properties and functionality from its **superclass** (its parent class). 
+We can say that `Lion` is a subclass of `Cat` and will inherit basic properties and functionality from its **superclass** (its parent class). 
 
-> Note: You may also hear subclasses and superclasses referred to as parent and child classes, which may help visualize what is meant by "inheritance."
+> **Note**: You may also hear subclasses and superclasses referred to as "parent" and "child" classes, which may help visualize what is meant by "inheritance."
 
 -----
 
@@ -78,7 +78,7 @@ class Lion extends Cat {
 
 In this case, we say `Lion` `extends` `Cat`, or `Lion` is a **subclass** of `Cat`. And we say `Cat` is a **superclass** of `Lion`. 
 
-The `Lion` class inherits members from its superclass, so the calls below are legal. Even though they're not in the `Lion` class, they're inherited from the `Cat` class.
+The `Lion` class inherits members from its superclass, so the calls below are legal. Even though they're not in the `Lion` class, they're inherited from the `Cat` class:
 
 ```java
 Lion lion = new Lion();
@@ -87,14 +87,14 @@ lion.favoriteSnack();
 lion.getLives();       
 ```
 
-> Think: What will each of the above calls return?
+> **Think**: What will each of the calls above return?
 
 <details>
 <summary>Answers</summary>
 
-* `hasWhiskers()` returns true (inherited from the `Cat` class).
-* `favoriteSnack()` returns "Mice" (inherited from the `Cat` class).
-* `getLives()` returns 1. Why? A cat may have nine lives, but a `Lion` was not so endowed, because its `getLives()` method was **overridden**.
+* `hasWhiskers()` returns `true` (inherited from the `Cat` class).
+* `favoriteSnack()` returns `"Mice"` (inherited from the `Cat` class).
+* `getLives()` returns `1`. Why? A cat may have nine lives, but a `Lion` doesn't, because its `getLives()` method was **overridden**.
 
 </details>
 
@@ -117,7 +117,7 @@ class Lion extends Cat {
 
 It's best practice to annotate an overridden method by placing the `@Override` annotation above it. That tells the compiler to ensure it's overriding a method from the base class.
 
-Although this isn't required, it's a good defensive practice. In the future, if the base method happens to get renamed along the way, the code will fail to compile (because it's no longer overridding anything). Therefore, this will help with early detection of some subtle bugs that would result from calling an overridden method which is actually a new method.
+Although this isn't required, it's a good defensive practice. In the future, if the base method happens to get renamed along the way, the code will fail to compile (because it's no longer overriding anything). Therefore, this will help with early detection of some subtle bugs that would result from calling an overridden method, which is actually a new method.
 
 An overridden method can be of the same visibility as the method it's overriding, or it can be more public. However, it can't be more private.
 
@@ -127,11 +127,11 @@ Here are a few quick-hit facts about annotations:
 * They do affect the compiler's actions.
 * They're not required, but it's best practice to use them.
 
-> For more about annotations, read through [this article](https://www.geeksforgeeks.org/annotations-in-java/).
+> For more details about annotations, read through [this article](https://www.geeksforgeeks.org/annotations-in-java/).
 
 ### Restricting Inheritance
 
-There are times when you want to ensure no subclasses can be created from your class. In such cases, you can declare your class to be **`final`**. If you try to create a subclass from a `final` class, the compiler will warn you with a message such as:
+There are times when you want to ensure that no subclasses can be created from your class. In such cases, you can declare your class to be `final`. If you try to create a subclass from a `final` class, the compiler will warn you with a message such as:
 
 ```java
 Error: java: cannot inherit from final class
@@ -145,7 +145,7 @@ A subclass can override any method visible to it — except if the method is `fi
 
 ## Guided Practice: Upcasting and Downcasting (15 min)
 
-There's a subtle feature going on here that's leveraged in just about every Java library you'll use: You can declare a variable to be of a certain type, and assign it any subtype.
+There's a subtle feature going on here that's leveraged in just about every Java library you'll use: You can declare a variable to be of a certain type and assign it any subtype.
 
 For example:
 
@@ -153,14 +153,14 @@ For example:
 Cat cat = new Lion();
 ````
 
-> Check: If you call `cat.getLives()` after declaring it like above, what do you expect will be returned: the nine lives of the `Cat`, or the one life of the `Lion`?
+> **Knowledge Check**: If you call `cat.getLives()` after declaring it like we did above, what do you expect will be returned: the nine lives of the `Cat` or the one life of the `Lion`?
 
 <details>
 <summary>The answer may be surprising.</summary>
 
-The rule to remember is that when you call a method on a variable, you're really calling the method on the instance contained in that variable. So in our case, since the `cat` variable contains a `Lion` instance, the `getLives()` method will return the one life of the `Lion` and not the nine of the parent `Cat`. This is generally a good thing, because library vendors can now define subclasses, and they'll function as the vendor intends them to.
+The rule to remember is that, when you call a method on a variable, you're really calling the method on the instance contained in that variable. So, in our case, because the `cat` variable contains a `Lion` instance, the `getLives()` method will return the one life of the `Lion` and not the nine of the parent `Cat`. This is generally a good thing, because library vendors can now define subclasses, and they'll function as the vendor intends.
 
-In plain English, maybe you want a collection (like an `Array` or `ArrayList`) of cats, but you want to be able to put lions, cats, and anything else in the cat family — say tigers or leopards — all in that same collection. That's known as upcasting.
+In plain English, maybe you want a collection (like an `Array` or `ArrayList`) of cats, but you want to be able to put lions, cats, and anything else in the cat family — say tigers or leopards — in that same collection. That's known as **upcasting**.
 
 Did the answer surprise you?
 
@@ -170,16 +170,16 @@ Did the answer surprise you?
 
 Downcasting works as well, as long as you're casting to the correct object type.
 
-So we can say `Cat cat = new Lion()`, which as we saw above works fine because lion is a cat. But we can't say `Lion lion = new Cat()`, because in general, cats are not lions.
+So, we can say `Cat cat = new Lion()`, which — as we saw above — works fine because a lion is a cat. But we can't say `Lion lion = new Cat()` because, in general, cats are not lions.
 
-However, given the assignment `Cat cat = new Lion()`, we know the `cat` variable contains a `Lion` instance; therefore, we should be able to assign it.
+However, given the assignment `Cat cat = new Lion()`, we know the `cat` variable contains a `Lion` instance; therefore, we should be able to assign it:
 
 ````java
 Cat cat = new Lion();
 Lion lion = cat;
 ````
 
-However, that fails to compile because the compiler has no way to be sure that by the time the `cat` is assigned, it still contains a `Lion` instance. All lions are cats, but not all cats are lions.
+However, that fails to compile, because the compiler has no way to be sure that, by the time the `cat` is assigned, it still contains a `Lion` instance. All lions are cats, but not all cats are lions.
 
 To make that assignment, you must explicitly downcast it using the **cast** operator, as follows:
 
@@ -187,9 +187,9 @@ To make that assignment, you must explicitly downcast it using the **cast** oper
 Lion lion = (Lion)cat;
 ```
 
-By preceding the variable `cat` with `(Lion)`, you're **casting** the `cat` instance to a `Lion` class, which is your way of signing a pact with the compiler guaranteeing that the variable will contain a `Lion` instance.
+By preceding the `cat` variable with `(Lion)`, you're **casting** the `cat` instance to a `Lion` class, which is your way of signing a pact with the compiler guaranteeing that the variable will contain a `Lion` instance.
 
-And if you break that pact, like below:
+And if you break that pact, like below...
 
 ```java
 public static void main(String[] args) {
@@ -197,7 +197,7 @@ public static void main(String[] args) {
     Lion lion = (Lion)cat;
 }
 ```
-You'll get a `ClassCastException` from the compiler.
+...You'll get a `ClassCastException` from the compiler.
 
 ----
 
@@ -207,7 +207,7 @@ Let's get into a little more depth with an example about `Shapes`.
 
 ### Part 1 (5 min)
 
-Let's start by coding out this first part together. Let's say we have a superclass called `Shape`, as follows:
+Let's start by coding out this first part together. Say we have a superclass called `Shape`, as follows:
 
 ```java
 package com.generalassembly.oop;
@@ -223,7 +223,7 @@ public class Shape {
 }
 ```
 
-Our Shape class has methods `getCircumference()` and `getArea()` that, depending on the shape, will calculate the circumference and area of the shape.
+Our `Shape` class has methods `getCircumference()` and `getArea()` that, depending on the shape, will calculate the circumference and area of the shape.
 
 As we define some subclasses to inherit from `Shape`, remember that each of these shapes has a slightly different function to determine its area or circumference.
 
@@ -249,7 +249,7 @@ public class Triangle extends Shape {
 
 Your assignment is to implement the `getCircumference()` and `getArea()` methods.
 
-The circumference (or perimeter) is defined as the length of the outline of the shape. So for a triangle, it's the sum of the sides, and for a circle, it's 2πr, where r is the radius and π is `Math.PI`.
+The circumference (or perimeter) is defined as the length of the outline of the shape. So, for a triangle, it's the sum of the sides, and for a circle, it's 2πr, where r is the radius and π is `Math.PI`.
 
 The area is the square footage covered by the shape. For a triangle, we can use Heron's formula:
 
@@ -351,11 +351,11 @@ public class Rectangle extends Shape {
 
 ### Part 3 (5 min)
 
-Now let's say we want to create a `Square` shape. We remember from geometry class that a square is a special kind of rectangle, where all sides are equal.
+Now let's say we want to create a `Square` shape. We remember from geometry class that a square is a special kind of rectangle in which all sides are equal.
 
-Let's create a `Square` class that extends `Rectangle`, and instead of overriding the `getCircumference()` and `getArea()` methods, just provide a constructor that will pass in the same value for all sides into the rectangle constructor.
+Let's create a `Square` class that extends `Rectangle` and, instead of overriding the `getCircumference()` and `getArea()` methods, just provide a constructor that will pass in the same value for all sides into the `Rectangle` constructor.
 
-> Check: How do you think we should implement this? Shout out some possible solutions.
+> **Knowledge Check**: How do you think we should implement this? Shout out some possible solutions.
 
 <details>
 <summary>Solution</summary>
@@ -381,13 +381,13 @@ Finally, let's test our code by calculating the circumference and area for each 
 * A circle with radius = 4.
 * A square with side = 4.
 
-Assign each one of these shapes to a variable of the appropriate type, and then pass that shape to a method with signature: 
+Assign each one of these shapes to a variable of the appropriate type, then pass that shape to a method with signature: 
 
 ```java
 private static String getCircumferenceAndArea(Shape shape)
 ```
 
-That will return a `String` such as "ShapeType circumference, area = x, y", with the correct values for each shape.
+That will return a `String` such as `ShapeType circumference, area = x, y`, with the correct values for each shape.
 
 **Sample expected output:**
 
@@ -401,9 +401,9 @@ Square circumference, area = 16.0, 16.0
 When you're ready, check your answer with the solution below.
 
 <details>
-<summary>Need a Hint?</summary>
+<summary>Need a hint?</summary>
 
-The important thing to note here is that the method `getCircumferanceAndArea()` accepts a `Shape` argument, and even though our shapes are `Triangle`, `Rectangle`, `Circle`, and `Square`, the method still accepts them since they extend `Shape`. Anything that extends a class **is** that class, so a `Rectangle` is a `Shape`.
+The important thing to note here is that the `getCircumferanceAndArea()` method accepts a `Shape` argument and, even though our shapes are `Triangle`, `Rectangle`, `Circle`, and `Square`, the method still accepts them, as they extend `Shape`. Anything that extends a class **is** that class, so a `Rectangle` is a `Shape`.
 </details>
 
 <details>
@@ -438,11 +438,11 @@ public class ShapeCalc {
 
 ## Conclusion (10 min)
 
-That was an intense lesson. Let's recap.
+That was an intense lesson! Let's recap.
 
 ### Tying Back to the Four Pillars
 
-Combining subclasses and visibility, we can hide the details of functionality inside a class and just expose an API (Application Programming Interface). Now that we've got inheritance in our tool belt, the uses of encapsulation (which includes things like the access level), abstraction, and polymorphism become a lot more salient.
+Combining subclasses and visibility, we can hide the details of functionality inside a class and just expose an API (application programming interface). Now that we've got inheritance in our tool belt, the uses of encapsulation (which includes things like the access level), abstraction, and polymorphism become a lot more salient.
 
 #### Remember Polymorphism?
 
@@ -450,10 +450,10 @@ Polymorphism may sound scary, and it will keep cropping up. But the concept is e
 
 Now that we have a specific example of polymorphism, let's revisit the topic. We see that we can create various subclasses of the same class and implement specific functionality for each.
 
-In our first example, we had `Cat` and `Lion`, and both had a `getLives()` method. However, the implementation was different despite sharing the same name.
+In our first example, we had `Cat` and `Lion`, and both had a `getLives()` method. However, their implementation was different despite sharing the same name.
 
-In our second example, we had five different shapes — `Shape`, `Triangle`, `Circle`, `Rectangle`, and `Square` — all with different implementations of their `getCircumference()` and `getArea()` functionality. Yet they all worked just fine and we didn't need to alter how we used the instance of each shape.
+In our second example, we had five different shapes — `Shape`, `Triangle`, `Circle`, `Rectangle`, and `Square` — all with different implementations of their `getCircumference()` and `getArea()` functionality. Yet they all worked just fine, and we didn't need to alter how we used the instance of each shape.
 
 ### Summary
 
-Inheritance is here for our convenience and to keep our code DRY (that stands for "Don't Repeat Youself"). It might seem like an intimidating concept, but once you master it, it can be a powerful tool. You'll find many examples of inheritance and shared properties and functionality in real life, which is exactly what our programming languages are meant to emulate and model.
+Inheritance is here for our convenience and to keep our code DRY (that stands for "Don't Repeat Yourself"). It might seem like an intimidating concept, but once you master it, it can be a powerful tool. You'll find many examples of inheritance and shared properties and functionality in real life, which is exactly what our programming languages are meant to emulate and model.
