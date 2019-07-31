@@ -6,13 +6,13 @@ creator:
     name: Josh Bartz
 ---
 
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Abstraction: Household
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Abstraction: Household Lab
 
 ## Introduction
 
-> **Note:** This can be a pair-programming activity or done independently.
+> **Instructor Note:** This can be a pair-programming activity or done independently.
 
-In this lab, you'll be designing an app that creates and maintains households. All households earn income and pay 20 percent of their income in taxes. All households will also have a pet. All pets can be fed, groomed, and played with.
+In this lab, you'll be designing an app that creates and maintains households. All households earn income and pay 20% of their income in taxes. All households also have a pet. All pets can be fed, groomed, and played with.
 
 You can express the state or action of something by printing messages to the command line, such as "Household sells X to gain income" or "Play fetch."
 
@@ -25,10 +25,9 @@ You can express the state or action of something by printing messages to the com
 - Create at least one abstract class.
 - Use at least one interface.
 - Create at least two households, each with a different kind of pet.
-- Use polymorphism to have each household earn income, pay their taxes, and care for their pet (feed, play with, and groom) in one loop.
+- Use polymorphism to have each household earn income, pay its taxes, and care for its pet (feed, play with, and groom) in one loop.
 
-**Bonus**
-- Add additional classes or subclasses.
+**Bonus**: Add additional classes or subclasses.
 
 #### Starter Code
 
@@ -36,7 +35,7 @@ In the [starter code](starter-code) folder, you'll find a `Driver` class with th
 
 #### Deliverable
 
-A simple Java program that has at least two households. Print statements can be used to show their behavior.
+A simple Java program that has at least two households. `print` statements can be used to show their behavior.
 
 ---
 
