@@ -1,50 +1,48 @@
 ---
-title: jUnit Testing
-type: lesson
+title: JUnit Testing
+type: Lesson
 duration: "1:15"
 creator: James Davis (NYC)
 
 ---
 
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) jUnit Testing
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) JUnit Testing
 
-### LEARNING OBJECTIVES
+### Learning Objectives
 
-*After this lesson, you will be able to:*
-* Given a class, add conditional methods to a test case.
-* Perform a jUnit test.
+At the end of this lesson, students will be able to:
+* Add conditional methods to a test case.
+* Perform a JUnit test.
 
-### LESSON GUIDE
+### Lesson Guide
 
-| TIMING  | TYPE  | TOPIC  |
+| Timing  | Type  | Topic  |
 |:-:|---|---|
-| 10 min  | Opening  | Discuss lesson objectives |
-| 5 min   | Introduction  | Unit tests |
+| 10 min  | Opening  | Man vs. Machine |
+| 5 min   | Introduction  | Unit Tests |
 | 20 min  | Demo  | Creating a Unit Test |
-| 40 min  | Independent Practice  | Automated testing |
-| 5 min   | Conclusion  | Review / Recap |
+| 40 min  | Independent Practice  | Automated Testing |
+| 5 min   | Conclusion  | Review/Recap |
 
-## Opening: Man vs. Machine (10 minutes)
+## Opening: Man vs. Machine (10 min)
 
-There are many, many ways to test something.
+There are many ways to test something. You can do it by hand, which a lot of QA teams do. However, this could get tedious because you usually have to test the full feature even for small changes.
 
-You can do it by hand, which is fine. A lot of QA teams test apps by hand. However, this could get tedious. Mainly, because they usually have to test the full feature once one small thing changes.
+For instance, imagine you're a home inspector checking out a newly built home. As the inspector, you'll have to test if a bedroom is indeed a bedroom. The room must have at least a bed, a dresser, and a closet.
 
-Imagine that you're a home inspector who's checking out a newly built home. Let's say you (the inspector) have to test if a bedroom is indeed a bedroom. The room must have at least a bed, a dresser, a closet.
+Let's say an interior designer adds a lamp to the dresser. You then have to go back to the room and check if the dresser, bed, and closet are still there.
 
-Let's also say a interior designer walks in and adds a lamp to the dresser. Then, you have to go back to the room and check if the dresser, bed, and closet are still there.
+Now let's say the designer added a rug. You'll have to check again if the bed, dresser, and closet are still there.
 
-Now, the designer added a rug. So, you have to check again if the bed, dresser, and closet are still there.
+Every time something changes, you have to ensure what you're checking does what it's required to do. This can be repetitive and, in some cases, a waste of time.
 
-Every time something changes, you have to ensure the thing you are checking does what it is required to do. This can be repetitive, and in some cases a waste of time.
+> **Knowledge Check**: Take one minute to discuss how to prevent this with the person next to you. Be prepared to share your answers with the class.
 
-> Check: Take one minute and discuss with the person next to you - what are some ways to prevent this? Share out!
+There are a few ways to tackle this problem. We'll talk about one today called **automation**.
 
-There are a few ways to tackle this problem. They way we will talk about today is **automation**!
+Think about the previous example. Now, imagine you built a robot to inspect the house for you. So every time the designer changes something in the house, the robot would inspect the room for you. And while that's happening, you're on vacation in some remote tropical island.
 
-Think about the previous example. Now imagine, instead of yourself, you built a robot to inspect the house for you. So, every time the designer changed something in the house, the robot would inspect the room for you! And while that's happening, you are on vacation in some remote, tropical place.
-
-This is the difference between manual and automated testing. You code tests to religiously check your code for defects while you and the QA team have more time to do other things.
+This is the difference between manual and automated testing. You code tests to religiously check your code for defects, while you and your QA team have more time to do other tasks.
 
 ----
 
@@ -57,39 +55,35 @@ There are many, many types of automated tests:
 - Regression tests
 - Acceptance tests
 
-This lesson will focus on Unit tests.
+This lesson will focus on unit tests.
 
-### What is a Unit test?
+### What Is a Unit Test?
 
-A Unit Test is one that tests a piece of code (a unit). A unit, in most cases in Java, is a Class.
-
-So, think of a unit test as "Is this class and its methods working as expected?"
+A unit test tests a piece of code (a unit). In Java, a unit is, in most cases, a class. A unit test asks the question, "Is this class and its methods working as expected?"
 
 ----
 
-## Demo: Creating a Unit Test (20 mins)
-
-Follow along!
+## Demo: Creating a Unit Test (20 min)
 
 To test our classes (units), we create test classes that test other classes.
 
-Create a new project in IntelliJ. In the **src** folder, you will find three folders:
+Create a new project in IntelliJ. In the `src` folder, you'll find two subfolders:
 
-* **main** - the location of your app's main code (classes, activities, resources, etc.)
-* **test** - the location of tests, where we'll add our test classes
+* `main`: The location of your app's main code (classes, activities, resources, and more).
+* `test`: The location of tests, where we'll add our test classes.
 
 We'll build a simple app that returns a student's name and grade.
 
-First, let's create a Student class, which has the methods `getFullName` and `getLetterGrade`. The constructor takes a first name, last name, and number grade.
+First, let's create a `Student` class, which has the methods `getFullName()` and `getLetterGrade()`. The first constructor takes a first name and last name, while the second one takes a letter grade.
 
-Then, go create a new test in the src/test package and call it `StudentTest`.
+Then, we'll create a new test in the `src/test` package and call it `StudentTest`.
 
-The idea of testing is to have methods in the Test that **implement** the class being tested and **assert** that their methods are working.
+The idea of testing is to have methods that **implement** the class being tested and **assert** that the methods of the class are working.
 
-In the `StudentTest` class, add methods that test if the `getFullName` and `getLetterGrade` methods are correct. Make sure to add the `@Test` annotation, or else jUnit doesn't recognize it.
+In the `StudentTest` class, add methods that test if the `getFullName()` and `getLetterGrade()` methods are correct. Make sure to add the `@Test` annotation, or else JUnit won't recognize it.
 
 <details>
-	<summary>Here's what it should look like:</summary>
+<summary>Here's what it should look like:</summary>
 
 ```java
 package co.ga.junittesting;
@@ -132,7 +126,7 @@ To assert something, you would use jUnit's `assert_____()` static methods. The m
     assertNotNull("Not null");
 ```
 
-Each of these take an *expected value* and an *actual value*. The expected value is what you think the method should return, and the actual value is what the method actually returns.
+Each of these take an **expected value** and an **actual value**. The expected value is what the method should return, and the actual value is what the method actually returns.
 
 So, filling out the rest of the class:
 
@@ -145,60 +139,60 @@ import static org.junit.Assert.*;
 public class StudentTest {
     @Test
     public void testIfFullNameIsCorrect() {
-				Student student = new Student("Leslie", "Knope", 93);
+	Student student = new Student("Leslie", "Knope", "A");
 
-				String expected = "Leslie Knope";
-				String actual = student.getFullName();
+	String expected = "Leslie Knope";
+	String actual = student.getFullName();
 
-				assertEquals(expected, actual);
+	assertEquals(expected, actual);
     }
 
     @Test
     public void testIfLetterGradeIsCorrect() {
-				Student student = new Student("Charlie", "Brown", 76);
+	Student student = new Student("Charlie", "Brown", "C");
 
-				String expected = "C";
-				String actual = student.getLetterGrade();
+	String expected = "C";
+	String actual = student.getLetterGrade();
 
-				assertEquals(expected, actual);
+	assertEquals(expected, actual);
     }
 }
 ```
 
-To run the test, you right click on the class in the Project View and click "Run StudentTest".
+To run the test, right click on the class in the "Project View" and click "Run StudentTest."
 
-**Note**: If you write multiple test classes, you can right click on the folder that contains the classes and click "Run tests in ______" to run all of them!
-
-----
-
-## Independent Practice: Automated Testing (40 minutes)
-
-Now, it's your turn to write some tests!
-
-`Math` class provides some handy methods that allow us to perform mathematical operations on numbers. Let's write some tests to make sure it's working properly!
-
-* `Math.abs(x)` returns the absolute value of x.
-	* Test for both integer and decimal point numbers
-
-* `Math.sqrt(x)` returns the square root of x.
-
-* `Math.pow(x, y)` returns the value of x to the power of y.
-
-* `Math.max(x, y)` returns the larger value between x and y.
-	* Test for both integer and decimal point numbers
-
-* `Math.min(x, y)` returns the smaller value between x and y.
-	* Test for both integer and decimal point numbers
-
-*Need a hint? Check out the [Oracle docs for the Math class](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html).*
-
-> Check: With 5 minutes left, let's review the solution. 
+**Note**: If you write multiple test classes, you can right click on the folder that contains the classes and click "Run tests in ______" to run all of them.
 
 ----
 
-## Conclusion (5 mins)
+## Independent Practice: Automated Testing (40 min)
 
-* What is the difference between a manual and an automated test?
-* What is a unit test?
-* Give me an "explain it like I'm 5" definition of how jUnit works.
+Now it's your turn to write some tests.
+
+The `Math` class provides some handy methods for performing mathematical operations on numbers. Let's write some tests to make sure it's working properly.
+
+* `Math.abs(x)` returns the absolute value of `x`.
+	* Test for both integers and decimal numbers.
+
+* `Math.sqrt(x)` returns the square root of `x`.
+
+* `Math.pow(x, y)` returns the value of `x` to the power of `y`.
+
+* `Math.max(x, y)` returns the larger value between `x` and `y`.
+	* Test for both integers and decimal numbers.
+
+* `Math.min(x, y)` returns the smaller value between `x` and `y`.
+	* Test for both integers and decimal numbers.
+
+Need a hint? Check out [Oracle's docs for the `Math` class](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html).
+
+> **Knowledge Check**: With five minutes left, let's review the solution. 
+
+----
+
+## Conclusion (5 min)
+
+* What's the difference between a manual and an automated test?
+* What's a unit test?
+* Give an "Explain it like I'm 5" definition of how JUnit works.
 
