@@ -103,7 +103,7 @@ public class StudentTest {
 
     }
 
-		@Test
+    @Test
     public void testIfLetterGradeIsCorrect() {
 
     }
@@ -112,11 +112,21 @@ public class StudentTest {
 
 </details>
 
+Let's break that down. What do we see going on here?
+
+#### We created and imported our own packages: `org.junit.Test` and `static org.junit.Assert`.
+
+(explanation needed)
+
+#### We added a `@Test` annotation before the test case.
+
+In Java, annotations are used to provide supplemental information about a program. They provide metadata about a class or method without being a part of the program itself. They don't change the actual *action* of a program, but affect how the compiler treats that line of code when it's compiled or at runtime. In this case, we use the `@Test` annotation to indicate that the upcoming method represents a test case. (Soon in your travels with Java, you'll see common annotations like `@Override` or `@Deprecated`.
+
 To assert something, you would use jUnit's `assert_____()` static methods. The main ones are:
 
 ```java
-	assertEquals(4, 2 + 2);
-	assertTrue(true);
+    assertEquals(4, 2 + 2);
+    assertTrue(true);
     assertFalse(false);
     assertNull(null);
     assertNotNull("Not null");
@@ -143,7 +153,7 @@ public class StudentTest {
 				assertEquals(expected, actual);
     }
 
-		@Test
+    @Test
     public void testIfLetterGradeIsCorrect() {
 				Student student = new Student("Charlie", "Brown", 76);
 
