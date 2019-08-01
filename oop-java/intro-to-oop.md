@@ -56,6 +56,8 @@ You could technically start your car with a screwdriver or directly with electri
 
 Inheritance allows classes to "inherit" code from one another. The base class is called the **parent** and the inheritor or beneficiary class is called the **child**. It's just one more way of keeping our code shorter and simpler.
 
+The most frequent use of inheritance is for deriving classes using existing classes, which provides reusability. The existing classes remain unchanged. By promoting reusability in our code, the development time of software is reduced.
+
 ### Polymorphism
 
 Polymorphism simply means "many forms." It refers to the fact that a method could have multiple implementations, either differing between a parent and a child class (method overriding) or depending on the type and number of arguments (method overloading).
