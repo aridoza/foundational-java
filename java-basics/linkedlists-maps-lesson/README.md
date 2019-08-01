@@ -22,17 +22,15 @@ At the end of this lesson, students will be able to:
 
 | Timing  | Type  | Topic  |
 |:-:|---|---|
-| 5 min  | [Opening](#opening-5-mins)  | Learning Objectives |
-| 10 min  | [Introduction](#introduction-lists-10-mins)  |  Lists |
-| 5 min  | [Demo](#demo-lists-5-mins)  | Lists |
-| 10 min  | [Independent Practice](#independent-practice-lists-10-mins)  | Lists |
-| 10 min  | [Introduction](#introduction-maps-10-mins)  |  Maps |
-| 10 min  | [Demo](#demo-maps-10-mins)  | Maps |
-| 10 min  | [Guided Practice](#guided-practice-maps-10-mins)  | Maps |
-| 15 min  | [Independent Practice](#independent-practice-collections-15-mins)  | Collections |
-| 5 min  | [Conclusion](#conclusion-5-mins)  | Review/Recap |
-
-<a name="opening"></a>
+| 5 min  | Opening  | Learning Objectives |
+| 10 min | Introduction  |  Lists |
+| 5 min  | Demo| Lists |
+| 10 min | Independent Practice  | Lists |
+| 10 min | Introduction  |  Maps |
+| 10 min | Demo  | Maps |
+| 10 min | Guided Practice  | Maps |
+| 15 min | Independent Practice  | Collections |
+| 5 min  | Conclusion  | Review/Recap |
 
 ## Opening (5 min)
 
@@ -43,8 +41,6 @@ We'll be learning about and comparing them today to understand their strengths a
 > **Knowledge Check**: As a quick review, what are some of the differences between arrays and array lists?
 
 ***
-
-<a name="introduction"></a>
 
 ## Introduction: Lists (10 min)
 
@@ -66,8 +62,6 @@ A `LinkedList` is backed by a collection of objects linked together by pointers 
 </details> 
 
 ***
-
-<a name="demo"></a>
 
 ## Demo: Lists (5 min)
 
@@ -98,6 +92,7 @@ List<String> stringArrayList = Arrays.asList(cookieFlavors);
 The process for creating a `LinkedList` and an `ArrayList` is the same, but with the class name changed:
 
 ```java
+  import java.util.LinkedList;
   public static void main(String[] args) {
       // initialize LinkedList
       LinkedList<String> iceCreamFlavors = new LinkedList<>();
@@ -110,8 +105,6 @@ The process for creating a `LinkedList` and an `ArrayList` is the same, but with
 
 ***
 
-<a name="guided-practice"></a>
-
 ## Independent Practice: Lists (10 min)
 
 1. Create a `LinkedList` containing the numbers 1–10.
@@ -119,8 +112,6 @@ The process for creating a `LinkedList` and an `ArrayList` is the same, but with
 3. Finally, print the size of the list.
 
 ***
-
-<a name="introduction"></a>
 
 ## Introduction: Maps (10 min)
 
@@ -141,8 +132,6 @@ The hash function isn't flawless. What happens if it gives us the same index for
 Java handles this by using a structure like a `LinkedList` in place of the actual objects in the `HashMap`. If a collision occurs, the object is added onto the end of that list.
 
 ***
-
-<a name="demo"></a>
 
 ## Demo: Maps (10 min)
 
@@ -167,8 +156,6 @@ As you can see, a map isn't that different from a list: You can add and retrieve
 
 ***
 
-<a name="guided-practice"></a>
-
 ## Guided Practice: Maps (10 min)
 
 Let's create a `HashMap` that represents a dictionary. The key will be the word, and the value will be the definition. We must add the value to the map, retrieve it, and print it to the console.
@@ -186,10 +173,36 @@ For example:
 - Create a `LinkedList` of strings with the values `{"One","Two","Three","Four"}`.
 - Create a `HashMap` with the keys `{"One","Two","Three","Four"}` taken from the list and the integer values `{1,2,3,4}` taken from the array.
  - Print out the `HashMap` size after adding the above items to it.
+ 
+<details>
+    <summary>Solution code</summary>
+
+```java
+import java.util.HashMap;
+import java.util.LinkedList;
+
+class Main {
+  public static void main(String[] args) {
+    LinkedList<String> keys = new LinkedList<String>();
+    keys.add("One");
+    keys.add("Two");
+    keys.add("Three");
+    keys.add("Four");
+
+    HashMap<String, Integer> combos = new HashMap<String, Integer>();
+    combos.put(keys.get(0), 1);
+    combos.put(keys.get(1), 2);
+    combos.put(keys.get(2), 3);
+    combos.put(keys.get(3), 4);
+
+    System.out.println(combos.size());
+    System.out.println(combos);
+  }
+}
+```
+</details>
 
 ***
-
-<a name="conclusion"></a>
 
 ## Conclusion (5 min)
 
