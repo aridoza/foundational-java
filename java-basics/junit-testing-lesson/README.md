@@ -50,11 +50,12 @@ This is the difference between manual and automated testing. You code tests to r
 
 ## Introduction: Unit tests (5 mins)
 
-There are two types of automated tests: Unit tests and UI tests.
-
-> Check: Predict the difference.
-
-Unit tests check if the code logic is correct, and UI tests check if the elements on the screen work as expected.
+There are many, many types of automated tests: 
+- Unit tests
+- Smoke tests
+- Integration tests
+- Regression tests
+- Acceptance tests
 
 This lesson will focus on Unit tests.
 
@@ -70,7 +71,7 @@ So, think of a unit test as "Is this class and its methods working as expected?"
 
 Follow along!
 
-To do test our classes (units), we create test classes that test other classes.
+To test our classes (units), we create test classes that test other classes.
 
 Create a new project in IntelliJ. In the **src** folder, you will find three folders:
 
@@ -83,7 +84,7 @@ First, let's create a Student class, which has the methods `getFullName` and `ge
 
 Then, go create a new test in the src/test package and call it `StudentTest`.
 
-The idea of testing is to have methods in the Test that **implement** the class being tested and **assert** that that their methods are working.
+The idea of testing is to have methods in the Test that **implement** the class being tested and **assert** that their methods are working.
 
 In the `StudentTest` class, add methods that test if the `getFullName` and `getLetterGrade` methods are correct. Make sure to add the `@Test` annotation, or else jUnit doesn't recognize it.
 
