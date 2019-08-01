@@ -137,6 +137,8 @@ Let's take a look at some basic things you can do with an array.
 Note that indexing (getting or setting the item based on its position in the array) and determining the length of the array have built-in syntax, while some less fundamental operations are performed by using methods on the `Arrays` object. This is similar to adding two numbers together by writing `a + b`, but using methods on the `Math` object to do more esoteric things like rounding.
 
 ```java
+  import java.util.Arrays;
+
   class ArrayManipulationDemo {
         // Initialize array:
         int[] primeNumbers = {5,3,11,7,2}; // next 13, 17, 19, 23
@@ -174,14 +176,13 @@ Now, what if we searched for a value that isn't in the array? Let's see if `10` 
 <!-- **Instructor Note**: Add the lines below, leaving out the commented code. Throw the exception, ask the students why it was thrown, and ONLY THEN should you add in the >=0 check commented out above and below.-->
 
 ```java
-  int[] primeNumbers = {5,3,11,7,2};
+int[] primeNumbers = {5,3,11,7,2};
 
-  int indexOf10 = Arrays.binarySearch(primeNumbers, 10);
-  System.out.println("index of 10: " + indexOf10);
-  
-  // if(indexOf10 >= 0) {
-      System.out.println("looking for 10, found value: " + primeNumbers[indexOf10]);
-  // }
+int indexOf10 = Arrays.binarySearch( primeNumbers, 10 );
+System.out.println( "index of 10: " + indexOf10 );
+	// if(indexOf10 >= 0) {
+		System.out.println("looking for 10, found value: " + primeNumbers[indexOf10]);
+	// }
 ```
 
 An exception is thrown when the computer is asked to do something it can't do, like accessing index `-1` or `4` in a four-element array. Exceptions bubble up and, unless caught (which we'll talk about in a later lesson), cause the program to quit.
@@ -235,6 +236,8 @@ Just like data types, we can use many different collection classes, each of whic
 Let's take the array we made of favorite things and convert it into an `ArrayList`:
 
 ```java
+  import java.util.ArrayList;
+
   public static void main(String[] args) {
       // initialize ArrayList
       ArrayList<String> favoriteThings = new ArrayList<>();
@@ -377,4 +380,5 @@ Arrays and array lists are fundamental tools for storing and manipulating collec
 - [Oracle Java Docs: Arrays](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/arrays.html)
 - [Oracle Java Docs: The `for` Statement](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html)
 - [CodingBat: Array Code Practice](https://codingbat.com/java/Array-1)
+- [Autoboxing](https://docs.oracle.com/javase/tutorial/java/data/autoboxing.html)
 
