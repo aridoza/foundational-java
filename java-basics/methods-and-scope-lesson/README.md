@@ -1,5 +1,5 @@
 ---
-title: Functions and Scope
+title: Methods and Scope
 type: Lesson
 duration: "1:25"
 creator:
@@ -7,40 +7,39 @@ creator:
   city: NYC
 ---
 
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Functions and Scope
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Methods and Scope
 
 ### Learning Objectives
 At the end of this lesson, students will be able to:
-- Describe how parameters relate to functions.
+- Describe how parameters relate to methods.
 - Compare different types of variable scope.
 - Identify the parts of a method.
 - Use naming conventions for methods and variables.
-- Create and call a function that accepts parameters to solve a problem.
 
 ### Lesson Guide
 
 | Timing  | Type  | Topic  |
 |:-:|---|---|
-| 5 min  | [Opening](#opening-5-mins)  | Learning Objectives |
-| 5 min  | [Introduction](#introduction-writing-functions-5-mins)  | Writing Functions |
-| 15 min  | [Demo](#demo-lets-break-it-down-15-mins)  | Let's Break It Down |
-| 10 min  | [Independent Practice](#independent-practice-discuss-10-mins)  | Discuss |
-| 10 min  | [Demo](#demo-more-functions-10-mins)  | More Functions |
-| 15 min  | [Guided Practice](#guided-practice-writing-functions-15-mins)  | Writing Functions |
-| 15 min  | [Independent Practice](#independent-practice-write-a-few-functions-15-mins)  | Write a Few Functions |
-| 5 min  | [Conclusion](#conclusion-5-mins)  | Review/Recap |
+| 5 min  | Opening  | Learning Objectives |
+| 5 min  | Introduction | Writing Methods |
+| 15 min | Demo   | Let's Break It Down |
+| 10 min | Independent Practice  | Discuss |
+| 10 min | Demo  | More Methods |
+| 15 min | Guided Practice  | Writing Methods |
+| 15 min | Independent Practice  | Write a Few Methods |
+| 5 min  | Conclusion | Review/Recap |
 
 ## Opening (5 min)
 
-We've previously covered variables and data types — two important building blocks for all programming languages. Today, we'll learn about two more topics: functions and scope. **Functions** are reusable chunks of code that complete some task, while **scope** defines where the variables actually have relevance in your program.
+We've previously covered variables and data types — two important building blocks for all programming languages. Today, we'll learn about two more topics: methods and scope. **Methods** are reusable chunks of code that complete some task, while **scope** defines where the variables actually have relevance in your program.
 
 ----
 
-## Introduction: Writing Functions (5 min)
+## Introduction: Writing Methods (5 min)
 
 #### `main` Method
 
-We've already met a function: the `main` method. Every Java program needs it. It's the entry point to the rest of the application, and it will invoke all of the other methods required by your program.
+We've already met a method: the `main` method. Every Java program needs it. It's the entry point to the rest of the application, and it will invoke all of the other methods required by your program.
 
 Let's briefly review it:
 
@@ -93,7 +92,7 @@ Any method called from within a `static` context must also be `static`. So for n
 
 #### Return Type
 
-A method can return a value, but the type of that returned value must be specified so the calling function knows what to do with it.
+A method can return a value, but the type of that returned value must be specified so the calling method knows what to do with it.
 
 Let's see how that works. Create a new Java program using the given console template from Eclipse, or create a basic class with an inner `main` method. Then, code the two methods below. Use the commented `print` statements to explain local scope.
 
@@ -139,35 +138,7 @@ class Main {
   }
 ```
 
-A function executes until it reaches a `return` statement or a closing curly brace. If a data type has been specified, that data (or `null`) must be returned, or the code will not compile.
-
-Another solution (if it wasn't appropriate to use a return type) would be to use a global variable.
-
-> **Knowledge Check**: What do you think a global variable allows you to do?
-
-Global variables are defined at the top of a class and by convention are named using `variableName`:
-
-```java
-class Main {
-    int mySum;
-    
-    public static void main(String[] args) {
-        getSum();
-        System.out.println(mySum);
-    }
-    
-    public static void getSum() {
-        int sum = 2 + 2;
-        
-	System.out.println(sum);
-        System.out.println(mySum);
-        
-	mySum = sum;
-    }
-  }
-```
-
-> **Knowledge Check**: When is it appropriate to use a return type? When is a global variable more appropriate?
+A method executes until it reaches a `return` statement or a closing curly brace. If a data type has been specified, that data (or `null`) must be returned, or the code will not compile.
 
 ----
 
@@ -177,13 +148,12 @@ Take five minutes and discuss the following questions with the person next to yo
 
 - What are some data types a method could return?
 - Why might you want to return a value from a method?
-- What is the naming convention for global variables, and where do you put them?
 
 Be ready to share your answers to the class.
 
 -----
 
-## Demo: More Functions (10 min)
+## Demo: More Methods (10 min)
 
 #### Method Name
 
@@ -193,7 +163,7 @@ By convention, a method name should be a **verb** in **camel case** — just lik
 
 #### Parameters (Enclosed Within Parentheses)
 
-Parameters are arguments passed into a function when it's called. This makes the function more dynamic.
+Parameters are arguments passed into a method when it's called. This makes the method more dynamic.
 
 Let's look back at the `returnSum()` method.
 
@@ -232,20 +202,20 @@ public static void main(String[] args) {
 It's also possible to have a return type for an unknown number of arguments, which can be declared like this:
 
 ```java
-public static void myFunction(String... vars) {}
+public static void myMethod(String... vars) {}
 ```
 
 Or like this:
 
 ```java
-public static void myFunction(String[] vars) {}
+public static void myMethod(String[] vars) {}
 ```
 
 These two signatures are the same thing under the hood.
 
 > **Knowledge Check**: From where does the last one look familiar?
  
-Like `main`, `myFunction()` will take an indefinite amount of parameters of the type `String`. For now, just know that it exists.
+Like `main`, `myMethod()` will take an indefinite amount of parameters of the type `String`. For now, just know that it exists.
 
 In Java, if a method declares a parameter, that **parameter** is required to be sent as an **argument** from the calling method.
 
@@ -253,7 +223,7 @@ In Java, if a method declares a parameter, that **parameter** is required to be 
 
 This is where the main functionality of your method will be called.
 
-## Guided Practice: Writing Functions (15 min)
+## Guided Practice: Writing Methods (15 min)
 
 <!--**Instructor Note**: Take a look at the [solution-code](solution-code) and run the `askAQuestion` Java program so students have an idea of what they'll be creating.-->
 
@@ -263,7 +233,7 @@ Some things to mention:
 
 - Methods must be contained within a class definition.
 - Nesting a method within another method isn't allowed.
-- Take note of scope and global variables.
+- Take note of variable scope.
 
 > **Knowledge Check**: Take a minute and try to come up with the syntax necessary to print this message: "\nAsk: who, what, why, when, or where."
 
@@ -345,13 +315,13 @@ What if the user wants to exit out of the program?
 }
 ```
 
-## Independent Practice: Write a Few Functions (15 min)
+## Independent Practice: Write a Few Methods (15 min)
 
 Create a new Java project in Eclipse and work through as many of these exercises as you can within the next 15 minutes. Use the official [Oracle Java Docs](https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html) to help you through these exercises and look up the different class methods available.
 
-1. Write a method called `divide152By()`. It should accept a number as an argument and divide `152` by the given number. For example, the `divide152By` result of `2` — `152/2` — is `76`. Your function should return the result.
+1. Write a method called `divide152By()`. It should accept a number as an argument and divide `152` by the given number. For example, the `divide152By` result of `2` — `152/2` — is `76`. Your method should return the result.
 
-    Use your function to find the following:
+    Use your method to find the following:
 
     ```java
     divide152By(3);
@@ -369,9 +339,9 @@ Create a new Java project in Eclipse and work through as many of these exercises
     thirdAndFirst("Times","thyme");
     ```
 
-3. Write a method called `transmogrifier()`. This method should accept three arguments, which you can assume will be numbers. Your function should return the "transmogrified" result, which is the product of the first two numbers raised to the power of the third number. For example, the transmogrified result of `5`, `3`, and `2` — `(5 times 3) to the power of 2` — is `225`.
+3. Write a method called `transmogrifier()`. This method should accept three arguments, which you can assume will be numbers. Your method should return the "transmogrified" result, which is the product of the first two numbers raised to the power of the third number. For example, the transmogrified result of `5`, `3`, and `2` — `(5 times 3) to the power of 2` — is `225`.
    
-    Use your function to find the following:
+    Use your method to find the following:
 
     ```java
     transmogrifier(5, 4, 3);
