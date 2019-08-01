@@ -27,9 +27,9 @@ Each subclass should have some unique property that differentiates it from its p
 - Create a `Main` class with a `main()` method.
 - Initialize a list of animals, adding different types of mammals and reptiles to it.
 
-Your primary objective is to practice everything that was covered in the lesson. Also, try to break your code, debug, and learn from the exceptions you get.
+Your primary objective is to practice everything that was covered in the lesson. Also, try to break your code, debug it, and learn from the exceptions you get.
 
-**Bonus:** Create more than the minimum number of mammal or reptile subclasses.
+**Bonus:** Create more than the minimum number of `Mammal` or `Reptile` subclasses.
 
 #### Starter Code
 
