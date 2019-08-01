@@ -34,6 +34,8 @@ At the end of this lesson, students will be able to:
 
 We've previously covered variables and data types — two important building blocks for all programming languages. Today, we'll learn about two more topics: functions and scope. **Functions** are reusable chunks of code that complete some task, while **scope** defines where the variables actually have relevance in your program.
 
+----
+
 ## Introduction: Writing Functions (5 min)
 
 #### `main` Method
@@ -45,6 +47,8 @@ Let's briefly review it:
 ```java
 public static void main(String[] args)
 ```
+
+-----
 
 ## Demo: Let's Break It Down (15 min)
 
@@ -97,7 +101,7 @@ The problem:
 
 ```java
 class Main {
-    int mSum;
+    int mySum;
     
     public static void main(String[] args) {
         getSum();
@@ -115,7 +119,7 @@ The solution:
 
 ```java
 class Main {
-    int mSum;
+    int mySum;
     
     public static void main(String[] args) {
         int returned = returnSum();
@@ -141,29 +145,31 @@ Another solution (if it wasn't appropriate to use a return type) would be to use
 
 > **Knowledge Check**: What do you think a global variable allows you to do?
 
-Global variables are defined at the top of a class and by convention are named using `mVariableName`:
+Global variables are defined at the top of a class and by convention are named using `variableName`:
 
 ```java
 class Main {
-    int mSum;
+    int mySum;
     
     public static void main(String[] args) {
         getSum();
-        System.out.println(mSum);
+        System.out.println(mySum);
     }
     
     public static void getSum() {
         int sum = 2 + 2;
         
 	System.out.println(sum);
-        System.out.println(mSum);
+        System.out.println(mySum);
         
-	mSum = sum;
+	mySum = sum;
     }
   }
 ```
 
 > **Knowledge Check**: When is it appropriate to use a return type? When is a global variable more appropriate?
+
+----
 
 ## Independent Practice: Discuss (10 min)
 
@@ -174,6 +180,8 @@ Take five minutes and discuss the following questions with the person next to yo
 - What is the naming convention for global variables, and where do you put them?
 
 Be ready to share your answers to the class.
+
+-----
 
 ## Demo: More Functions (10 min)
 
