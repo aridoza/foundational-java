@@ -8,7 +8,6 @@ creator:
 
 ---
 
-
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Control Flow and Loops
 
 ### Learning Objectives
@@ -44,6 +43,8 @@ Control flow is a concept that's consistent across most programming languages. T
 What varies is the way different control flow components are implemented from language to language. Let's see how it's done in Java.
 
 Java supports a compact set of statements — specifically control flow statements — that you can use to incorporate interactivity in your application.
+
+-----
 
 ## Introduction: Logical Operators and Control Flow (10 min)
 
@@ -95,6 +96,8 @@ if (beautiful)
 System.out.println(name); //=> robin
 ```
 
+-----
+
 ## Demo: Conditional Statements (10 min)
 
 Conditional statements are a way of skipping over a block of code if it doesn't pass a Boolean expression. Java supports two conditional statements: `if...else` and `switch`.
@@ -108,6 +111,7 @@ if (expr) {
     other code
 }
 ```
+
 This means run the `code` block if `expr` is `true`, otherwise (if `expr` is `false`), run the `other code` block:
 
 ```java
@@ -163,12 +167,14 @@ It's important to know that all of the following become `false` when converted t
 For example:
 
 ```java
-Boolean b = new Boolean("");
+Boolean b = Boolean.valueOf("");
 
 System.out.println(b); //=> false
 ```
 
 This can be helpful when checking if conditions exist or are undefined, or if variables don't hold value.
+
+-----
 
 ## Guided Practice: Boolean or Logical Operators (15 min)
 
@@ -270,6 +276,8 @@ In this case, if the first operand, `instructor != null`, is `false`, then the s
 
 This is also important because a `NullPointerException` will be thrown if we try to call a method using "dot notation" on a `null` object reference.
 
+----
+
 ## Demo: Comparison Operators (10 min)
 
 [Comparisons](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html) in Java can be made on primitives using `<`, `>`, `<=`, and `>=`.
@@ -351,6 +359,8 @@ In short, use `equals()` when comparing `String`s.
 
 There's also an `!=` operator, which is the inverse of `==`.
 
+-----
+
 ## Introduction: `switch` Statements (10 min)
 
 The `switch` statement can be used for multiple branches based on a number or `String`:
@@ -409,6 +419,8 @@ No favorite
 
 This isn't what we intended.
 
+------
+
 ## Demo: Loops (15 min)
 
 Looping exists in just about all programming languages. A loop is a statement or block of code that will continue to execute while or until a condition exists.
@@ -462,6 +474,8 @@ Notice the placement of the semicolons. Now, let's take a look at what each of t
   - This happens every time the loop evaluates.
   - This is equivalent to the `do` section of the `do...while` loop.
   - In this case, for each loop, `i` is incremented by `1`.
+  
+-----
 
 ## Independent Practice: Fizz Buzz (15 min)
 
@@ -497,6 +511,8 @@ for (int i = 1; i < 101; i++) {
 ```
 
 </details>
+
+----
 
 ## Conclusion (5 min)
 
