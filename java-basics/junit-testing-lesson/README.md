@@ -46,13 +46,14 @@ This is the difference between manual and automated testing. You code tests to r
 
 ----
 
-## Introduction: Unit Tests (5 min)
+## Introduction: Unit tests (5 mins)
 
-There are two types of automated tests: **unit tests** and **UI tests**.
-
-> **Knowledge Check**: What's the difference between these two types of automated tests?
-
-Unit tests check if the code's logic is correct, while UI tests check if the elements on screen work as expected.
+There are many, many types of automated tests: 
+- Unit tests
+- Smoke tests
+- Integration tests
+- Regression tests
+- Acceptance tests
 
 This lesson will focus on unit tests.
 
@@ -64,7 +65,7 @@ A unit test tests a piece of code (a unit). In Java, a unit is, in most cases, a
 
 ## Demo: Creating a Unit Test (20 min)
 
-To perform unit testing, we create test classes that test other classes (units).
+To test our classes (units), we create test classes that test other classes.
 
 Create a new project in IntelliJ. In the `src` folder, you'll find two subfolders:
 
@@ -105,7 +106,17 @@ public class StudentTest {
 
 </details>
 
-To assert something, you would use JUnit's `assert_____()` static methods. The main ones are:
+Let's break that down. What do we see going on here?
+
+#### We created and imported our own packages: `org.junit.Test` and `static org.junit.Assert`.
+
+(explanation needed)
+
+#### We added a `@Test` annotation before the test case.
+
+In Java, annotations are used to provide supplemental information about a program. They provide metadata about a class or method without being a part of the program itself. They don't change the actual *action* of a program, but affect how the compiler treats that line of code when it's compiled or at runtime. In this case, we use the `@Test` annotation to indicate that the upcoming method represents a test case. (Soon in your travels with Java, you'll see common annotations like `@Override` or `@Deprecated`.
+
+To assert something, you would use jUnit's `assert_____()` static methods. The main ones are:
 
 ```java
     assertEquals(4, 2 + 2);
