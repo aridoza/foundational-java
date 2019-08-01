@@ -40,9 +40,9 @@ At the end of this lesson, students will be able to:
 
 In programming, we need a way of storing information while our programs are running. This could be anything from names and numbers to dates and many other things, which are all known as **data types**. These data types are stored in **variables**, just like in algebra class. Today, we'll be exploring how data types and variables form the basic building blocks of programming and how we use them to store information in our programs.
 
-## Introduction: Data Types in Java (10 min)
+----
 
-From Wikipedia:
+## Introduction: Data Types in Java (10 min)
 
 In computer science and computer programming, a data type — or simply, type — is a classification identifying one of various types of data that determines:
 - The possible values for that type.
@@ -57,8 +57,8 @@ Data types are similar across different languages, including English.
 |Category    | Data Type                     | Description          | Example |
 |------------|------------------------------|----------------------|---------|
 |True or False  | `boolean`, `Boolean`                   | Represents either true or false.                               |`true`, `false`|
-|Integers    | `short`, `int`, `Integer`, `long`, `Long`    | Whole numbers with no delimiter; can optionally have underscores to make large numbers easier to read.	| `42`, `1024`, `1_000_000` |
-|Decimals    | `float`, `Float`, `double`, `Double`       | Decimals with no delimiter.                                   | `42.123`, `2.5` |
+|Integers    | `short`, `int`, `Integer`, `long`, `Long`    | Whole numbers; can optionally have underscores to make large numbers easier to read.	| `42`, `1024`, `1_000_000` |
+|Decimals    | `float`, `Float`, `double`, `Double`       | Decimals.                                   | `42.123`, `2.5` |
 |Characters  | `char`                               | A single character surrounded by single quotation marks.                 | `'a'`, `'A'`|
 |Strings     | `String`                             | Single words or sentences surrounded by double quotation marks.        | `"lots of kittens"`, `"a lazy lizard"`    |                                                                | `true`, `false`
 
@@ -69,6 +69,8 @@ There are also a few odd ones:
 We'll elaborate on all of the categories on the board and show you some helper methods to manipulate them.
 
 > **Knowledge Check**: Come up with a few examples of data. Predict what type it falls into.
+
+-----
 
 ## Demo: Let's Start With Numbers (15 min)
 
@@ -82,16 +84,16 @@ What do you expect to be printed to the console?
 
 ```java
 int num1 = 5;
-System.out.println("num1, type int = " + num1);
-=> num1 = 5
+System.out.println(num1);
+=> 5
 ```
 
 How about here?
 
 ```java
 int num2 = 5 / 2;
-System.out.println("num2, type int = 5/2 = " + num2);
-=> num2 = 2
+System.out.println(num2);
+=> 2
 ```
 
 But why is `num2` not 2.5? In low-level languages (unlike JavaScript, Ruby, or PHP), numbers are strictly typed, and a type is either an integer or a decimal. An `int` stores an integer, not a decimal, as demonstrated in the previous function.
@@ -102,8 +104,8 @@ How about `float`?
 
 ```java
 float num3 = 5 / 2;
-System.out.println("num3, type float = 5/2 = " + num3);
-=> num3 = 2
+System.out.println(num3);
+=> 2
 ```
 
 > **Knowledge Check**: That didn't work quite as expected. Can anyone guess why?
@@ -112,14 +114,14 @@ Because both `5` and `2` are automatically assigned the `int` data type, when th
 
 ```java
 float num4 = 5f / 2f;
-System.out.println("num4, type float = 5f/2f = " + num4);
-=> num4 = 2.5
+System.out.println(num4);
+=> 2.5
 ```
 
 ```java
 double num5 = 5d / 2d;
-System.out.println("num5, type double = 5d/2d " + num5);
-=> num5 = 2.5
+System.out.println(num5);
+=> 2.5
 ```
 
 Note: In the previous example, we used both a `float` and a `double` data type to save decimal numbers.
@@ -169,6 +171,8 @@ System.out.println(2 * 2);
 System.out.println(2 % 2); // What does this do?
 ```
 
+----
+
 ## Demo: Using Special Number Operators (10 min)
 
 Coding languages can at times be limiting in terms of the number of operations they allow you to perform. For example, how do you square or cube a number?
@@ -203,6 +207,8 @@ int range = Math.abs(max - min) + 1;
 ```
 
 > **Knowledge Check**: Who provides the `Math` object? Where do you think you might be able to find more information? ([Oracle Math Documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Math.html)).
+
+----
 
 ## Introduction: Primitives vs. Objects (10 min)
 
@@ -241,6 +247,8 @@ String str = "abc";
 // is actually
 char data[] = {'a', 'b', 'c'};
 ```
+
+-----
 
 ## Demo: Creating a New `String` (15 min)
 
@@ -293,6 +301,7 @@ To make a `String` uppercase:
 ```
 
 To add two `String`s together:
+
 ```java
 "hello".concat(" world");
 => "hello world"
@@ -334,6 +343,8 @@ In short, use `equals` when comparing `String`s.
 
 > **Knowledge Check**: Why can we call methods on a variable with a `String` data type but not on an `int`?
 
+-----
+
 ## Demo: Converting Between Data Types (10 min)
 
 Sometimes, it's necessary to convert between data types. User input is **always** a `String`, such as when you enter your email address, age, income, and more. If you'd like to operate on those numbers, however, you'll have to convert it to a numeric data type.
@@ -366,7 +377,7 @@ For example, to convert a `String` to an `Integer`, you can use:
 
 ```java
 String strValue = "42";
-int intValue = new Integer(strValue).intValue();
+int intValue = Integer.valueOf(strValue);
 ```
 
 Similar methods exist for all of the wrappers.
@@ -393,6 +404,8 @@ A `null` value is an empty value. According to a StackOverflow post:
 
 <a name="ind-practice"></a>
 
+------
+
 ## Independent Practice (15 min)
 
 <!-- **Instructor Note**: This can be a pair programming activity or done independently.-->
@@ -402,6 +415,8 @@ Grab the starter code from `VariablePractice` and complete all of the tasks. We'
 ***
 
 <a name="conclusion"></a>
+
+----
 
 ## Conclusion (5 min)
 
