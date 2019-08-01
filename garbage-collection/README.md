@@ -7,7 +7,7 @@
 
 ## Learning Objectives
 
-At the end of this lesson, you'll be able to:
+At the end of this lesson, students will be able to:
 
 - Describe what the garbage collector is and how it works.
 - Specify the heap size when you launch a program.
@@ -23,7 +23,7 @@ At the end of this lesson, you'll be able to:
 | 10 min | Lecture   | Heap vs. Stack |
 | 10 min | Demo | `OutofMemory` Error |
 | 10 min | Demo | Resolving an `OutofMemory` Error|
-| 5 min  | Conclusion  | Review and Recap |
+| 5 min  | Conclusion  | Review/Recap |
 
 ## Opening (5 min)
 
@@ -41,9 +41,9 @@ Before Java entered the picture, earlier languages like C and C++ required the p
 
 The technology behind garbage collection has greatly evolved in the last 20 years or so, and there are large companies that make a career out of optimizing garbage collection. We won't get into the precise details, but the common theme is that the JVM allocates an area of memory called the **heap**, where it stores all objects.
  
-When the heap starts to fill up, Java runs a background process (the garbage collector) that looks at every object in the heap and traces its references transitively to determine whether they're still directly or indirectly referenced by any live thread. If they're not, then they're eligible for collection.
+When the heap starts to fill up, Java runs a background process (the garbage collector) that looks at every object in the heap and traces its references transitively to determine if they're still directly or indirectly referenced by any live thread. If they're not, then they're eligible for collection.
 
-The garbage collector will mark those for collection, and then in a sweep process, will remove that memory and perform a compaction so the memory once again becomes available.
+The garbage collector will mark those for collection and then, in a sweep process, remove that memory and perform a compaction so the memory once again becomes available.
 
 Consider the following program:
 
@@ -54,7 +54,7 @@ for (int i = 0; i < 100; i++) {
 }
 ```
 
-> Check: What happens to the `message` object created during the loop?
+> **Knowledge Check**: What happens to the `message` object created during the loop?
 
 <details>
 	
@@ -64,7 +64,7 @@ At the end of each loop iteration, the `message` object created during that iter
 	
 </details>
 
-> Check: Based on this information, is the `message` object eligible for collection?
+> **Knowledge Check**: Based on this information, is the `message` object eligible for collection?
 
 <details>
 	
@@ -90,7 +90,7 @@ For example, the following will allocate an initial memory of 10 GB and increase
 java -Xms10g -Xmx100g MyCode
 ```
 
-If your `-Xmx` setting is greater than your `-Xms` setting, then Java will start with an initial heap size equal to your `-Xms` setting, then will allocate more heap as needed until the `-Xmx` value is reached. 
+If your `-Xmx` setting is greater than your `-Xms` setting, then Java will start with an initial heap size equal to your `-Xms` setting and allocate more heap as needed until the `-Xmx` value is reached. 
 
 #### Default Heap Size
 
@@ -98,9 +98,9 @@ If you don't specify a heap size, Java will allocate a default heap size for you
 
 #### The Stack
 
-Note that when your program executes, even if there isn't a single object allocated, it still uses some memory to keep track of the call stack of every thread running.
+Note that, when your program executes, even if there isn't a single object allocated, it still uses some memory to keep track of the call stack of every thread running.
 
-For example, if method A calls method B calls method C, Java must remember that when method C exits, it must return to the spot in method B that called it, and when that returns, return to method A. This memory is called the **stack** and is distinct from the heap. 
+For example, if Method A calls Method B calls Method C, Java must remember that, when Method C exits, it must return to the spot in Method B that called it and, when that returns, return to Method A. This memory is called the **stack** and is distinct from the heap. 
 
 The stack also holds any method-local data that will be swept off once the method returns. The stack works on a 
 "first in, first out" (aka FIFO) basis: It's allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, the stack is swept in a FIFO manner, so the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
@@ -126,7 +126,7 @@ public class OOMError {
 
 ```
 
-> Check: Can someone explain what happened? 
+> **Knowledge Check**: Can someone explain what happened? 
 
 In this program, we continuously create a large array and store it in a `List`. We display the total and available memory on each iteration.
 
@@ -134,12 +134,12 @@ Eventually, because every object is referenced by our `List`, nothing is eligibl
 
 Here are two reasons a program might ever run out of memory:
 
-1. The memory requirements of the program might just exceed the allocated memory. If you have a lot of live data or objects, then you need to allocate enough memory for the program to run. This can be determined by watching the program run in development, under production-like load.
-1. You might have a **memory leak**. A memory leak occurs when objects are allocated but not released when done — for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or file system connections. To locate these, review your code, looking at all your collections to ensure they're not growing without bound, and checking all your connections to ensure you're releasing them when done. Make sure to use Java 7's `try... with` resources syntax as a defense against memory leaks. 
+1. The program's memory requirements might just exceed the allocated memory. If you have a lot of live data or objects, then you need to allocate enough memory for the program to run. This can be determined by watching the program run in development under a production-like load.
+1. You might have a **memory leak**. A memory leak occurs when objects are allocated but not released when done — for example, collecting them without end in a list and never letting them go. Another common cause of memory leaks comes from forgetting to release connection resources, such as database or file system connections. To locate these, review your code, looking at all of your collections to ensure they're not growing without bound and checking all of your connections to ensure you're releasing them when done. Make sure to use Java 7's `try... with` resources syntax as a defense against memory leaks. 
 
 ## Resolving an `OutOfMemory` Error (10 min)
 
-So, it is possible to run out of memory. That means we should be asking ourselves, "What do we do when that happens?"
+So, it's possible to run out of memory. That means we should be asking ourselves, "What do we do when that happens?"
 
 Our memory leak generator is an extreme example of what can happen if our program creates objects with reckless abandon. To prevent this, make sure you're not allowing collections to grow indefinitely.
 
@@ -150,7 +150,7 @@ Some other preventive measures include:
 - Using least-recently-used structures, which automatically remove items that have not been referenced for a specified amount of time.
 - Consider using weak references (see Java's [WeakHashMap](https://docs.oracle.com/javase/8/docs/api/java/util/WeakHashMap.html)), which clean up when memory is running out.
 
-The bottom line is that **fixing** an `OutOfMemory` error is tricky, and generally means changing something about the way your program is designed. (Do a quick search on Stack Overflow and you'll see just how many people are trying to figure this out.) It's important to take **preventive measures** when you set up a program to ensure this doesn't happen (and yes, we know — easier said than done).
+The bottom line is that **fixing** an `OutOfMemory` error is tricky and generally means changing something about the way your program is designed. (Do a quick search on Stack Overflow and you'll see just how many people are trying to figure this out.) It's important to take **preventive measures** when you set up a program to ensure this doesn't happen (and yes, we know — easier said than done).
 
 ## Conclusion (5 min) 
 
