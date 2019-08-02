@@ -11,51 +11,61 @@ creator:
 
 ## Introduction
 
-> **Instructor Note**: This can be a pair programming activity or done independently.
-The skeleton of the lab can be found in the attached lab directory.
-The solution can be found in the attached solution directory.
-Leave 20 minutes at the end of the lab to work through the solutions.
-
 This lab provides an opportunity to practice filtering, mapping, and statistics. 
+
+It can be a pair programming activity or done independently.
+
+The skeleton of the lab can be found in the attached lab directory. The solution can be found in the attached solution directory.
+
+------
 
 ## Exercise
 
-#### Requirements
+### Requirements
 
 Write code that uses Lambdas and Streams to satisfy the requirements listed below:
 
-First, complete the following method to print out all of the elements in the supplied list.
+1. First, complete the following method to print out all of the elements in the supplied list.
 
+    ```
     private <T> void printList(List<T> list) {
 
     }
+    ```
 
-Next, print a list of all Employees that earn 50K or more. 
+2. Next, print a list of all Employees that earn 50K or more. 
 
+    ```
     @Test
     public void getEmployeesOver50k() {
         List<Employee> employees = null;
         printList(employees);
     }
+    ```
 
-Next, print a list of the names (not the Employee) of all Employees that were hired on or after Jan 1, 2012
+3. Next, print a list of the names (not the Employee) of all Employees that were hired on or after Jan 1, 2012.
 
+    ```
     @Test
     public void getEmployeeNamesHiredAfter2012() {
         List<Employee> employees = null;
         printList(employees);
     }
+    ```
 
-Now print the maximum salary of all employees:
+4. Now print the maximum salary of all employees.
 
+    ```
     @Test
     public void getMaxSalary() {
         double max = 0;
         System.out.println("Max:" + max);
     }
+    ```
 
-And the minimum salary:
+5. And the minimum salary.
     
+    ```
     @Test
     public void getMinSalary() {
         double min = this.employees.stream()
@@ -64,10 +74,11 @@ And the minimum salary:
                 .orElse(0);
         System.out.println("Min:" + min);
     }
+    ```
 
+6. Now print the average salary of all employees.
 
-Now print the average salary of all employees
-
+    ```
     @Test
     public void getAverageSalaries() {
         double averageMale = 0;
@@ -75,27 +86,33 @@ Now print the average salary of all employees
 
         System.out.println("Averages: Male:" + averageMale + " Female:" + averageFemale);
         System.out.println("Averages: Male:" + averageMale + " Female:" + averageFemale);
-}
+     }
+     ```
 
-Finally, use the reduce operation to find the Employee instance of the employee with the highest salary
+7. Finally, use the reduce operation to find the Employee instance of the employee with the highest salary
 
+    ```
     @Test
     public void getMaximumPaidEmployee() {
         Employee highest = null;
         System.out.println(highest);
     }
+    ```
 
-#### Starter Code
+### Starter / Solution Code
 
 See the accompanying lab directory, which contains the required classes, and testers for each exercise.
 
 See the accompanying solution directory for the solutions.
 
-#### Deliverable
+### Deliverable
 
-You'll review the answers with the instructor in class.
+We'll take about 20 minutes at the end of class to review solutions.
+
+----
 
 ## Additional Resources
+
 - [Oracle Java Docs: Defining Methods](https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html)
 - [Oracle Java Docs: A Closer Look at the "Hello World!" Application](https://docs.oracle.com/javase/tutorial/getStarted/application/)
 - [Princeton: Java Programming Cheat Sheet](https://introcs.cs.princeton.edu/java/11cheatsheet/)
