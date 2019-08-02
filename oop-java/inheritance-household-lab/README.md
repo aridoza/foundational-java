@@ -1,10 +1,6 @@
----
-title: Abstraction: Household
-type: Lab
-duration: "1:15"
-creator:
-    name: Josh Bartz
----
+| Title | Type | Duration | Author |
+| -- | -- | -- | -- |
+| Abstraction: Household | HW  | 1:15 | Josh Bartz |
 
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Abstraction: Household Lab
 
