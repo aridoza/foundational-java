@@ -99,7 +99,7 @@ Voila! We have a new instance of `HumanKind`.
 
 - `HumanKind vannaWhite` declares a variable of type `HumanKind` and names that variable `vannaWhite`. The `=` sign assigns everything on its right to the variable on its left.
 
-   > **Tip**: Remember the Java naming convention: camel case variable names, classes starting with a capital letter, variables starting with a lowercase letter.
+   > **Tip**: Remember the Java naming convention: camel case for variable names, and classes starting with a capital letter.
 
 - `new HumanKind()` calls the constructor, which is a method with the same name as the `HumanKind` class. Notice that, even though we didn't write a constructor method called `HumanKind()`, Java provides one by default. A constructor is called to **construct** (or create) a new instance of a class using that class as a template. This process is known as instantiation: We're **instantiating** a new object (i.e., creating a new instance of the class).
 
@@ -179,8 +179,11 @@ We might have a `setAddress()` method that alters the `address` field's value.
 
 ```java
 public class HumanKind {
+    private String address;
+    
     public void setAddress(String address) {
         this.address = address;
+    }    
 }
 ```
 
