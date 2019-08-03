@@ -105,9 +105,9 @@ Voila! We have a new instance of `HumanKind`.
 
 So in plain English, this statement is saying, "Declare a new variable named `vannaWhite` of type `HumanKind` and assign it a new instance of the class `HumanKind`."
 
-    ```java
-    HumanKind vannaWhite = new HumanKind();
-    ```
+```java
+HumanKind vannaWhite = new HumanKind();
+```
 
 ### Step 4 
 
