@@ -45,7 +45,12 @@ We often check for code that could cause errors manually through conditional sta
 
 Before we can start talking about the try/catch block, we need to talk about Exceptions. Exceptions are events that occur while a program is running that interrupts the normal flow of the code. These can be null pointer exceptions, divide by zero, array out of bounds, etc. You can see many of the built-in exceptions in the [Java documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Exception.html).
 
-There are two types of exceptions- Checked and Unchecked. A **checked exception** is an exception that occurs at compile time, that means a programmer is forced to handle these exceptions otherwise program will not compile. An **unchecked exception** occurs at the time program is executing. Also know as Runtime exceptions. You don't have to handle them, you can if you want to.
+There are two types of exceptions- Checked and Unchecked. A **checked exception** is an exception that occurs at compile time, that means a programmer is forced to handle these exceptions otherwise program will not compile. Checked exceptions are subclasses of Exception class. An **unchecked exception** occurs at the time program is executing. Also know as Runtime exceptions. You don't have to handle them, you can if you want to.
+
+
+
+![](https://cdn2.howtodoinjava.com/wp-content/uploads/ExceptionHierarchyJava.png)
+<sub>[source](https://howtodoinjava.com/java/exception-handling/checked-vs-unchecked-exceptions-in-java/)</sub>
 
 When an Exception occurs, we say that it is **thrown**. This will become important when we look at the Try/Catch blocks. While many parts of Java throw exceptions on their own, you can also manually throw exceptions as well.
 
@@ -78,7 +83,7 @@ It is important to note that the code in the catch block is only executed if an 
 
 Let's take a look at a case where we try to access a value from an array with an index outside of its bounds. Open up the starter-code for IndexOutOfBounds. As you can see, this program has a list of superheroes and lets us enter a number to access our favorite superhero.
 
-If we run the program and type in a number that is outside of the bounds of the arraylist, we get an `IndexOutOfBoundsException` (example of unchecked exception), and everything crashes! Instead of having the program crash, we can still log the error, but let the program handle the exception gracefully by letting the user know what they entered isn't valid.
+If we run the program and type in a number that is outside of the bounds of the arraylist, we get an [IndexOutOfBoundsException](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/IndexOutOfBoundsException.html) (example of unchecked exception), and everything crashes! Instead of having the program crash, we can still log the error, but let the program handle the exception gracefully by letting the user know what they entered isn't valid.
 
 Let's add a Try/Catch around the code that is causing the error.
 
@@ -171,7 +176,7 @@ In this next example, we will be looking at a program that divides two numbers f
 
 > Check: Give the students 2 minutes to look at the code and determine how we should handle the error if it occurs.
 
-In this code if you run with any value higher than 0 in divisor the program runs smoothly. But as soon as you input 0 in divisor the program fails with the exception `/ by zero`. This is a type of `ArithmeticException`.
+In this code if you run with any value higher than 0 in divisor the program runs smoothly. But as soon as you input 0 in divisor the program fails with the exception `/ by zero`. This is a type of [ArithmeticException](https://docs.oracle.com/javase/8/docs/api/?java/lang/ArithmeticException.html).
 
 In this case, in `division()` method we will check if the divisor is 0, throw an exception.
 
@@ -209,6 +214,8 @@ public static void main(String[] args) {
 <a name="ind-practice"></a>
 
 ## Independent Practice: File Reading and Writing (10 mins)
+
+Create a small app that reads from a file all superhero names, asks user for a cool thing that superhero does
 
 Open the IndependentPractice starter-code. In this app, the user is able to type text into the EditText and press the Save button to save it to a file. When the app is opened, it attempts to read text from the file and put it in the EditText so the user can resume editing it.
 
