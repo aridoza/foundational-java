@@ -20,7 +20,7 @@ In this lab, you'll apply your knowledge of classes to build a Java program that
 
 #### Requirements
 
-- Create an `Animal` class with the following properties: `numLegs`, `topSpeed`, `isEndangered`, and `name`.
+- Create an `Animal` class with the following `private` properties: `numLegs`, `topSpeed`, `isEndangered`, and `name`.
 - Complete the constructor for the `Animal` class.
 - Create all getters and setters for the `Animal` properties.
 - Instantiate an `Animal` object and display some of its properties.
