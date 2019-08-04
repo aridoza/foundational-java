@@ -1,8 +1,8 @@
 public class Animal {
-    int numLegs;
-    int topSpeed;
-    boolean isEndangered;
-    String name;
+    private int numLegs;
+    private int topSpeed;
+    private boolean isEndangered;
+    private String name;
 
     public Animal(int numLegs, int topSpeed, boolean isEndangered, String name){
         //Set properties here
