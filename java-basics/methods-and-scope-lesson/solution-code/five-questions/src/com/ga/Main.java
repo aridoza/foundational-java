@@ -1,4 +1,4 @@
-package com.adi;
+package com.ga;
 
 import java.util.Scanner;
 
@@ -15,10 +15,10 @@ public class Main {
         String userString = grabUserInput();
 
         if (userString.contains("who")) {
-            System.out.println("We're the ADI class.");
+            System.out.println("We're the Java class.");
         }
         else if (userString.contains("what")) {
-            System.out.println("We're people learning to be awesome android developers!");
+            System.out.println("We're people learning to be awesome Java developers!");
         }
         else if (userString.contains("when")) {
             System.out.println("Right now!");
@@ -27,7 +27,7 @@ public class Main {
             System.out.println("We're in the Flatiron District of NYC.");
         }
         else if (userString.contains("why")) {
-            System.out.println("To create awesome apps!");
+            System.out.println("To create awesome programs!");
         }
         else if (userString.contains("exit")) {
             askAgain();

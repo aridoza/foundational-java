@@ -11,18 +11,12 @@ public class ListIterationWithConcatenationDemo {
         List<String> stringList = Arrays.asList("My name is ", "My friends call me ", "My mother calls me ");
         List<String> concatenatedList = new ArrayList<>();
 
-        stringList.stream().forEach(stringValue -> {
-            concatenatedList.add(stringValue + "Jim");
-        });
+        stringList.stream().forEach(stringValue -> concatenatedList.add(stringValue + "Jim"));
 
         //Now output the values of the concatenatedList using streams.
-        concatenatedList.stream().forEach(stringValue -> {
-            System.out.println(stringValue);
-        });
+        concatenatedList.forEach(stringValue -> System.out.println(stringValue));
 
         //Now output the values of the original stringList using streams to show that the list is unaltered.
-        stringList.stream().forEach(stringValue -> {
-            System.out.println(stringValue);
-        });
+        stringList.stream().forEach(stringValue -> System.out.println(stringValue));
     }
 }
