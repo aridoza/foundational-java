@@ -1,6 +1,6 @@
 ---
 title: Exception Handling lesson
-duration: "0:55"
+duration: "1:30"
 creator:
     name: Drew Mahrt & Isha Arora
 ---
@@ -81,7 +81,7 @@ It is important to note that the code in the catch block is only executed if an 
 
 ## Demo: IndexOutOfBoundsException (10 mins)
 
-Let's take a look at a case where we try to access a value from an array with an index outside of its bounds. Open up the starter-code for IndexOutOfBounds. As you can see, this program has a list of superheroes and lets us enter a number to access our favorite superhero.
+Let's take a look at a case where we try to access a value from an array with an index outside of its bounds. Open up the starter-code for [IndexOutOfBounds](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/IndexOutOfBounds). As you can see, this program has a list of superheroes and lets us enter a number to access our favorite superhero.
 
 If we run the program and type in a number that is outside of the bounds of the arraylist, we get an [IndexOutOfBoundsException](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/IndexOutOfBoundsException.html) (example of unchecked exception), and everything crashes! Instead of having the program crash, we can still log the error, but let the program handle the exception gracefully by letting the user know what they entered isn't valid.
 
@@ -172,7 +172,7 @@ The biggest advantage of using this keyword is having all exception handling at 
 ## throw keyword
 We use this keyword to throw an exception manually from anywhere in the code. This concept is best explained through an example. 
 
-In this next example, we will be looking at a program that divides two numbers for us and displays the result. Open up the DivisionExample starter-code.
+In this next example, we will be looking at a program that divides two numbers for us and displays the result. Open up the [DivisionExample starter-code](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/DivisionExample).
 
 > Check: Give the students 2 minutes to look at the code and determine how we should handle the error if it occurs.
 
@@ -215,12 +215,11 @@ public static void main(String[] args) {
 
 ## Lab: File Reading and Writing (45 mins)
 
-Create an app that quizes users on their superhero trivia. 
+Create an app that quizes users on their superhero trivia. Open the Superheroes [starter-code](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/Superheroes) and start working from there.
 
 Your app reads from an `input.txt` file the superhero info, stores it in an ArrayList. Based on the answers keeps count of every right and wrong answer. If the number of right answers is greater than wrong ones, declare user a winner and write user's name and result of the quiz in an `output.txt` file.
 
-Open the Superheroes starter-code and start working from there.
-
+You can refer to solution-code [here](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/solution-code/Superheroes).
 ***
 
 <a name="conclusion"></a>
