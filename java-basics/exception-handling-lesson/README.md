@@ -3,8 +3,8 @@ title: Exception Handling lesson
 duration: "0:55"
 creator:
     name: Drew Mahrt & Isha Arora
-    city: NYC
 ---
+
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Exception Handling
 
 
@@ -47,7 +47,7 @@ Before we can start talking about the try/catch block, we need to talk about Exc
 
 There are two types of exceptions- Checked and Unchecked. A **checked exception** is an exception that occurs at compile time, that means a programmer is forced to handle these exceptions otherwise program will not compile. Checked exceptions are subclasses of Exception class. An **unchecked exception** occurs at the time program is executing. Also know as Runtime exceptions. You don't have to handle them, you can if you want to.
 
-
+This is the exception hierarchy. Red is unchecked exceptions. Blue is checked.
 
 ![](https://cdn2.howtodoinjava.com/wp-content/uploads/ExceptionHierarchyJava.png)
 <sub>[source](https://howtodoinjava.com/java/exception-handling/checked-vs-unchecked-exceptions-in-java/)</sub>
@@ -213,13 +213,13 @@ public static void main(String[] args) {
 
 <a name="ind-practice"></a>
 
-## Independent Practice: File Reading and Writing (10 mins)
+## Lab: File Reading and Writing (45 mins)
 
-Create a small app that reads from a file all superhero names, asks user for a cool thing that superhero does
+Create an app that quizes users on their superhero trivia. 
 
-Open the IndependentPractice starter-code. In this app, the user is able to type text into the EditText and press the Save button to save it to a file. When the app is opened, it attempts to read text from the file and put it in the EditText so the user can resume editing it.
+Your app reads from an `input.txt` file the superhero info, stores it in an ArrayList. Based on the answers keeps count of every right and wrong answer. If the number of right answers is greater than wrong ones, declare user a winner and write user's name and result of the quiz in an `output.txt` file.
 
-With a partner, figure out where the Try/Catch blocks need to go and discuss why you think the code needs to be checked for an Exception.
+Open the Superheroes starter-code and start working from there.
 
 ***
 
