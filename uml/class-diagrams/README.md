@@ -19,7 +19,7 @@ creator:
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
 | 5 min | Opening  | Lesson Objectives |
-| 10 min | Instruction | Intro to UML |
+| 10 min | Instruction | UML |
 | 40 min | Instruction | Class Diagrams |
 | 30 min | Student Activity | Coding a Trading System | 
 | 5 min | Conclusion | Brief Debrief |
@@ -33,6 +33,8 @@ creator:
 * Understand a Class Diagram UML
 * Develop their own Class Diagrams
 
+### Intro to UML
+
 By now, you have seen many examples of some pretty arcane code, that make even simple programs hard to follow.
 
 Wouldn't it be great if we could express programs clearly, without having to plow through all of the terse language syntax?
@@ -43,7 +45,7 @@ In this course, we will discuss the two most common UML diagrams - class diagram
 
 ---
 
-## Intro to UML (10 min)
+## UML (10 min)
 
 ### What is UML?
 
@@ -64,6 +66,8 @@ Using UML, a software architect or program designer can quickly describe the str
 use those models to communicate implementation details to developers and engineers, much as a building architect can use blueprints to communicate the details of a building to the engineering staff. 
 
 There are many tools in the market for preparing UML diagrams. There are specialized enterprise-quality tools like "Enterprise Architect" and IBM Rational, to free tools like ArgoUML, as well as general modeling tools like Lucidchart and Microsoft Visio. Many tools provide the capability to reverse engineer code, and to generate code from models. Usually the choice of tool will be dictated in your shop.
+
+###### CFU: What is the purpose of UML? 
 
 --- 
 
@@ -174,7 +178,7 @@ Note that Market is an interface, as indicated by the italics. All of the others
 
 ## Conclusion (5 min)
 
-
+Today we learned about class diagrams. Next lesson we'll learn about sequence diagrams, another category of UML diagrams. 
 
 ---
 
