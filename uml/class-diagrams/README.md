@@ -31,7 +31,7 @@ creator:
 *After this lesson, you will:*
 * Understand the different categories of UML
 * Understand a Class Diagram UML
-* Develop their own Class Diagrams
+* Develop your own Class Diagrams
 
 ### Intro to UML
 
