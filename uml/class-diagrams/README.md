@@ -11,6 +11,8 @@ creator:
 
 *After this lesson, students will:*
 * Understand the different categories of UML
+* Understand a Class Diagram UML
+* Develop their own Class Diagrams
 
 - 
 
@@ -25,6 +27,13 @@ creator:
 | 5 min | Conclusion | Brief Debrief |
 
 ## Introduction (5 min)
+
+### Learning Objectives
+
+*After this lesson, you will:*
+* Understand the different categories of UML
+* Understand a Class Diagram UML
+* Develop their own Class Diagrams
 
 By now, you have seen many examples of some pretty arcane code, that make even simple programs hard to follow.
 
@@ -61,6 +70,8 @@ There are many tools in the market for preparing UML diagrams. There are special
 --- 
 
 ## Class Diagrams (40 min)
+
+### Example of a Class Diagram
 
 Imagine you are building a trading system for financial assets such as stocks, bonds, and commodities.
 
