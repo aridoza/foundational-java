@@ -10,11 +10,9 @@ creator:
 ### Learning Objectives
 
 *After this lesson, students will:*
-* Understand the different categories of UML
+* Know the different categories of UML
 * Understand a Class Diagram UML
 * Develop their own Class Diagrams
-
-- 
 
 ### Lesson Guide
 
