@@ -121,18 +121,22 @@ Basically the connectors indicate the kind of relationship. Some of the differen
 
 ### Association
 ![](resources/association.png)  
+
 Association connector depicts that class A _has a field_ of type B
 
 ### Dependency
 ![](resources/dependency.png)  
+
 Dependency connector depicts that class A might not have a field of type B, but that it uses type B as an import, for example as a local type in a method.
 
 ### Aggregation
-![](resources/aggregation.png)  
+![](resources/aggregation.png)
+
 Aggregation and Composition are subsets of Association, i.e. kinds of Association, and in fact the generated code would be identical. Where Association just indicates that class A has a field of type B, Aggregation indicates that class A has a field of type B, but that B can exist independently of A. 
 
 ### Composition
 ![](resources/composition.png)
+
 Where Aggregation indicates that A refers to B but B can exist without A, Composition indicates that B is a vital part of A
 
 A building has rooms and it has a superintendent. If you take away the superindendent, you still have a building (for a while!) That is aggregation. But if you take away the rooms, the building ceases to exist. That is composition. And both are associations.
@@ -142,14 +146,17 @@ Note the direction of the arrows. In assocation, the arrow head is on the depend
 
 ### Inheritance
 ![](resources/inheritance.png)  
+
 Inheritance connectors indicate the subclasses of a class, i.e. the classes that extend a class. In this example class B extends class A. Generally the subclass is drawn below the base class, and the inheritance arrow is drawn pointing upward. That is consistent with the naming convention we saw earlier, where "upcasting" is the operation of casting a subclass to its base class, and "downcasting" is the operation of casting a class to a subclass. Up and down refer to the direction of the inheritance arrow.
 
 To indicate several subclasses, we generally merge the arrows as follows:  
 ![](resources/multiple-subclasses.png)  
+
 In this diagram, classes B1, B2, and B3 all extend class A
 
 ### Implementation
 ![](resources/implementation.png)  
+
 Implementation is similar to inheritance, except the class A is an interface, and the arrow indicates that class B implements interface A.
 
 ### Multiplicity
