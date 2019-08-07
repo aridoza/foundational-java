@@ -126,12 +126,10 @@ You can also include multiplicity indicators on the connecting arrows, some numb
 In the following, we see that a cat has up to 4 legs, and a leg belongs to at most 1 cat.  
 ![](resources/multiplicity.png)  
 
-## In conclusion
-The amount of detail included in a UML diagram depends on the level of granularity you are trying to convey. If you just want to convey the high-level class relationships, you can omit some or all of the fields and methods.
+---
 
-Even if you are not generating code from your UML, you can see the benefit of using UML over code for communicating code structure.
+## Student Activity (30 min)
 
-## Student Activity
 Let's get started coding our Trading system from existing models.  Here is the class diagram for a trading system.
 ![](resources/trading-system-classes.png)  
 
@@ -139,8 +137,13 @@ We will add the implementation details later, in the lesson on sequence diagrams
 
 Note that Market is an interface, as indicated by the italics. All of the others are concrete (non-abstract) classes.
 
+---
 
+## Conclusion (5 min)
 
+The amount of detail included in a UML diagram depends on the level of granularity you are trying to convey. If you just want to convey the high-level class relationships, you can omit some or all of the fields and methods.
+
+Even if you are not generating code from your UML, you can see the benefit of using UML over code for communicating code structure.
 
 
 
