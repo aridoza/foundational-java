@@ -18,9 +18,6 @@ creator:
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
 | 10 min | Opening  | Lesson Objectives |
-| 15 min | Discussion  | Agile vs. The Old Way |
-| 30 min | Instruction | Case Study Review |
-| 5 min  | Conclusion  | Review/Recap |
 
 ## Introduction (10 min)
 
