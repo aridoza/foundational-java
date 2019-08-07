@@ -9,7 +9,8 @@ creator:
 
 ### Learning Objectives
 
-*After this lesson, students will be able to:*
+*After this lesson, students will:*
+* Understand the different categories of UML
 
 - 
 
@@ -17,15 +18,21 @@ creator:
 
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
-| 10 min | Opening  | Lesson Objectives |
+| 5 min | Opening  | Lesson Objectives |
+| 10 min | Instruction | UML |
 
-## Introduction (10 min)
+
+## Introduction (5 min)
 
 By now, you have seen many examples of some pretty arcane code, that make even simple programs hard to follow.
 
 Wouldn't it be great if we could express programs clearly, without having to plow through all of the terse language syntax?
 
 That is where UML comes in.
+
+---
+
+### UML (10 min)
 
 UML (Unified Modeling Language) is a graphic-based language that uses intuitive pictures to express program structure and interactions.
 
