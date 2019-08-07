@@ -34,7 +34,7 @@ In this course, we will discuss the two most common UML diagrams - class diagram
 
 ---
 
-### UML (10 min)
+## Intro to UML (10 min)
 
 ### What is UML?
 
