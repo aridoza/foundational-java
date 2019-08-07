@@ -1,3 +1,29 @@
+---
+title: Class Diagrams
+type: lesson
+duration: "
+creator: 
+---
+
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Class Diagrams
+
+### Learning Objectives
+
+*After this lesson, students will be able to:*
+
+- 
+
+### Lesson Guide
+
+| TIMING  | TYPE  | TOPIC  |
+|:-:|---|---|
+| 10 min | Opening  | Lesson Objectives |
+| 15 min | Discussion  | Agile vs. The Old Way |
+| 30 min | Instruction | Case Study Review |
+| 5 min  | Conclusion  | Review/Recap |
+
+## Introduction (10 min)
+
 By now, you have seen many examples of some pretty arcane code, that make even simple programs hard to follow.
 
 Wouldn't it be great if we could express programs clearly, without having to plow through all of the terse language syntax?
