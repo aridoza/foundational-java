@@ -19,8 +19,8 @@ creator:
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
 | 5 min | Opening  | Lesson Objectives |
-| 10 min | Instruction | UML |
-
+| 10 min | Instruction | Intro to UML |
+| 10 min | Instruction | Class Diagrams |
 
 ## Introduction (5 min)
 
@@ -30,13 +30,18 @@ Wouldn't it be great if we could express programs clearly, without having to plo
 
 That is where UML comes in.
 
+In this course, we will discuss the two most common UML diagrams - class diagrams and sequence diagrams. 
+
 ---
 
 ### UML (10 min)
 
+### What is UML?
+
 UML (Unified Modeling Language) is a graphic-based language that uses intuitive pictures to express program structure and interactions.
 
 There are several categories of UML diagrams, including:
+
 * Class diagrams - Represent the static structure of classes and their dependencies.
 * Package diagrams - Represent the relationships between packages.
 * Sequence diagrams - Represent the dynamic interactions between objects.
@@ -44,12 +49,14 @@ There are several categories of UML diagrams, including:
 
 and many others.
 
+### Using UML
+
 Using UML, a software architect or program designer can quickly describe the structure and interactions of a system in a model, and 
 use those models to communicate implementation details to developers and engineers, much as a building architect can use blueprints to communicate the details of a building to the engineering staff. 
 
 There are many tools in the market for preparing UML diagrams. There are specialized enterprise-quality tools like "Enterprise Architect" and IBM Rational, to free tools like ArgoUML, as well as general modeling tools like Lucidchart and Microsoft Visio. Many tools provide the capability to reverse engineer code, and to generate code from models. Usually the choice of tool will be dictated in your shop.
 
-In this course, we will discuss the two most common UML diagrams - class diagrams and sequence diagrams. 
+## Class Diagrams (10 min)
 
 Imagine you are building a trading system for financial assets such as stocks, bonds, and commodities.
 
