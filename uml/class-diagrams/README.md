@@ -116,6 +116,7 @@ A UML class diagram arranges these classes on a blank canvas, and then uses conn
 The shapes of the lines and arrows indicate the kind of relationships, as follows:
 
 ![](resources/connectors.png)
+
 Basically the connectors indicate the kind of relationship. Some of the differences are subtle, so let's discuss each of them:
 
 ### Association
