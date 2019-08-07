@@ -1,7 +1,7 @@
 ---
 title: Class Diagrams
 type: lesson
-duration: "
+duration: "1:30"
 creator: 
 ---
 
@@ -20,7 +20,9 @@ creator:
 |:-:|---|---|
 | 5 min | Opening  | Lesson Objectives |
 | 10 min | Instruction | Intro to UML |
-| 10 min | Instruction | Class Diagrams |
+| 40 min | Instruction | Class Diagrams |
+| 30 min | Student Activity | Coding a Trading System | 
+| 5 min | Conclusion | Brief Debrief |
 
 ## Introduction (5 min)
 
@@ -56,7 +58,9 @@ use those models to communicate implementation details to developers and enginee
 
 There are many tools in the market for preparing UML diagrams. There are specialized enterprise-quality tools like "Enterprise Architect" and IBM Rational, to free tools like ArgoUML, as well as general modeling tools like Lucidchart and Microsoft Visio. Many tools provide the capability to reverse engineer code, and to generate code from models. Usually the choice of tool will be dictated in your shop.
 
-## Class Diagrams (10 min)
+--- 
+
+## Class Diagrams (40 min)
 
 Imagine you are building a trading system for financial assets such as stocks, bonds, and commodities.
 
