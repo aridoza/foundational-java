@@ -17,7 +17,9 @@ creator:
 
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
-| 10 min | Opening  | Lesson Objectives |
+| 5 min | Opening | Introduction  |
+| 15 min | Instruction | Executor Class |
+| 
 
 ## Introduction
 
