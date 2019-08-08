@@ -20,6 +20,9 @@ creator:
 | 5 min | Opening | Introduction  |
 | 10 min | Instruction | Executor Class |
 | 20 min | Activity | Fixed Thread Pool |
+| 10 min | Instruction | Cached Executor |
+| 10 min | Instruction | Futures |
+
 
 
 ## Introduction (5 min)
@@ -44,7 +47,7 @@ We will concentrate on construction, and the methods `execute`, and `submit`.
 
 ---
 
-## Fixed Thread Pool (15 min)
+## Fixed Thread Pool (20 min)
 
 To construct a fixed thread pool, call `Executors.newFixedThreadPool(pool-size)`, passing in the number of threads to pool. For example:
 
@@ -129,7 +132,7 @@ How large should you make your thread pool? If each thread pinned the CPU (i.e. 
 
 ---
 
-## Cached Executor
+## Cached Executor (10 min)
 
 We will briefly mention the cached executor. This is kind of an unlimited thread pool. You would only use this if you know you have a limited number of short lived threads, so there is no reason to limit it using a fixed thread pool. We will use this in some of our examples for simplicity, but in general there is probably more reason to use fixed thread pools.
 
