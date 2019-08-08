@@ -22,7 +22,10 @@ creator:
 | 20 min | Activity | Fixed Thread Pool |
 | 10 min | Instruction | Cached Executor |
 | 10 min | Instruction | Futures |
-
+| 15 min | Demo | Atomic Components |
+| 20 min | Demo | ReadWriteLock |
+| 5 min | Instruction | ConcurrentHashMap | 
+| 5 min | Closing | Summary |
 
 
 ## Introduction (5 min)
@@ -147,7 +150,9 @@ One place you might want to use a cached thread pool would be for UI events. UI 
 <!-- COMMENT (Brandi): Can we add a more concrete example of a situation we'd want to use this? -->
 <!-- how's this? -->
 
-## Futures
+---
+
+## Futures (10 min)
 
 A _Future_ in Java is a kind of promise, that data _will_ be available. So until it has that data, our thread waits and will block if you try to access it.
 
@@ -173,7 +178,9 @@ private void checkFtpServer(long period) {
 
 In this example, we are creating a new scheduled thread pool, which is a kind of `ScheduledExecutorService`, and then scheduling our job at a fixed rate of `period` seconds, with an initial delay of 0. That will check for files and process them every `period` seconds, which is a good alternative to the sleep approach we have been using until now.
 
-## Atomics Components - AtomicInteger
+---
+
+## Atomics Components - AtomicInteger (15 min)
 
 Imagine you are creating a hit counter for a website. The naive implementation would say something like (in pseudocode):
 
@@ -277,15 +284,17 @@ The good news is we reached 10000!
 
 Don't be thrown by the fact that some of the numbers appear out of sequence; that's just the way the output was ordered by the thrashing threads. If you study the output carefully, you will see there is exactly one of each number from 1 to 10,000. 
 
-## ReadWriteLock
+---
+
+## ReadWriteLock (20 min)
 
 There are many more components in the `java.util.concurrent` package, each implementing some valuable concurrency design pattern. We will look at one more, but it pays to study the documentation to see the full treasury: https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/package-summary.htm]
 
- The last concurrency component we will look at is the `ReadWriteLock`, which solves a common problem.
+The last concurrency component we will look at is the `ReadWriteLock`, which solves a common problem.
  
- Let's say you have many readers of a certain set of data. There are also writers that change the data, and the changes must be atomic, in the sense that we want to ensure that readers can't read the data until all of it is changed. What would be an example of that?
+Let's say you have many readers of a certain set of data. There are also writers that change the data, and the changes must be atomic, in the sense that we want to ensure that readers can't read the data until all of it is changed. What would be an example of that?
  
- Well, a very common example would be a stock portfolio owned by a hedge fund. There's money on the line, so we've got to get this right!
+Well, a very common example would be a stock portfolio owned by a hedge fund. There's money on the line, so we've got to get this right!
  
 Let's say we have the following:
  
@@ -488,14 +497,18 @@ Now, search for the five lines marked `uncomment` and uncomment those line, whic
 
 Doing that, we see there is a single value, as we had hoped. 
 
-## ConcurrentHashMap
+---
+
+## ConcurrentHashMap (5 min)
 You will notice that we used a new Map implementation, _ConcurrentHashMap_. This is very similar to a standard _HashMap_, except that it is designed to handle concurrency.
 
 The main difference is that a standard HashMap prevents threads from iterating and writing at the same time, by throwing a ConcurrentModificationException. This is called _fail-fast_ and ensures that the data in the Map is the same throughout the iteration. In contrast, a ConcurrentHashMap assumes you will take care of any required locking externally, and so will not fail-fast when iterating and writing.
 
 Generally if you have multiple threads iterating and writing to a Map, you want to use a ConcurrentHashMap instead of a HashMap.
 
-## Summary
+---
+
+## Summary (5 min)
 
 <!-- COMMENT (Brandi): Summary should be a little better. For now I just reiterated the lesson objectives, but maybe we include a brief how-to on how to know which tool to use when. A quiz maybe? -->
 
@@ -515,9 +528,12 @@ Wow, we learned a lot in this lesson! To recap, here's what we hope you can disc
     - Atomics components - AtomicInteger
     - ReadWriteLock
 
+--- 
+
 ## Here are some topics for group discussion:
 
 1. You are making a hit-counter for your website. You want to make sure that concurrent threads don't update the hit counter at the exact same time, messing up the count. Which concurrency component should you use? <!-- AtomicInteger -->
+
 2. You are writing an inventory management system. Merchandise can arrive or ship out at any time. Your application must always be able to add up the inventory, but it must wait until updates are complete before calculating the value. Which concurrency component should you use? <!-- ReadWriteLock -->
 
 3. You are building a file transfer application, and you have two threads - the first one has to ask the user for the FTP address, and the second one has to actually transfer the file. How can the first thread signal the second thread that the user has input the address and the transfer can begin? <!-- Second thread should call some mutex.wait(). First thread should call mutex.notify() when ready. Both threads should synchronize on the same mutex, which allows them to signal eachother -->
