@@ -1,4 +1,27 @@
-# Concurrency Components
+---
+title: Concurrency
+type: lesson
+duration: "1:00"
+creator: 
+---
+
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Concurrency
+
+### Learning Objectives
+
+*After this lesson, students will be able to:*
+
+- 
+
+### Lesson Guide
+
+| TIMING  | TYPE  | TOPIC  |
+|:-:|---|---|
+| 10 min | Opening  | Lesson Objectives |
+
+## Introduction
+
+#### Concurrency Components
 
 Until Java 5 arrived on the scene, that was pretty much the extent of the concurrency support. You basically were given the low level functionality, but building things like thread pools (to dispatch pools of threads), or semaphores (like locks except with more than one permit), were left to the programmer. Soon after the advent of Java, Oswego Professor Doug Lea published his seminal book Concurrent Programming in Java, which introduced many design patterns to assist with the complexities of concurrency. Then in 2006, Brian Goetz (currently the Java Language Architect at Oracle) et.al. released Java Concurrecy in Practice, tightening up many of the original patterns, and introducing many more patterns and concurrency strategies. These were further streamlined by the Java Community Process.
 
