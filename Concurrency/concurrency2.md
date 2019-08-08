@@ -18,8 +18,9 @@ creator:
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
 | 5 min | Opening | Introduction  |
-| 25 min | Instruction | Executor Class |
-| 
+| 10 min | Instruction | Executor Class |
+| 20 min | Activity | Fixed Thread Pool |
+
 
 ## Introduction (5 min)
 
@@ -31,7 +32,7 @@ Java 5 distilled all of that knowledge into the `java.util.concurrent` package, 
 
 ---
 
-## Executors Class (25 min)
+## Executors Class (10 min)
 
 So far we have seen how to create threads; but threads use resources, and it would be dangerous to have programs spin arbitrary numbers of threads. To control this, there is a concept of a _thread pool_. This is a component that allocates threads from a fixed pool, and once the pool is depleted, requests for more threads block, until threads are returned to the pool. 
 
@@ -41,7 +42,9 @@ In Java, thread pools belong to the category of ExecutorServices, and are create
 
 We will concentrate on construction, and the methods `execute`, and `submit`.
 
-### Fixed Thread Pool
+---
+
+## Fixed Thread Pool (15 min)
 
 To construct a fixed thread pool, call `Executors.newFixedThreadPool(pool-size)`, passing in the number of threads to pool. For example:
 
@@ -118,7 +121,7 @@ private static Runnable getRunnable(String message) {
 </details>
 
 Now, the pool only has two threads, but we are calling it four times. Looking at the output, we see that the first two jobs run until complete, whence the next two jobs run:  
-![](resources/threadpoolexecutor.png))
+![](resources/threadpoolexecutor.png)
 
 ### How Many Threads Should I Use?
 
