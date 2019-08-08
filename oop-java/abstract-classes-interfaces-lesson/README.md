@@ -205,7 +205,7 @@ In a more concrete example, we might take our `Automobile` interface and create 
 ```java
 class HondaAccord implements Automobile {
     // Instance variable:
-    public int year; 
+    private int year; 
 
     // Constructor:
     public HondaAccord(year) {
