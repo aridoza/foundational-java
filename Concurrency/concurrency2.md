@@ -1,7 +1,7 @@
 ---
 title: Concurrency
 type: lesson
-duration: "1:00"
+duration: "1:40"
 creator: 
 ---
 
@@ -12,6 +12,7 @@ creator:
 *After this lesson, students will:*
 - Understand the purpose of concurency components
 - Know how to construct a fixed thread pool
+- 
 
 ### Lesson Guide
 
