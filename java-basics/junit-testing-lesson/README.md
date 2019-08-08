@@ -48,14 +48,15 @@ This is the difference between manual and automated testing. You code tests to r
 
 ## Introduction: Unit tests (5 mins)
 
-There are many, many types of automated tests: 
+There are many, many types of tests: 
+
 - Unit tests
 - Smoke tests
 - Integration tests
 - Regression tests
 - Acceptance tests
 
-This lesson will focus on unit tests.
+Each type of test is created and executed to perform a very specific function. Not all types of tests are created by developers. One of the first type of test written by a developer is unit test. In this lesson will focus on writing unit tests.
 
 ### What Is a Unit Test?
 
@@ -67,16 +68,45 @@ A unit test tests a piece of code (a unit). In Java, a unit is, in most cases, a
 
 To test our classes (units), we create test classes that test other classes.
 
-Create a new project in IntelliJ. In the `src` folder, you'll find two subfolders:
+Create a new Java project in Eclipse. In the `src` folder, create two subfolders, if not present:
 
 * `main`: The location of your app's main code (classes, activities, resources, and more).
 * `test`: The location of tests, where we'll add our test classes.
 
-We'll build a simple app that returns a student's name and grade.
+We'll build a simple app that returns a student's fullname and grade.
 
-First, let's create a `Student` class, which has the methods `getFullName()` and `getLetterGrade()`. The first constructor takes a first name and last name, while the second one takes a letter grade.
+First, let's create a `Student` class under package `co.ga.junittesting`, which has 3 `private` fields `firstName`, `lastName` and `grade`. It will have the methods `getFullName()` and `getLetterGrade()`. The first constructor takes a first name and last name, while the second one takes a letter grade.
 
-Then, we'll create a new test in the `src/test` package and call it `StudentTest`.
+```
+package main.co.ga.junittesting;
+
+public class Student {
+	
+	private String firstName;
+	private String lastName;
+	private char grade;
+	
+	public Student(String firstName, String lastName, char grade) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.grade = grade;
+	}
+	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+	
+	public char getLetterGrade() {
+		return grade;
+	}
+
+}
+```
+Before writing unit tests for the class we just created, we have to first add the JUnit library in our project. 
+
+If you're working in **Eclipse**, right-click on the project folder -> Go to Build Path -> click Configure Build Path. A window will open, go to Libraries tab -> click Add Library -> select JUnit -> click Next then Finish -> click Apply and Close.
+
+Then, we'll create a new test in the `src/test` creating the same package we did for `Student` class, `co.ga.junittesting` and call it `StudentTest`.
 
 The idea of testing is to have methods that **implement** the class being tested and **assert** that the methods of the class are working.
 
@@ -86,7 +116,7 @@ In the `StudentTest` class, add methods that test if the `getFullName()` and `ge
 <summary>Here's what it should look like:</summary>
 
 ```java
-package co.ga.junittesting;
+package test.co.ga.junittesting;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -108,60 +138,115 @@ public class StudentTest {
 
 Let's break that down. What do we see going on here?
 
-#### We created and imported our own packages: `org.junit.Test` and `static org.junit.Assert`.
+#### org.junit.Test
 
-(explanation needed)
+In Java, annotations are used to provide supplemental information about a program. They provide metadata about a class or method without being a part of the program itself. They don't change the actual *action* of a program, but affect how the compiler treats that line of code when it's compiled or at runtime. 
 
-#### We added a `@Test` annotation before the test case.
+In this case, we use the **@Test** annotation to indicate that the upcoming method represents a test case and needs to be executed as a JUnit test.
 
-In Java, annotations are used to provide supplemental information about a program. They provide metadata about a class or method without being a part of the program itself. They don't change the actual *action* of a program, but affect how the compiler treats that line of code when it's compiled or at runtime. In this case, we use the `@Test` annotation to indicate that the upcoming method represents a test case. (Soon in your travels with Java, you'll see common annotations like `@Override` or `@Deprecated`.
+#### org.junit.Assert
 
-To assert something, you would use jUnit's `assert_____()` static methods. The main ones are:
+To assert something, you would use jUnit's `assert_____()` static methods. We import static `Assert` because all the assert methods are static. Some of the main ones are:
 
 ```java
-    assertEquals(4, 2 + 2);
-    assertTrue(true);
-    assertFalse(false);
-    assertNull(null);
-    assertNotNull("Not null");
+assertEquals(4, 2 + 2);
+assertTrue(true);
+assertFalse(false);
+assertNull(null);
+assertNotNull("Not null");
 ```
 
 Each of these take an **expected value** and an **actual value**. The expected value is what the method should return, and the actual value is what the method actually returns.
 
-So, filling out the rest of the class:
+Let's fill both our test methods, one will check if the `getFullName()` is behaving as expected and the other will check `getLetterGrade()`.
 
 ```java
-package co.ga.junittesting;
+package test.co.ga.junittesting;
 
 import org.junit.Test;
+
+import main.co.ga.junittesting.Student;
+
 import static org.junit.Assert.*;
 
 public class StudentTest {
+
     @Test
     public void testIfFullNameIsCorrect() {
-	Student student = new Student("Leslie", "Knope", "A");
-
-	String expected = "Leslie Knope";
-	String actual = student.getFullName();
-
-	assertEquals(expected, actual);
+    	Student student = new Student("Leslie", "Knope", 'A');
+    	
+		String expected = "Leslie Knope";
+		String actual = student.getFullName();
+	
+		assertEquals(expected, actual);
     }
 
     @Test
     public void testIfLetterGradeIsCorrect() {
-	Student student = new Student("Charlie", "Brown", "C");
+    	
+    	Student student = new Student("Leslie", "Knope", 'A');
+    	
+		char expected = 'A';
+		char actual = student.getLetterGrade();
+	
+		assertEquals(expected, actual);
 
-	String expected = "C";
-	String actual = student.getLetterGrade();
+    }}
+```
+>**Note**: If you write multiple test classes, you can right click on the folder that contains the classes and click "Run tests in ______" to run all of them.
 
-	assertEquals(expected, actual);
+To run the test, right click on the class in the "Project View" and click "Run StudentTest." 
+
+Both the tests right now are happy path tests. According to [wikipedia](https://en.wikipedia.org/wiki/Happy_path), Happy path testing is a well-defined test case using known input, which executes without exception and produces an expected output. Slowly we will learn to test every aspect of our code, even the ones which give an error.
+
+
+
+
+## Bonus: @Before
+
+If you have noticed that we are creating an instance of `Student` for each method. This is not the best programming practice. Our code needs to be DRY (Do not Repeat Yourself). What we will do is use`@Before` annotation that `Test` provides us to do this for us. Your refactored class will look like,
+
+```
+package test.co.ga.junittesting;
+
+import org.junit.Test;
+
+import main.co.ga.junittesting.Student;
+
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+
+public class StudentTest {
+	
+	private Student student;
+	
+	@Before
+	public void initializeStudent() {
+		student = new Student("Leslie", "Knope", 'A');
+	}
+	
+    @Test
+    public void testIfFullNameIsCorrect() {
+	
+    	String expected = "Leslie Knope";
+		String actual = student.getFullName();
+	
+		assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testIfLetterGradeIsCorrect() {
+    
+		char expected = 'A';
+		char actual = student.getLetterGrade();
+	
+		assertEquals(expected, actual);
+
     }
 }
 ```
-
-To run the test, right click on the class in the "Project View" and click "Run StudentTest."
-
-**Note**: If you write multiple test classes, you can right click on the folder that contains the classes and click "Run tests in ______" to run all of them.
+**@Before** annotation tells our compiler to execute `initializeStudent()` first before running any other tests. This way our `student` object gets initialized before being used by the test methods.
 
 ----
 
