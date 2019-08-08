@@ -9,31 +9,33 @@ creator:
 
 ### Learning Objectives
 
-*After this lesson, students will be able to:*
-
-- 
+*After this lesson, students will:*
+- Understand the purpose of concurency components
+- Know how to construct a fixed thread pool
 
 ### Lesson Guide
 
 | TIMING  | TYPE  | TOPIC  |
 |:-:|---|---|
 | 5 min | Opening | Introduction  |
-| 15 min | Instruction | Executor Class |
+| 25 min | Instruction | Executor Class |
 | 
 
-## Introduction
+## Introduction (5 min)
 
-#### Concurrency Components
+### Concurrency Components
 
 Until Java 5 arrived on the scene, that was pretty much the extent of the concurrency support. You basically were given the low level functionality, but building things like thread pools (to dispatch pools of threads), or semaphores (like locks except with more than one permit), were left to the programmer. Soon after the advent of Java, Oswego Professor Doug Lea published his seminal book Concurrent Programming in Java, which introduced many design patterns to assist with the complexities of concurrency. Then in 2006, Brian Goetz (currently the Java Language Architect at Oracle) et.al. released Java Concurrecy in Practice, tightening up many of the original patterns, and introducing many more patterns and concurrency strategies. These were further streamlined by the Java Community Process.
 
 Java 5 distilled all of that knowledge into the `java.util.concurrent` package, which provided a rich set of components for handling many important concurrency design patterns. We will go through the important ones now.
 
-## Executors Class
+---
+
+## Executors Class (25 min)
 
 So far we have seen how to create threads; but threads use resources, and it would be dangerous to have programs spin arbitrary numbers of threads. To control this, there is a concept of a _thread pool_. This is a component that allocates threads from a fixed pool, and once the pool is depleted, requests for more threads block, until threads are returned to the pool. 
 
-In Java thread pools belong to the category of ExecutorServices, and are created using a factory class called _Executors_, which contains many static methods for creating different flavors of ExecutorService. Looking at the API for ExecutorService, there are methods for invoking, shutting down, and checking status.  
+In Java, thread pools belong to the category of ExecutorServices, and are created using a factory class called _Executors_, which contains many static methods for creating different flavors of ExecutorService. Looking at the API for ExecutorService, there are methods for invoking, shutting down, and checking status.  
 
 ![](resources/executorservice.png)
 
@@ -118,9 +120,11 @@ private static Runnable getRunnable(String message) {
 Now, the pool only has two threads, but we are calling it four times. Looking at the output, we see that the first two jobs run until complete, whence the next two jobs run:  
 ![](resources/threadpoolexecutor.png))
 
-## How Many Threads Should I Use?
+### How Many Threads Should I Use?
 
 How large should you make your thread pool? If each thread pinned the CPU (i.e. brought CPU utilization near 100%), then you would generally want no more than one thread per CPU. So the idea is to look at CPU utilization for one thread, and divide that number into the number of CPUs. For example, if we have 4 cores, and the utilization from one thread is 20% per core, then the number of threads for 100% utilization would be 4/.2 = 20. If you need to exceed that, then it's probably time to start thinking about upgrading hardware. But don't make rash decisions until you test things, because Java is clever about context switching and swapping, so it will still work albeit marginally slower.
+
+---
 
 ## Cached Executor
 
