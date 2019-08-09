@@ -207,7 +207,7 @@ Usage of a Function is:
 - R is the return of the function of a specified type. Let's check out the demo to see it in action.
 
 **Key abstract method**
-- apply - this triggers the Function execution to run the lambda expression body.
+- apply - this triggers the Function to execute the lambda expression body.
 
 **Professor Note**  
 Please have the class compare the SquareMe functional interface in Example 3 in the last demo with the Function interface above.  The SquareMe's abstract method is called "square", whereas the Function abstract method is called "apply".  Even though the method names are different, the SquareMe interface could be replaced with a built-in Function and create the same results.
@@ -247,9 +247,9 @@ Here's another example of a Function that takes in an Integer and outputs an Int
 
 
 ## Introduction - BiFunction  
-BiFunction is another built-in functional interface.  Like Function, BiFunction has one abstract method called "apply".  However, BiFunction's apply method accepts 2 input parameters and produces 1 output. The layman's term way of thinking about this is that it takes in two inputs and gives one output.
+BiFunction is another built-in functional interface.  Like Function, BiFunction has one abstract method called "apply".  However, BiFunction's apply method accepts 2 input parameters and produces 1 output. In layman's terms - it takes two inputs and returns one output.
 
-Functional Interface looks like:
+The Functional Interface for the _BiFunction_ interface looks like:
 
     @FunctionalInterface
     public interface BiFunction<T, U, R> {
@@ -267,10 +267,10 @@ Usage of a BiFunction is:
 - R is the return type of the function. Let's check out the demo to see it in action.
 
 **Key Methods**
-- apply - this triggers the Function execution to run the lambda expression body.
+- apply - this triggers the Function to execute the lambda expression body.
 
 ## Demo - BiFunction 
-Let's take a look at a couple of examples of how to use a BiFunction.  The first example will take 2 Integers as input and output an Integer result that represents the sum of the 2 Integers.
+Let's take a look at a couple of examples of how to use a BiFunction.  The first example accepts 2 Integers as input and returns an Integer result that represents the sum of the 2 Integers.
 
     BiFunction<Integer, Integer, Integer> addFunction = (a, b) -> a + b;
     Integer addResult = addFunction.apply(4,5);
@@ -283,11 +283,11 @@ Let's examine the first line:
 
     BiFunction<Integer, Integer, Integer> addFunction = (a, b) -> a + b;
 
-The first 2 Integers in BiFunction generic represent the types of input #1 and input #2, respectively.  The last Integer represents the type of the output.
+The first 2 Integers in BiFunction generic represent the types of two BiFunction inputs.  The last Integer represents the type of the output.
 
-The 2nd line runs the "apply" method which will trigger the lambda expression to run by passing 4 and 5 as the input.  The lambda body will run 4 + 5 and return the result.
+The 2nd line runs the "apply" method, which triggers the lambda expression to execute, by passing 4 and 5 as the input.  The lambda body calculates 4 + 5 and returns the result.
 
-The next BiFunction example will take in 2 Integers and return an Integer that represents the result of multiplying the 2 Integers together.
+The next BiFunction example accepts 2 Integers, and return an Integer that represents the result of multiplying the 2 input Integers.
 
     BiFunction<Integer, Integer, Integer> multiplyFunction = (a, b) -> a * b;
     Integer multiplyResult = multiplyFunction.apply(4,5);
@@ -298,9 +298,9 @@ Output:
 
 
 ## Introduction - Supplier
-Supplier is a built-in functional interface that accepts no input and gives an output. 
+Supplier is a built-in functional interface that accepts no inputs and produces a generic output. 
 
-Functional Interface looks like:
+The Functional Interface for the _Supplier_ interface looks like:
 
     @FunctionalInterface
     public interface Supplier<T> {
@@ -318,10 +318,10 @@ Usage of a Supplier is:
 - get - this will trigger execution of the lambda body
 
 **A Good Supplier Strategy**  
-A good strategy for using Supplier is for scenarios that require no input but may be expensive to run.  Suppliers leverage lazy evaluation, meaning they won't executed until actually needed.  You can use that to your advantage to avoid making the expensive method call until it's absolutely need.  The following demo will help explain it better.
+Suppliers are espcially valuable in situations that may be expensive to run, even though they might not even be used! Suppliers leverage lazy evaluation, meaning they won't execute until actually needed.  You can use that to your advantage to avoid making the expensive method unless and until it's absolutely need.  The following demo will help explain it better.
 
 ## Demo - Supplier
-The following demo will show an example of how using a Supplier could save you from running an expensive operation when it's not necessary.  Let's say you have the following:
+The following demo shows an example of using a Supplier to save you from running an expensive operation when it's not necessary.  Let's say you have the following:
 
     public static void main(String[] args) {
 
@@ -370,12 +370,12 @@ Output:
 executing expensive computation...  
 incompatible!  
 
-Since we are now wrapping the expensiveComputeOperation with a Supplier, we now have the ability to only run that method when needed. Since a.get() in the lazyMatch method returns false, the b.get() will never execute.  This saves us from running the expensiveComputeOperation method when it's not needed.
+Since we are now wrapping the expensiveComputeOperation with a Supplier, we now have the ability to run that method only if and when it is needed. Since a.get() in the lazyMatch method returns false, the b.get() will never execute.  This saves us from running the expensiveComputeOperation method when it's not needed.
 
 ## Introduction - Consumer
 Consumer is a built-in functional interface that accepts one input and has no output. 
 
-Functional Interface looks like:
+The Functional Interface for the _Consumer_ interface looks like:
 
     @FunctionalInterface
     public interface Consumer<T> {
