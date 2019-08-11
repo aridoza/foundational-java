@@ -1,19 +1,17 @@
 ---
-title: Lambdas and Streams
-type: Lab
-duration: "1:30"
-creator:
-  name: Victor Grazi
-  city: NYC
+Title: Lambdas and Streams
+Type: Lab
+Duration: "1:30"
+Creator:
+  Name: Victor Grazi
+  City: NYC
 ---
 
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Lambdas and Streams
 
 ## Introduction
 
-This lab provides an opportunity to practice filtering, mapping, and statistics. 
-
-It can be a pair programming activity or done independently.
+This lab provides an opportunity to practice filtering, mapping, and statistics. It can be a pair-programming activity or done independently.
 
 The skeleton of the lab can be found in the attached lab directory. The solution can be found in the attached solution directory.
 
@@ -23,9 +21,9 @@ The skeleton of the lab can be found in the attached lab directory. The solution
 
 ### Requirements
 
-Write code that uses Lambdas and Streams to satisfy the requirements listed below:
+Write code that uses lambdas and streams to satisfy the requirements listed below.
 
-1. First, complete the following method to print out all of the elements in the supplied list.
+1. First, complete the following method to print out all the elements in the supplied list:
 
     ```
     private <T> void printList(List<T> list) {
@@ -33,7 +31,7 @@ Write code that uses Lambdas and Streams to satisfy the requirements listed belo
     }
     ```
 
-2. Next, print a list of all Employees that earn 50K or more. 
+2. Next, print a list of all employees that earn 50K or more. 
 
     ```
     @Test
@@ -43,7 +41,7 @@ Write code that uses Lambdas and Streams to satisfy the requirements listed belo
     }
     ```
 
-3. Next, print a list of the names (not the Employee) of all Employees that were hired on or after Jan 1, 2012.
+3. Next, print a list of the names (not the `String` representation of `Employee`) of all employees that were hired on or after Jan. 1, 2012.
 
     ```
     @Test
@@ -53,17 +51,17 @@ Write code that uses Lambdas and Streams to satisfy the requirements listed belo
     }
     ```
 
-4. Now print the maximum salary of all employees.
+4. Now, print the maximum salary of all employees ...
 
     ```
     @Test
     public void getMaxSalary() {
         double max = 0;
-        System.out.println("Max:" + max);
+        System.out.println("Max: " + max);
     }
     ```
 
-5. And the minimum salary.
+5. ... and the minimum salary.
     
     ```
     @Test
@@ -76,7 +74,7 @@ Write code that uses Lambdas and Streams to satisfy the requirements listed belo
     }
     ```
 
-6. Now print the average salary of all employees.
+6. Now, print the average salary of all employees.
 
     ```
     @Test
@@ -84,12 +82,12 @@ Write code that uses Lambdas and Streams to satisfy the requirements listed belo
         double averageMale = 0;
         double averageFemale = 0;
 
-        System.out.println("Averages: Male:" + averageMale + " Female:" + averageFemale);
-        System.out.println("Averages: Male:" + averageMale + " Female:" + averageFemale);
+        System.out.println("Averages: Male: " + averageMale + " Female: " + averageFemale);
+        System.out.println("Averages: Male: " + averageMale + " Female: " + averageFemale);
      }
      ```
 
-7. Finally, use the reduce operation to find the Employee instance of the employee with the highest salary
+7. Finally, use the `reduce` operation to find the `Employee` instance of the employee with the highest salary.
 
     ```
     @Test
@@ -99,15 +97,15 @@ Write code that uses Lambdas and Streams to satisfy the requirements listed belo
     }
     ```
 
-### Starter / Solution Code
+### Starter and Solution Code
 
-See the accompanying lab directory, which contains the required classes, and testers for each exercise.
+See the accompanying lab directory, which contains the required classes and testers for each exercise.
 
 See the accompanying solution directory for the solutions.
 
 ### Deliverable
 
-We'll take about 20 minutes at the end of class to review solutions.
+We'll take about 20 minutes at the end of the class to review solutions.
 
 ----
 
