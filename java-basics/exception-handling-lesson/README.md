@@ -42,16 +42,16 @@ We often manually check for code that could cause errors through conditional sta
 
 ## Introduction: Exceptions (5 min)
 
-Before we start talking about the `try-catch` block, we need to talk about exceptions. Exceptions are events that occur while a program is running and interrupt the normal flow of the code. These can be null pointer exceptions, divide by zero, array out of bounds, and more. You can see many of the built-in exceptions in the [Java documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Exception.html).
+Before we start talking about the `try-catch` block, we need to talk about exceptions. Exceptions are events that occur while a program is running and interrupt the normal flow of the code. These can be null pointer exceptions, divide by zero exceptions, index out of bounds exceptions, and more. You can see many of the built-in exceptions in the [Java documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Exception.html).
 
-There are two types of exceptions: checked and unchecked. A **checked exception** occurs at compile time, which means a programmer is forced to handle these exceptions — otherwise, the program won't compile. Checked exceptions are subclasses of the `Exception` class. An **unchecked exception** — also known as a runtime exception — occurs at the time a program is executing. You don't have to handle them, but you can if you want to.
+There are two types of exceptions: checked and unchecked. A **checked exception** occurs at compile time, which means a programmer is forced to handle these exceptions; otherwise, the program won't compile. Checked exceptions are subclasses of the `Exception` class. An **unchecked exception** — also known as a runtime exception — occurs at the time a program is executing. You don't have to handle them, but you can if you want to.
 
 Below is an illustration of the exception hierarchy. Red denotes unchecked exceptions, while blue denotes checked ones.
 
 ![](https://cdn2.howtodoinjava.com/wp-content/uploads/ExceptionHierarchyJava.png)
 <sub>[Source](https://howtodoinjava.com/java/exception-handling/checked-vs-unchecked-exceptions-in-java/)</sub>
 
-When an exception occurs, we say that it is **thrown**. This will become important when we look at `try-catch` blocks. While many parts of Java throw exceptions on their own, you can manually throw exceptions as well.
+When an exception occurs, we say that it's **thrown**. This will become important when we look at `try-catch` blocks. While many parts of Java throw exceptions on their own, you can manually throw exceptions as well.
 
 ***
 
@@ -82,9 +82,9 @@ It's important to note that the code in the `catch` block is only executed if an
 
 Let's take a look at a case where we try to access a value from an array with an index outside of its bounds. Open up the starter code for [`IndexOutOfBounds`](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/IndexOutOfBounds). As you can see, this program has a list of superheroes and lets us enter a number to access our favorite superhero.
 
-If we run the program and type in a number outside of the bounds of the `ArrayList`, we get an [`IndexOutOfBoundsException`](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/IndexOutOfBoundsException.html) (an example of an unchecked exception), and everything crashes.
+If we run the program and type in a number outside of the bounds of the `ArrayList`, we get an [`IndexOutOfBoundsException`](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/IndexOutOfBoundsException.html) — an example of an unchecked exception — and everything crashes.
 
-Instead of crashing the program, we can log the error and let the program handle the exception gracefully by letting the user know that what they entered isn't valid.
+Instead of having the program crash, we can log the error and allow the program to handle the exception gracefully by letting the user know what they entered isn't valid.
 
 Let's add a `try-catch` block around the code causing the error.
 
@@ -106,7 +106,7 @@ As you can see, the code causing the error is `superheroes.get(num)`. By placing
 
 ## When You Should Use `try-catch` Blocks (10 min)
 
-In most situations, `try-catch` blocks are not mandatory, so using them is completely up to you. If you have an expectation that a certain error has a decent chance of occurring, you can add a `try-catch` block to handle it.
+In most situations, `try-catch` blocks aren't mandatory, so using them is completely up to you. If you expect that a certain error has a decent chance of occurring, you can add a `try-catch` block to handle it.
 
 However, there are times when you're absolutely required to have `try-catch` blocks, such as with file reading and writing and networking. Let's look at a few lines of code that force us to use `try-catch`. You can use any open Java project to add these two lines of code:
 
@@ -114,18 +114,19 @@ However, there are times when you're absolutely required to have `try-catch` blo
 URL url = new URL("http://www.google.com");
 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 ```
-After importing the dependencies, you'll see that the IDE is still showing a compiler error. If you hover over the error, you'll see two options: surround the code with `try-catch` OR add a `throws` declaration. Lets go with `try-catch` for now, then we'll discuss the other option later.
+After importing the dependencies, you'll see that the IDE is still showing a compiler error. If you hover over the error, you'll see two options: surround the code with `try-catch` OR add a `throws` declaration. Let's go with `try-catch` for now, then we'll discuss the other option later.
 
 We can consolidate the two `try-catch` blocks like this:
 
 ```java
 URL url = null;
+
 try {
     url = new URL("http://www.google.com");
     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-} catch (MalformedURLException e) {
+} catch(MalformedURLException e) {
     e.printStackTrace();
-} catch (IOException e) {
+} catch(IOException e) {
     e.printStackTrace();
 }
 ```
@@ -143,8 +144,6 @@ try {
     e.printStackTrace();
 }
 ```
-
-***
 
 <a name="guided-practice"></a>
 
@@ -180,7 +179,7 @@ In this example, we'll be looking at a program that divides two numbers for us a
 
 > **Knowledge Check:** Take two minutes to look at the code and determine how to handle the error if it occurs.
 
-The program runs smoothly if you run it using any value higher than 0 as a divisor. But as soon as you input 0 as a divisor, the program fails with the exception `/ by zero`. This is a type of [`ArithmeticException`](https://docs.oracle.com/javase/8/docs/api/?java/lang/ArithmeticException.html).
+The program runs smoothly if you use any value higher than 0 as a divisor. But as soon as you input 0 as a divisor, the program fails with the exception `/ by zero`. This is a type of [`ArithmeticException`](https://docs.oracle.com/javase/8/docs/api/?java/lang/ArithmeticException.html).
 
 In this case, in the `division()` method, we need to check if the divisor is 0, then throw an exception. We can handle this exception by surrounding our code with a `try-catch` block, but this time we'll let the calling method — in our case `main()` — handle the exception.
 
@@ -217,11 +216,11 @@ public static void main(String[] args) {
 
 ## Lab: File Reading and Writing (45 min)
 
-Create an app that quizes users on superhero trivia. Open the `Superheroes` [starter code](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/Superheroes) and start working from there.
+Create an app that quizzes users on superhero trivia. Open the `Superheroes` [starter code](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/Superheroes) and start working from there.
 
-Your app reads the superhero info from an `input.txt` file and stores it in an `ArrayList`. Based on the answers, keep count of every right and wrong one. If the number of right answers is greater than wrong ones, declare the user a winner and write the user's name and result of the quiz in an `output.txt` file.
+Your app reads the superhero info from an `input.txt` file and stores it in an `ArrayList`. Based on the answers, keep count of every right and wrong one. If the number of right answers is greater than wrong ones, declare the user a winner and write the user's name and the result of the quiz in an `output.txt` file.
 
-You can refer to solution code [here](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/solution-code/Superheroes).
+You can refer to the solution code [here](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/solution-code/Superheroes).
 ***
 
 <a name="conclusion"></a>
