@@ -11,7 +11,7 @@
 
 At the end of this lesson, students will be able to:
 * Define intermediate and terminal stream operations.
-* Leverage different collectors to create the end result.
+* Use different collectors to create the end result.
 * Properly order intermediate stream operations.
 
 ---
@@ -61,7 +61,7 @@ But you don't need to start with a collection to create a stream. You can create
     Stream objectStream = Stream.of(100, 200, 300);
     objectStream.forEach(value -> System.out.println(value));
 
-You can create streams using `StreamBuilder`, which is usually more efficient than the previous examples because it doesn't need to use an array or `ArrayList` as a buffer when adding elements to the stream.
+You can also create streams using `StreamBuilder`, which is usually more efficient than the previous examples because it doesn't need to use an array or `ArrayList` as a buffer when adding elements to the stream.
 
 ```java
 Stream.Builder<String> stringStreamBuilder = Stream.builder();
@@ -97,10 +97,10 @@ In the following sections and demos, we'll see why and when you'd use each type.
 We've learned that intermediate stream operations take a stream as input, modify the stream, and output a resulting stream.
 
 The key takeaways about intermediate stream operations from this section should be: 
-- Intermediate stream operations quite surprisingly do not produce an end result. They use lazy evaluation, which means that stream processing does not activate until a **terminal stream operation** is encountered.
+- Intermediate stream operations quite surprisingly don't produce an end result. They use lazy evaluation, which means that stream processing doesn't activate until a **terminal stream operation** is encountered.
 - **The order of your stream operations matter.** Ordering them incorrectly could have a negative performance impact.
 
-In this demo, we'll first look at some of the commonly used intermediate stream operations. After that, we'll see that no processing happens until a terminal operation occurs. Finally, we'll look at what happens when you don't order your intermediate operations correctly.
+In this demo, we'll first look at some commonly used intermediate stream operations. After that, we'll see that no processing happens until a terminal operation occurs. Finally, we'll look at what happens when you don't order your intermediate operations correctly.
 
 ### Commonly Used Intermediate Stream Operations
 
@@ -201,7 +201,7 @@ The following example will flatten a list of `Person` lists (i.e., `List<List<Pe
                     new Person("Jane", 45),
                     new Person("Alice", 38));
     
-    // Create a List of Lists, containing both of our Person lists above
+    // Create a list of lists, containing both of our Person lists above
     List<List<Person>> listOfPersonLists = Arrays.asList(personList1, personList2);
 
     // flatMap: flatten the list of person lists
@@ -225,9 +225,9 @@ Output is:
 
 `sorted` is used to sort elements in a stream based on a given comparison.
 
-The following example will sort the `Person` list by name. 
+The following example will sort the `Person` list alphabetically. 
 
-    // sorted: sort the person list alphabetically according to name
+    // sorted: sort the person list alphabetically
     List<Person> sortedList =
             personList.stream()
             .sorted((person1, person2) -> person1.getName().compareTo(person2.getName()))
@@ -265,7 +265,6 @@ Now, let's add a terminal operation and see what happens:
 
 The output is:  
 
-`Person is: Person {name='Tom', age=30}`  
 `Person is: Person {name='Jane', age=45}`  
 `Person is: Person {name='Jeff', age=70}`  
 
@@ -332,9 +331,7 @@ The first name `filter` takes 11 iterations to filter the stream down to four. T
 
 ## Terminal Stream Operations (15 min)
 
-In the last section, we learned about intermediate stream operations and how they can be used to manipulate streams. We also learned that stream processing doesn't start until there's a terminal stream operation.
-
-We'll use this section to discuss terminal stream operations. As mentioned in the last functional programming module, terminal operations such as `forEach()` mark the stream as consumed, after which it can no longer be used.  
+As mentioned in the last functional programming module, terminal operations such as `forEach()` mark the stream as consumed, after which it can no longer be used.  
 
 Some commonly used terminal stream operations are:  
 - `findFirst`: returns the first entry in a stream.
@@ -345,7 +342,7 @@ We'll discuss several other useful terminal operations in the "Comparison-Based 
 
 ### Demo: Terminal Stream Operations  
 
-For this short demo, we'll show examples of using `forEach`, `findFirst`, `collect`, and `toArray`. We'll also use the same `Person` class in the previous demo:
+For this short demo, we'll show examples of using `findFirst`, `collect`, and `toArray`. We'll also use the same `Person` class in the previous demo:
 
     public class Person {
 
@@ -404,7 +401,7 @@ So in the example, if no result is found, it will return `null`. However, we did
 
 ### `collect`
 
-Find persons whose names starts with the letter "J".
+Find persons whose names start with the letter "J."
 
     largePersonList.stream()
         .filter(person -> person.getName().startsWith("J"))
@@ -453,13 +450,13 @@ Output:
 `Person{name='Jane', age=45}`  
 `Person{name='Jeff', age=70}`
 
-> `toArray` is a convenient method on every collection that returns the elements of the collection as an array.
+`toArray` is a convenient method on every collection that returns the elements of the collection as an array.
 
 -----
 
 ## Comparison-Based Stream Operations (15 min)
 
-In the previous sections, we discussed commonly used intermediate and terminal operations. In this section, we'll discuss stream operations that can be used for comparing items in a stream. They are:
+In this section, we'll discuss stream operations that can be used for comparing items in a stream. They are:
 
 - `sorted`: intermediate operation that sorts a stream.
 - `min`: terminal operation that returns the minimum element based on a comparison.
@@ -470,7 +467,7 @@ The following demo gives a little more detail on each one.
 
 ### Demo: Comparison-Based Stream Operations
 
-In this demo, we'll be using the same Person class from the previous demos:
+In this demo, we'll be using the same `Person` class from the previous demos:
 
     public class Person {
 
@@ -548,7 +545,7 @@ Output:
 
 ### `min`
 
-Th example below will return the youngest person. We can use `Comparator.comparing` for the lambda expression to specify which class property to use.
+The example below will return the youngest person. We can use `Comparator.comparing` for the lambda expression to specify which class property to use.
 
     Person youngestPerson =
         largePersonList.stream()
@@ -606,7 +603,7 @@ In the previous module, we talked briefly about collectors. Again, collectors ar
 
 ### Demo: More Collectors
 
-We'll use the following class in some of the examples:
+We'll use the following class in some examples:
 
     public static class Person {
 
@@ -662,8 +659,14 @@ We'll use the following class in some of the examples:
 
 ### `toSet`
 
-This example will take a list that contains one duplicate and create a `Set`, which discards the duplicates. As usual, duplicates are defined as values that return `true` when compared using the `equals()` method.
+The example below will take a list that contains one duplicate and create a `Set` which discards the duplicates. As usual, duplicates are defined as values that return `true` when compared using the `equals()` method.
 
+    List<CollectorsDemo.Person> duplicatePersonList =
+        Arrays.asList(
+                new CollectorsDemo.Person("Tom", 30),
+                new CollectorsDemo.Person("Tom", 30),
+                new CollectorsDemo.Person("Jenny", 20));
+                
     Set<Person> personSet =
         duplicatePersonList.stream()
             .collect(Collectors.toSet());
@@ -677,7 +680,7 @@ Output:
 
 ### `toMap`
 
-This example will create a `Map`, where the key is the person's name and the value is the age:
+The example below will create a `Map`, where the key is the person's name and the value is the age:
     
     Map<String, Integer> nameToAgeMap =
         largePersonList.stream()
@@ -706,12 +709,6 @@ Output:
 ### Special Note About `toMap` and Duplicate Keys
 
 If `toMap` encounters a duplicate key, then an exception will be thrown. For example:  
-
-    List<CollectorsDemo.Person> duplicatePersonList =
-        Arrays.asList(
-                new CollectorsDemo.Person("Tom", 30),
-                new CollectorsDemo.Person("Tom", 30),
-                new CollectorsDemo.Person("Jenny", 20));
 
     Map<String, Integer> nameToAgeDuplicateMap =
         duplicatePersonList.stream()
@@ -778,7 +775,7 @@ This is essentially saying to take the last duplicate encountered. If we specifi
     System.out.println("Persons with initial E");
     firstInitialMap.get('E').forEach(person -> System.out.println(person));
 
-    System.out.println("Persons with initial C");
+    System.out.println("Persons with initial Z");
     firstInitialMap.get('C').forEach(person -> System.out.println(person));
 
 Output:  
@@ -801,8 +798,8 @@ Output:
 `Person {name='Helen', age=60}`  
 `Persons with initial E`  
 `Person {name='Erin', age=50}`  
-`Persons with initial C`  
-`Person {name='Chris', age=37}`  
+`Persons with initial Z`  
+`Person {name='Zach', age=10}`  
 
 -----
 
@@ -810,8 +807,8 @@ Output:
 
 For the independent practice, we'll take what we've learned in this module and put them to use. 
 
-**Hint:** You will need to use:
-- `filters`
+**Hint:** You'll need to use:
+- `filter`
 - `min` 
 - `max` 
 - `toMap` 
@@ -933,7 +930,7 @@ For the independent practice, we'll take what we've learned in this module and p
 
 -----
 
-## Conclusion
+## Conclusion (5 min)
 
 To recap, we've learned a great deal about streams and how to manipulate them using pipelines of intermediate and terminal operations. After going through this module, you can see how powerful streams and pipelines are. Their biggest benefit is saving you from having to write a lot of boilerplate code to convert data structures, making your code much more readable and maintainable. The syntax can get tricky at times, so the best thing is to go slowly, try things out, let the IDE recommend changes, and work through examples.
 
@@ -945,4 +942,4 @@ With that said, here are a few review questions:
 
 
 ### Additional Resources
-- [A Guide to Streams in Java 8: In-Depth Tutorial with Examples](https://stackify.com/streams-guide-java-8/)
+- [A Guide to Streams in Java 8: In-Depth Tutorial With Examples](https://stackify.com/streams-guide-java-8/)
