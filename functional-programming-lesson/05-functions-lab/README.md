@@ -41,7 +41,7 @@ Write code that uses lambdas and streams to satisfy the requirements listed belo
     }
     ```
 
-3. Next, print a list of the names (not the `String` representation of `Employee`) of all employees that were hired on or after Jan. 1, 2012.
+3. Next, print a list of the names (not the `Employee` instances) of all employees that were hired on or after Jan. 1, 2012.
 
     ```
     @Test
@@ -82,7 +82,6 @@ Write code that uses lambdas and streams to satisfy the requirements listed belo
         double averageMale = 0;
         double averageFemale = 0;
 
-        System.out.println("Averages: Male: " + averageMale + " Female: " + averageFemale);
         System.out.println("Averages: Male: " + averageMale + " Female: " + averageFemale);
      }
      ```
