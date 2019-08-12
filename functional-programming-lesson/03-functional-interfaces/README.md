@@ -285,7 +285,7 @@ In this case, filter accepts a Lambda:
 
 Function and Predicate are particularly useful for the Stream.map() and Stream.filter() methods, but all of the built in Functional Interfaces are used in Stream processing and other places where Lambdas are useful. Let's look at a few more examples.   
 
-<!-- I am not sure we need to go through all of these remaining Function Interfaces. If we are short of time, they are less frequently used and IMHO could probably be skipped, we already got the gist, and belaboring this might be tedious - Victor -->
+<!-- I think we can skip BiFunction. The remaining are used in the next section, so they are useful, but the topic is getting a little tedious, I think we can drop BiFunction - Victor -->
 
 ## Introduction - BiFunction  
 BiFunction is another built-in functional interface.  Like Function, BiFunction has one abstract method called "apply".  However, BiFunction's apply method accepts 2 input parameters and produces 1 output. In layman's terms - it takes two inputs and returns one output.

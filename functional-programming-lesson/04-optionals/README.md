@@ -7,12 +7,12 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Functional Programming | Optionals
 
 ### LEARNING OBJECTIVES
-*After this lesson, you will be able to:*
+*After this lesson, you will:*
 * Understand the use case for optionals
 * See how they are used with streams
 
 ### STUDENT PRE-WORK
-*Before this lesson, you should already be able to:*
+*Before this lesson, you should already:*
 - Understand Lambda Expressions
 - Understand Functional Interfaces
 - Understand Streams and Collectors
@@ -42,15 +42,18 @@
 |  5 min |      Conclusion      |                                       Review/Recap                                       |
 
 ## Introduction: Intro to Optionals
-If you worked with Java long enough, you will have eventually come across the dreaded "NullPointerException".  There's nothing worse than having your code completely stop execution because you expect a value to be present but it's not. To circumvent this, Java 8 released the Optional class.  
+If you worked with Java long enough, you will have eventually come across the dreaded "NullPointerException".  There's nothing worse than having your code completely stop execution because you expect a variable to contain a value, when actually none is present. To circumvent this, Java 8 released the Optional class.  
 
 ###What is an Optional?###
-The Optional class is a single value container that may or may not contain a value. It also forces the developer to think about how to handle the situation when a value is not present.  Another benefit is that it reduces the amount of boilerplate code needed to test if a value is null.  Let's take a look at how you create an Optional in our first demo.
+The Optional class is a single value container that may or may not contain a value. Being structured as such, it forces the developer to think about how to handle the situation when a value is not present,  and it reduces the amount of boilerplate code needed to test for null values.  Let's take a look at how you create an Optional in our first demo.
 
 ## Demo: How to create Optionals
-The Optional class has 3 static methods used to create optionals, _.empty_, _.of_ and _.ofNullable_.
+The Optional class has 3 static methods used to create Optionals, 
+* _.empty_ 
+* _.of_
+* _.ofNullable_.
 
-To create an empty optional, you'd do the following:
+To create an empty Optional (i.e. one that contains no value), you can do the following:
 
 ```java
 Optional<String> emptyOptional = Optional.empty();
@@ -67,9 +70,12 @@ You can also create an Optional from an existing value by using the _.of_ method
 String name = "Mark";
 Optional<String> optionalName = Optional.of(name);
 System.out.println(optionalName.isPresent());
+System.out.println(optionalName.get());
+
 ```
 Output:  
 true
+Mark
 
 The output shows that the value of "Mark" is present in the Optional.  But what happens if a null value is passed to the _.of_ method.  Let's see.
 
@@ -90,14 +96,14 @@ System.out.println(optionalValue.isPresent());
 Output:  
 false
 
-As you can see, we didn't get a NullPointerException, but instead we have an empty Optional.  So with that said, the preferred static method to use when creating an Optional class with a value would be _.ofNullable_.
+As you can see, we didn't get a NullPointerException, but instead we have an empty Optional.  So with that said, the preferred static method to use when creating an Optional class with a value that could be null would be _.ofNullable_.
 
 ## Introduction: Checking for values in Optionals 
 The Optional class provides 3 useful methods to check the state of an Optional.  They are: 
 
 - isPresent - returns true if the Optional has a value present
-- isEmpty - returns true if the Optional does not have a value. Available starting Java 11
-- ifPresent - a functional style replacement of checking if a value is empty.
+- isEmpty - returns true if the Optional does not have a value. (Available starting Java 11)
+- ifPresent - a functional style replacement of checking if a value is empty, accepting a Lambda representing a Consumer instance.
 
 Let's take a look at a demo to see how we'd use these methods.
 
@@ -141,7 +147,7 @@ ageOptional.ifPresent(myAge -> System.out.println("My age is " + myAge));
 Output:  
 My age is 20
 
-Looking at the example,the ifPresent method uses a lambda expression.  It accepts a Consumer Function.  If you remember from the last module, a Consumer accepts 1 input and returns void.  By using _ifPresent_, it removes the need for the boilerplate "if(age != null)" check.
+Looking at the example,the ifPresent method uses a lambda expression to represent a Consumer Function.  If you remember from the last module, a Consumer accepts 1 input and returns void.  By using _ifPresent_, it removes the need for the boilerplate "if(age != null)" check.
 
 ## Introduction: Getting Optional Values
 The Optional class provides a _get_ method to get the value in the Optional. It also provides 3 orElse type methods to help in cases where a value is not present in the Optional.  They are:
@@ -231,7 +237,9 @@ orElse with populated Optional
 In getDefaultName method  
 John  
 
-Even though we populate the value in the Optional, the "getDefaultName" is executed. I can't explain why the Java people decided to code it that way, but this can be a big deal if the "getDefaultName" method has to hit a database. This results in unnecessary executions.  Now let's look at an example using _orElseGet_
+Even though we populate the value in the Optional, the "getDefaultName" is executed. <!-- "I can't explain why the Java people decided to code it that way, but" 
+I would leave that out, it might confuse the class. This is the way Java traditionally worked - all pieces of an expression are always computed (ternary and logical operators being exceptions). That was why Lambdas were introduced. Now that we have Lambdas however, we can't go back and change the way existing code works. That is a big no-no in Javaland!
+Victor -->  This can be a big deal if the "getDefaultName" method has to do something slow, like hiting a database. This results in unnecessary executions.  Now let's look at an example using _orElseGet_
 .
 ```java
 System.out.println("orElseGet with populated Optional");
@@ -242,7 +250,7 @@ Output:
 orElseGet with populated Optional  
 World  
 
-As you can see, the "getDefaultName" method is not triggered as expected.  The reason being is that the Supplier lambda is using lazy evaluation.  It's able to determine that there is no need to run, so it doesn't trigger the "getDefaultName" method.  With that said, the preferred way to provide a default value is _orElseGet_.
+As you can see, the "getDefaultName" method is not triggered as expected.  The reason being is that the Supplier lambda is using lazy evaluation.  The Lambda is supplied but since it is not needed, it is never executed,, so it doesn't trigger the "getDefaultName" method.  With that said, the preferred way to provide a default value is generally going to be _orElseGet_.
 
 Now let's take a look at an example of _orElseThrow_.
 
@@ -259,8 +267,8 @@ As you can see, an exception is thrown if the Optional is empty.
 The Optional class provides 3 useful stream-like operation methods to manipulate Optionals.  They are:
 
 - filter - runs a test on the Optional value based on a given predicate. If the predicate returns true, the Optional is returned as-is.  If the predicate returns false, then an empty Optional is returned.
-- map - runs a computation on the Optional's unwrapped value and wraps the result of the computation in an Optional.
-- flatMap - similar to the map method.  The difference is that flatMap will first unwrap the Optional value before performing the computation.
+- map - runs a computation on the Optional's unwrapped value and wraps the result of the computation in a new Optional, before returning.
+- flatMap - similar to the map method, except that where map operates on an Optional containing an arbitrary value, flatMap assumes the value itslef is an Optional, and will first unwrap that Optional value before performing the computation. This is useful in processing Streams of Optionals, you want to unwrap those Optionals before processing, so you use flatMap. 
 
 The definitions may be a lot to digest, so let's take a look at some examples to help clear things up.
 
@@ -361,7 +369,7 @@ true
 
 Let's first examine the PersonWithOptional class.  The member variable _age_ is an Optional<Integer>.  In other words, the "age" is wrapped in an Optional. Looking at the _flatMap_ definition, _flatMap_ will first unwrap the value from the Optional before performing it's computation.  
 
-Looking at the _flatMap_ line in the example, it is accessing the Optional<PersonWithOptional>'s unwrapped "age" value just like the _map_ method does. But unlike the _map_ method, it won't wrap the result in an Optional.  It just returns the unwrapped Optional<Integer> to the _filter_ method.  Had we used _map_, the return from _map_ would have been Optional<Optional<Integer>>.
+Looking at the _flatMap_ line in the example, it is accessing the Optional<PersonWithOptional>'s unwrapped "age" value just like the _map_ method does. The difference is that flatMap expects this Optional to contain another Optional, and so will unwrap that extra later. Had we used _map_, the return from _map_ would have been Optional<Optional<Integer>>.
 
 
 ## Independent Practice
