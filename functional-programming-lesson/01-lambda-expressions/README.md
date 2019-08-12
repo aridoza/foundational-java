@@ -25,7 +25,7 @@ At the end of this lesson, students will be able to:
 | 10 min |         Demo         |                 Iterating Through a Collection Using Streams                    |
 | 10 min |     Introduction     |              `map` and `collect`                        |
 | 10 min |         Demo         | Rewrite Previous Demo Using Collectors |
-| 10 min |     Introduction     |                                      Filters                                     |
+| 10 min |     Introduction     |                                      The `filter` Method                                     |
 | 20 min | Independent Practice | Complete a Program Using Streams, Lambda Expressions, Filtering, and Collecting |
 |  5 min |      Conclusion      |                                       Review/Recap                                       |
 
@@ -33,7 +33,7 @@ At the end of this lesson, students will be able to:
 
 ![](./LambdaSyntax.png)
 
-A lambda expression is an anonymous function with a concise and functional syntax that's used for writing anonymous methods. Lambda expressions are similar to anonymous classes in that they enable you to express functionality as data — for example, to pass functionality into a method as a parameter. But where anonymous classes require a lot of boilerplate code to set up the class, lambda expressions provide a concise syntax specifically for expressing code as data.
+A lambda expression is an anonymous function with a concise functional syntax that's used for writing anonymous methods. Lambda expressions are similar to anonymous classes in that they enable you to express functionality as data — for example, to pass functionality into a method as a parameter. But where anonymous classes require a lot of boilerplate code to set up the class, lambda expressions provide a concise syntax specifically for expressing code as data.
 
 A lambda expression consists of the following:
 - A comma-separated collection of formal parameters enclosed in parentheses.
@@ -48,7 +48,7 @@ Finally, if the body consists of more than one statement, it must be enclosed in
 
     (int a, int b) -> { return a * b; }
     
-The above example has two `int` type parameters: `a` and `b`. The expression body will multiply the `int` parameter `a` with the `int` parameter `b`.
+The example above has two `int` parameters: `a` and `b`. The expression body will multiply the `int` parameter `a` with the `int` parameter `b`.
 
 In this example, the type `int` is usually optional (depending on context), and can be expressed as:  
 
@@ -87,7 +87,7 @@ public class NonLambdaExpressionIntroDemo {
             }
         };
 
-        System.out.println("5 + 6 = " + add.operation(5,6));
+        System.out.println("5 + 6 = " + add.operation(5, 6));
 
         // Notice the use of yet another anonymous inner class.
         Computation subtract = new Computation() {
@@ -98,7 +98,7 @@ public class NonLambdaExpressionIntroDemo {
             }
         };
 
-        System.out.println("10 - 6 = " + subtract.operation(10,6));
+        System.out.println("10 - 6 = " + subtract.operation(10, 6));
 
     }
 }
@@ -124,16 +124,16 @@ public class LambdaExpressionIntroDemo {
 
         Computation add = (a, b) -> a + b;
 
-        System.out.println("5 + 6 = " + add.operation(5,6));
+        System.out.println("5 + 6 = " + add.operation(5, 6));
 
         Computation subtract = (a, b) -> a - b;
 
-        System.out.println("10 - 6 = " + subtract.operation(10,6));
+        System.out.println("10 - 6 = " + subtract.operation(10, 6));
     }
 }
 ```
 
-Notice the reduction of the amount of code needed to do the computation:
+Notice the reduction in the amount of code needed to do the computation:
 
 - **Example 1:** 680 characters and 32 lines  
 - **Example 2:** 416 characters and 19 lines  
@@ -184,12 +184,12 @@ A **collection** is a data structure that stores elements, while a **stream** is
 
 ### What Is a Pipeline?
 
-A **pipeline** is a sequence of operations — such as filtering, modifying, or aggregating — that are applied to a source stream to produce a result. The result can be anything: a primitive, an object, a collection, or even another stream. The operations are supplied as parameters, expressed as lambda expressions. Some of the common stream operations are `map`, `filter`, `sum`, `average`, `sort`, and `forEach`.
+A **pipeline** is a sequence of operations — such as filtering, modifying, or aggregating — that are applied to a source stream to produce a result. The result can be anything: a primitive, an object, a collection, or even another stream. The operations are supplied as parameters, expressed as lambda expressions. Some common stream operations are `map`, `filter`, `sum`, `average`, `sort`, and `forEach`.
 
 ### Types of Stream Operations
 
-Stream operations are used to modify streams to create an end result. Stream operations come in two major flavors:  
-- **Intermediate operations** take a stream as input, filtering and modifying the input elements to produce a new stream as output. Some of the commonly used intermediate operations are `map`, `filter`, `sort`, and `flatMap`. 
+Stream operations are used to modify streams to create an end result. They come in two major flavors:  
+- **Intermediate operations** take a stream as input, filtering and modifying the input elements to produce a new stream as output. Some commonly used intermediate operations are `map`, `filter`, `sort`, and `flatMap`. 
 - **Terminal operations** consume a stream to produce a final result. Once a terminal operation is reached, the stream is fully consumed, and no further operations can be applied to the stream. Some common terminal operations are `collect`, `reduce`, and `forEach`.
 
 ### Getting a Stream From a Collection
@@ -231,7 +231,7 @@ The output would be:
 
 ## Demo: Iterating Through a Collection Using Streams (10 min)
 
-In this demo, we'll take an existing list of `String` objects and iterate through it to produce a new list of strings, consisting of the values from the original list concatenated with a constant string value.
+In this demo, we'll take an existing list of `String` objects and iterate through it to produce a new list of strings, consisting of the values from the original list concatenated with a constant `String` value.
 
 ```java
 package com.ga.examples;
@@ -260,11 +260,11 @@ public class ListIterationWithConcatenationDemo {
     
 The output would be:  
 
-`My name is Jim`
-`My friends call me Jim`
-`My mother calls me Jim`
-`My name is`
-`My friends call me`
+`My name is Jim`  
+`My friends call me Jim`  
+`My mother calls me Jim`  
+`My name is`  
+`My friends call me`  
 `My mother calls me`
 
 
@@ -321,7 +321,7 @@ The `map` operation converts each `String` from the input stream into an `Intege
  
 The `collect` operation consumes the resulting `Integer` stream and produces a list of corresponding `Integer` objects.
  
-> **A side note about how intermediate operators are evaluated:** Intermediate operators, such as `map`, are lazy in nature. This means they don't execute until a terminal operator is encountered. In the case of the code above, the `map` logic won't execute until the `collect` is encountered.
+> **A side note about how intermediate operators are evaluated:** Intermediate operators such as `map` are lazy in nature. This means they don't execute until a terminal operator is encountered. In the case of the code above, the `map` logic won't execute until `collect` is encountered.
 
 ----
 
@@ -359,28 +359,28 @@ public class MapWithConcatenationDemo {
 
 The output would be:  
 
-`My name is Jim`
-`My friends call me Jim`
-`My mother calls me Jim`
-`My name is`
-`My friends call me`
-`My mother calls me`   
+`My name is Jim`  
+`My friends call me Jim`  
+`My mother calls me Jim`  
+`My name is`  
+`My friends call me`  
+`My mother calls me` 
 
-<-- **Instructor notes:**
+<!--**Instructor notes:**
 - Point out to the class that the code is more concise and readable by using collectors.
-- Also point out the stream pipeline of `stringList.stream()`, `map`, and `collect`.-->
+- Also, point out the stream pipeline of `stringList.stream()`, `map`, and `collect`.-->
 
 -----
 
-## Filters (10 min)
+## The `filter` Method (10 min)
 
 So far, we've discussed how streams can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation `map` and the terminal operations `forEach` and `collect`. But what if we had a requirement where we only needed a subset of the data based on certain criteria? This is where the `filter` intermediate operation comes in.
 
-### What Is a Filter?
+### What Is the `filter` Method?
 
-The `filter` method essentially selects a subset of elements from the original list based on a "predicate" condition expressed as a lambda. The `filter` method accepts a `Predicate` object, which provides a function applied to a condition. We'll see in the "Functional Interfaces" lesson that the lambda is used to express the `Predicate` functional interface by taking an input value and producing a boolean. 
+The `filter` method essentially selects a subset of elements from the original list based on a "predicate" condition expressed as a lambda. The `filter` method accepts a `Predicate` object, which provides a function applied to a condition. If the condition evaluates to `true`, the object is selected. Otherwise, it's ignored.
 
-If the condition evaluates to `true`, the object is selected. Otherwise, it's ignored.  
+We'll see in the "Functional Interfaces" lesson that the lambda is used to express the `Predicate` functional interface by taking an input value and producing a boolean result.  
 
 **Example:**
 
@@ -400,17 +400,17 @@ In this example, we use a lambda expression in the `filter` method to express th
 
 The output would be:  
 
-`2`
-`4`
-`6`
-`8`
-`10`
+`2`  
+`4`  
+`6`  
+`8`  
+`10`  
 
 -----
 
 ## Independent Practice (20 min)
 
-For the Independent Practice, we'll take the template program below and complete the `TODO` parts commented out. To confirm that your results are correct, iterate through each list you create and output the results.
+For this independent practice, we'll take the template program below and complete the `TODO` parts commented out. To confirm that your results are correct, iterate through each list you create and output the results.
 
 **Hints:**  
 - You'll need to leverage the intermediate operations `map` and `filter`.
@@ -497,7 +497,7 @@ The completed example can be found in the repo, in the file named `IndependentPr
 
 We've covered a lot in this brief introduction to lambda expressions, streams, filtering, and collecting. Hopefully, this introduction shows how this **functional** style can improve code readability and reduce the amount of code needed to achieve a task as compared to the classic **imperative** style.
 
-#### Let's Review
+### Let's Review
 
 With a partner, draft a one-sentence answer to each of these questions:
 - What is a lambda expression?
