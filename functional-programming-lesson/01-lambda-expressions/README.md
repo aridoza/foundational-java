@@ -23,9 +23,9 @@ At the end of this lesson, students will be able to:
 | 10 min |         Demo         |   To Lambda or Not to Lambda, That Is the Question                                       |
 | 10 min |     Introduction     |                          Streams and Collections                   |
 | 10 min |         Demo         |                 Iterating Through a Collection Using Streams                    |
-| 10 min |     Introduction     |              `map` and `collect`                        |
+| 10 min |     Introduction     |              `map()` and `collect()`                        |
 | 10 min |         Demo         | Rewrite Previous Demo Using Collectors |
-| 10 min |     Introduction     |                                      The `filter` Method                                     |
+| 10 min |     Introduction     |                                      The `filter()` Method                                     |
 | 20 min | Independent Practice | Complete a Program Using Streams, Lambda Expressions, Filtering, and Collecting |
 |  5 min |      Conclusion      |                                       Review/Recap                                       |
 
@@ -33,16 +33,16 @@ At the end of this lesson, students will be able to:
 
 ![](./LambdaSyntax.png)
 
-A lambda expression is an anonymous function with a concise functional syntax that's used for writing anonymous methods. Lambda expressions are similar to anonymous classes in that they enable you to express functionality as data — for example, to pass functionality into a method as a parameter. But where anonymous classes require a lot of boilerplate code to set up the class, lambda expressions provide a concise syntax specifically for expressing code as data.
+A **lambda expression** is an anonymous function with a concise functional syntax that's used for writing anonymous methods. Lambda expressions are similar to anonymous classes in that they enable you to express functionality as data — for example, to pass functionality into a method as a parameter. But where anonymous classes require a lot of boilerplate code to set up the class, lambda expressions provide a concise syntax specifically for expressing code as data.
 
 A lambda expression consists of the following:
 - A comma-separated collection of formal parameters enclosed in parentheses.
 - Followed by an arrow `->`.
 - Followed by the body, consisting of either a single expression or a statement block.
 
-You may — but are not required to — specify the data type of the parameters in a lambda expression, and where there's no ambiguity, they're usually omitted for brevity. In addition, you may omit the parentheses around the parameter list, provided there's exactly one parameter. 
+You may — but are not required to — specify the data type of the parameters in a lambda expression, and where there's no ambiguity, they're usually omitted for brevity. Additionally, you may omit the parentheses around the parameter list, provided there's exactly one parameter. 
 
-Finally, if the body consists of more than one statement, it must be enclosed in squiggly brackets. However, if it consists of exactly one statement, the brackets may be omitted, in which case the `return` keyword must also be omitted, as well as the semicolon at the end of the lambda expression.
+Finally, if the body consists of more than one statement, it must be enclosed in curly braces. However, if it consists of exactly one statement, the braces may be omitted, in which case the `return` keyword must also be omitted, as well as the semicolon at the end of the lambda expression.
 
 **Example:**
 
@@ -50,7 +50,7 @@ Finally, if the body consists of more than one statement, it must be enclosed in
     
 The example above has two `int` parameters: `a` and `b`. The expression body will multiply the `int` parameter `a` with the `int` parameter `b`.
 
-In this example, the type `int` is usually optional (depending on context), and can be expressed as:  
+In this example, the type `int` is usually optional (depending on context) and can be expressed as:  
 
     (a, b) -> { return a * b; }  
     
@@ -62,7 +62,7 @@ Because it's a one-statement lambda, we can also drop the brackets, `return`, an
 
 ## Demo: To Lambda or Not to Lambda, That Is the Question (10 min)
 
-In the following demo, we'll create a `Computation` interface. We'll use this interface to solve simple math problems. We'll create two versions of the demo: one without lambda expressions and one with lambda expressions.
+In the following demo, we'll create a `Computation` interface and use it to solve simple math problems. We'll create two versions of the demo: one without lambda expressions and one with lambda expressions.
 
 **Example without lambda expressions:**
 
@@ -71,14 +71,14 @@ package com.ga.examples;
 
 public class NonLambdaExpressionIntroDemo {
 
-    // Here's the Computation interface
+    // Here's the Computation interface:
     interface Computation {
         int operation(int a, int b);
     }
 
     public static void main(String[] args) {
 
-        // Notice the use of the anonymous inner class.
+        // Notice the use of the anonymous inner class:
         Computation add = new Computation() {
 
             @Override
@@ -89,7 +89,7 @@ public class NonLambdaExpressionIntroDemo {
 
         System.out.println("5 + 6 = " + add.operation(5, 6));
 
-        // Notice the use of yet another anonymous inner class.
+        // Notice the use of yet another anonymous inner class:
         Computation subtract = new Computation() {
 
             @Override
@@ -133,14 +133,14 @@ public class LambdaExpressionIntroDemo {
 }
 ```
 
-Notice the reduction in the amount of code needed to do the computation:
+Notice the reduction in the amount of code necessary to perform the computation:
 
-- **Example 1:** 680 characters and 32 lines  
-- **Example 2:** 416 characters and 19 lines  
+- **Example 1**: 680 characters and 32 lines  
+- **Example 2**: 416 characters and 19 lines  
 
-This is a 39 percent reduction in characters and a 41 percent reduction in the lines of code. Also, in most cases, code that uses lambdas becomes more expressive and more readable.
+This is a 39% reduction in characters and a 41% reduction in lines of code. Also, in most cases, code that uses lambdas becomes more expressive and more readable.
 
-Let's take a look at some more examples of lambda expressions. The next example has the following functional interface:
+Let's take a look at some more examples of lambda expressions. The next one has the following functional interface:
 
 ```java
 interface HelloYou {
@@ -148,14 +148,14 @@ interface HelloYou {
 }
 ```
 
-If you notice, the `greetYou` method takes in one parameter (`name`) and has a `void` return type. The following code implements this method with the lambda on line 1:
+If you notice, the `greetYou()` method takes in one parameter (`name`) and has a `void` return type. The following code implements this method with the lambda on Line 1:
 
 ```java
 HelloYou helloYou = name -> System.out.println("Hello " + name);
 helloYou.greetYou("Michael"); // => Hello Michael
 ```
 
-You'll notice that the lambda has one parameter, so you can omit the parentheses. The parameter also corresponds to the single input parameter for the `greetYou` method. The `println` method in the lambda body has a `void` return type, which corresponds to the return type of the `greetYou` method.
+You'll notice that the lambda has one parameter, so you can omit the parentheses. The parameter also corresponds to the single input parameter for the `greetYou`() method. The `println()` method in the lambda body has a `void` return type, which corresponds to the return type of the `greetYou()` method.
 
 This next example has the following functional interface:
 
@@ -165,14 +165,14 @@ This next example has the following functional interface:
 }
 ```
 
-The `greet` method has no input parameters and has a `void` return type. The following code shows how to implement this with a lambda expression (line 1):
+The `greet()` method has no input parameters and has a `void` return type. The following code shows how to implement this with a lambda expression (Line 1):
 
 ```java
 Greeting greeting = () -> System.out.println("Hello whoever you are!");
 greeting.greet(); // => Hello whoever you are!
 ```  
 
-To represent the empty parameter for the `greet` method, you'd use `()`. The `println` method has a `void` return type, which corresponds to the return type of the `greet` method.
+To represent the empty parameter for the `greet()` method, you'd use `()`. The `println()` method has a `void` return type, which corresponds to the return type of the `greet()` method.
 
 ------
 
@@ -184,13 +184,13 @@ A **collection** is a data structure that stores elements, while a **stream** is
 
 ### What Is a Pipeline?
 
-A **pipeline** is a sequence of operations — such as filtering, modifying, or aggregating — that are applied to a source stream to produce a result. The result can be anything: a primitive, an object, a collection, or even another stream. The operations are supplied as parameters, expressed as lambda expressions. Some common stream operations are `map`, `filter`, `sum`, `average`, `sort`, and `forEach`.
+A **pipeline** is a sequence of operations — such as filtering, modifying, or aggregating — that are applied to a source stream to produce a result. The result can be anything: a primitive, an object, a collection, or even another stream. The operations are supplied as parameters, expressed as lambda expressions. Some common stream operations are `map()`, `filter()`, `sum()`, `average()`, `sort()`, and `forEach()`.
 
 ### Types of Stream Operations
 
 Stream operations are used to modify streams to create an end result. They come in two major flavors:  
-- **Intermediate operations** take a stream as input, filtering and modifying the input elements to produce a new stream as output. Some commonly used intermediate operations are `map`, `filter`, `sort`, and `flatMap`. 
-- **Terminal operations** consume a stream to produce a final result. Once a terminal operation is reached, the stream is fully consumed, and no further operations can be applied to the stream. Some common terminal operations are `collect`, `reduce`, and `forEach`.
+- **Intermediate operations** take a stream as input, filtering and modifying the input elements to produce a new stream as output. Some commonly used intermediate operations are `map()`, `filter()`, `sort()`, and `flatMap()`. 
+- **Terminal operations** consume a stream to produce a final result. Once a terminal operation is reached, the stream is fully consumed and no further operations can be applied to it. Some common terminal operations are `collect()`, `reduce()`, and `forEach()`.
 
 ### Getting a Stream From a Collection
 
@@ -220,7 +220,7 @@ Or even simpler:
 stringList.forEach(x -> System.out.println(x));
 ```
 
-We can use the `forEach` operator directly on the list because Java collections have a built-in `forEach()` method, which implicitly calls `stream().forEach()`.
+We can use the `forEach()` operator directly on the list, because Java collections have a built-in `forEach()` method, which implicitly calls `stream().forEach()`.
 
 The output would be:
 
@@ -268,15 +268,15 @@ The output would be:
 `My mother calls me`
 
 
-The original list is unaltered when using streams.
+When using streams, the original list is unaltered.
 
-> **Knowledge Check:** How many lambda expressions are in the demo?
+> **Knowledge Check**: How many lambda expressions are in the demo?
 
 -----
 
-## `map` and `collect` (10 min)
+## `map()` and `collect()` (10 min)
 
-### What Does the `map` Function Do?  
+### What Does the `map()` Function Do?  
 
 The `map()` intermediate operation is a method in the `Stream` class that represents a functional programming concept. `map()` is used to transform one object into a different object by using a lambda expression.
 
@@ -296,17 +296,17 @@ Stream<Integer> numberListStream =
         .map(number -> Integer.valueOf(number));
 ```
 
-In the example above, we're iterating through the list, and for each value, the `number` argument represents the next number in the list. The function `Integer.valueOf(number)` is applied to each of those `number` values in turn, producing a new stream of `Integer` values that itself can be further filtered, aggregated, and converted to other objects.
+In the example above, we're iterating through the list and, for each value, the `number` argument represents the next number in the list. The `Integer.valueOf(number)` function is applied to each of those `number` values in turn, producing a new stream of `Integer` values that can be further filtered, aggregated, and converted to other objects.
 
-> **Note:** The `map()` function will always return a stream because it's an intermediate operation.
+> **Note**: The `map()` function will always return a stream because it's an intermediate operation.
 
 ### What Are Collectors?
 
-In the previous examples, we've seen how to iterate through streams and how to map streams to new objects to produce new streams. But at the end of the day, we want values — not streams. So how do you come up with an end result? That's where collectors come in.
+In the previous examples, we've seen how to iterate through streams and how to map streams to new objects to produce new streams. But at the end of the day, we want values — not streams. So, how do you come up with an end result? That's where collectors come in.
 
-Collectors are terminal operators used to implement various reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, and more. In short, collectors produce an end result from an input stream.
+**Collectors** are terminal operators used to implement various reduction operations, such as accumulating elements into collections, summarizing elements according to various criteria, and more. In short, collectors produce an end result from an input stream.
 
-Java provides a `Collectors` class with many static methods. Let's zoom in on one of these methods — `toList()` — which we'll use to expand our earlier example by consuming a stream of `String` objects representing integers to produce a new list of corresponding `Integer` values.
+Java provides a `Collectors` class with many static methods. Let's zoom in on one of these methods — `toList()` — which we'll use to expand our earlier example by consuming a stream of `String` objects that represents integers to produce a new list of corresponding `Integer` values:
 
 ```java
 List<String> numbersList = Arrays.asList("1", "2", "3", "4", "5");
@@ -317,17 +317,17 @@ List<Integer> newNumbersList =
         .collect(Collectors.toList());
 ```
 
-The `map` operation converts each `String` from the input stream into an `Integer`, producing a new list of `Integer` values.
+The `map()` operation converts each `String` from the input stream into an `Integer`, producing a new list of `Integer` values.
  
-The `collect` operation consumes the resulting `Integer` stream and produces a list of corresponding `Integer` objects.
+The `collect()` operation consumes the resulting `Integer` stream and produces a list of corresponding `Integer` objects.
  
-> **A side note about how intermediate operators are evaluated:** Intermediate operators such as `map` are lazy in nature. This means they don't execute until a terminal operator is encountered. In the case of the code above, the `map` logic won't execute until `collect` is encountered.
+> **A side note on how intermediate operators are evaluated**: Intermediate operators such as `map()` are lazy in nature. This means they don't execute until a terminal operator is encountered. In the case of the code above, the `map()` logic won't execute until `collect()` is encountered.
 
 ----
 
 ## Rewrite Previous Demo Using Collectors (10 min)
 
-For this demo, we'll revisit the `My name is Jim` demo above, but this time we'll use a collector instead of manually adding elements to a new list.
+For this demo, we'll revisit `My name is Jim` from before, but this time we'll use a collector instead of manually adding elements to a new list.
 
 ```java
 package com.ga.examples;
@@ -366,21 +366,21 @@ The output would be:
 `My friends call me`  
 `My mother calls me` 
 
-<!--**Instructor notes:**
-- Point out to the class that the code is more concise and readable by using collectors.
-- Also, point out the stream pipeline of `stringList.stream()`, `map`, and `collect`.-->
+<!--**Instructor Notes:**
+- Point out to the class that the code is more concise and readable when using collectors.
+- Also, point out the stream pipeline of `stringList.stream()`, `map()`, and `collect()`.-->
 
 -----
 
-## The `filter` Method (10 min)
+## The `filter()` Method (10 min)
 
-So far, we've discussed how streams can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation `map` and the terminal operations `forEach` and `collect`. But what if we had a requirement where we only needed a subset of the data based on certain criteria? This is where the `filter` intermediate operation comes in.
+So far, we've discussed how streams can be manipulated via intermediate and terminal operations. We've seen how to use the intermediate operation `map()` and the terminal operations `forEach()` and `collect()`. But what if we had a requirement where we only needed a subset of the data based on certain criteria? This is where the intermediate operation `filter()` comes in.
 
-### What Is the `filter` Method?
+### What Is the `filter()` Method?
 
-The `filter` method essentially selects a subset of elements from the original list based on a "predicate" condition expressed as a lambda. The `filter` method accepts a `Predicate` object, which provides a function applied to a condition. If the condition evaluates to `true`, the object is selected. Otherwise, it's ignored.
+The `filter()` method essentially selects a subset of elements from the original list based on a "predicate" condition expressed as a lambda. The `filter()` method accepts a `Predicate` object, which provides a function applied to a condition. If the condition evaluates to `true`, the object is selected. Otherwise, it's ignored.
 
-We'll see in the "Functional Interfaces" lesson that the lambda is used to express the `Predicate` functional interface by taking an input value and producing a boolean result.  
+We'll see in the "Functional Interfaces" lesson that the lambda is used to express the `Predicate` functional interface by taking an input value and producing a Boolean result.  
 
 **Example:**
 
@@ -396,7 +396,7 @@ List<Integer> evenNumberList =
 evenNumberList.forEach(number -> System.out.println(number));
 ```
 
-In this example, we use a lambda expression in the `filter` method to express this condition: "If the number is even, return `true` and keep it. Otherwise, return `false` and ignore it."
+In this example, we use a lambda expression in the `filter()` method to express this condition: "If the number is even, return `true` and keep it. Otherwise, return `false` and ignore it."
 
 The output would be:  
 
@@ -413,7 +413,7 @@ The output would be:
 For this independent practice, we'll take the template program below and complete the `TODO` parts commented out. To confirm that your results are correct, iterate through each list you create and output the results.
 
 **Hints:**  
-- You'll need to leverage the intermediate operations `map` and `filter`.
+- You'll need to leverage the intermediate operations `map()` and `filter()`.
 - You'll also need to use the terminal operation `Collectors.toList`.
 
 ### Independent Practice Template
@@ -465,11 +465,11 @@ public class IndependentPractice {
 
         List<Person> personList = createPersonList();
 
-        // TODO: Create a list of Person objects whose names start with the letter "M"
+        // TODO: Create a list of Person objects whose names start with the letter "M".
 
-        // TODO: Create a list of Strings containing the names of persons over the age of 40
+        // TODO: Create a list of Strings containing the names of persons over the age of 40.
 
-        // TODO: Create a list of Person objects whose names start with the letter "J" and are under the age of 47
+        // TODO: Create a list of Person objects whose names start with the letter "J" and are under the age of 47.
         
     }
 
@@ -489,7 +489,7 @@ public class IndependentPractice {
 }
 ```
 
-The completed example can be found in the repo, in the file named `IndependentPracticeCompleted.java`.
+The completed example can be found in the repo in the file named `IndependentPracticeCompleted.java`.
 
 ----
 
@@ -508,5 +508,5 @@ With a partner, draft a one-sentence answer to each of these questions:
 
 ## Additional Resources
 - [Oracle Java Tutorial: Lambda Expressions](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html)
-- [Java 8 `map`, `filter`, and `collect` Examples](https://dzone.com/articles/how-to-use-map-filter-collect-of-stream-in-java-8)
+- [Java 8 `map()`, `filter()`, and `collect()` Examples](https://dzone.com/articles/how-to-use-map-filter-collect-of-stream-in-java-8)
 - [Java API: `Collectors`](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html)
