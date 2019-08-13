@@ -32,9 +32,9 @@ At the end of this lesson, students will be able to:
 
 ## Opening (5 min)
 
-We often manually check for code that could cause errors through conditional statements. But Java (as well as many other programming languages) provides a useful tool called a `try-catch` block. This helps to not only shape the behavior of our apps if an error occurs, but to also stop our apps from completely crashing if an error-prone portion of code is used (such as file streaming or networking operations).
+We often manually check for code that could cause errors through conditional statements. But Java (as well as many other programming languages) provides a useful tool called a **`try-catch` block**. This helps to not only shape the behavior of our apps if an error occurs but also stop our apps from completely crashing if an error-prone portion of code is used (such as file-streaming or networking operations).
 
-> **Knowledge Check:** Have you encountered any errors with `Exception` as part of their name?
+> **Knowledge Check**: Have you encountered any errors with `Exception` as part of their name?
 
 ***
 
@@ -42,11 +42,11 @@ We often manually check for code that could cause errors through conditional sta
 
 ## Introduction: Exceptions (5 min)
 
-Before we start talking about the `try-catch` block, we need to talk about exceptions. Exceptions are events that occur while a program is running and interrupt the normal flow of the code. These can be null pointer exceptions, divide by zero exceptions, index out of bounds exceptions, and more. You can see many of the built-in exceptions in the [Java documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Exception.html).
+Before we start talking about the `try-catch` block, we need to talk about exceptions. **Exceptions** are events that occur while a program is running and interrupt the normal flow of the code. These can be null-pointer exceptions, divide-by-zero exceptions, index-out-of-bounds exceptions, and more. You can review many of the built-in exceptions in the [Java documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/Exception.html).
 
-There are two types of exceptions: checked and unchecked. A **checked exception** occurs at compile time, which means a programmer is forced to handle these exceptions; otherwise, the program won't compile. Checked exceptions are subclasses of the `Exception` class. An **unchecked exception** — also known as a runtime exception — occurs at the time a program is executing. You don't have to handle them, but you can if you want to.
+There are two types of exceptions: checked and unchecked. A **checked exception** occurs at compile time, which means a programmer is forced to handle these exceptions; otherwise, the program won't compile. Checked exceptions are subclasses of the `Exception` class. An **unchecked exception** — also known as a **runtime exception** — occurs at the time a program executes. You don't have to handle them, but you can if you'd like.
 
-Below is an illustration of the exception hierarchy. Red denotes unchecked exceptions, while blue denotes checked ones.
+Below is an illustration of the exception hierarchy. Red denotes unchecked exceptions, while blue denotes checked ones:
 
 ![](https://cdn2.howtodoinjava.com/wp-content/uploads/ExceptionHierarchyJava.png)
 <sub>[Source](https://howtodoinjava.com/java/exception-handling/checked-vs-unchecked-exceptions-in-java/)</sub>
@@ -62,17 +62,17 @@ On their own, exceptions aren't particularly useful, but when paired with a `try
 
 ```java
 try {
-  // Your code goes here
+  // Your code goes here.
 } catch(Exception e) {
-  // Execute this code if an error occurs
+  // Execute this code if an error occurs.
 }
 ```
 
-Earlier, we said that exceptions are **thrown**. We also say that they're **caught** in the `catch` statement. `Exception` is the generic type from which all other exceptions are derived from, and you can catch multiple types of exceptions from a single block of code.
+Earlier, we said that exceptions are **thrown**. We also say that they're **caught** in the `catch` statement. `Exception` is the generic type from which all other exceptions are derived, and you can catch multiple types of exceptions from a single block of code.
 
 It's important to note that the code in the `catch` block is only executed if an exception that matches the type of `Exception` declared is thrown.
 
-> **Knowledge Check:** Discuss with the person next to you why we would want to catch multiple types of exceptions.
+> **Knowledge Check**: Discuss with the person next to you why we would want to catch multiple types of exceptions.
 
 ***
 
@@ -80,15 +80,15 @@ It's important to note that the code in the `catch` block is only executed if an
 
 ## Demo: `IndexOutOfBoundsException` (10 min)
 
-Let's take a look at a case where we try to access a value from an array with an index outside of its bounds. Open up the starter code for [`IndexOutOfBounds`](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/IndexOutOfBounds). As you can see, this program has a list of superheroes and lets us enter a number to access our favorite superhero.
+Let's take a look at a case where we try to access a value from an array with an index outside of its bounds. Open up the starter code for [`IndexOutOfBounds`](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/IndexOutOfBounds). As you can see, this program has a list of superheroes and lets us enter a number to access our favorite one.
 
 If we run the program and type in a number outside of the bounds of the `ArrayList`, we get an [`IndexOutOfBoundsException`](https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/IndexOutOfBoundsException.html) — an example of an unchecked exception — and everything crashes.
 
-Instead of having the program crash, we can log the error and allow the program to handle the exception gracefully by letting the user know what they entered isn't valid.
+Instead of having the program crash, we can log the error and allow the program to handle the exception gracefully by letting the user know that what they entered isn't valid.
 
 Let's add a `try-catch` block around the code causing the error.
 
-> **Knowledge Check:** Take a minute to discuss what code you think should be inside the `try` block.
+> **Knowledge Check**: Take a minute to discuss what code you think should be inside the `try` block.
 
 ```java
 try {
@@ -100,7 +100,7 @@ try {
 
 As you can see, the code causing the error is `superheroes.get(num)`. By placing that inside the `try` block, we can catch the exception and show a message to the user. The program will continue running after the error has occurred, but we know the error occurred.
 
-> **Knowledge Check:** Why didn't we put `Exception` instead of `IndexOutOfBoundsException`?
+> **Knowledge Check**: Why didn't we put `Exception` instead of `IndexOutOfBoundsException`?
 
 ***
 
@@ -132,7 +132,7 @@ try {
 ```
 > Both `IOException` and `MalformedURLException` are examples of checked exceptions. You have to handle them for the program to compile.
 
-Post Java 8, we can combine our `catch` blocks into something like below. It will do exactly the same as above but with fewer lines of code.
+Post-Java 8, we can combine our `catch` blocks into something like what's shown below. It will do the exact same thing as above but with fewer lines of code:
 
 ```
 URL url = null;
@@ -149,16 +149,16 @@ try {
 
 ### `throws` keyword
 
-Now, lets talk about the other option our IDE was giving us: adding a `throws` declaration. Another way of handling a checked exception is by using the `throws` keyword. We use this keyword to tell the calling method that it's responsible for handling the error this piece of code might throw. 
+Now, let's talk about the other option our IDE was giving us: adding a `throws` declaration. Another way of handling a checked exception is by using the `throws` keyword. We use this keyword to tell the calling method that it's responsible for handling the error this piece of code might throw. 
 
-In the previous example where we were trying to connect to a URL:
+In the previous example where we were trying to connect to a URL...
 
 ```java
 URL url = new URL("http://www.google.com");
 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 ```
 
-Instead of `try-catch`, we could have used the `throws` keyword.
+...instead of `try-catch`, we could have used the `throws` keyword.
 
 Again, you can use any open project to write this code:
 
@@ -170,18 +170,18 @@ public void connectToURL() throws IOException {
 ```
 Now, whichever method will call `connectToURL()` can either handle the exception there or throw it to the calling method.
 
-The biggest advantage of using this keyword is having all exception handling at one place as your application grows and becomes more complex. Also, it helps declutter your code.
+The biggest advantage of using this keyword is having all exception handling in one place as your application grows and becomes more complex. Also, it helps declutter your code.
 
 ### `throw` keyword
 We use this keyword to throw an exception manually from anywhere in the code. This concept is best explained through an example. 
 
 In this example, we'll be looking at a program that divides two numbers for us and displays the result. Open up the [`DivisionExample` starter code](https://git.generalassemb.ly/GA-Cognizant/foundational-java/tree/master/java-basics/exception-handling-lesson/starter-code/DivisionExample).
 
-> **Knowledge Check:** Take two minutes to look at the code and determine how to handle the error if it occurs.
+> **Knowledge Check**: Take two minutes to look at the code and determine how to handle the error if it occurs.
 
-The program runs smoothly if you use any value higher than 0 as a divisor. But as soon as you input 0 as a divisor, the program fails with the exception `/ by zero`. This is a type of [`ArithmeticException`](https://docs.oracle.com/javase/8/docs/api/?java/lang/ArithmeticException.html).
+The program runs smoothly if you use any value higher than zero as a divisor. But, as soon as you input zero as a divisor, the program fails with the exception `/ by zero`. This is a type of [`ArithmeticException`](https://docs.oracle.com/javase/8/docs/api/?java/lang/ArithmeticException.html).
 
-In this case, in the `division()` method, we need to check if the divisor is 0, then throw an exception. We can handle this exception by surrounding our code with a `try-catch` block, but this time we'll let the calling method — in our case `main()` — handle the exception.
+In this case, in the `division()` method, we need to check if the divisor is zero, then throw an exception. We can handle this exception by surrounding our code with a `try-catch` block, but this time we'll let the calling method — in our case `main()` — handle the exception:
 
 ```java
 public static void division(int numerator, int divisor) {
@@ -194,7 +194,7 @@ public static void division(int numerator, int divisor) {
 }
 ```
 
-We need to put the actual division operation inside the `try` block because that's where the error is actually going to happen. In our `catch` block, we let the user know they can't use 0 as a divisor.
+We need to put the actual division operation inside the `try` block, because that's where the error is actually going to happen. In our `catch` block, we let the user know they can't use zero as a divisor.
 
 ```
 public static void main(String[] args) {
@@ -207,7 +207,7 @@ public static void main(String[] args) {
 }
 ```
 
-> **Knowledge Check:** Is it better to check for division by 0 with an exception, or manually check to see if the divisor is 0?
+> **Knowledge Check**: Is it better to check for division by zero with an exception or manually check to see if the divisor is zero?
 
 ***
 
@@ -232,5 +232,5 @@ Exceptions are an important part of keeping our apps running when problems occur
 ***
 
 ### Additional Resources
-- [`try` blocks](https://docs.oracle.com/javase/tutorial/essential/exceptions/try.html)
-- [`catch` blocks](https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html)
+- [`try` Blocks](https://docs.oracle.com/javase/tutorial/essential/exceptions/try.html)
+- [`catch` Blocks](https://docs.oracle.com/javase/tutorial/essential/exceptions/catch.html)
