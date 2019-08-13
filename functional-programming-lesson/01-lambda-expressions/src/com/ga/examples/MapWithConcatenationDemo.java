@@ -12,26 +12,22 @@ public class MapWithConcatenationDemo {
         List<String> stringList = Arrays.asList("My name is ", "My friends call me ", "My mother calls me ");
 
         List<String> concatenatedList =
-// todo: I strongly suggest replacing the variable stringValue with something more
-//    concise, like value. The practice for lambdas is to keep the variable names concise
-//    Even something like s would be acceptable. Not to mention it can be a method reference,
-//    but I am not sure if you covered those yet,
             stringList.stream()
-                .map(stringValue -> apply(stringValue))
+                .map(s -> apply(s))
                 .collect(Collectors.toList());
 
         //Now output the values of the concatenatedList using streams.
-        concatenatedList.stream().forEach(stringValue -> {
-            System.out.println(stringValue);
+        concatenatedList.stream().forEach(s -> {
+            System.out.println(s);
         });
 
         //Now output the values of the original stringList using streams to show that the list is unaltered.
-        stringList.stream().forEach(stringValue -> {
-            System.out.println(stringValue);
+        stringList.stream().forEach(s -> {
+            System.out.println(s);
         });
     }
 
-    private static String apply(String stringValue) {
-        return stringValue + "Jim";
+    private static String apply(String s) {
+        return s + "Jim";
     }
 }
