@@ -8,11 +8,11 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Functional Programming | Functional Interfaces
 
 ### LEARNING OBJECTIVES
-*After this lesson, you will be able to:*
+*After this lesson, you will:*
 * Have a strong understanding about Functions, Suppliers, Consumers, Operators, and Predicates
 
 ### STUDENT PRE-WORK
-*Before this lesson, you should already be able to:*
+*Before this lesson, you should already:*
 - Understand the Java Basics lessons
 - Understand the OOP in Java lessons
 - Understand the Intro to Lambda Expressions
@@ -30,7 +30,7 @@
 ### LESSON GUIDE
 
 | TIMING |         TYPE         |                                           TOPIC                                          |
-|:------:|:--------------------:|:----------------------------------------------------------------------------------------:|
+|:------:|:--------------------|:----------------------------------------------------------------------------------------|
 |  5 min |        Opening       |                                 Introduction to Functional Interfaces                                |
 | 10 min |     Introduction     |                         Functional Interfaces Deep Dive                        |
 | 10 min |     Demo     |                         Functional Interfaces Demo                        |
@@ -46,49 +46,73 @@
 |  5 min |      Conclusion      |                                       Review/Recap                                       |
 
 ## Opening - Introduction to Functional Interfaces   
-We have learned a lot in the first 2 modules.  Now we are going to dive deeper into Functional Interfaces.  This is the heart and soul of a lambda expression. To recap, a lambda expression is an anonymous function which provides a very concise and functional syntax which is further used for writing anonymous methods. Lambda expressions are similar to anonymous classes.  Remember that the lambda expression syntax is as follows:
+We have learned a lot in the first 2 modules.  Now we are going to dive deeper into Functional Interfaces, which are the heart and soul of lambda expressions. To recap, a lambda expression is a concise syntax for expressing an anonymous method.  Remember that syntax for expressing lambda expression is generally as follows:
 
     (arg1, arg2,...) -> lambda expression body
 
-To begin this lesson, we will take a look at how to create your own functional interfaces.
+A Functional Interface is nothing more than an interface with exactly one abstract method. And so I will let you in on a secret... a Lambda expression is syntactic sugar for defining the implementation of a functional interface, by supplying the arguments and the implementation, and skipping all of the boiler plate code of having to say `public void blah(args) { implementation}`. So when you provide a Lambda expression somewhere, what you are really doing is subclassing that abstract class, and providing the implementation for that one abstract method. 
+
+> Note to teacher - once that concept sinks in, the student should find the rest of this section straightforward, so I recommend discussing this a bit... how does Java know which functional interface you are overriding if you don't specify it? Answer - The name of the functional interface is specified in the method signature, so Java uses that!
+
+> How does Java know which method to override if you are not supplying a method name? Answer - since there is exactly one abstract method in the functional interface, that is the one Java overrides! 
+
+Let's start by learning how to create your own functional interfaces.
 
 ## Introduction - Functional Interfaces Deep Dive
-**What is a functional interface?**  A functional interface is an interface that contains only one abstract method. These interfaces should be annotated with the @FunctionalInterface annotation to aid the compiler to throw an error when more than one abstract method is defined.
+**What is a functional interface?**  As we said, a functional interface is an interface that contains only exactly abstract method. When writing these interfaces, you should annotate them with the optional @FunctionalInterface annotation. If you don't, the code will still work. But adding the annotation is defensive, and signals the compiler to fail the build, in case anyone someday accidentally adds new abstract methods to the interface.
 
-**Why use a functional interface?** The benefit of using a functional interface is that we can leverage lambda expressions to represent them, instead of having to use anonymous classes. It is also less verbose in terms of lines of code. Let's go through the demo to see some examples.
+For example
+```java
+@FunctionalInterface
+public interface MyFunctionalInterface {
+    ...
+}
+```
 
-**What is a method reference?**  You use lambda expressions to create anonymous methods. Sometimes, however, a lambda expression does nothing but call an existing method. In those cases, it's often clearer to refer to the existing method by name. Method references enable you to do this; they are compact, easy-to-read lambda expressions for methods that already have a name. You'll see an example of a method reference later in one of our demos.
+**Why use a functional interface?** Functional interfaces make Lambda expressions possible. Using a functional interface lets us leverage lambda expressions to represent them, instead of having to explicitly subclass them. This is considerably less verbose than creating anonymous inner classes. Let's go through the demo to see some examples.
+
+One other major difference that you may never notice, is that the compiler assigns a funny name for every anonymous inner class, whereas lambdas do not.  If you look at your generated classes, you can recognize these files because they have a $ sign and a number following the parent class name, for example `MyClass$21.class`.
+
+**What is a method reference?**  As if lambdas were not concise enough, there are times when you can simplify them even further! When the body of a lambda expression does nothing but call a method using the input parameter as an argument, you can refer to the existing method by name, eliminate the call parameters and the arrow, use the special :: notation, and the input is understood. For example the following lambda calls one method, System.out.println() on the input parameter
+
+`param -> System.out.println(param)`
+
+This can be replaced with a method reference, as follows. (Notice the use of the :: to represent the method reference syntax): 
+`System.out::println`
+
+Using this syntax, you can see how we eliminated the input parameter, the arrow, and the method argument, by simply using the method name.
+
+We will see more examples of method references later, in our demos.
 
 ## Demo - Functional Interfaces
-For this demo, we will be using 4 different functional interfaces examples so that you can get familiar and comfortable with them. 
+For this demo, we will be using 4 different functional interface examples so that you can get comfortable with them. 
 
 ### Example 1 - A functional interface that has no input and returns void.
 Given the following functional interface, we can use it to print "Hello World!"
 
     @FunctionalInterface
-    public interface VoidFunctionalInterface {
+    public interface Greeter {
         public void greet();
     }
 
-    //Use the VoidFunctionalInterface to say Hello.
-    VoidFunctionalInterface greetTheWorld = () -> System.out.println("Hello World!");
+    //Use the Greeter to say Hello.
+    Greeter greetTheWorld = () -> System.out.println("Hello World!");
     greetTheWorld.greet();
-
 Output:  
 Hello World!
 
-Taking a look at the interface... You'll notice that it's annotated with @FunctionalInteface.  It also has only one abstract method, which meets the criteria of a functional interface.  
+Taking a look at the interface... It has only one abstract method, which meets the criteria of a functional interface.  You'll notice that it's also annotated with the optional @FunctionalInteface annotation.
 
-To use the functional interface, we create a variable of type VoidFunctionalInterface called "greetTheWorld".  The value of the variable is a lambda expression that takes in no arguments and prints out "Hello World!".
+To use the functional interface, we created variable _greetTheWorld_ of type Greeter, and assigned it a lambda expression that takes no arguments, prints out "Hello World!", and returns void. Guess what, that is exactly the signature of the abstract _greet_ method in our functional interface - it takes not parameters and returns void.
 
-The last thing we do is call the greet method for it to execute.
+The last thing we did was call the greet method for it to execute.
 
 ### Example 1 Continued - Using an Anonymous class instead of lambdas.
 Let's write the same example as before, but instead, let's use an anonymous class.
 
     //Anonymous class example of the above.
-    VoidFunctionalInterface voidFunctionalInterfaceImpl = 
-        new VoidFunctionalInterface() {
+    Greeter voidFunctionalInterfaceImpl = 
+        new Greeter() {
             @Override
             public void greet() {
                 System.out.println("Hello World!");
@@ -96,10 +120,10 @@ Let's write the same example as before, but instead, let's use an anonymous clas
         };
     voidFunctionalInterfaceImpl.greet();
 
-The output is the same as before, but what stands out to you when you compare this version with the lambda expression version?  I don't know about you, but the anonymous class version seems verbose and harder to read when compared to the lambda expression version.  Let's look at some more examples.
+The output is the same as before, but I am sure you will agree the anonymous class version is obviously more verbose and harder to read when compared to the lambda expression version.  Let's look at some more examples.
 
 ### Example 2 - A functional interface that takes in one input and returns void
-Given the following functional interface, it will greet a person based on a given name.
+Given the following functional interface, it will greet a person based on a given name:
 
     @FunctionalInterface
     public interface GreetByName {
@@ -108,15 +132,16 @@ Given the following functional interface, it will greet a person based on a give
 
     GreetByName greetSomeone =
             (name -> System.out.println("Hello " + name + "!  How are you doing today?"));
+            
     greetSomeone.greet("Mark");
 
 Output:  
 Hello Mark! how are you doing today.
 
-If you look at the greet method of the GreetByName functional interface.  You'll notice that it takes in a String parameter called "name".  This parameter will become the input parameter to the lambda expression that is used further down in the example.  In this case, the lambda input parameter is called "name".  The parameter names don't have to match, but it is good practice to name them according to what they are.
+If you look at the _greet_ method of the _GreetByName_ functional interface,  you'll notice that it takes one String parameter called "name".  This parameter will become the input parameter to the lambda expression that is used further down in the example.  In this case, the lambda input parameter is called "name".  The parameter names don't have to match, but it is a good practice to name them according to what they are.
 
 ### Example 3 - A functional interface that has one input and produces one output.
-The following example will use a functional interface to take an integer given as input and output the square of that given input.
+The following example uses a functional interface to take an integer input parameter, and output the square of that given input.
 
     @FunctionalInterface
     public interface SquareMe {
@@ -129,21 +154,21 @@ The following example will use a functional interface to take an integer given a
 Output:  
 The square of 11 is 121
 
-Similar to example 2, the functional interface method "square" takes in one input called "input".  However, this type the "square" method returns an integer.  If you look at the lambda expression, the input parameter "number" matches up to the "input" parameter of the "square" method. The body of the lambda expression will take the input and multiply it by itself.
+Similar to example 2, the functional interface method "square" takes in one input called "input".  However, this time the "square" method returns an integer.  If you look at the lambda expression, the input parameter "number" matches up to the "input" parameter of the "square" method. The body of the lambda expression will take the input and multiply it by itself.
 
 To get the output, you have to call the "square" method on the "squareMe" variable. ie.
 
     squareMe.square(11)
 
 ### Example 4 - A functional interface that takes multiple inputs and returns one output.
-The following example will use a functional interface method that takes in a first, middle, and last name and concatenate them together.
+The following example uses a functional interface method that takes a first, middle, and last name, and concatenates them together.
 
     @FunctionalInterface
     private static interface CreateFullName {
         public String fullName(String firstName, String middleName, String lastName);
     }
 
-    //Use the CreateFullName interface to greet a person by their full name.
+    // Use the CreateFullName interface to greet a person by their full name.
     CreateFullName whatsMyName =
             ((firstName, middleName, lastName) -> firstName + " " + middleName + " " + lastName);
 
@@ -156,14 +181,15 @@ Hello Michael Jeffrey Jordan, it's a pleasure to meet you.
 As before, compare the input parameters of the "fullName" functional interface method with the input parameters of the lambda expressions.  The lambda body does the dirty work of concatenating the name portions together.
 
 ## Built-In Functional Interfaces
-In the previous section, we discussed how to create and use your own custom functional interfaces. However, Java was nice enough to provide us with a number of built-in functional interfaces that should meet a majority of our needs.  In the next 4 sections will discuss some of these built in functional interfaces.  
+In the previous section, we discussed how to create and use your own custom functional interfaces. However, Java was nice enough to provide us with a robust supply of built-in functional interfaces that should meet a majority of our needs.  In the next 4 sections we'll discuss some of these built in functional interfaces.  
 
-There is something that I want you to keep in mind while going through the following sections. These built-in functional interfaces are structures and NOT semantics.  In other words, their use cases are created by the implementor. 
+There is something you should keep in mind while going through the following sections. These built-in functional interfaces are structures. They are NOT semantics.  In other words, their use cases are created by the implementor. 
+<!-- I have no idea what that meant!! Victor -->
 
 ## Introduction - Function
-Function is a built-in functional interface that has one abstract method "apply" that accepts one input and produces one output. 
+_Function_ is a built-in functional interface that has one abstract method "apply", which accepts one input and produces one output. 
 
-Functional Interface looks like:
+The Functional Interface for the _Function_ interface looks like:
 
     @FunctionalInterface
     public interface Function<T, R> {
@@ -181,13 +207,13 @@ Usage of a Function is:
 - R is the return of the function of a specified type. Let's check out the demo to see it in action.
 
 **Key abstract method**
-- apply - this triggers the Function execution to run the lambda expression body.
+- apply - this triggers the Function to execute the lambda expression body.
 
 **Professor Note**  
 Please have the class compare the SquareMe functional interface in Example 3 in the last demo with the Function interface above.  The SquareMe's abstract method is called "square", whereas the Function abstract method is called "apply".  Even though the method names are different, the SquareMe interface could be replaced with a built-in Function and create the same results.
 
 ## Demo - Function
-Let's take a look at a couple of examples of how to use Function.
+Let's take a look at a couple of examples of how to use _Function_.
 
 The first example will take in a String that represents a name and the output will be a greeting.
 
@@ -203,9 +229,9 @@ So let's talk about what's going on with this example.  Let's examine the first 
 
     Function<String, String> greetingFunction = s -> "Good Morning " + s + "!";
 
-If you look at Function generic "Function<String, String>".  The first String represents the type of the input.  The second String represents the type of the output.
+`Function<String, String>` is how we express our Function using generics.  The first String represents the type of the input.  The second String represents the type of the output.
 
-Looking at the lambda expression, the "s" input parameter will be of type String which coincides with the first String of the Function generic.  The lambda body will return a string as well, which coincides with the second String of the Function generic.
+Looking at the lambda expression, the "s" input parameter in our example will be of type String which coincides with the first String of the Function generic.  The lambda body will return a string as well, which coincides with the second String of the Function generic.
 
 Let's look at the 2nd line:  
 
@@ -219,11 +245,52 @@ Here's another example of a Function that takes in an Integer and outputs an Int
     Integer squareOfNine = squareFunction.apply(9);
     System.out.println(squareOfNine);
 
+### Why is this useful?
+Now we know that Java supplies all of these pre-build functional interfaces, and we see that they are kind of elegant, but how do they add value?
+
+Well, the good news is, you can start using them immediately, without even knowing their names. How? Well, by supplying Lambdas! Since Lambdas don't care about the name of the functional interface, you can use them when the semantics are clear, even if you don't know the function name at all!
+
+For example, the Stream class has a method called _map_.
+
+Specifically
+
+    <R> Stream<R> map(Function<? super T, ? extends R> mapper);
+
+Now what this cryptic declaration means is actually something very simple - it means that Streams have a _map_ method, that accept a _Function_ parameter, that returns another Stream. That is why we can say something like:
+
+        List<String> concatenatedList =
+            stringList.stream()
+                .map(s -> "Hello, " + s)
+                .collect(Collectors.toList());
+
+The lambda their in the .map method is: 
+
+    s->"Hello, " + s
+    
+The variable _s_ is the input parameter in the _Function.apply() method_, and the Lambda body _"Hello, " + s_ is the output result of the Function.apply() method. So there, you called the map method without ever having to know you were supplying an implementation for the Function.apply() method.
+
+Another important class in stream processing is the Predicate class. Predicate is a functional interface that has one abstract method called _test_, which accepts a method body that returns a boolean. This is very useful in the Stream.filter() method, where we want to filter out elements so that only the elements matching the predicate are retained. 
+
+That's why we can say:
+
+    numberList.stream()
+            .filter(number -> number % 2 == 0)
+            .collect(Collectors.toList());
+ 
+In this case, filter accepts a Lambda:
+
+    number -> number % 2 == 0
+ 
+ that represents a Predicate, that returns true if the supplied integer is even.
+
+Function and Predicate are particularly useful for the Stream.map() and Stream.filter() methods, but all of the built in Functional Interfaces are used in Stream processing and other places where Lambdas are useful. Let's look at a few more examples.   
+
+<!-- I think we can skip BiFunction. The remaining are used in the next section, so they are useful, but the topic is getting a little tedious, I think we can drop BiFunction - Victor -->
 
 ## Introduction - BiFunction  
-BiFunction is another built-in functional interface.  Like Function, BiFunction has one abstract method called "apply".  However, BiFunction's apply method accepts 2 input parameters and produces 1 output. The layman's term way of thinking about this is that it takes in two inputs and gives one output.
+BiFunction is another built-in functional interface.  Like Function, BiFunction has one abstract method called "apply".  However, BiFunction's apply method accepts 2 input parameters and produces 1 output. In layman's terms - it takes two inputs and returns one output.
 
-Functional Interface looks like:
+The Functional Interface for the _BiFunction_ interface looks like:
 
     @FunctionalInterface
     public interface BiFunction<T, U, R> {
@@ -241,10 +308,10 @@ Usage of a BiFunction is:
 - R is the return type of the function. Let's check out the demo to see it in action.
 
 **Key Methods**
-- apply - this triggers the Function execution to run the lambda expression body.
+- apply - this triggers the Function to execute the lambda expression body.
 
 ## Demo - BiFunction 
-Let's take a look at a couple of examples of how to use a BiFunction.  The first example will take 2 Integers as input and output an Integer result that represents the sum of the 2 Integers.
+Let's take a look at a couple of examples of how to use a BiFunction.  The first example accepts 2 Integers as input and returns an Integer result that represents the sum of the 2 Integers.
 
     BiFunction<Integer, Integer, Integer> addFunction = (a, b) -> a + b;
     Integer addResult = addFunction.apply(4,5);
@@ -257,11 +324,11 @@ Let's examine the first line:
 
     BiFunction<Integer, Integer, Integer> addFunction = (a, b) -> a + b;
 
-The first 2 Integers in BiFunction generic represent the types of input #1 and input #2, respectively.  The last Integer represents the type of the output.
+The first 2 Integers in BiFunction generic represent the types of two BiFunction inputs.  The last Integer represents the type of the output.
 
-The 2nd line runs the "apply" method which will trigger the lambda expression to run by passing 4 and 5 as the input.  The lambda body will run 4 + 5 and return the result.
+The 2nd line runs the "apply" method, which triggers the lambda expression to execute, by passing 4 and 5 as the input.  The lambda body calculates 4 + 5 and returns the result.
 
-The next BiFunction example will take in 2 Integers and return an Integer that represents the result of multiplying the 2 Integers together.
+The next BiFunction example accepts 2 Integers, and return an Integer that represents the result of multiplying the 2 input Integers.
 
     BiFunction<Integer, Integer, Integer> multiplyFunction = (a, b) -> a * b;
     Integer multiplyResult = multiplyFunction.apply(4,5);
@@ -272,9 +339,9 @@ Output:
 
 
 ## Introduction - Supplier
-Supplier is a built-in functional interface that accepts no input and gives an output. 
+Supplier is a built-in functional interface that accepts no inputs and produces a generic output. 
 
-Functional Interface looks like:
+The Functional Interface for the _Supplier_ interface looks like:
 
     @FunctionalInterface
     public interface Supplier<T> {
@@ -292,10 +359,10 @@ Usage of a Supplier is:
 - get - this will trigger execution of the lambda body
 
 **A Good Supplier Strategy**  
-A good strategy for using Supplier is for scenarios that require no input but may be expensive to run.  Suppliers leverage lazy evaluation, meaning they won't executed until actually needed.  You can use that to your advantage to avoid making the expensive method call until it's absolutely need.  The following demo will help explain it better.
+Suppliers are especially valuable in situations that may be expensive to run, even though they might not even be used! Suppliers leverage lazy evaluation, meaning they won't execute until actually needed.  You can use that to your advantage to avoid making the expensive method unless and until it's absolutely need.  The following demo will help explain it better.
 
 ## Demo - Supplier
-The following demo will show an example of how using a Supplier could save you from running an expensive operation when it's not necessary.  Let's say you have the following:
+The following demo shows an example of using a Supplier to save you from running an expensive operation when it's not necessary.  Let's say you have the following:
 
     public static void main(String[] args) {
 
@@ -344,12 +411,12 @@ Output:
 executing expensive computation...  
 incompatible!  
 
-Since we are now wrapping the expensiveComputeOperation with a Supplier, we now have the ability to only run that method when needed. Since a.get() in the lazyMatch method returns false, the b.get() will never execute.  This saves us from running the expensiveComputeOperation method when it's not needed.
+Since we are now wrapping the expensiveComputeOperation with a Supplier, we now have the ability to run that method only if and when it is needed. Since a.get() in the lazyMatch method returns false, the b.get() will never execute.  This saves us from running the expensiveComputeOperation method when it's not needed.
 
 ## Introduction - Consumer
 Consumer is a built-in functional interface that accepts one input and has no output. 
 
-Functional Interface looks like:
+The Functional Interface for the _Consumer_ interface looks like:
 
     @FunctionalInterface
     public interface Consumer<T> {

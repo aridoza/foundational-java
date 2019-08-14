@@ -13,19 +13,21 @@ public class MapWithConcatenationDemo {
 
         List<String> concatenatedList =
             stringList.stream()
-                .map(stringValue -> {
-                    return stringValue + "Jim";
-                })
+                .map(s -> apply(s))
                 .collect(Collectors.toList());
 
         //Now output the values of the concatenatedList using streams.
-        concatenatedList.stream().forEach(stringValue -> {
-            System.out.println(stringValue);
+        concatenatedList.stream().forEach(s -> {
+            System.out.println(s);
         });
 
         //Now output the values of the original stringList using streams to show that the list is unaltered.
-        stringList.stream().forEach(stringValue -> {
-            System.out.println(stringValue);
+        stringList.stream().forEach(s -> {
+            System.out.println(s);
         });
+    }
+
+    private static String apply(String s) {
+        return s + "Jim";
     }
 }
