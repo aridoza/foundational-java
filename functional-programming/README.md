@@ -4,8 +4,8 @@
 
 Title | Type | Timing | Notes 
 ----- | ---- | --     | -----
-[Lambda Expressions](./functional-programming/lambda-expressions)    | Lesson  | 1:30 | 
-[Stream Processing and Collectors](./functional-programming/stream-processing-and-collectors) | Lesson  | 1:30 | 
-[Functions](./functional-programming/functions-lab)    | Lab / HW  | 1:30 | 
-[Functional Interfaces](./functional-programming/functional-interfaces)    | Lesson  | 1:30 | 
-[Optionals](./functional-programming/optionals)    | Lesson  | 1:30 | 
+[Lambda Expressions](./lambda-expressions)    | Lesson  | 1:30 | 
+[Stream Processing and Collectors](./stream-processing-and-collectors) | Lesson  | 1:30 | 
+[Functions](./functions-lab)    | Lab / HW  | 1:30 | 
+[Functional Interfaces](./functional-interfaces)    | Lesson  | 1:30 | 
+[Optionals](./optionals)    | Lesson  | 1:30 | 
