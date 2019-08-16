@@ -4,26 +4,27 @@
 
 Title | Type | Timing | Notes 
 ----- | ---- | --     | -----
-[Computers and Java](./java-basics-computers-and-java-lesson) | Lesson   | 0:30 | 
-[My First Java](./java-basics-my-first-java-lesson)      | Lesson      | 1:00 | 
-[Data Types and Variables](./java-basics-data-types-and-variables-lesson) | Lesson   | 1:30 | 
-[Control Flow and Loops](./java-basics-control-flow-and-loops-lesson)     | Lesson   | 1:30 | 
-[Methods and Scope](./java-basics-methods-and-scope-lesson) | Lesson | 1:30 |
-[Methods](./java-basics-methods-lab)             | Lab / HW | 1:30 |
-[Arrays and ArrayLists](./java-basics-arrays-arraylists-lesson)  | Lesson   | 1:30 |
-[LinkedLists and Maps](./java-basics-linkedlists-maps-lesson)    | Lesson   | 1:30 |
-[Organizing Information](./java-basics-organizing-information-lab) | Lab / HW | 1:30 |
-[Debugging](./java-basics-debugging-lesson)    | Lesson   | 1:00 |
-[Exception Handling](./java-basics-exception-handling-lesson)    | Lesson   | 1:00 |
-[jUnit](./java-basics-junit-testing-lesson)      | Lesson   | 1:15 |
-[jUnit](./java-basics-junit-testing-lab)     	 | Lab / HW | 1:30 |
-[Full-day Java Lab](./java-basics-java-project)  | Lab     | 5:00 |
-[Intro to OOP](./oop-java-intro-to-oop.md)       | Lesson   | 0:30 | Could also do earlier on as an introduction
-[Objects and Classes](./oop-java-objects-and-classes-lesson)  | Lesson   | 1:30 |
-[Creating Classes](./oop-java-creating-classes-lab)           | Lab / HW | 1:30 | 
-[Subclasses](./oop-java-subclasses-lesson)             |  Lesson   | 1:30 |
-[Subclasses](./oop-java-subclassing-lab)        | Lab / HW | 1:30 | 
-[Abstract Classes and Interfaces](./oop-java-abstract-classes-interfaces-lesson) | Lesson   | 1:30 |
-[Inheritance and Abstraction](./oop-java-inheritance-abstraction-lab)            | Lab / HW | 1:15 |
-[Inheritance](./oop-java-inheritance-household-lab)            | Lab / HW | 1:30 | This + above lab are interchangeable
-[OOP Recap](./oop-java-oop-review-hw)       | Lab / HW  | 1:00 |
+[Computers and Java](./java-basics/computers-and-java-lesson) | Lesson   | 0:30 | 
+[My First Java](./java-basics/my-first-java-lesson)      | Lesson      | 1:00 | 
+[Data Types and Variables](./java-basics/data-types-and-variables-lesson) | Lesson   | 1:30 | 
+[Control Flow and Loops](./java-basics/control-flow-and-loops-lesson)     | Lesson   | 1:30 | 
+[Methods and Scope](./java-basics/methods-and-scope-lesson) | Lesson | 1:30 |
+[Methods](./java-basics/methods-lab)             | Lab / HW | 1:30 |
+[Arrays and ArrayLists](./java-basics/arrays-arraylists-lesson)  | Lesson   | 1:30 |
+[LinkedLists and Maps](./java-basics/linkedlists-maps-lesson)    | Lesson   | 1:30 |
+[Organizing Information](./java-basics/organizing-information-lab) | Lab / HW | 1:30 |
+[Debugging](./java-basics/debugging-lesson)    | Lesson   | 1:00 |
+[Exception Handling](./java-basics/exception-handling-lesson)    | Lesson   | 1:00 |
+[jUnit](./java-basics/junit-testing-lesson)      | Lesson   | 1:15 |
+[jUnit](./java-basics/junit-testing-lab)     	 | Lab / HW | 1:30 |
+[Full-day Java Lab](./java-basics/java-project)  | Lab     | 5:00 |
+[Intro to OOP](./oop-java/intro-to-oop.md)       | Lesson   | 0:30 | Could also do earlier on as an introduction
+[Objects and Classes](./oop-java/objects-and-classes-lesson)  | Lesson   | 1:30 |
+[Creating Classes](./oop-java/creating-classes-lab)           | Lab / HW | 1:30 | 
+[Subclasses](./oop-java/subclasses-lesson)             |  Lesson   | 1:30 |
+[Subclasses](./oop-java/subclassing-lab)        | Lab / HW | 1:30 | 
+[Abstract Classes and Interfaces](./oop-java/abstract-classes-interfaces-lesson) | Lesson   | 1:30 |
+[Inheritance and Abstraction](./oop-java/inheritance-abstraction-lab)            | Lab / HW | 1:15 |
+[Inheritance](./oop-java/inheritance-household-lab)            | Lab / HW | 1:30 | This + above lab are interchangeable
+[OOP Recap](./oop-java/oop-review-hw)       | Lab / HW  | 1:00 |
+
