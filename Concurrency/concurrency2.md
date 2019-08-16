@@ -10,6 +10,7 @@ creator: Victor Grazi
 ### Learning Objectives
 
 *After this lesson, students will:*
+
 - Determine which concurrency components to use in a given scenario.
 - Construct a fixed thread pool.
 - Use the AtomicIntegerClass to synchronize threads.
@@ -28,7 +29,7 @@ creator: Victor Grazi
 
 ## Opening (5 min)
 
-Until Java 5 arrived on the scene, there was not much in the way of concurrency support. You basically were given the low level functionality, but building things like thread pools or semaphores were left to the programmer. Soon after the advent of Java, Oswego Professor Doug Lea published his seminal book "Concurrent Programming in Java", which introduced many design patterns to assist with the complexities of concurrency. Then in 2006, Brian Goetz (currently the Java Language Architect at Oracle) et al. released "Java Concurrecy in Practice," tightening up many of the original patterns and introducing many more patterns and concurrency strategies. These were further streamlined by the Java Community Process.
+Until Java 5 arrived on the scene, there was not much in the way of concurrency support. Basically, you were given the low-level functionality, but building things such as thread pools or semaphores were left to the programmer. Soon after the advent of Java, SUNY Oswego professor Doug Lea published his seminal book "Concurrent Programming in Java," which introduced many design patterns to assist with the complexities of concurrency. In 2006, Brian Goetz (currently the Java Language Architect at Oracle) and co-authors released "Java Concurrecy in Practice," tightening up many of the original patterns and introducing many more patterns and concurrency strategies. These were further streamlined by the Java Community Process.
 
 Java 5 distilled all of that knowledge into the `java.util.concurrent` package, which provided a rich set of components for handling many important concurrency design patterns. We will go through some of the important components now.
 
@@ -36,27 +37,27 @@ Java 5 distilled all of that knowledge into the `java.util.concurrent` package, 
 
 ## Executors Class (40 min)
 
-So far we have seen how to create threads; but threads use resources, and it would be dangerous to have programs spin arbitrary numbers of threads. To control this, there is a concept of a _thread pool_. This is a component that allocates threads from a fixed pool, and once the pool is depleted, requests for more threads block, until threads are returned to the pool. 
+So far, we have seen how to create threads; but threads use resources, and it would be dangerous to have programs spin arbitrary numbers of threads. To control this, there is the concept of a _thread pool_. This is a component that allocates threads from a fixed pool; once the pool is depleted, requests for more threads are blocked until threads are returned to the pool. 
 
 In Java, thread pools belong to the category of ExecutorServices, and are created using a factory class called _Executors_, which contains many static methods for creating different flavors of ExecutorService. Looking at the API for ExecutorService, there are methods for invoking, shutting down, and checking status.  
 
 ![](resources/executorservice.png)
 
-We will concentrate on construction, and the methods `execute`, and `submit`.
+We will concentrate on construction, as well as the methods `execute` and `submit`.
 
 ### Constructing a Fixed Thread Pool
 
-To construct a fixed thread pool, call `Executors.newFixedThreadPool(pool-size)`, passing in the number of threads to pool. For example:
+To construct a fixed thread pool, call `Executors.newFixedThreadPool(pool-size)`, passing in the number of threads to the pool. For example:
 
 ```java
 private final ExecutorService threadPool = Executors.newFixedThreadPool(3);
 ```
 
-> We made the threadPool variable private because we want to prevent any other access to it except for our class, and final so that we don't dereference it.
+> We made the threadPool variable private because we want to prevent any other access to it except for our class, and finally so we don't "dereference" it.
 
 That returns a new ExecutorService, which in this example we assigned to a variable called _threadPool_.
 
-To use that thread pool, we call the `ExecutorService.execute(Runnable)` method, providing a Runnable instance. This is usually done by supplying an anonymous inner class or Lambda expression. Here is how it looks:
+To use that thread pool, we call the `ExecutorService.execute(Runnable)` method, providing a `Runnable` instance. This is usually done by supplying an anonymous inner class or Lambda expression. Here is how it looks:
 
 ```java
 ExecutorService threadPool = Executors.newFixedThreadPool(2);
@@ -78,7 +79,7 @@ threadPool.execute(new Runnable() {
 
 We are creating a new `Runnable`, providing a `run()` method that iterates three times, printing out the thread number and the iteration number.
 
-Let's see what happens if we start 4 threads like that. Since we hate copy and paste code, let's take a moment to do a bit of refactoring.
+Let's see what happens if we start four threads like that. Since we hate copy-and-paste code, let's take a moment to do a bit of refactoring:
 
 ```java
 public static void main(String[] args) {
@@ -107,15 +108,15 @@ private static Runnable getRunnable(String message) {
 }
 ```
 
-Now, the pool only has two threads, but we are calling it four times. Looking at the output, we see that the first two jobs run until complete, when the next two jobs run:  
+The pool only has two threads, but we are calling it four times. Looking at the output, we see that the first two jobs run until complete, and then the next two jobs run:  
 
 ![](resources/threadpoolexecutor.png)
 
 ### How Many Threads Should I Use?
 
-How large should you make your thread pool? If each thread pinned the CPU (i.e. brought CPU utilization near 100%), then you would generally want no more than one thread per CPU. The idea is to look at CPU utilization for one thread, and divide that number into the number of CPUs. 
+How large should you make your thread pool? If each thread pinned the CPU (i.e., brought the CPU utilization near 100%), then you would generally want no more than one thread per CPU. The idea is to look at CPU utilization for one thread and divide that number into the number of CPUs. 
 
-For example, if we have 4 cores, and the utilization from one thread is 20% per core, then the number of threads for 100% utilization would be 4/.2 = 20. If you need to exceed that, then it's probably time to start thinking about upgrading hardware. But don't make rash decisions until you test things, because Java is clever about context switching and swapping, so it will still work albeit marginally slower.
+For example, if we have four cores, and the utilization from one thread is 20% per core, then the number of threads for 100% utilization would be 4/.2 = 20. If you need to exceed that, then it's probably time to start thinking about upgrading hardware. But don't make rash decisions until you test things, because Java is clever about context switching and swapping, so it will still work (albeit marginally slower).
 
 ### Cached Executor
 
@@ -127,9 +128,9 @@ The cached execute is created by calling:
 ExecutorService executor = Executors.newCachedThreadPool()
 ```
 
-One place you might want to use a cached thread pool would be for UI events. UI frameworks like Swing, for building a Java-based web-browser dom, will normally have a single event thread controlling all of its UI rendering, such as displaying mouse overs when hovering over buttons, or displaying typed keys on keyboard entry. 
+One place you might want to use a cached thread pool would be for UI events. UI frameworks such as Swing (for building a Java-based web-browser DOM) will normally have a single event thread controlling all of its UI rendering, such as displaying mouse-overs when hovering over buttons, or displaying typed keys on keyboard entry. 
 
-You want to avoid using the event thread for anything else, and so whenever it needs to do some work that might cause it to delay, it should delegate to another thread. For such cases, a cached thread pool would be in order, because the threads are short lived, and you don't generally want to impose arbitrary limits on the number of them, because you want all of your rendering to happen quickly
+You want to avoid using the event thread for anything else, so whenever it needs to do some work that might cause it to delay, it should delegate to another thread. For such cases, a cached thread pool would be in order, because the threads are short-lived, and you don't generally want to impose arbitrary limits on the number of them; you want all of your rendering to happen quickly.
 
 ### Futures
 
@@ -137,13 +138,13 @@ A _Future_ in Java is a kind of promise that data _will_ be available. So until 
 
 To get the result of a Future, call its `get()` method, which blocks until there is something _to get_!
 
-When you call `ExecutorService.submit()` method, it returns a `Future`.
+When you call the `ExecutorService.submit()` method, it returns a `Future`.
  
 ### Scheduled Executor
 
 An important flavor of ExecutorService is the _scheduled executor_. This calls its job repeatedly at fixed intervals. 
 
-Let's say we created a job that checks for files on an FTP server, and when files are there, it processes them. Let's say our requirement is to check every 1 minute.
+Let's say we created a job that checks for files on an FTP server; when files are there, it processes them. Let's say our requirement is to check every single minute.
 
 We could write that job like this:
 
@@ -171,7 +172,7 @@ Line 3: setHitCounter(value);
 
 Now that looks all well and good, but what happens if two threads call this code using a dangerous sequencing of events?!
 
-Let's say the hit counter is currently at 1000, when the two threads attack. Now follow me closely:
+Let's say the hit counter is currently at 1000 when the two threads attack. Now follow me closely:
 
 ```text
 Thread 1 calls Line 1, gets value of 1000
@@ -184,9 +185,9 @@ Thread 2 sets the hit counter to 1001
 
 What just happened?? We had two threads, and we only incremented the hit counter by one!!
 
-One solution to this would be to combine Lines 1, 2, and 3 into a single call, and synchronize it. 
+One solution to this would be to combine Lines 1, 2, and 3 into a single call and synchronize it. 
 
-But Java provides those semantics inherently, in its AtomicInteger class.
+But Java provides those semantics inherently, via its AtomicInteger class.
 
 Let's see an example:
 
@@ -252,7 +253,7 @@ Running that application yields the log output:
 Process finished with exit code 0
 ```
 
-The good news is we reached 10000!
+The good news: We reached 10000!
 
 Don't be thrown by the fact that some of the numbers appear out of sequence; that's just the way the output was ordered by the thrashing threads. If you study the output carefully, you will see there is exactly one of each number from 1 to 10,000. 
 
@@ -264,7 +265,7 @@ There are many more components in the `java.util.concurrent` package, each imple
 
 The last concurrency component we will look at is the `ReadWriteLock`, which solves a common problem.
  
-Let's say you have many readers of a certain set of data. There are also writers that change the data, and the changes must be atomic, in the sense that we want to ensure that readers can't read the data until all of it is changed. What would that look like in real life?
+Let's say you have many readers of a certain data set. There are also writers that change the data, and the changes must be atomic, in the sense that we want to ensure that readers can't read the data until all of it is changed. What would that look like in real life?
  
 Well, a very common example would be a stock portfolio owned by a hedge fund. There's money on the line, so we've got to get this right!
  
@@ -283,21 +284,21 @@ The fund just sold 500 shares of FB at $176 and used the money to buy 1000 share
   
 In reality, the value of the portfolio has not changed at all; $88,000 of FB was sold, and the same amount of ABC was bought. Zero net change in portfolio value.
  
-But imagine that a reader came in to calculate the portfolio value *just* while the writer was updating.
+But imagine that a reader came in to calculate the portfolio value *just* as the writer was updating.
  
-The writer sold the $88,000 of FB when the reader comes in. The reader is a fast thread, so it reads FB (down 88,000), ABC (unchanged, because the writer did not get to it yet), and MSFT (which was not changed at all) So in that scenario, the reader will see a portfolio that is $88,000 lower than the actual value. Hmm... what should we do?
+The writer sells the $88,000 of FB when the reader comes in. The reader is a fast thread, so it reads FB (down 88,000), ABC (unchanged, because the writer did not get to it yet), and MSFT (which was not changed at all). In that scenario, the reader will see a portfolio that is $88,000 lower than the actual value. Hmm... what should we do?
  
-Now, we might try to synchronize, which should cure the problem of data consistency, but by doing so, the writers may never get a chance to write, since there might *always* be readers holding the lock. Our hedge fund manager is not on board.
+Now, we might try to synchronize, which should cure the problem of data consistency, but by doing so, the writers may never get a chance to write, since there might *always* be readers holding the lock. Our hedge fund manager is not on board with this.
  
-The solution for both data consistency and a happy boss in this case is to use a `ReadWriteLock`. The way this works is each reader thread grabs a read lock. These do not block each other at all.
+In this case, the solution for both data consistency and a happy boss is to use a `ReadWriteLock`. The way this works is each reader thread grabs a read lock. These do not block each other at all.
 
 When a writer gets a write lock, the writer blocks until there are no more readers! And no _new_ readers can get in, as long as a writer is waiting for a write lock.
  
-Here is an animation to illustrate that. (The reader threads are shown with arrow heads, and the writers have trapezoid heads. Also, the state is color coded - green is running, and white is waiting.)
+Here is an animation to illustrate that concept. The reader threads are shown with arrow heads, and the writers have trapezoid heads. Also, the state is color coded: Green is running, and white is waiting.
  
 ![](resources/read-write-lock.gif)
 
-Notice that in the animations, as long as there are no writers, readers come and go freely. As soon as a writer comes along, new readers and writers must wait. Once the last writer does its job, all of the waiting readers are free once again to perform their computations.
+Notice that, in the animations, as long as there are no writers, readers come and go freely. As soon as a writer comes along, new readers and writers must wait. Once the last writer does its job, all of the waiting readers are free once again to perform their computations.
 
 To create a new `ReadWriteLock`, call exactly that:
 
@@ -305,13 +306,13 @@ To create a new `ReadWriteLock`, call exactly that:
 ReadWriteLock readWriteLock = new ReadWriteLock();
 ```
 
-> Usage for reads: To grab a read lock, call `readWriteLock.readLock().lock()`, and to relinquish the read lock, call `readWriteLock.readLock().unlock()`.
+> Usage for reads: To grab a read lock, call `readWriteLock.readLock().lock()`. To relinquish the read lock, call `readWriteLock.readLock().unlock()`.
 
-> Usage for writes: To grab a write lock, call `readWriteLock.writeLock().lock()`, and to relinquish the write lock, call `readWriteLock.writeLock().unlock()`.
+> Usage for writes: To grab a write lock, call `readWriteLock.writeLock().lock()`. To relinquish the write lock, call `readWriteLock.writeLock().unlock()`.
 
-Let's look at an example, first without the read write lock, then again with.
+Let's look at an example, first without the `ReadWriteLock`, then with it.
 
-Copy and paste the following into a single Java source file called _ReadWriteLockLesson_ in package _com.generalassembly.concurrency_.
+Copy and paste the following into a single Java source file called _ReadWriteLockLesson_ in package _com.generalassembly.concurrency_:
 
 ```java
 package com.generalassembly.concurrency;
@@ -324,7 +325,7 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * Holding class contains the ticker, shares, and prices of a stock in a portfolio
+ * Holding class contains the ticker, shares, and prices of a stock in a portfolio.
  */
 class Holding {
     private String ticker;
@@ -407,7 +408,7 @@ public class ReadWriteLockLesson {
         executor.execute(() -> write());
     }
 
-    // for the fun, we will first sell FB and buy ABC, then we will buy FB and sell ABC
+    // For fun, we will first sell FB and buy ABC, then we will buy FB and sell ABC.
     volatile int plusMinus = 1;
 
     private void write() {
@@ -450,21 +451,21 @@ That produces the output:
 
 So we see the portfolio has produced three different values, depending on the sequence of how they were called.
 
-Now, search for the five lines marked `uncomment` and uncomment those line, which inserts the `ReadWriteLock` logic, and try again.
+Now search for the five lines marked `uncomment` and uncomment those lines, which inserts the `ReadWriteLock` logic, and try again.
 
 ```text
 {2291700.0=0}
 ```
 
-Doing that, we see there is a single value, as we had hoped. 
+Doing that, we see there is a single value (as we had hoped). 
 
 #### ConcurrentHashMap
 
-You will notice that we used a new Map implementation, _ConcurrentHashMap_. This is very similar to a standard _HashMap_, except that it is designed to handle concurrency.
+You will notice that we used a new map implementation, _ConcurrentHashMap_. This is very similar to a standard _HashMap_, except that it is designed to handle concurrency.
 
-The main difference is that a standard HashMap prevents threads from iterating and writing at the same time by throwing a ConcurrentModificationException. This is called _fail-fast_ and ensures that the data in the Map is the same throughout the iteration. In contrast, a ConcurrentHashMap assumes you will take care of any required locking externally, and so will not fail-fast when iterating and writing.
+The main difference is that a standard HashMap prevents threads from iterating and writing at the same time by throwing a ConcurrentModificationException. This is called _fail-fast_ and ensures that the data in the map is the same throughout the iteration. By contrast, a ConcurrentHashMap assumes you will take care of any required locking externally, and so will not fail-fast when iterating and writing.
 
-Generally, if you have multiple threads iterating and writing to a Map, you want to use a ConcurrentHashMap instead of a HashMap.
+Generally, if you have multiple threads iterating and writing to a map, you want to use a ConcurrentHashMap instead of a HashMap.
 
 -----
 
@@ -472,9 +473,9 @@ Generally, if you have multiple threads iterating and writing to a Map, you want
 
 Wow, we learned a lot in this lesson! You now know three important concurrency components, but just *knowing* how to implement them isn't enough. How do you know when to use each one?
 
-Let's discuss just that! With a partner, read over each of these scenarios. Discuss which concurrency components (if any) should be used to solve this problem and why.
+Let's discuss that! With a partner, read over each of these scenarios. Discuss which concurrency components (if any) should be used to solve this problem and why.
 
-1. You are making a hit-counter for your website. You want to make sure that concurrent threads don't update the hit counter at the exact same time, messing up the count. Which concurrency component should you use? 
+1. You are making a hit counter for your website. You want to make sure that concurrent threads don't update the hit counter at the exact same time, messing up the count. Which concurrency component should you use? 
 
 <details>
     <summary>Answer:</summary>
@@ -492,12 +493,12 @@ ReadWriteLock
 
 </details>
 
-3. You are building a file transfer application, and you have two threads - the first one has to ask the user for the FTP address, and the second one has to actually transfer the file. How can the first thread signal the second thread that the user has input the address and the transfer can begin?
+3. You are building a file transfer application, and you have two threads: The first one has to ask the user for the FTP address, and the second one has to actually transfer the file. How can the first thread signal to the second thread that the user has inputted the address and the transfer can begin?
 
 <details>
     <summary>Answer:</summary>
 
-Second thread should call some mutex.wait(). First thread should call mutex.notify() when ready. Both threads should synchronize on the same mutex, which allows them to signal each other.
+The second thread should call some `mutex.wait()`. The first thread should call `mutex.notify()` when ready. Both threads should synchronize on the same `mutex`, which allows them to signal each other.
 
 </details>
 
@@ -505,19 +506,19 @@ Second thread should call some mutex.wait(). First thread should call mutex.noti
 
 ## Conclusion (5 min)
 
-To recap on both Concurrency lessons we covered, here's what we hope you can discuss:
+To recap both concurrency lessons we covered, here's what we hope you can discuss:
 
   - Why use concurrency?
-  - How to create a Thread: 2 Different Ways!
-    - Extending Thread
-    - Implement the Runnable interface
-  - Estimate how many threads to use
-  - Usage of the synchronized keyword
-  - Locking and associated thread states
-  - Signalling threads using wait/notify - synchronization
+  - How to create a thread: two different ways!
+    - Extending a thread.
+    - Implement the runnable interface.
+  - Estimate how many threads to use.
+  - Usage of the synchronized keyword.
+  - Locking and associated thread states.
+  - Signalling threads using wait/notify: synchronization.
   - Concurrency components:
-    - Executors and ThreadPools
-    - Execute vs. Submit
-    - Atomics components - AtomicInteger
-    - ReadWriteLock
+    - Executors and ThreadPools.
+    - Execute vs. Submit.
+    - Atomics components: AtomicInteger.
+    - ReadWriteLock.
 
