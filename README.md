@@ -26,5 +26,15 @@ Title | Type | Timing | Notes
 [Abstract Classes and Interfaces](./oop-java/abstract-classes-interfaces-lesson) | Lesson   | 1:30 |
 [Inheritance and Abstraction](./oop-java/inheritance-abstraction-lab)            | Lab / HW | 1:15 |
 [Inheritance](./oop-java/inheritance-household-lab)            | Lab / HW | 1:30 | This + above lab are interchangeable
-[OOP Recap](./oop-java/oop-review-hw)       | Lab / HW  | 1:00 |
+[OOP Recap](./oop-java/oop-review-hw)       | Lab / HW  | 1:00 | 
+[Intro to Design Patterns](./intro-design-patterns) | Lab / AM Exercise  | 1:00 | Could also be introduced later
+[Lambda Expressions](./functional-programming/lambda-expressions)    | Lesson  | 1:30 | Advanced
+[Stream Processing and Collectors](./functional-programming/stream-processing-and-collectors) | Lesson  | 1:30 | Advanced
+[Functions](./functional-programming/functions-lab)    | Lab / HW  | 1:30 | Advanced
+[Functional Interfaces](./functional-programming/functional-interfaces)    | Lesson  | 1:30 | More advanced
+[Optionals](./functional-programming/optionals)    | Lesson  | 1:30 | More advanced
+[The Heap and the Garbage Collector](./garbage-collection)    | Lesson  | 1:00 | "Bonus" lesson, not required
+[Concurrency, Part 1](./Concurrency/concurrency-part-1)    | Lesson  | 3:00 | Advanced, not necessary to know
+[Concurrency, Part 2](./Concurrency/concurrency-part-2)    | Lesson  | 2:00 | Very advanced, proceed with caution
+[UML and Class Diagrams](./uml)    | Lesson  | 1:30 | "Bonus" lesson, not required
 

@@ -1,10 +1,11 @@
-# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Functional Programming
+# ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png)
 
-## Table of Contents
+## Recommended order
 
-| Order | Topic | Type | Timing |
-| --- | ------ | --- | --- |
-| 1 | Lambda Expressions | Lesson | 1:30 |
-| 2 | Stream processing and Collectors | Lesson | 1:30 |
-| 3 | Functional Interfaces | Lesson | 1:30 |
-| 4 | Optionals | Lesson | 1:30 |
+Title | Type | Timing | Notes 
+----- | ---- | --     | -----
+[Lambda Expressions](./functional-programming/lambda-expressions)    | Lesson  | 1:30 | 
+[Stream Processing and Collectors](./functional-programming/stream-processing-and-collectors) | Lesson  | 1:30 | 
+[Functions](./functional-programming/functions-lab)    | Lab / HW  | 1:30 | 
+[Functional Interfaces](./functional-programming/functional-interfaces)    | Lesson  | 1:30 | 
+[Optionals](./functional-programming/optionals)    | Lesson  | 1:30 | 
