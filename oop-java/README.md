@@ -1,11 +1,13 @@
-## OOP Lesson Overview
+## Recommended order
 
-
-| Order | Topic | Type | Timing |
-| -- | ------ | --- | -- |
-| 1 | Introduction to Object-Oriented Programming | Lesson | 0:30 |
-| 2 | Objects and Classes | Lesson | 1:30 |
-| 3 | Creating Classes | Lab | 1:30 |
-| 4 | Subclasses | Lesson | 1:30 |
-| 5 | Subclassing | Lab or HW | 1:30 |
-| 6 | Abstract Classes and Interfaces | Lesson | 1:30 |
+Title | Type | Timing | Notes 
+----- | ---- | --     | -----
+[Intro to OOP](./intro-to-oop.md)       | Lesson   | 0:30 | Could also do earlier in the unit as an introduction
+[Objects and Classes](./objects-and-classes-lesson)  | Lesson   | 1:30 |
+[Creating Classes](./creating-classes-lab)           | Lab / HW | 1:30 | 
+[Subclasses](./subclasses-lesson)             |  Lesson   | 1:30 |
+[Subclasses](./subclassing-lab)        | Lab / HW | 1:30 | 
+[Abstract Classes and Interfaces](./abstract-classes-interfaces-lesson) | Lesson   | 1:30 |
+[Inheritance and Abstraction](./inheritance-abstraction-lab)            | Lab / HW | 1:15 |
+[Inheritance](./inheritance-household-lab)            | Lab / HW | 1:30 | This + above lab are interchangeable
+[OOP Recap](./oop-review-hw)       | Lab / HW  | 1:00 |
