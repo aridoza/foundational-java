@@ -474,7 +474,7 @@ public class independentPractice {
         //TODO No. 1: Write a lambda using orElseGet() to default the price to $500 if the price is missing. Print the output
         //to confirm the price.
 
-        //TODO No 3: Call the method that you created in TODO No. 2 for the following Television objects and print out the
+        //TODO No 2: Call the method that you created in TODO No. 2 for the following Television objects and print out the
         //output.
         Television television1 =
                 new Television("AAAA", true, true, 1500);
@@ -486,7 +486,7 @@ public class independentPractice {
                 new Television("CCCC", false, false, 500);
     }
 
-    //TODO No. 2 Write a method that takes in a Television object and returns true if the price is greater than $999.
+    //TODO No. 3 Write a method that takes in a Television object and returns true if the price is greater than $999.
 }
 
 ```
