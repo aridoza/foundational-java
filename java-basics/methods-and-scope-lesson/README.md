@@ -1,7 +1,7 @@
 ---
 title: Methods and Scope
 type: Lesson
-duration: "1:25"
+duration: "1:00"
 creator:
   name: Kristen Tonga
   city: NYC
