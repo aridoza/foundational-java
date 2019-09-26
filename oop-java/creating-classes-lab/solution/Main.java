@@ -13,7 +13,7 @@ public class Main {
       name = animal.getName();
       topSpeed = animal.getTopSpeed();
 
-      output.setText("The "+name + " has a top speed of "+topSpeed+" mph");
+      System.out.println("The "+name + " has a top speed of "+topSpeed+" mph");
 
       //Set new name, speed, and endangered properties values using setters
       animal.setName("Lion");
@@ -25,6 +25,6 @@ public class Main {
       topSpeed = animal.getTopSpeed();
 
       //Set text of second TextView
-      changedOutput.setText("The "+name+" has a top speed of "+topSpeed+" mph");
+      System.out.println("The "+name+" has a top speed of "+topSpeed+" mph");
     }
 }
