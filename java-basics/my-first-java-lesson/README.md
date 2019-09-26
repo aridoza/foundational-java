@@ -70,7 +70,7 @@ Next, the `static` keyword indicates that this method belongs to the `class` its
 
 #### `main`
 
-Finally, we name our function. In this case, the `main` function is absolutely required in Java programs and must be named `main`.
+Finally, we name our function. In this case, the `main` function is absolutely required in Java code meant to be executed and must be named `main`.
 
 #### `String[] args`
 
