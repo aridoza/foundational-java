@@ -15,7 +15,6 @@ public class Main {
         topSpeed = ;
 
         //Print some output
-        output.setText();
 
         //Set new name, speed, and endangered properties values using setters
 
@@ -25,6 +24,6 @@ public class Main {
         topSpeed = ;
 
         //Print some output
-        changedOutput.setText();
+        
     }
 }
