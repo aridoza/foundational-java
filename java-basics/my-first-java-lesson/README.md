@@ -133,7 +133,7 @@ JavaScript lets us get away with errors, while Java will enforce its rules befor
 
 When the file is successfully compiled, you should notice that a new file with a `.class` extension has been created: This is our compiled `class`. Now, we can actually run the code with the command `java HowdyPardner`. (That's right — we can't run a file until it's compiled. A file with a `.java` extension won't run, but a compiled file with the `.class` extension will run.)
 
-Once we start using the Eclipse IDE, we won't have to do any of this. The application will automatically compile our code when we save the file, and you can run the file by clicking one button.
+Once we start using an IDE like IntelliJ or Eclipse, we won't have to do any of this. The application will automatically compile our code when we save the file, and you can run the file by clicking one button.
 
 ## Variable Declaration (5 min)
 
@@ -151,7 +151,7 @@ double priceOfSteak = 6.99;
 
 We'll learn more about all of Java's different data types soon, but these are the ones we see here:
 - `int`: Short for integer; a whole number.
-- `String`: Any combination of letters and words. The word `"String"` is a `class`, so it always begins with a capital letter.
+- `String`: Any combination of letters, numbers, and punctuation. The word `"String"` is a `class`, so it always begins with a capital letter.
 - `double`: A number with a decimal.
 
 Notice anything about how we write variables? That's right — they're in camel case.
