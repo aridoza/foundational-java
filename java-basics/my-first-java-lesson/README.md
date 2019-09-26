@@ -58,7 +58,7 @@ What's going on here?
 
 #### `public`
 
-First, the `public` keyword declares this method to be available anywhere. On the other hand, a `private` method is only available to other members of the same `class`. You can find more details [here](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html).
+First, the `public` keyword declares this method to be available anywhere. On the other hand, a `private` method is only available within the `class`. You can find more details [here](https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html).
 
 #### `static`
 
