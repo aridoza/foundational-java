@@ -57,7 +57,7 @@ public class Main {
         ___ totalDebt2010 = 129,579;
         String debt = "Debt is an unwelcome guest at the table in many American households. Back in the late 1940s and early 1950s, the average American consumer had less than $/*something*/ in total personal debt. Today the average U.S. household with debt carries $/*something*/ in credit card debt and $/*something*/ in total debt.";
 
-      // TODO: Using one line of code, determine if the following string contains the word "table". Print the result to the command line.
+      // TODO: Using one line of code, determine if the string contains the word "table". Print the result to the command line.
 
       // TODO: How has the ratio of debt to income changed in the past 60 years?
 
