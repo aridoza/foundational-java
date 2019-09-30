@@ -152,28 +152,6 @@ String allowed = (age > 18) ? "yes" : "no";
 
 System.out.println(allowed); //=> "no"
 ```
-
-#### `true` or `false`
-
-It's important to know that all of the following become `false` when converted to a `Boolean`:
-
-- `false`
-- `0`
-- `""` (empty string)
-- `NaN`
-- `null`
-- `undefined`
-
-For example:
-
-```java
-Boolean b = Boolean.valueOf("");
-
-System.out.println(b); //=> false
-```
-
-This can be helpful when checking if conditions exist or are undefined, or if variables don't hold value.
-
 -----
 
 ## Guided Practice: Boolean or Logical Operators (15 min)
