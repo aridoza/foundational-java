@@ -26,7 +26,12 @@ public class Main {
 
 	    int num = Integer.parseInt(scanner.nextLine()); //parse a string into an integer
 	    
-	    System.out.println(superheroes.get(num));	    
+	    try {
+	    	System.out.println(superheroes.get(num));
+	    }catch(IndexOutOfBoundsException e) {
+	    	System.out.println("The number you entered is invalid. Please enter from 0 to 2");
+	    }
+	    
 	}
 
 }
