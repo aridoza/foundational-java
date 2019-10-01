@@ -1,3 +1,5 @@
+package com.ga;
+
 import java.util.Scanner;
 
 /**
@@ -59,6 +61,6 @@ public class Main {
         float result = firstNum / secondNum;
         System.out.println("Result: "+result);
     }
-
-
 }
+
+
