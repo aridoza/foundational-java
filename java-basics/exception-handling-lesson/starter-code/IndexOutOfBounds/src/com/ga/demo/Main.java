@@ -22,16 +22,11 @@ public class Main {
 			System.out.println(superhero);
 		
 		Scanner scanner = new Scanner(System.in);  // Create a Scanner object to take input from user
-	    System.out.println("Enter the number of your favorite superhero");
+	    System.out.println("Enter the index of your favorite superhero");
 
 	    int num = Integer.parseInt(scanner.nextLine()); //parse a string into an integer
 	    
-	    try {
-	    	System.out.println(superheroes.get(num));
-	    }catch(IndexOutOfBoundsException e) {
-	    	System.out.println("The number you entered is invalid. Please enter from 0 to 2");
-	    }
-	    
+	    System.out.println(superheroes.get(num));	    
 	}
 
 }
