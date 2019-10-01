@@ -145,6 +145,31 @@ try {
 }
 ```
 
+### finally Block
+According to [Java docs](https://docs.oracle.com/javase/tutorial/essential/exceptions/finally.html) *the finally block always executes when the try block exits.* This ensures that the finally block is executed even if an unexpected exception occurs. But finally is useful for more than just exception handling — it allows the programmer to avoid having cleanup code accidentally bypassed by a return, continue, or break. Putting cleanup code in a finally block is always a good practice, even when no exceptions are anticipated.
+
+It can be used just with `try` or with `try-catch`
+
+```
+try{
+   //block of code
+}finally {
+   //clean up code
+}
+```
+
+OR
+
+```
+try{
+   //block of code
+}catch(){
+   //exception handling
+}finally {
+   //clean up code
+}
+```
+
 <a name="guided-practice"></a>
 
 ### `throws` keyword
