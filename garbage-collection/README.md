@@ -103,7 +103,7 @@ Note that, when your program executes, even if there isn't a single object alloc
 For example, if Method A calls Method B calls Method C, Java must remember that, when Method C exits, it must return to the spot in Method B that called it and, when that returns, return to Method A. This memory is called the **stack** and is distinct from the heap. 
 
 The stack also holds any method-local data that will be swept off once the method returns. The stack works on a 
-"first in, first out" (aka FIFO) basis: It's allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, the stack is swept in a FIFO manner, so the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
+"last in, first out" (aka LIFO) basis: It's allocated and data is assigned, then methods call other methods, allocating more stack space. Once a method returns, it is popped from the stack so the next frame in the stack (representing the calling method) becomes the top of the stack, and so on.
 
 ## Demo: `OutOfMemory` Error (10 min) 
 
